@@ -10,7 +10,6 @@ import android.widget.RelativeLayout;
 import android.widget.RelativeLayout.LayoutParams;
 import android.widget.TextView;
 
-import com.example.test1.R;
 
 /**
  * »ù±¾Àà

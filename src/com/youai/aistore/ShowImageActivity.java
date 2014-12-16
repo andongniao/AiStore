@@ -1,6 +1,5 @@
 package com.youai.aistore;
 
-import com.example.test1.R;
 
 import android.app.Activity;
 import android.graphics.Bitmap;
