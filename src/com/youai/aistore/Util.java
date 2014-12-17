@@ -2,6 +2,9 @@ package com.youai.aistore;
 
 import java.sql.Date;
 import java.text.SimpleDateFormat;
+
+import com.youai.aistore.NetInterface.GetHttp;
+
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
@@ -107,7 +110,10 @@ public class Util {
 		SimpleDateFormat sdf = new SimpleDateFormat(str);
 		return sdf.format(date);
 	}
-	
+	/**
+	 * Æô¶¯Loding...
+	 * @param context
+	 */
 	public static void startProgressDialog(Context context){
 		if (progressDialog == null){
 			progressDialog = CustomProgressDialog.createDialog(context);
@@ -115,7 +121,9 @@ public class Util {
 
 		progressDialog.show();
 	}
-
+	/**
+	 * ¹Ø±ÕLoding...
+	 */
 	public static void stopProgressDialog(){
 		if (progressDialog != null){
 			progressDialog.dismiss();
