@@ -11,6 +11,12 @@
     <string name="but_class">分类</string>
     <string name="but_shopcart">购物车</string>
     <string name="but_my">我</string>
+    <!-- 首页 -->
+    <string name="home_woman_used">女性用品</string>
+    <string name="home_woman_like">猜你喜欢</string>
+    <!-- 购物车 -->
+    <string name="shopcart_title">购物车</string>
+    <string name="shopcart_isnull">购物车里还没有东西</string>
     
 
 </resources>

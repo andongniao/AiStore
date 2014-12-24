@@ -46,6 +46,10 @@
  <!-- TABActivity -->
   <color name="RoyalBlue">#4169E1</color>
     <color name="LightSteelBlue">#B0C4DE</color>
+ <!-- 首页文字色 -->
+    <color name="home_text_grey">#999999</color>
+    <color name="home_text_red">#EF2E5A</color>
+ 
     
     
 

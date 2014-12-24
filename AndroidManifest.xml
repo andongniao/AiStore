@@ -35,6 +35,10 @@
             android:name="com.youai.aistore.Home.HomeActivity"
             android:label="@string/app_name" >
         </activity>
+        <activity
+            android:name="com.youai.aistore.ShopCart.ShopCartActivity"
+            android:label="@string/app_name" >
+        </activity>
     </application>
 
 </manifest>
