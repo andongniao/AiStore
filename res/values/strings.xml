@@ -1,8 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">Test1</string>
+    <string name="app_name">AiStore</string>
     <string name="hello_world">Hello world!</string>
     <string name="menu_settings">Settings</string>
+    
+    <string name="base_null"></string>
+    <!-- 导航栏 -->
+    <string name="but_home">首页</string>
+    <string name="but_class">分类</string>
+    <string name="but_shopcart">购物车</string>
+    <string name="but_my">我</string>
+    
 
 </resources>

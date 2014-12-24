@@ -18,9 +18,9 @@ public class WelcomeActivity extends Activity{
 			public void handleMessage(Message msg) {
 				super.handleMessage(msg);
 				if(msg.what==1){
-//					Intent intent = new Intent(WelcomeActivity.this,MainActivity.class);
-//					intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-//					startActivity(intent);
+					Intent intent = new Intent(WelcomeActivity.this,ExampleActivity.class);
+					intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+					startActivity(intent);
 					finish();
 				}
 			}

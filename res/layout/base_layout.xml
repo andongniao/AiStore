@@ -9,7 +9,7 @@
         android:id="@+id/Base_Layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/base_bg"
+        android:background="@drawable/top"
         android:padding="15dp" >
 
         <TextView

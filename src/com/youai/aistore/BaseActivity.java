@@ -189,5 +189,32 @@ public abstract class BaseActivity extends Activity {
 	public void topRightVisible() {
 		topRightTv.setVisibility(View.VISIBLE);
 	}
+	
+	/**
+	 * 设置右上角背景
+	 * 
+	 * @param drawable
+	 *            图片
+	 */
+	@SuppressWarnings("deprecation")
+	public void setTopRightBackground(Drawable drawable) {
+		topRightTv.setBackgroundDrawable(drawable);
+	}
+	/**
+	 * 设置右上角背景
+	 * 
+	 * @param drawableid
+	 *            资源id
+	 */
+	public void setTopRightBackground(int drawableId) {
+		topRightTv.setBackgroundResource(drawableId);
+	}
+	/**
+	 * 获取右上角view
+	 * @return
+	 */
+	public View getTopRightView(){
+		return topRightTv;
+	}
 
 }
