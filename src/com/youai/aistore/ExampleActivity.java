@@ -14,6 +14,7 @@ import android.widget.ImageView;
 import android.widget.TabWidget;
 import android.widget.TextView;
 
+import com.youai.aistore.Fclass.FclassActivity;
 import com.youai.aistore.Home.HomeActivity;
 
 /**
@@ -35,7 +36,7 @@ public class ExampleActivity extends TabHostActivity {
 		
 		TabItem Fclass = new TabItem(
 				R.drawable.base_fclass_bg,
-				new Intent(this, HomeActivity.class));
+				new Intent(this, FclassActivity.class));
 		
 		TabItem ShopCart = new TabItem(
 				R.drawable.base_shopcart,

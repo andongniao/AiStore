@@ -187,7 +187,11 @@ public class Util {
 		}
 		return sdcard_path;
 	}
-
+	/**
+	 * ºô³ötoast
+	 * @param context
+	 * @param content
+	 */
 	public static void ShowToast(Context context,String content){
 		Toast.makeText(context, content, 1000).show();
 	}
