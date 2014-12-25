@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    
+    <string name="base_test">测试文字</string>
 
     <string name="app_name">AiStore</string>
     <string name="hello_world">Hello world!</string>
@@ -19,6 +21,9 @@
     <!-- 购物车 -->
     <string name="shopcart_title">购物车</string>
     <string name="shopcart_isnull">购物车里还没有东西</string>
+    <!-- 搜索 -->
+    <string name="search_et_text">请输入关键词</string>
+    <string name="search_bt_text">搜索</string>
     
 
 </resources>
