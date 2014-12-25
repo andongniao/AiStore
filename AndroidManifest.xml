@@ -36,11 +36,11 @@
             android:label="@string/app_name" >
         </activity>
         <activity
-<<<<<<< HEAD
             android:name="com.youai.aistore.Fclass.FclassActivity"
-=======
+            android:label="@string/app_name" >
+        </activity>
+        <activity
             android:name="com.youai.aistore.ShopCart.ShopCartActivity"
->>>>>>> caf11ee86bb9253415d7dad10fba97b2c41d1194
             android:label="@string/app_name" >
         </activity>
     </application>
