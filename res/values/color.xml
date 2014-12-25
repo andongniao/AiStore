@@ -48,9 +48,15 @@
     <color name="LightSteelBlue">#B0C4DE</color>
  <!-- 首页文字色 -->
     <color name="home_text_grey">#999999</color>
+<<<<<<< HEAD
     <color name="home_text_red">#EF2E5A</color>
  <!-- 分类背景 ,灰色-->
     <color name="fclass_background"> #F1F1F1</color>
+=======
+    <color name="home_text_red">#EF2E5B</color>
+ 
+    
+>>>>>>> a79e1d59d3d779d4b88814ca8c8d164f397d95e0
     
 
 </resources>

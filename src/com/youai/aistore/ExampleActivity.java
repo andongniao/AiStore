@@ -76,18 +76,18 @@ public class ExampleActivity extends TabHostActivity {
 	
 	/**tab的title，icon，边距设定等等*/
 	@Override
-	protected void setTabItemTextView(TextView textView, int position) {
+	protected void setTabItemTextView(ImageView textView, int position) {
 		textView.setPadding(3, 3, 3, 3);
-		textView.setText(mItems.get(position).getTitle());
+//		textView.setText(mItems.get(position).getTitle());
 		textView.setBackgroundResource(mItems.get(position).getBg());
-		textView.setCompoundDrawablesWithIntrinsicBounds(0, mItems.get(position).getIcon(), 0, 0);
+//		textView.setCompoundDrawablesWithIntrinsicBounds(0, mItems.get(position).getIcon(), 0, 0);
 		
 	}
 	
 	/**tab唯一的id*/
 	@Override
 	protected String getTabItemId(int position) {
-		return mItems.get(position).getTitle();	// 我们使用title来作为id，你也可以自定
+		return mItems.get(position).getIntent().toString();	// 我们使用title来作为id，你也可以自定
 	}
 
 	/**点击tab时触发的事件*/

@@ -160,7 +160,7 @@ public abstract class BaseActivity extends Activity {
 		titleTv.setVisibility(View.VISIBLE);
 	}
 	/**
-	 * 设置左上角背景
+	 * 设置顶部背景
 	 * 
 	 * @param drawableid
 	 *            资源id
@@ -170,7 +170,7 @@ public abstract class BaseActivity extends Activity {
 	}
 
 	/**
-	 * 设置左上角背景
+	 * 设置顶部背景
 	 * 
 	 * @param drawable
 	 *            图片

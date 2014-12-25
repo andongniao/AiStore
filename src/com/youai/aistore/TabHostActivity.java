@@ -6,7 +6,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
-import android.widget.LinearLayout;
+import android.widget.ImageView;
 import android.widget.TabHost;
 import android.widget.TabHost.TabSpec;
 import android.widget.TabWidget;
@@ -54,7 +54,7 @@ public abstract class TabHostActivity extends TabActivity {
 			// set text view
 			View tabItem = mLayoutflater.inflate(R.layout.api_tab_item, null);
 			
-			TextView tvTabItem = (TextView) tabItem.findViewById(R.id.tab_item_tv);
+			ImageView tvTabItem = (ImageView) tabItem.findViewById(R.id.tab_item_iv);
 			setTabItemTextView(tvTabItem, i);
 			// set id
 			String tabItemId = getTabItemId(i);
@@ -84,7 +84,7 @@ public abstract class TabHostActivity extends TabActivity {
 	}
 
 	/** 设置TabItem的图标和标题等*/
-	abstract protected void setTabItemTextView(TextView textView, int position);
+	abstract protected void setTabItemTextView(ImageView textView, int position);
 
 	abstract protected String getTabItemId(int position);
 	
