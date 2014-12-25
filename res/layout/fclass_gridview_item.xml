@@ -2,13 +2,16 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
-    android:gravity="center_vertical" >
+    android:background="@color/white"
+    android:gravity="center"
+    >
 
     <!-- 女性用品，girdview，自定义每个网格的格式,3行 -->
 
     <!-- 第一行：产品图片 -->
     <LinearLayout
         android:id="@+id/one"
+        android:gravity="center_horizontal" 
         android:layout_width="fill_parent"
         android:layout_height="wrap_content" >
 
@@ -23,10 +26,11 @@
 
     <RelativeLayout
         android:id="@+id/two"
-        android:layout_width="220dip"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/one" 
-        
+        android:layout_marginTop="5dp"
+        android:gravity="center_vertical"
         >
 
         <ImageView
@@ -34,6 +38,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
+            android:layout_marginLeft="5dip"
+            android:layout_marginRight="2dip"
             android:src="@drawable/fclass_girdview_imgmoney" />
 
         <TextView
@@ -42,6 +48,7 @@
             android:layout_height="wrap_content"
             android:layout_toRightOf="@+id/fclass_gridview_item_imgmoney"
             android:text="458"
+            android:gravity="center_vertical"
             android:textColor="@color/red"
              />
 
@@ -50,6 +57,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_toLeftOf="@+id/fclass_gridview_item_textcomment"
+			android:layout_marginRight="2dip"
             android:src="@drawable/fclass_girdview_imgcomment" />
 
         <TextView
@@ -57,6 +65,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
+            android:layout_marginRight="5dip"
+            android:gravity="center_vertical"
             android:text="334"
             android:textColor="@color/red"
              />
@@ -73,8 +83,13 @@
             android:id="@+id/fclass_gridview_item_textproduct"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="5dip"
+            android:layout_marginRight="5dip"
+            android:layout_marginBottom="5dip"
             android:text="你好的身手房"
             android:textColor="@color/black"
+            android:ellipsize="end"
+            android:singleLine="true"
              />
     </LinearLayout>
 

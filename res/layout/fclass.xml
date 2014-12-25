@@ -1,36 +1,185 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
-    android:layout_height="wrap_content"
-    android:background="@android:color/white"
+    android:layout_height="fill_parent"
+    android:background="@color/fclass_background"
+    android:orientation="vertical" >
 
-     >
-    
-    <!--fclass分类界面  -->
-        <GridView
-         android:id="@+id/fclass_gridview"
-         android:layout_width="fill_parent"
-         android:layout_height="wrap_content"
-         android:numColumns="4"
-         android:padding="10dip"
-         android:verticalSpacing="10dip"
-         android:horizontalSpacing="10dip"
-         android:stretchMode="columnWidth"
-         android:gravity="center"
-         android:scrollbars="none"  
-         />
-     <GridView
-         android:id="@+id/fclass_gridview_av"
-         android:layout_width="fill_parent"
-         android:layout_height="wrap_content"
-         android:layout_below="@+id/fclass_gridview"
-         android:numColumns="2"
-         android:padding="10dip"
-         android:verticalSpacing="10dip"
-         android:horizontalSpacing="10dip"
-         android:stretchMode="columnWidth"
-         android:gravity="center"
-         android:scrollbars="none"  
-         />
+    <!-- fclass分类界面 -->
 
-</RelativeLayout>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/white" >
+
+        <com.youai.aistore.Fclass.MyGridView
+            android:id="@+id/fclass_gridview"
+            style="@style/fclass_gridview_classname"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:scrollbars="none" >
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dip"
+            android:orientation="vertical" >
+
+            <!-- 女性用品，av震动棒 -->
+
+            <include
+                android:id="@+id/fclass_classname_av"
+                layout="@layout/fclass_classname_item" >
+            </include>
+
+            <com.youai.aistore.Fclass.MyGridView
+                android:id="@+id/fclass_gridview_av"
+                style="@style/fclass_gridview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <!-- 女性用品，仿真阳具 -->
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical" >
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="25dip"
+                    android:layout_marginRight="5dip"
+                    android:src="@drawable/fclass_classname_imgred" />
+
+                <TextView
+                    android:id="@+id/fclass_classname_textdildo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="分类具体名字"
+                    android:textColor="@color/black"
+                    android:textSize="20sp" />
+            </LinearLayout>
+
+            <com.youai.aistore.Fclass.MyGridView
+                android:id="@+id/fclass_gridview_dildo"
+                style="@style/fclass_gridview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <!-- 女性用品，情趣跳蛋 -->
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical" >
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="25dip"
+                    android:layout_marginRight="5dip"
+                    android:src="@drawable/fclass_classname_imgred" />
+
+                <TextView
+                    android:id="@+id/fclass_classname_textjumpegg"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="分类具体名字"
+                    android:textColor="@color/black"
+                    android:textSize="20sp" />
+            </LinearLayout>
+
+            <com.youai.aistore.Fclass.MyGridView
+                android:id="@+id/fclass_gridview_jumpegg"
+                style="@style/fclass_gridview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <!-- 女性用品，伸缩转珠bead -->
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical" >
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="25dip"
+                    android:layout_marginRight="5dip"
+                    android:src="@drawable/fclass_classname_imgred" />
+
+                <TextView
+                    android:id="@+id/fclass_classname_textbead"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="分类具体名字"
+                    android:textColor="@color/black"
+                    android:textSize="20sp" />
+            </LinearLayout>
+
+            <com.youai.aistore.Fclass.MyGridView
+                android:id="@+id/fclass_gridview_bead"
+                style="@style/fclass_gridview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <!-- 女性用品，护理保健nuring -->
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical" >
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="25dip"
+                    android:layout_marginRight="5dip"
+                    android:src="@drawable/fclass_classname_imgred" />
+
+                <TextView
+                    android:id="@+id/fclass_classname_textnursing"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="分类具体名字"
+                    android:textColor="@color/black"
+                    android:textSize="20sp" />
+            </LinearLayout>
+
+            <com.youai.aistore.Fclass.MyGridView
+                android:id="@+id/fclass_gridview_nursing"
+                style="@style/fclass_gridview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <!-- 女性用品，其他-->
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical" >
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="25dip"
+                    android:layout_marginRight="5dip"
+                    android:src="@drawable/fclass_classname_imgred" />
+
+                <TextView
+                    android:id="@+id/fclass_classname_textother"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="分类具体名字"
+                    android:textColor="@color/black"
+                    android:textSize="20sp" />
+            </LinearLayout>
+
+            <com.youai.aistore.Fclass.MyGridView
+                android:id="@+id/fclass_gridview_other"
+                style="@style/fclass_gridview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>
