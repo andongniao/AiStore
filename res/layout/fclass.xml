@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:background="@android:color/white"
+
+     >
+    
+    <!--fclass分类界面  -->
+        <GridView
+         android:id="@+id/fclass_gridview"
+         android:layout_width="fill_parent"
+         android:layout_height="wrap_content"
+         android:numColumns="4"
+         android:padding="10dip"
+         android:verticalSpacing="10dip"
+         android:horizontalSpacing="10dip"
+         android:stretchMode="columnWidth"
+         android:gravity="center"
+         android:scrollbars="none"  
+         />
+     <GridView
+         android:id="@+id/fclass_gridview_av"
+         android:layout_width="fill_parent"
+         android:layout_height="wrap_content"
+         android:layout_below="@+id/fclass_gridview"
+         android:numColumns="2"
+         android:padding="10dip"
+         android:verticalSpacing="10dip"
+         android:horizontalSpacing="10dip"
+         android:stretchMode="columnWidth"
+         android:gravity="center"
+         android:scrollbars="none"  
+         />
+
+</RelativeLayout>
