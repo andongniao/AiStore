@@ -16,6 +16,7 @@ import android.widget.TextView;
 
 import com.youai.aistore.Fclass.FclassActivity;
 import com.youai.aistore.Home.HomeActivity;
+import com.youai.aistore.ShopCart.ShopCartActivity;
 
 /**
  * µ¼º½
@@ -40,7 +41,7 @@ public class ExampleActivity extends TabHostActivity {
 		
 		TabItem ShopCart = new TabItem(
 				R.drawable.base_shopcart,
-				new Intent(this, HomeActivity.class));
+				new Intent(this, ShopCartActivity.class));
 		
 		TabItem MyCenter = new TabItem(
 				R.drawable.base_mycenter,

@@ -134,6 +134,7 @@ public abstract class BaseActivity extends Activity {
 	public void setTitleTxt(int textId) {
 		titleTv.setText(textId);
 	}
+	
 
 	/**
 	 * 设置标题
@@ -157,6 +158,26 @@ public abstract class BaseActivity extends Activity {
 	 */
 	public void visibleTitle() {
 		titleTv.setVisibility(View.VISIBLE);
+	}
+	/**
+	 * 设置左上角背景
+	 * 
+	 * @param drawableid
+	 *            资源id
+	 */
+	public void setTopTitleBackground(int drawableId) {
+		titleTv.setBackgroundResource(drawableId);
+	}
+
+	/**
+	 * 设置左上角背景
+	 * 
+	 * @param drawable
+	 *            图片
+	 */
+	@SuppressWarnings("deprecation")
+	public void setTopTitleBackground(Drawable drawable) {
+		titleTv.setBackgroundDrawable(drawable);
 	}
 
 	/**

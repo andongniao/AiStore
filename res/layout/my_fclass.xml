@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@color/bg_color"
+    android:orientation="vertical" >
+
+    <!--
+    android:groupIndicator="@null" 取消默认图片  
+    android:childIndicatorLeft 设置孩子左边间距  
+    android:dividerHeight 这个高度一定要设置，不然显示不出来分割线，估计默认为0吧      -->
+
+    <ExpandableListView
+        android:id="@+id/fclass_expandableListView"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:cacheColorHint="@null"
+        android:dividerHeight="1dp"
+        android:groupIndicator="@null"
+        android:scrollbarAlwaysDrawHorizontalTrack="true" />
+
+</LinearLayout>
