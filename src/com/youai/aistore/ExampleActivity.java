@@ -5,17 +5,12 @@ import java.util.List;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
-import android.view.View.OnClickListener;
 import android.widget.ImageView;
 import android.widget.TabWidget;
-import android.widget.TextView;
 
-import com.youai.aistore.Fclass.FclassActivity;
+import com.youai.aistore.Fclass.FclassHomeActivity;
 import com.youai.aistore.Home.HomeActivity;
+import com.youai.aistore.Product.ProductDetailsActivity;
 import com.youai.aistore.ShopCart.ShopCartActivity;
 
 /**
@@ -25,8 +20,7 @@ import com.youai.aistore.ShopCart.ShopCartActivity;
  */
 public class ExampleActivity extends TabHostActivity {
 
-	List<TabItem> mItems;
-	
+	private List<TabItem> mItems;
 	/**在初始化TabWidget前调用
 	 * 和TabWidget有关的必须在这里初始化*/
 	@Override
@@ -37,7 +31,7 @@ public class ExampleActivity extends TabHostActivity {
 		
 		TabItem Fclass = new TabItem(
 				R.drawable.base_fclass_bg,
-				new Intent(this, FclassActivity.class));
+				new Intent(this, FclassHomeActivity.class));
 		
 		TabItem ShopCart = new TabItem(
 				R.drawable.base_shopcart,
@@ -45,7 +39,7 @@ public class ExampleActivity extends TabHostActivity {
 		
 		TabItem MyCenter = new TabItem(
 				R.drawable.base_mycenter,
-				new Intent(this, HomeActivity.class));
+				new Intent(this, ProductDetailsActivity.class));
 		
 //		TabItem more = new TabItem(
 //				"更多",

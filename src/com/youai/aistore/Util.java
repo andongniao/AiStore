@@ -7,10 +7,7 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.List;
 
-import android.R.integer;
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
@@ -19,6 +16,10 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Environment;
 import android.text.TextUtils;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ListAdapter;
+import android.widget.ListView;
 import android.widget.Toast;
 /**
  * 公用工具类
@@ -190,12 +191,20 @@ public class Util {
 		return sdcard_path;
 	}
 	/**
-	 * 呼出toast
+	 * 呼出Toast
 	 * @param context
 	 * @param content
 	 */
 	public static void ShowToast(Context context,String content){
 		Toast.makeText(context, content, 1000).show();
+	}
+	/**
+	 * 呼出Toast
+	 * @param context
+	 * @param i
+	 */
+	public static void ShowToast(Context context,int i){
+		Toast.makeText(context, i, 1000).show();
 	}
 	
 	/**
@@ -226,6 +235,25 @@ public class Util {
 		}
 		return sb.toString();
 	}
-
+	
+	 public static void setListViewHeightBasedOnChildren(ListView listView) {  
+	        // 获取ListView对应的Adapter  
+	        ListAdapter listAdapter = listView.getAdapter();  
+	        if(listAdapter == null) {  
+	            return;  
+	        }  
+	        int totalHeight = 0;  
+	        for(int i = 0, len = listAdapter.getCount(); i < len; i++) { // listAdapter.getCount()返回数据项的数目  
+	            View listItem = listAdapter.getView(i, null, listView);  
+	            listItem.measure(0, 0); // 计算子项View 的宽高  
+	            totalHeight += listItem.getMeasuredHeight(); // 统计所有子项的总高度  
+	        }  
+	        ViewGroup.LayoutParams params = listView.getLayoutParams();  
+	        params.height = totalHeight  
+	                + (listView.getDividerHeight() * (listAdapter.getCount() - 1));  
+	        // listView.getDividerHeight()获取子项间分隔符占用的高度  
+	        // params.height最后得到整个ListView完整显示需要的高度  
+	        listView.setLayoutParams(params);  
+	    }  
 
 }

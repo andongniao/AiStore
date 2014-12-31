@@ -7,7 +7,7 @@
      >
     
     <!--fclass分类界面  -->
-        <GridView
+        <com.youai.aistore.Home.MyGridview
          android:id="@+id/fclass_gridview"
          android:layout_width="fill_parent"
          android:layout_height="wrap_content"
@@ -17,19 +17,23 @@
          android:horizontalSpacing="10dip"
          android:stretchMode="columnWidth"
          android:gravity="center"
+         android:cacheColorHint="#00000000"
+         android:listSelector="#00000000"
          android:scrollbars="none"  
          />
-     <GridView
+     <com.youai.aistore.Home.MyGridview
          android:id="@+id/fclass_gridview_av"
          android:layout_width="fill_parent"
          android:layout_height="wrap_content"
          android:layout_below="@+id/fclass_gridview"
          android:numColumns="2"
          android:padding="10dip"
-         android:verticalSpacing="10dip"
-         android:horizontalSpacing="10dip"
+         android:verticalSpacing="10dp"
+         android:horizontalSpacing="10dp"
          android:stretchMode="columnWidth"
          android:gravity="center"
+          android:cacheColorHint="#00000000"
+         android:listSelector="#00000000"
          android:scrollbars="none"  
          />
 

@@ -1,0 +1,114 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:orientation="horizontal" >
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:padding="3dp" >
+
+        <ImageView
+            android:id="@+id/search_result_item_iv"
+            android:layout_width="75dp"
+            android:layout_height="75dp" />
+    </LinearLayout>
+    <LinearLayout 
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="wrap_content"
+        android:padding="3dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        >
+        <LinearLayout 
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            >
+            <TextView 
+                android:id="@+id/search_result_item_title_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                />
+            <LinearLayout 
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                >
+                <TextView 
+                    android:id="@+id/search_result_item_shop_price_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/home_text_red"
+                    android:textSize="16dp"
+                    android:text="@string/base_test"
+                    />
+                <TextView 
+                    android:id="@+id/search_result_item_market_price_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/home_text_grey"
+                    android:layout_marginLeft="7dp"
+                    android:text="@string/base_test"
+                    />
+            </LinearLayout>
+            
+            
+            <LinearLayout 
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginBottom="15dp"
+                >
+                <TextView 
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/home_text_grey"
+                    android:textSize="16dp"
+                    android:text="@string/search_result_comments"
+                    />
+                <TextView 
+                    android:id="@+id/search_result_item_comments_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/home_text_grey"
+                    android:layout_marginLeft="7dp"
+                    android:text="@string/base_test"
+                    />
+            </LinearLayout>
+        </LinearLayout>
+        
+        <LinearLayout 
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:orientation="horizontal"
+            android:padding="3dp"
+            android:gravity="center"
+            >
+            <ImageView 
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/detail_favbutton_bg_highlighted"
+                android:layout_marginRight="5dp"
+                />
+            <TextView 
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/home_text_red"
+                android:gravity="center"
+                android:text="@string/base_test"
+                />
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>

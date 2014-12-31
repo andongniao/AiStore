@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg"
+    android:gravity="center"
+    android:orientation="vertical" >
+
+
+    <ImageView 
+        android:id="@+id/fclass_frist_view_addview_item_iv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        />    
+
+    <LinearLayout 
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        >
+        <TextView 
+            android:id="@+id/fclass_frist_view_addview_item_price_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textColor="@color/home_text_red"
+            android:text="@string/base_test"
+            />
+        <TextView 
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textColor="@color/home_text_red"
+            />
+        <ImageView 
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/detail_favbutton_bg"
+            android:layout_marginRight="3dp"
+            />
+        <TextView 
+            android:id="@+id/fclass_frist_view_addview_item_likes_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textColor="@color/home_text_red"
+              android:text="@string/base_test"
+            />
+    </LinearLayout>
+    <TextView 
+        android:id="@+id/fclass_frist_view_addview_item_title_tv"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:padding="3dp"
+        android:textColor="@color/black"
+        android:textSize="16dp"
+        android:text="@string/base_test"
+        />
+
+</LinearLayout>

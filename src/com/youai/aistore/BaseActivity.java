@@ -2,11 +2,13 @@ package com.youai.aistore;
 import android.app.Activity;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 import android.widget.RelativeLayout.LayoutParams;
 import android.widget.TextView;
 
@@ -237,5 +239,6 @@ public abstract class BaseActivity extends Activity {
 	public View getTopRightView(){
 		return topRightTv;
 	}
+	
 
 }

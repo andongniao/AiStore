@@ -43,6 +43,8 @@
     <color name="dialog_button_separator_dark">#12FFFFFF</color>
  <!-- 7% opacity -->
     <color name="background_dark">#C35817</color>
+ <!-- dialog 半透明色 -->
+  <color name="dialog_bg">#e0000000</color>
  <!-- TABActivity -->
   <color name="RoyalBlue">#4169E1</color>
     <color name="LightSteelBlue">#B0C4DE</color>

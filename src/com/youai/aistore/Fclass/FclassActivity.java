@@ -17,39 +17,29 @@ import android.widget.Toast;
 import com.youai.aistore.BaseActivity;
 import com.youai.aistore.R;
 import com.youai.aistore.Util;
+import com.youai.aistore.Home.MyGridview;
 
 /**
  * @author zy
  * 
  */
 public class FclassActivity extends BaseActivity {
-	private GridView gridview, gridview_av;
+	private MyGridview gridview,gridview_av;
 
 	@Override
 	protected void onCreate(Bundle arg0) {
 		super.onCreate(arg0);
-		setContentView(R.layout.fclass);
-
 		setTopLeftBackground(R.drawable.btn_search_navigation_back);
-		setTopRightBackground(R.drawable.ic_launcher);
-		topRightVisible();
-		TextView topright = (TextView) getTopRightView();
-		topright.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View arg0) {
-				Util.ShowToast(FclassActivity.this, "search");
-			}
-		});
 		// 分类界面标题；显示
 		setTitleTxt(R.string.titleTV);
-		visibleTitle();
+		setContentXml(R.layout.fclass);
 
 		// 声明资源变量，获取资源
 		Resources rs = this.getResources();
 		// 创建列表分类数组，
 		String[] gridFclass = rs.getStringArray(R.array.fclass_gridview);
 		// 获取列表的id
-		gridview = (GridView) findViewById(R.id.fclass_gridview);
+		gridview = (MyGridview) findViewById(R.id.fclass_gridview);
 		/*
 		 * 列表适配器ArrayAdapter<t>
 		 * (context;子view的layout，由我们在资源中自行设定布局文件;子view中要填充数据的TextView的控件ID;数据源);
@@ -75,7 +65,7 @@ public class FclassActivity extends BaseActivity {
 		}
 		avimgproduct.recycle();
 		// 获取列表的id
-		gridview_av = (GridView) findViewById(R.id.fclass_gridview_av);
+		gridview_av = (MyGridview) findViewById(R.id.fclass_gridview_av);
 		gridview_av.setAdapter(getCategoryAdapter(resIds,avtextmoney,avtextcomment,avtextproduct));
 
 	}
@@ -101,6 +91,8 @@ public class FclassActivity extends BaseActivity {
 						R.id.fclass_gridview_item_textproduct });
 		return simperAdapter;
 
+		
+		
 	}
 
 }// 结束
