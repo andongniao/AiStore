@@ -9,6 +9,8 @@ import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
@@ -17,20 +19,25 @@ import android.widget.Toast;
 
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.youai.aistore.BaseActivity;
+import com.youai.aistore.ExampleActivity;
 import com.youai.aistore.ImageCycleView;
 import com.youai.aistore.MyApplication;
+import com.youai.aistore.WelcomeActivity;
 import com.youai.aistore.ImageCycleView.ImageCycleViewListener;
 import com.youai.aistore.R;
 import com.youai.aistore.Util;
 import com.youai.aistore.Bean.GoodsBean;
 import com.youai.aistore.Bean.ListGoodsBean;
+import com.youai.aistore.Fclass.FclassFristViewActivity;
+import com.youai.aistore.Fclass.FclassHomeActivity;
 import com.youai.aistore.NetInterface.Send;
+import com.youai.aistore.Product.ProductDetailsActivity;
 
 public class HomeActivity extends BaseActivity implements OnClickListener{
 	private long exitTime = 0;
 	private Context context;
 	private ImageCycleView actitvit;
-	private ImageView more,home_new_l,home_new_c,home_new_r,
+	private ImageView woman,man,neiyi,more,runhua,tt,tosex,home_new_l,home_new_c,home_new_r,
 	home_woman_hot_iv_l,home_woman_hot_iv_r_t,home_woman_hot_iv_r_b,
 	home_man_hot_iv_l,home_man_hot_iv_r_t,home_man_hot_iv_r_b,
 	home_neiyi_hot_iv_l,home_neiyi_hot_iv_r_t,home_neiyi_hot_iv_r_b,
@@ -47,13 +54,16 @@ public class HomeActivity extends BaseActivity implements OnClickListener{
 	private MyGridview gridView;
 	private HomeGridviewAdapter adapter;
 	private ScrollView myscrollview;
+	private ArrayList<String> urllist;
+	private int type,id,postion;
+	private String title;
 
 
 	@Override
 	protected void onCreate(Bundle arg0) {
 		super.onCreate(arg0);
 		context = HomeActivity.this;
-		Util.ShowToast(context, MyApplication.UkUUID);
+		Util.ShowToast(context, MyApplication.SessionId);
 		womanimglist = new ArrayList<ImageView>();
 		manlist = new ArrayList<ImageView>();
 		neiyilist = new ArrayList<ImageView>();
@@ -105,43 +115,61 @@ public class HomeActivity extends BaseActivity implements OnClickListener{
 //				actitvit.setImageResources(mImageUrl, mAdCycleViewListener);
 		morell = (LinearLayout) findViewById(R.id.home_more_ll);
 		home_new_l = (ImageView) findViewById(R.id.home_new_iv_l);
+		home_new_l.setOnClickListener(this);
 		home_new_c = (ImageView) findViewById(R.id.home_new_iv_c);
+		home_new_c.setOnClickListener(this);
 		home_new_r = (ImageView) findViewById(R.id.home_new_iv_r);
+		home_new_r.setOnClickListener(this);
 		//女用
 		home_woman_hot_iv_l = (ImageView) findViewById(R.id.home_woman_hot_iv_l);
 		womanimglist.add(home_woman_hot_iv_l);
+		home_woman_hot_iv_l.setOnClickListener(this);
 		home_woman_hot_iv_r_t = (ImageView) findViewById(R.id.home_woman_hot_iv_r_t);
 		womanimglist.add(home_woman_hot_iv_r_t);
+		home_woman_hot_iv_r_t.setOnClickListener(this);
 		home_woman_hot_iv_r_b = (ImageView) findViewById(R.id.home_woman_hot_iv_r_b);
 		womanimglist.add(home_woman_hot_iv_r_b);
+		home_woman_hot_iv_r_b.setOnClickListener(this);
 		//男用
 		home_man_hot_iv_l = (ImageView) findViewById(R.id.home_man_hot_iv_l);
 		manlist.add(home_man_hot_iv_l);
+		home_man_hot_iv_l.setOnClickListener(this);
 		home_man_hot_iv_r_t = (ImageView) findViewById(R.id.home_man_hot_iv_r_t);
 		manlist.add(home_man_hot_iv_r_t);
+		home_man_hot_iv_r_t.setOnClickListener(this);
 		home_man_hot_iv_r_b = (ImageView) findViewById(R.id.home_man_hot_iv_r_b);
 		manlist.add(home_man_hot_iv_r_b);
+		home_man_hot_iv_r_b.setOnClickListener(this);
 		//内衣
 		home_neiyi_hot_iv_l = (ImageView) findViewById(R.id.home_neiyi_hot_iv_l);
 		neiyilist.add(home_neiyi_hot_iv_l);
+		home_neiyi_hot_iv_l.setOnClickListener(this);
 		home_neiyi_hot_iv_r_t = (ImageView) findViewById(R.id.home_neiyi_hot_iv_r_t);
 		neiyilist.add(home_neiyi_hot_iv_r_t);
+		home_neiyi_hot_iv_r_t.setOnClickListener(this);
 		home_neiyi_hot_iv_r_b = (ImageView) findViewById(R.id.home_neiyi_hot_iv_r_b);
 		neiyilist.add(home_neiyi_hot_iv_r_b);
+		home_neiyi_hot_iv_r_b.setOnClickListener(this);
 		//tt
 		home_tt_hot_iv_l = (ImageView) findViewById(R.id.home_tt_hot_iv_l);
 		ttlist.add(home_tt_hot_iv_l);
+		home_tt_hot_iv_l.setOnClickListener(this);
 		home_tt_hot_iv_r_t = (ImageView) findViewById(R.id.home_tt_hot_iv_r_t);
 		ttlist.add(home_tt_hot_iv_r_t);
+		home_tt_hot_iv_r_t.setOnClickListener(this);
 		home_tt_hot_iv_r_b = (ImageView) findViewById(R.id.home_tt_hot_iv_r_b);
 		ttlist.add(home_tt_hot_iv_r_b);
+		home_tt_hot_iv_r_b.setOnClickListener(this);
 		//tosex
 		home_tosex_hot_iv_l = (ImageView) findViewById(R.id.home_tosex_hot_iv_l);
 		tosexlist.add(home_tosex_hot_iv_l);
+		home_tosex_hot_iv_l.setOnClickListener(this);
 		home_tosex_hot_iv_r_t = (ImageView) findViewById(R.id.home_tosex_hot_iv_r_t);
 		tosexlist.add(home_tosex_hot_iv_r_t);
+		home_tosex_hot_iv_r_t.setOnClickListener(this);
 		home_tosex_hot_iv_r_b = (ImageView) findViewById(R.id.home_tosex_hot_iv_r_b);
 		tosexlist.add(home_tosex_hot_iv_r_b);
+		home_tosex_hot_iv_r_b.setOnClickListener(this);
 		
 		
 		tv_newpp_l_tttle = (TextView) findViewById(R.id.home_new_tv_l_one);
@@ -151,8 +179,22 @@ public class HomeActivity extends BaseActivity implements OnClickListener{
 		tv_newpp_r_tttle = (TextView) findViewById(R.id.home_new_tv_r_one);
 		tv_newpp_r_price = (TextView) findViewById(R.id.home_new_tv_r_two);
 		gridView = (MyGridview) findViewById(R.id.home_gridview);
+		gridView.setOnItemClickListener(new myitemlistener());
+		
 		more = (ImageView) findViewById(R.id.home_more);
 		more.setOnClickListener(this);
+		woman = (ImageView) findViewById(R.id.home_woman);
+		woman.setOnClickListener(this);
+		man = (ImageView) findViewById(R.id.home_mant);
+		man.setOnClickListener(this);
+		neiyi = (ImageView) findViewById(R.id.home_threex);
+		neiyi.setOnClickListener(this);
+		runhua = (ImageView) findViewById(R.id.home_lwrite);
+		runhua.setOnClickListener(this);
+		tt = (ImageView) findViewById(R.id.home_tt);
+		tt.setOnClickListener(this);
+		tosex = (ImageView) findViewById(R.id.home_tosex);
+		tosex.setOnClickListener(this);
 
 
 	}
@@ -160,8 +202,22 @@ public class HomeActivity extends BaseActivity implements OnClickListener{
 		iv.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
 		ImageLoader.getInstance().displayImage(url, iv);
 	}
-
-
+	private void toActivity(int type,int id){
+		if(type==2){
+			Intent intent = new Intent(HomeActivity.this,ProductDetailsActivity.class);
+			intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+			intent.putExtra("id",id);
+			startActivity(intent);
+		}
+	}
+	private void toFclassFrist(String title,int postion){
+		//TODO
+		Intent intent = new Intent(HomeActivity.this,ProductDetailsActivity.class);
+		intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+		intent.putExtra("listindex",postion);
+		intent.putExtra("title",title);
+		startActivity(intent);
+	}
 	@Override
 	public void onClick(View v) {
 		switch (v.getId()) {
@@ -174,6 +230,130 @@ public class HomeActivity extends BaseActivity implements OnClickListener{
 				morellisshow = false;
 			}
 			break;
+		case R.id.home_woman:
+			title = "女性用品";
+			postion = 0;
+			toFclassFrist(title, postion);
+			break;
+		case R.id.home_mant:
+			title = "男性用品";
+			postion = 1;
+			toFclassFrist(title, postion);
+			break;
+		case R.id.home_threex:
+			title = "情趣内衣";
+			postion = 2;
+			toFclassFrist(title, postion);
+			break;
+		case R.id.home_lwrite:
+			//小分类
+			title = "润滑消毒";
+			break;
+		case R.id.home_tt:
+			title = "安全套";
+			postion = 3;
+			toFclassFrist(title, postion);
+			break;
+		case R.id.home_tosex:
+			title = "双人情趣";
+			postion = 5;
+			toFclassFrist(title, postion);
+			break;
+		case R.id.home_new_iv_l:
+			type = homeBeanList.getList().get(1).get(0).getType();
+			id = homeBeanList.getList().get(1).get(0).getId();
+			toActivity(type, id);
+			break;
+		case R.id.home_new_iv_c:
+			type = homeBeanList.getList().get(1).get(1).getType();
+			id = homeBeanList.getList().get(1).get(1).getId();
+			toActivity(type, id);
+			break;
+		case R.id.home_new_iv_r:
+			type = homeBeanList.getList().get(1).get(2).getType();
+			id = homeBeanList.getList().get(1).get(2).getId();
+			toActivity(type, id);
+			break;
+			
+		case R.id.home_woman_hot_iv_l:
+			type = homeBeanList.getList().get(2).get(0).getType();
+			id = homeBeanList.getList().get(2).get(0).getId();
+			toActivity(type, id);
+			break;
+		case R.id.home_woman_hot_iv_r_t:
+			type = homeBeanList.getList().get(2).get(1).getType();
+			id = homeBeanList.getList().get(2).get(1).getId();
+			toActivity(type, id);
+			break;
+		case R.id.home_woman_hot_iv_r_b:
+			type = homeBeanList.getList().get(2).get(2).getType();
+			id = homeBeanList.getList().get(2).get(2).getId();
+			toActivity(type, id);
+			break;
+			
+		case R.id.home_man_hot_iv_l:
+			type = homeBeanList.getList().get(3).get(0).getType();
+			id = homeBeanList.getList().get(3).get(0).getId();
+			toActivity(type, id);
+			break;
+		case R.id.home_man_hot_iv_r_t:
+			type = homeBeanList.getList().get(3).get(1).getType();
+			id = homeBeanList.getList().get(3).get(1).getId();
+			toActivity(type, id);
+			break;
+		case R.id.home_man_hot_iv_r_b:
+			type = homeBeanList.getList().get(3).get(2).getType();
+			id = homeBeanList.getList().get(3).get(2).getId();
+			toActivity(type, id);
+			break;
+			
+		case R.id.home_neiyi_hot_iv_l:
+			type = homeBeanList.getList().get(4).get(0).getType();
+			id = homeBeanList.getList().get(4).get(0).getId();
+			toActivity(type, id);
+			break;
+		case R.id.home_neiyi_hot_iv_r_t:
+			type = homeBeanList.getList().get(4).get(1).getType();
+			id = homeBeanList.getList().get(4).get(1).getId();
+			toActivity(type, id);
+			break;
+		case R.id.home_neiyi_hot_iv_r_b:
+			type = homeBeanList.getList().get(4).get(2).getType();
+			id = homeBeanList.getList().get(4).get(2).getId();
+			toActivity(type, id);
+			break;
+			
+		case R.id.home_tt_hot_iv_l:
+			type = homeBeanList.getList().get(5).get(0).getType();
+			id = homeBeanList.getList().get(5).get(0).getId();
+			toActivity(type, id);
+			break;
+		case R.id.home_tt_hot_iv_r_t:
+			type = homeBeanList.getList().get(5).get(1).getType();
+			id = homeBeanList.getList().get(5).get(1).getId();
+			toActivity(type, id);
+			break;
+		case R.id.home_tt_hot_iv_r_b:
+			type = homeBeanList.getList().get(5).get(2).getType();
+			id = homeBeanList.getList().get(5).get(2).getId();
+			toActivity(type, id);
+			break;
+			
+		case R.id.home_tosex_hot_iv_l:
+			type = homeBeanList.getList().get(6).get(0).getType();
+			id = homeBeanList.getList().get(6).get(0).getId();
+			toActivity(type, id);
+			break;
+		case R.id.home_tosex_hot_iv_r_t:
+			type = homeBeanList.getList().get(6).get(1).getType();
+			id = homeBeanList.getList().get(6).get(1).getId();
+			toActivity(type, id);
+			break;
+		case R.id.home_tosex_hot_iv_r_b:
+			type = homeBeanList.getList().get(6).get(2).getType();
+			id = homeBeanList.getList().get(6).get(2).getId();
+			toActivity(type, id);
+			break;
 
 		}
 	}
@@ -183,6 +363,15 @@ public class HomeActivity extends BaseActivity implements OnClickListener{
 		@Override
 		public void onImageClick(int position, View imageView) {
 			// TODO 单击图片处理事件
+			if(urllist!=null){
+				int type = homeBeanList.getList().get(0).get(position).getType();
+			if(type==2){
+				Intent intent = new Intent(HomeActivity.this,ProductDetailsActivity.class);
+				intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+				intent.putExtra("id",homeBeanList.getList().get(0).get(position).getId());
+				startActivity(intent);
+			}
+			}
 		}
 
 		@Override
@@ -242,11 +431,10 @@ public class HomeActivity extends BaseActivity implements OnClickListener{
 		@Override  
 		protected void onPostExecute(Object result) {  
 			Util.stopProgressDialog();
-			//TODO
 			homeBeanList  = (ListGoodsBean) result;
 			if(homeBeanList!=null && homeBeanList.getCode() == 200){
 				activitListBean = homeBeanList.getList().get(0);
-				ArrayList<String> urllist = new ArrayList<String>();
+				urllist = new ArrayList<String>();
 				for(int i=0;i<activitListBean.size();i++){
 					String url1 = activitListBean.get(i).getPicurl();
 					urllist.add(url1);
@@ -260,8 +448,8 @@ public class HomeActivity extends BaseActivity implements OnClickListener{
 				tv_newpp_c_price.setText("￥"+newppListBean.get(1).getShop_price());
 				tv_newpp_c_tttle.setText(newppListBean.get(1).getTitle());
 				setimagebackground(newppListBean.get(2).getPicurl(), home_new_r);
-				tv_newpp_r_price.setText("￥"+newppListBean.get(1).getShop_price());
-				tv_newpp_r_tttle.setText(newppListBean.get(1).getTitle());
+				tv_newpp_r_price.setText("￥"+newppListBean.get(2).getShop_price());
+				tv_newpp_r_tttle.setText(newppListBean.get(2).getTitle());
 				//女用
 				womanListBean = homeBeanList.getList().get(2);
 				for(int i=0;i<womanListBean.size();i++){
@@ -310,6 +498,18 @@ public class HomeActivity extends BaseActivity implements OnClickListener{
 			Util.stopProgressDialog();
 		}  
 	} 
+	
+	class myitemlistener implements OnItemClickListener{
+
+		@Override
+		public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
+				long arg3) {
+			type = homeBeanList.getList().get(7).get(arg2).getType();
+			id = homeBeanList.getList().get(7).get(arg2).getId();
+			toActivity(type, id);
+		}
+		
+	}
 	@Override
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
 			if(keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_DOWN){   

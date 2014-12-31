@@ -17,11 +17,13 @@ import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
 /**
  * MyApplication
  * 
- * @author minking
+ * @author Qzr
  */
 public class MyApplication extends Application {
-	public static String UkUUID = ""; 
+	public static String SessionId = ""; 
 	public static SharedPreferences mSharedPreferences;
+	public static String callnumber = "4000965585";
+	public static String smsnumber = "13331054789";
 
 	@Override
 	public void onCreate() {
@@ -44,13 +46,13 @@ public class MyApplication extends Application {
 		String DEVICE_ID = tm.getDeviceId();
 		String time = String.valueOf(System.currentTimeMillis());
 		mSharedPreferences = getSharedPreferences("aistoresp", 0);
-		String ukuuid = mSharedPreferences.getString("ukuuid", "nulla");
-		if(ukuuid!=null && !ukuuid.equals("nulla")){
-			UkUUID = ukuuid;
+		String sessionid = mSharedPreferences.getString("sessionid", "nulla");
+		if(sessionid!=null && !sessionid.equals("nulla")){
+			SessionId = sessionid;
 		}else{
-			UkUUID = Util.hashKeyForDisk(DEVICE_ID+time);
+			SessionId = Util.hashKeyForDisk(DEVICE_ID+time);
 		SharedPreferences.Editor mEditor = mSharedPreferences.edit();
-		mEditor.putString("ukuuid", UkUUID);
+		mEditor.putString("ukuuid", SessionId);
 		mEditor.commit();  
 		}
 	}

@@ -255,5 +255,21 @@ public class Util {
 	        // params.height最后得到整个ListView完整显示需要的高度  
 	        listView.setLayoutParams(params);  
 	    }  
+	 
+		/**
+		 * 把时间戳转化成时间类型
+		 * 
+		 * @param str
+		 *            时间类型格式
+		 * @param time
+		 *            时间戳 单位毫秒
+		 * @return
+		 */
+		public static String getTimeForData(String str, long time) {
+			// yyyy-MM-dd hh:mm:ss
+			SimpleDateFormat sdf = new SimpleDateFormat(str);
+			String date = sdf.format(new Date(time));
+			return date;
+		}
 
 }
