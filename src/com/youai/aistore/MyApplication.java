@@ -4,6 +4,9 @@
 package com.youai.aistore;
 
 import android.app.Application;
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.telephony.TelephonyManager;
 
 import com.nostra13.universalimageloader.cache.disc.naming.Md5FileNameGenerator;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
@@ -17,6 +20,8 @@ import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
  * @author minking
  */
 public class MyApplication extends Application {
+	public static String UkUUID = ""; 
+	public static SharedPreferences mSharedPreferences;
 
 	@Override
 	public void onCreate() {
@@ -35,6 +40,19 @@ public class MyApplication extends Application {
 				.threadPriority(Thread.NORM_PRIORITY - 2).denyCacheImageMultipleSizesInMemory()
 				.discCacheFileNameGenerator(new Md5FileNameGenerator()).tasksProcessingOrder(QueueProcessingType.LIFO).build();
 		ImageLoader.getInstance().init(config);
+		TelephonyManager tm = (TelephonyManager)getSystemService(Context.TELEPHONY_SERVICE); 
+		String DEVICE_ID = tm.getDeviceId();
+		String time = String.valueOf(System.currentTimeMillis());
+		mSharedPreferences = getSharedPreferences("aistoresp", 0);
+		String ukuuid = mSharedPreferences.getString("ukuuid", "nulla");
+		if(ukuuid!=null && !ukuuid.equals("nulla")){
+			UkUUID = ukuuid;
+		}else{
+			UkUUID = Util.hashKeyForDisk(DEVICE_ID+time);
+		SharedPreferences.Editor mEditor = mSharedPreferences.edit();
+		mEditor.putString("ukuuid", UkUUID);
+		mEditor.commit();  
+		}
 	}
 
 }

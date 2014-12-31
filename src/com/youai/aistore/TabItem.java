@@ -10,8 +10,8 @@ public class TabItem {
 	
 	public TabItem(int bg, Intent intent) {
 		super();
-		this.title = title;
-		this.icon = icon;
+//		this.title = title;
+//		this.icon = icon;
 		this.bg = bg;
 		this.intent = intent;
 	}

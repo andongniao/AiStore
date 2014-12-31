@@ -27,6 +27,7 @@ import android.widget.LinearLayout;
  * @author minking
  */
 public class ImageCycleView extends LinearLayout {
+	private long time = 3000;
 
 	/**
 	 * 上下文
@@ -127,9 +128,9 @@ public class ImageCycleView extends LinearLayout {
 			mImageView.setPadding(imagePadding, imagePadding, imagePadding, imagePadding);
 			mImageViews[i] = mImageView;
 			if (i == 0) {
-				mImageViews[i].setBackgroundResource(R.drawable.cor_gray);
+				mImageViews[i].setBackgroundResource(R.drawable.cor_red);
 			} else {
-				mImageViews[i].setBackgroundResource(R.drawable.cor_white);
+				mImageViews[i].setBackgroundResource(R.drawable.cor_gray);
 			}
 			mGroup.addView(mImageViews[i]);
 		}
@@ -158,14 +159,17 @@ public class ImageCycleView extends LinearLayout {
 	private void startImageTimerTask() {
 		stopImageTimerTask();
 		// 图片每3秒滚动一次
-		mHandler.postDelayed(mImageTimerTask, 3000);
+		mHandler.postDelayed(mImageTimerTask, time);
 	}
 
 	/**
 	 * 停止图片滚动任务
 	 */
-	private void stopImageTimerTask() {
+	public void stopImageTimerTask() {
 		mHandler.removeCallbacks(mImageTimerTask);
+	}
+	public void settime(long time){
+		this.time = time;
 	}
 
 	private Handler mHandler = new Handler();
@@ -209,10 +213,10 @@ public class ImageCycleView extends LinearLayout {
 			// 设置当前显示的图片下标
 			mImageIndex = index;
 			// 设置图片滚动指示器背景
-			mImageViews[index].setBackgroundResource(R.drawable.cor_gray);
+			mImageViews[index].setBackgroundResource(R.drawable.cor_red);
 			for (int i = 0; i < mImageViews.length; i++) {
 				if (index != i) {
-					mImageViews[i].setBackgroundResource(R.drawable.cor_white);
+					mImageViews[i].setBackgroundResource(R.drawable.cor_gray);
 				}
 			}
 

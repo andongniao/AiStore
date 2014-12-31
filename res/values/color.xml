@@ -24,11 +24,11 @@
     <color name="dialog_button_text">#333333</color>
     <color name="dialog_button_normal">@android:color/transparent</color>
     <color name="dialog_button_pressed">#99f3a71e</color>
-    <!-- 60 % opacity -->
+ <!-- 60 % opacity -->
     <color name="dialog_button_focused">#4Cf3a71e</color>
-    <!-- 30 % opacity -->
+ <!-- 30 % opacity -->
     <color name="dialog_button_separator">#25000000</color>
-    <!-- 7% opacity -->
+ <!-- 7% opacity -->
     <color name="background">#FFA500</color>
     <!-- custom dark theme: -->
     <color name="dialog_message_text_dark">#FFFFFF</color>
@@ -37,19 +37,22 @@
     <color name="dialog_button_text_dark">#FFFFFF</color>
     <color name="dialog_button_normal_dark">@android:color/transparent</color>
     <color name="dialog_button_pressed_dark">#99F8A500</color>
-    <!-- 60 % opacity -->
+ <!-- 60 % opacity -->
     <color name="dialog_button_focused_dark">#4CF8A500</color>
-    <!-- 30 % opacity -->
+ <!-- 30 % opacity -->
     <color name="dialog_button_separator_dark">#12FFFFFF</color>
-    <!-- 7% opacity -->
+ <!-- 7% opacity -->
     <color name="background_dark">#C35817</color>
-    <!-- TABActivity -->
-    <color name="RoyalBlue">#4169E1</color>
+ <!-- dialog 半透明色 -->
+  <color name="dialog_bg">#e0000000</color>
+ <!-- TABActivity -->
+  <color name="RoyalBlue">#4169E1</color>
     <color name="LightSteelBlue">#B0C4DE</color>
-    <!-- 首页文字色 -->
+ <!-- 首页文字色 -->
     <color name="home_text_grey">#999999</color>
-    <color name="home_text_red">#EF2E5A</color>
-    <!-- 分类背景 ,灰色 -->
-    <color name="fclass_background"> #F1F1F1</color>
+    <color name="home_text_red">#EF2E5B</color>
+ 
+    
+    
 
 </resources>

@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
     android:layout_height="90dp"
-    android:background="@drawable/home_red_title"
+    android:background="@drawable/home_dialog_bg"
     android:padding="15dp"
     android:gravity="center" >
 

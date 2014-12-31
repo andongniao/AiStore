@@ -4,14 +4,25 @@
     android:layout_height="fill_parent"
     android:background="@color/bg_color"
     android:orientation="vertical" >
-
+	<LinearLayout 
+	     android:layout_width="fill_parent"
+   		 android:layout_height="0dp"
+   		 android:layout_weight="1"
+   		 android:orientation="vertical"
+	    >
+<!-- 
+    <com.youai.aistore.xlistview.XListView
+ -->
     <ListView
         android:id="@+id/shopcart_listview"
         android:layout_width="fill_parent"
         android:layout_height="0dp"
         android:scrollbars="none"
-        android:layout_weight="1" >
-    </ListView>
+        android:cacheColorHint="#00000000"
+        android:dividerHeight="30px"
+        android:divider="#00000000"
+        android:fadingEdge="vertical" 
+        android:layout_weight="1" />
 
     <LinearLayout
         android:id="@+id/shopcart_isnull_ll"
@@ -26,13 +37,41 @@
             android:id="@+id/shopcart_isnull_iv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/ic_launcher" />
+            android:background="@drawable/fclass_cart" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/shopcart_isnull"
+            android:layout_marginTop="10dp"
             android:textColor="@color/home_text_grey" />
     </LinearLayout>
+    	    
+	</LinearLayout>
+	<LinearLayout 
+	    android:id="@+id/shopcart_gopay_seeagain_view_ll"
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content"
+	    android:orientation="horizontal"
+	    android:gravity="center_vertical"
+	    android:padding="5dp"
+	    android:layout_marginTop="10dp"
+	    >
+	    <Button 
+	        android:id="@+id/shopcart_see_again_bt"
+	        android:layout_width="0dp"
+	        android:layout_height="wrap_content"
+	        android:layout_weight="1"
+	        android:text="@string/shopcart_see_again"
+	        android:layout_marginLeft="5dp"
+	        />
+	    <Button 
+	        android:id="@+id/shopcart_gopay_bt"
+	        android:layout_width="0dp"
+	        android:layout_height="wrap_content"
+	        android:layout_weight="1"
+	        android:text="@string/shopcart_gopay"
+	        />
+	</LinearLayout>
 
 </LinearLayout>

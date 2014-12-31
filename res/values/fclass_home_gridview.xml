@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="fclass_home_expandablelistviewname">
+        <item>女性</item>
+        <item>男性</item>
+        <item>内衣</item>
+        <item>安全套</item>
+        <item>双人</item>
+    </string-array>
+
+    <string-array name="fclass_home_woman_gridview">
+        <item>热门</item>
+        <item>AV震动棒</item>
+        <item>仿真阳具</item>
+        <item>情趣跳蛋</item>
+        <item>伸缩转珠</item>
+        <item>护理保健</item>
+        <item>其它女用</item>
+    </string-array>
+    <string-array name="fclass_frist_woman_gridview">
+        <item>AV震动棒</item>
+        <item>仿真阳具</item>
+        <item>情趣跳蛋</item>
+        <item>伸缩转珠</item>
+        <item>护理保健</item>
+        <item>其它女用</item>
+    </string-array>
+    
+    <string-array name="fclass_home_man_gridview">
+        <item>热门</item>
+        <item>飞机杯</item>
+        <item>荫臀倒模</item>
+        <item>辅助器具</item>
+    </string-array>
+    <string-array name="fclass_frist_man_gridview">
+        <item>飞机杯</item>
+        <item>荫臀倒模</item>
+        <item>辅助器具</item>
+    </string-array>
+    
+    <string-array name="fclass_home_neiyi_gridview">
+        <item>热门</item>
+        <item>性感内衣</item>
+        <item>丝袜内裤</item>
+        <item>情趣睡衣</item>
+        <item>制服诱惑</item>
+        <item>连体网衣</item>
+        <item>三点透视</item>
+    </string-array>
+    <string-array name="fclass_frist_neiyi_gridview">
+        <item>性感内衣</item>
+        <item>丝袜内裤</item>
+        <item>情趣睡衣</item>
+        <item>制服诱惑</item>
+        <item>连体网衣</item>
+        <item>三点透视</item>
+    </string-array>
+
+    <string-array name="fclass_home_tt_gridview">
+        <item>热门</item>
+        <item>经典超薄</item>
+        <item>持久延时</item>
+        <item>女用避孕</item>
+        <item>大小号套</item>
+        <item>花样情趣</item>
+    </string-array>
+    <string-array name="fclass_frist_tt_gridview">
+        <item>经典超薄</item>
+        <item>持久延时</item>
+        <item>女用避孕</item>
+        <item>大小号套</item>
+        <item>花样情趣</item>
+    </string-array>
+    <string-array name="fclass_home_tosex_gridview">
+        <item>热门</item>
+        <item>延时助情</item>
+        <item>后庭刺激</item>
+        <item>情趣环套</item>
+        <item>润滑消毒</item>
+        <item>SM</item>
+        <item>情趣其他</item>
+    </string-array>
+    <string-array name="fclass_frist_tosex_gridview">
+        <item>延时助情</item>
+        <item>后庭刺激</item>
+        <item>情趣环套</item>
+        <item>润滑消毒</item>
+        <item>SM</item>
+        <item>情趣其他</item>
+    </string-array>
+</resources>

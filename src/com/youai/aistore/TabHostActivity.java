@@ -1,5 +1,6 @@
 package com.youai.aistore;
 
+import android.annotation.SuppressLint;
 import android.app.TabActivity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,14 +13,13 @@ import android.widget.TabHost.TabSpec;
 import android.widget.TabWidget;
 import android.widget.TextView;
 
-@SuppressWarnings("unused")
+@SuppressWarnings({ "unused", "deprecation" })
 public abstract class TabHostActivity extends TabActivity {
 
 	private TabHost mTabHost;
 	private TabWidget mTabWidget;
 	private LayoutInflater mLayoutflater;
 
-	@SuppressWarnings("deprecation")
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		requestWindowFeature(Window.FEATURE_NO_TITLE);  
@@ -46,6 +46,7 @@ public abstract class TabHostActivity extends TabActivity {
 //		layout.addView(child);
 //	}
 
+	@SuppressLint("InflateParams")
 	private void initTabSpec() {
 
 		int count = getTabItemCount();
