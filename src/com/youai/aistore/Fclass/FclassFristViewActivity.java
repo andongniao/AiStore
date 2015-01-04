@@ -4,14 +4,19 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
+import android.widget.ListAdapter;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
 
@@ -19,16 +24,18 @@ import com.youai.aistore.BaseActivity;
 import com.youai.aistore.R;
 import com.youai.aistore.Util;
 import com.youai.aistore.Bean.GoodsBean;
+import com.youai.aistore.Home.HomeActivity;
 import com.youai.aistore.Home.MyGridview;
+import com.youai.aistore.Home.SearchResultActivity;
 import com.youai.aistore.NetInterface.Send;
 
 public class FclassFristViewActivity extends BaseActivity {
-	private MyGridview topgtitleridview; // 上面标题gridview
+	private MyGridview toptitlegridview; // 上面标题gridview
 	private LinearLayout addviewll; // 添加动态布局
 	private int listindex;
 	private Resources rs;
 	private String[] titlelist; // 标题数组
-	private ArrayList<View> addviewlist; 
+	private ArrayList<View> addviewlist;
 	private LayoutInflater inflater; // 需要使用inflate来动态载入界面
 	private Context context;
 	private ArrayList<MyGridview> gridviewlist;
@@ -39,7 +46,7 @@ public class FclassFristViewActivity extends BaseActivity {
 		super.onCreate(arg0);
 		setContentXml(R.layout.fclass_frist_view);
 		String title = getIntent().getStringExtra("title");// 添加标题，获取传过来的值，
-		listindex = getIntent().getIntExtra("listindex",0);
+		listindex = getIntent().getIntExtra("listindex", 0);
 		setTitleTxt(title);
 		init();
 
@@ -52,7 +59,7 @@ public class FclassFristViewActivity extends BaseActivity {
 		inflater = LayoutInflater.from(context);
 		gridviewlist = new ArrayList<MyGridview>();
 
-		topgtitleridview = (MyGridview) findViewById(R.id.fclass_frist_view_topgridview);
+		toptitlegridview = (MyGridview) findViewById(R.id.fclass_frist_view_topgridview);
 
 		addviewll = (LinearLayout) findViewById(R.id.fclass_frist_view_addview_ll);
 
@@ -68,10 +75,11 @@ public class FclassFristViewActivity extends BaseActivity {
 			titlelist = rs.getStringArray(R.array.fclass_frist_tosex_gridview);
 		}
 
-		topgtitleridview
+		toptitlegridview
 				.setAdapter(new ArrayAdapter<String>(this,
 						R.layout.fclass_gridview, R.id.fclass_gridview_text,
 						titlelist));
+		toptitlegridview.setOnItemClickListener(new Titlegridviewonclick());
 
 		// 测试，女性用品数据
 		String[] avtextmoney = rs
@@ -112,6 +120,7 @@ public class FclassFristViewActivity extends BaseActivity {
 		 */
 	}
 
+
 	private SimpleAdapter getCategoryAdapter(int[] avimgproduct,
 			String[] avtextmoney, String[] avtextcomment, String[] avtextproduct) {
 		ArrayList<HashMap<String, Object>> date = new ArrayList<HashMap<String, Object>>();
@@ -135,12 +144,36 @@ public class FclassFristViewActivity extends BaseActivity {
 		return simperAdapter;
 
 	}
+	
+	/*
+	 * 详细分类监听器
+	 */
+	class Titlegridviewonclick implements OnItemClickListener   {
 
+
+		@Override
+		public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
+				long arg3) {
+			// TODO Auto-generated method stub
+		
+				Intent intent = new Intent(FclassFristViewActivity.this,FclassMoreActivity.class);
+				//titlelist数组传值给FclassFristViewActivity的标题
+				intent.putExtra("title", titlelist[arg2].toString());
+				startActivity(intent);
+				Util.ShowToast(context, "点击了"+titlelist[arg2]);
+		}
+	
+		
+		
+	}
+	
+	
 	private class MyTask extends AsyncTask<Object, Object, Object> {
 		// onPreExecute方法用于在执行后台任务前做一些UI操作
 		@Override
 		protected void onPreExecute() {
 			Util.startProgressDialog(context);
+			
 		}
 
 		// doInBackground方法内部执行后台任务,不可在此方法内修改UI
