@@ -32,7 +32,7 @@ public class ShopCartActivity extends BaseActivity implements OnClickListener{
 	private ImageView isnull_iv;
 	private View isnull;
 	private ShopCartAdapter adapter;
-	private LinearLayout goypayandseeagainview;
+	private LinearLayout showviewll;
 	private Button seeagainbt,goypaybt;
 	
 	@Override
@@ -52,7 +52,7 @@ public class ShopCartActivity extends BaseActivity implements OnClickListener{
 
 	private void init() {
 		isnull = findViewById(R.id.shopcart_isnull_ll);
-		goypayandseeagainview = (LinearLayout) findViewById(R.id.shopcart_gopay_seeagain_view_ll);
+		showviewll = (LinearLayout) findViewById(R.id.shopcart_showview_ll);
 		seeagainbt = (Button) findViewById(R.id.shopcart_see_again_bt);
 		goypaybt = (Button) findViewById(R.id.shopcart_gopay_bt);
 		lv = (ListView) findViewById(R.id.shopcart_listview);
@@ -82,9 +82,9 @@ public class ShopCartActivity extends BaseActivity implements OnClickListener{
 		adapter = new ShopCartAdapter(context, list);
 		lv.setAdapter(adapter);
 		if(list!=null && list.size()>0){
-			goypayandseeagainview.setVisibility(View.VISIBLE);
+			showviewll.setVisibility(View.VISIBLE);
 		}else{
-			goypayandseeagainview.setVisibility(View.GONE);
+			showviewll.setVisibility(View.GONE);
 		}
 
 	}

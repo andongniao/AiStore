@@ -2,7 +2,10 @@ package com.youai.aistore.Product;
 
 import java.util.ArrayList;
 
+import com.nostra13.universalimageloader.core.ImageLoader;
 import com.youai.aistore.R;
+import com.youai.aistore.Util;
+import com.youai.aistore.Bean.CommentsBean;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -19,17 +22,17 @@ import android.widget.TextView;
  */
 public class UserCommentAdapter extends BaseAdapter{
 	private Context context;
-	private ArrayList<String> list;
+	private ArrayList<CommentsBean> list;
 	private LayoutInflater inflater;
 	private UserCommentItem commentItem;
 	
-	public UserCommentAdapter(Context context,ArrayList<String> list){
+	public UserCommentAdapter(Context context,ArrayList<CommentsBean> list){
 		this.context = context;
 		this.list = list;
 		inflater = LayoutInflater.from(context);
 		
 	}
-	public void setdata(ArrayList<String> list){
+	public void setdata(ArrayList<CommentsBean> list){
 		this.list = list;
 	}
 
@@ -65,7 +68,14 @@ public class UserCommentAdapter extends BaseAdapter{
 		}
 		
 		//TODO 
-		
+		commentItem.iv.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
+		ImageLoader.getInstance().displayImage(list.get(arg0).getTouxiang(), commentItem.iv);
+		commentItem.tv_username.setText(list.get(arg0).getYonghuming());
+		commentItem.tv_fans.setText(list.get(arg0).getFensi());
+		commentItem.tv_comment_content.setText(list.get(arg0).getContent());
+		long t = Long.parseLong(list.get(arg0).getAdd_time());
+		String time = Util.getTimeForData("yyyy-MM-dd",t);
+		commentItem.tv_time.setText(time);
 		
 		return arg1;
 	}

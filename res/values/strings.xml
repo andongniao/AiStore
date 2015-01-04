@@ -36,6 +36,8 @@
     <string name="shopcart_delete">删除</string>
     <string name="shopcart_see_again">再逛逛</string>
     <string name="shopcart_gopay">去结算</string>
+    <string name="shopcart_gongji">共计:</string>
+   
     <!-- 搜索 -->
     <string name="search_et_text">请输入关键词</string>
     <string name="search_bt_text">搜索</string>
@@ -51,6 +53,15 @@
     <string name="product_user_comments">用户评论</string>
     <string name="product_user_comments_fans">粉丝：</string>
     <string name="product_user_comments_likes">喜欢</string>
+     <string name="product_call_text">官方热线:</string>
+    <string name="product_call_number">400-096-5585</string>
+    <string name="product_sms_text">短信订购</string>
+    <string name="product_sms_number">13331054189</string>
+    <string name="product_iscall">是否呼叫？</string>
+    <string name="product_issms">是否发送短信？</string>
+    <string name="product_cancle">取消</string>
+    <string name="product_sms_send">发送</string>
+    <string name="product_cll_tell">呼叫</string>
     
     <!-- NetREquest -->
     <string name="http_status_code_error">请求失败</string>

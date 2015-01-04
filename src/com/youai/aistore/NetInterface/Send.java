@@ -13,7 +13,9 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.youai.aistore.R;
 import com.youai.aistore.Util;
+import com.youai.aistore.Bean.CommentsBean;
 import com.youai.aistore.Bean.GoodsBean;
+import com.youai.aistore.Bean.ListCommentsBean;
 import com.youai.aistore.Bean.ListGoodsBean;
 
 public class Send {
@@ -125,4 +127,51 @@ public class Send {
 		
 	}
 
+	
+	/**
+	 * 获取单品评论
+	 */
+	@SuppressWarnings("unchecked")
+	public ListCommentsBean GetProductComments(int id,int page){
+		ListCommentsBean list = new ListCommentsBean();
+		CommentsBean bean = null;
+		String url = ServiceUrl.Product_comments_Url_head+id+ServiceUrl.Product_comments_Url_foot+page;
+		String jsonStr = null;
+		jsonStr = GetHttp.sendGet(url);
+		
+		if (jsonStr != null && !jsonStr.equals("")) {
+			JSONObject object = null;
+			try {
+				object = new JSONObject(jsonStr);
+				if (object.get("code") != null && object.getInt("code") == 200) {
+					JSONArray data = object.getJSONArray("data");
+						Type type = new TypeToken<ArrayList<CommentsBean>>() {}.getType();
+						String json = data.toString();
+						ArrayList<CommentsBean> l = gson.fromJson(json, type);
+						list.setList(l);
+						list.setCode(200);
+						list.setMsg(object.getString("message"));
+					return list;
+				} else {
+					list.setMsg(object.getString("message"));
+					list.setCode(object.getInt("code"));
+					return list;
+					
+				}
+				
+			} catch (JSONException e) {
+				e.printStackTrace();
+			}
+		} else {
+			list.setCode(500);
+			list.setMsg(context.getResources().getString(
+					R.string.http_status_code_error));
+			return list;
+		}
+		
+		return null;
+		
+	}
+
+	
 }

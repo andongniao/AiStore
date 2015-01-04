@@ -3,13 +3,19 @@ package com.youai.aistore.Product;
 import java.util.ArrayList;
 
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Paint;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.DisplayMetrics;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -19,14 +25,18 @@ import android.webkit.WebViewClient;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.youai.aistore.BaseActivity;
 import com.youai.aistore.ImageCycleView;
 import com.youai.aistore.ImageCycleView.ImageCycleViewListener;
+import com.youai.aistore.MyApplication;
 import com.youai.aistore.R;
 import com.youai.aistore.Util;
+import com.youai.aistore.Bean.CommentsBean;
 import com.youai.aistore.Bean.GoodsBean;
+import com.youai.aistore.Bean.ListCommentsBean;
 import com.youai.aistore.NetInterface.Send;
 import com.youai.aistore.xlistview.XListView;
 import com.youai.aistore.xlistview.XListView.IXListViewListener;
@@ -41,39 +51,56 @@ public class ProductDetailsActivity extends BaseActivity implements IXListViewLi
 	private XListView xListView;
 	private View view_webview,view_listview;
 	private TextView tv_shop_price,tv_market_price,tv_title,tv_click_num,tv_image_text_tv,tv_user_comment;
-	private LinearLayout addviewll;
+	private LinearLayout addviewll,call_ll,sms_ll;
 	private LayoutInflater inflater;
 	private Context context;
 	private String URL;
 	private MyTask myTask;
-	private int id,showsatau;
+	private int id,showsatau,page;
 	private GoodsBean bean;
 	private UserCommentAdapter adapter;
-	private ArrayList<String> list;
-	private Handler handler;
+	private ArrayList<CommentsBean> list;
+	private Handler handler,myHandler;
+	private ListCommentsBean listcombean,nextpagelist;
+	private  Dialog alertDialog;
 
 	@Override
 	protected void onCreate(Bundle arg0) {
 		super.onCreate(arg0);
 		setTitleTxt(R.string.product_title);
 		setContentXml(R.layout.product_details);
+		setTopLeftBackground(R.drawable.btn_back);
 		handler = new Handler();
 		init();
 		if(Util.detect(context)){
-			myTask = new MyTask();
+			myTask = new MyTask(1);
+			myTask.execute("");  
+			myTask = new MyTask(2);
 			myTask.execute("");  
 		}else{
 			Util.ShowToast(context, R.string.net_work_is_error);
 		}
+		//		myHandler = new Handler(){
+		//			@Override
+		//			public void handleMessage(Message msg) {
+		//				super.handleMessage(msg);
+		//				//TODO
+		//			}
+		//		};
 	}
 
 	@SuppressWarnings("deprecation")
 	@SuppressLint("InflateParams")
 	private void init() {
+		page = 1;
 		showsatau = 0;
 		id = getIntent().getIntExtra("id", -1);
 		context = ProductDetailsActivity.this;
 		inflater = LayoutInflater.from(context);
+		call_ll = (LinearLayout) findViewById(R.id.product_details_call_ll);
+		call_ll.setOnClickListener(this);
+		sms_ll = (LinearLayout) findViewById(R.id.product_details_sms_ll);
+		sms_ll.setOnClickListener(this);
 		view_webview =  inflater.inflate(R.layout.product_addview_webview, null);
 		view_listview =  inflater.inflate(R.layout.product_addview_listview, null);
 		webView = (WebView) view_webview.findViewById(R.id.product_webview);
@@ -89,7 +116,7 @@ public class ProductDetailsActivity extends BaseActivity implements IXListViewLi
 		topshowic = (ImageCycleView) findViewById(R.id.product_details_ic);
 		topshowic.stopImageTimerTask();
 		topshowic.settime(999999999);
-		
+
 		tv_shop_price = (TextView) findViewById(R.id.product_shop_price_tv);
 		tv_shop_price.getPaint().setFlags(Paint. UNDERLINE_TEXT_FLAG ); //下划线
 		tv_shop_price.getPaint().setAntiAlias(true);//抗锯齿
@@ -102,72 +129,24 @@ public class ProductDetailsActivity extends BaseActivity implements IXListViewLi
 		tv_image_text_tv.setOnClickListener(this);
 		tv_user_comment = (TextView) findViewById(R.id.product_user_comment_tv);
 		tv_user_comment.setOnClickListener(this);
-		
-		
+
+
 		tv_image_text_tv.setTextColor(getResources().getColor(R.color.home_text_red));
 		tv_image_text_tv.getPaint().setFlags(Paint. UNDERLINE_TEXT_FLAG ); //下划线
 		tv_image_text_tv.getPaint().setAntiAlias(true);//抗锯齿
 		tv_user_comment.getPaint().setFlags(0); // 取消设置的的划线
 		tv_user_comment.setTextColor(getResources().getColor(R.color.black));
-		
-		
-		/******************模拟数据******************************/
-		String imageUrl1 = "http://www.ppt123.net/beijing/UploadFiles_8374/201202/2012022812392852.jpg";
-		String imageUrl2 = "http://img3.imgtn.bdimg.com/it/u=3371032114,892333757&fm=21&gp=0.jpg";
-		String imageUrl3 = "http://img1.imgtn.bdimg.com/it/u=115106945,3813595292&fm=21&gp=0.jpg";
-		String imageUrl4 = "http://img5.imgtn.bdimg.com/it/u=2065705989,2820968328&fm=21&gp=0.jpg";
-		ArrayList<String>mImageUrl = new ArrayList<String>();
-		mImageUrl.add(imageUrl1);
-		mImageUrl.add(imageUrl2);
-		mImageUrl.add(imageUrl3);
-		mImageUrl.add(imageUrl4);
-		topshowic.setImageResources(mImageUrl, mAdCycleViewListener);
-		/***************webview*********************/
-//		webView.getSettings().setJavaScriptEnabled(true);  
-//		webView.getSettings().setSupportZoom(true);   
-		//设置出现缩放工具   
-//		webView.getSettings().setBuiltInZoomControls(true);
-//		webView.getSettings().setDefaultZoom(WebSettings.ZoomDensity.FAR);  		
+
+
 		//自适应屏幕
 		webView.getSettings().setLayoutAlgorithm(LayoutAlgorithm.SINGLE_COLUMN);
 		webView.getSettings().setLoadWithOverviewMode(true);
 		webView.setWebViewClient(new MyWebViewClient());
-		/******************模拟数据******************************/
-		URL = "http://www.android100.org/html/201306/25/3281.html";//"http://www.baidu.com";//bean.getGood_desc();
-		webView.loadUrl(URL);
-//		webView.setLayoutParams(new LayoutParams(LayoutParams.FILL_PARENT,LayoutParams.WRAP_CONTENT));
-		DisplayMetrics dm = new DisplayMetrics();//获取当前显示的界面大小
-        getWindowManager().getDefaultDisplay().getMetrics(dm);
-        int width=dm.widthPixels;
-        int height=dm.heightPixels;//获取当前界面的高度
-        LinearLayout.LayoutParams linearParams = (LinearLayout.LayoutParams) webView.getLayoutParams(); 
-        linearParams.height = height;//linearParams.WRAP_CONTENT;
-        webView.setLayoutParams(linearParams);
-        handler.postDelayed(new Runnable() {
-			
-			@Override
-			public void run() {
-				DisplayMetrics dm = new DisplayMetrics();//获取当前显示的界面大小
-		        getWindowManager().getDefaultDisplay().getMetrics(dm);
-				 int width=dm.widthPixels;
-			        int height=dm.heightPixels;//获取当前界面的高度
-			        LinearLayout.LayoutParams linearParams = (LinearLayout.LayoutParams) webView.getLayoutParams(); 
-			        linearParams.height = linearParams.WRAP_CONTENT;
-			        webView.setLayoutParams(linearParams);
-			}
-		}, 1000);
-        
-        
-        
-		ArrayList<String> list = new ArrayList<String>();
-		list.add("1");
-		list.add("w");
-		list.add("f");
-		adapter = new UserCommentAdapter(context, list);
-		xListView.setAdapter(adapter);
-		Util.setListViewHeightBasedOnChildren(xListView);
+
+
+
 	}
-	
+
 	class MyWebViewClient extends WebViewClient {
 		//重写父类方法，让新打开的网页在当前的WebView中显示
 		@Override
@@ -179,10 +158,10 @@ public class ProductDetailsActivity extends BaseActivity implements IXListViewLi
 		@Override
 		public void onPageStarted(WebView 
 				view, String url, Bitmap favicon) {
-			
+
 			super.onPageStarted(view, url, favicon);
 		}
-		 //网页加载完毕
+		//网页加载完毕
 
 		@Override
 		public void onPageFinished(WebView view, String url) {
@@ -207,36 +186,54 @@ public class ProductDetailsActivity extends BaseActivity implements IXListViewLi
 
 	@Override
 	public void onRefresh() {
-		// TODO Auto-generated method stub
-		
+		page = 1;
+		myTask = new MyTask(3);
+		myTask.execute("");  
+
 	}
 
 	@Override
 	public void onLoadMore() {
-		onLoad();
-		String s = String.valueOf(System.currentTimeMillis());
-		list.add(s);
-		adapter.setdata(list);
-		Util.setListViewHeightBasedOnChildren(xListView);
+		page += 1;
+		myTask = new MyTask(3);
+		myTask.execute("");  
+
+
 	}
 
 
-	
+
 	private class MyTask extends AsyncTask<Object, Object, Object> {  
+		private int getstatu = 1;
+		public MyTask(int getstatu){
+			this.getstatu = getstatu;
+		}
 		//onPreExecute方法用于在执行后台任务前做一些UI操作  
 		@Override  
 		protected void onPreExecute() {  
 			//	            textView.setText("loading...");  
-			Util.startProgressDialog(context);
+			if(getstatu == 1 ||getstatu == 2){
+				Util.startProgressDialog(context);
+			}
 		}  
 
 		//doInBackground方法内部执行后台任务,不可在此方法内修改UI  
 		@Override  
-		protected GoodsBean doInBackground(Object... params) {  
+		protected Object doInBackground(Object... params) {  
 			try {  
-				Send send = new Send(context);
-				bean = send.GetProductDetails(2056);
-				return bean;//new String(baos.toByteArray(), "gb2312");  
+				if(getstatu == 1){
+					Send send = new Send(context);
+					bean = send.GetProductDetails(id);
+					return bean;//new String(baos.toByteArray(), "gb2312");  
+				}else if(getstatu == 2){
+					Send send = new Send(context);
+					listcombean = send.GetProductComments(id, page);
+					return listcombean;//new String(baos.toByteArr
+				}else if(getstatu == 3){
+					Send send = new Send(context);
+					nextpagelist = send.GetProductComments(id, page);
+					return nextpagelist;//new String(baos.toByteArr
+				}
 			} catch (Exception e) {  
 				e.printStackTrace();
 			}  
@@ -252,22 +249,89 @@ public class ProductDetailsActivity extends BaseActivity implements IXListViewLi
 		@Override  
 		protected void onPostExecute(Object result) {  
 			Util.stopProgressDialog();
-			bean = (GoodsBean) result;
-			if(bean!=null && bean.getCode()==200){
-			//图片
-			topshowic.setImageResources(bean.getPicurls(), mAdCycleViewListener);
+			if(getstatu==1){
+				bean = (GoodsBean) result;
+				if(bean!=null && bean.getCode()==200){
+					//图片
+					topshowic.setImageResources(bean.getPicurls(), mAdCycleViewListener);
+					tv_shop_price.setText("￥"+bean.getShop_price()+"元");
+					tv_market_price.setText("￥"+bean.getMarket_price()+"元");
+					tv_click_num.setText(bean.getClick());
+					tv_title.setText(bean.getTitle());
+					//webview
+					URL = bean.getGood_desc();
+					webView.loadUrl(URL);
+					DisplayMetrics dm = new DisplayMetrics();//获取当前显示的界面大小
+					getWindowManager().getDefaultDisplay().getMetrics(dm);
+					int width=dm.widthPixels;
+					int height=dm.heightPixels;//获取当前界面的高度
+					LinearLayout.LayoutParams linearParams = (LinearLayout.LayoutParams) webView.getLayoutParams(); 
+					linearParams.height = height;//linearParams.WRAP_CONTENT;
+					webView.setLayoutParams(linearParams);
+					handler.postDelayed(new Runnable() {
 
-				
-			//webview
-//			URL = bean.getGood_desc();
-//			webView.loadUrl(URL);
-			}else{
-				if(bean!=null)
-				Util.ShowToast(context, bean.getMsg());
+						@Override
+						public void run() {
+							DisplayMetrics dm = new DisplayMetrics();//获取当前显示的界面大小
+							getWindowManager().getDefaultDisplay().getMetrics(dm);
+							int width=dm.widthPixels;
+							int height=dm.heightPixels;//获取当前界面的高度
+							LinearLayout.LayoutParams linearParams = (LinearLayout.LayoutParams) webView.getLayoutParams(); 
+							linearParams.height = linearParams.WRAP_CONTENT;
+							webView.setLayoutParams(linearParams);
+						}
+					}, 2000);
+				}else{
+					if(bean!=null)
+						Util.ShowToast(context, bean.getMsg());
+				}
+			}else if(getstatu == 2){
+				listcombean = (ListCommentsBean) result;
+				if(listcombean!=null && listcombean.getCode()==200){
+					list = listcombean.getList();
+					adapter = new UserCommentAdapter(context,list);
+					xListView.setAdapter(adapter);
+					Util.setListViewHeightBasedOnChildren(xListView);
+				}else{
+					if(listcombean!=null)
+						Util.ShowToast(context, listcombean.getMsg());
+				}
+			}else if(getstatu == 3){
+				onLoad();
+				nextpagelist = (ListCommentsBean) result;
+				if(nextpagelist!=null && nextpagelist.getCode()==200){
+					if(nextpagelist.getList().size()>0){
+						if(page==1){
+							list = nextpagelist.getList();
+							if(adapter==null){
+								adapter = new UserCommentAdapter(context, list);
+								xListView.setAdapter(adapter);
+							}else{
+								adapter.setdata(list);
+								adapter.notifyDataSetInvalidated();
+							}
+						}else{
+							list.addAll(nextpagelist.getList());
+							if(adapter==null){
+								adapter = new UserCommentAdapter(context, list);
+								xListView.setAdapter(adapter);
+							}else{
+								adapter.setdata(list);
+								adapter.notifyDataSetInvalidated();
+							}
+						}
+						Util.setListViewHeightBasedOnChildren(xListView);
+					}else{
+						Util.ShowToast(context, "最后一页了，亲");
+					}
+				}else{
+					if(listcombean!=null)
+						Util.ShowToast(context, listcombean.getMsg());
+				}
 			}
-			
-			
-		
+
+
+
 		}  
 
 		//onCancelled方法用于在取消执行中的任务时更改UI  
@@ -305,27 +369,81 @@ public class ProductDetailsActivity extends BaseActivity implements IXListViewLi
 				tv_user_comment.getPaint().setAntiAlias(true);//抗锯齿
 				tv_image_text_tv.getPaint().setFlags(0); // 取消设置的的划线
 				tv_image_text_tv.setTextColor(getResources().getColor(R.color.black));
-				list = new ArrayList<String>();
-				list.add("1");
-				list.add("w");
-				list.add("f");
-				if(adapter==null){
-					adapter = new UserCommentAdapter(context, list);
-					xListView.setAdapter(adapter);
-				}else{
-					adapter.setdata(list);
-					adapter.notifyDataSetInvalidated();
-				}
+				//								if(adapter==null){
+				//									adapter = new UserCommentAdapter(context, list);
+				//									xListView.setAdapter(adapter);
+				//								}else{
+				//									adapter.setdata(list);
+				//									adapter.notifyDataSetInvalidated();
+				//								}
 			}
+			break;
+		case R.id.product_details_call_ll:
+			ShowDialog(1);
+			break;
+		case R.id.product_details_sms_ll:
+			ShowDialog(2);
 			break;
 
 		}
-		
+
 	} 
-	
+
 	private void onLoad() {
 		xListView.stopRefresh();
 		xListView.stopLoadMore();
-//		xListView.setRefreshTime(changetime);
+		//		xListView.setRefreshTime(changetime);
 	}
+
+	private void ShowDialog(final int statu){
+		int index,title;
+		if(statu == 1){
+			title = R.string.product_iscall;
+			index = R.string.product_cll_tell;
+		}else{
+			title = R.string.product_issms;
+			index = R.string.product_sms_send;
+
+		}
+		alertDialog = new AlertDialog.Builder(this).
+				setTitle(title).
+				setIcon(null).
+				setPositiveButton(R.string.product_cancle, new DialogInterface.OnClickListener() {
+
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+					}
+				}).
+				setNegativeButton(index, new DialogInterface.OnClickListener() {
+
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						if(statu==1){
+							Intent phoneIntent = new Intent("android.intent.action.CALL",
+									Uri.parse("tel:" + MyApplication.callnumber));
+							startActivity(phoneIntent); 
+						}else{
+							Uri uri=Uri.parse("smsto:"+MyApplication.smsnumber);
+							Intent ii=new Intent(Intent.ACTION_SENDTO,uri);
+							ii.putExtra("sms_body", "");
+							startActivity(ii);
+						}
+					}
+				}).
+				create();
+		alertDialog.show();
+	}
+	@Override
+	public boolean onKeyDown(int keyCode, KeyEvent event) {
+		if(alertDialog!=null && alertDialog.isShowing()){
+			alertDialog.dismiss();
+			alertDialog = null;
+		}else
+			if(keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_DOWN){   
+				finish();
+				return true;   
+			}
+		return super.onKeyDown(keyCode, event);
+	}
+
 }

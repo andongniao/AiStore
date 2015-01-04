@@ -8,13 +8,14 @@
 	<com.youai.aistore.xlistview.XListView
         android:id="@+id/product_xListView"
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent" 
+        android:layout_height="wrap_content" 
         android:fastScrollEnabled="true"
         android:cacheColorHint="#00000000"
         android:divider="#00000000"
         android:dividerHeight="0.5dp"
         android:fadingEdge="vertical"
         android:scrollbars="none" 
+        android:background="@color/white"
         android:padding="5dp"
         />
 </LinearLayout>
