@@ -183,8 +183,10 @@ public class FclassHomeAdapter extends BaseExpandableListAdapter{
 		public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
 				long arg3) {
 			if(arg2==0){
-				Intent intent = new Intent(context,FclassActivity.class);
+				Intent intent = new Intent(context,FclassFristViewActivity.class);
 				intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+				//groupname数组传值给FclassFristViewActivity的标题
+				intent.putExtra("title", groupname.get(arg2).toString());
 				context.startActivity(intent);
 			}
 			Util.ShowToast(context, "点击了"+childname.get(index).get(arg2));
