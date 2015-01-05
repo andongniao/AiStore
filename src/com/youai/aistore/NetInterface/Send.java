@@ -19,6 +19,8 @@ import com.youai.aistore.Bean.GoodsBean;
 import com.youai.aistore.Bean.ListCommentsBean;
 import com.youai.aistore.Bean.ListFclassTwo;
 import com.youai.aistore.Bean.ListGoodsBean;
+import com.youai.aistore.Bean.ListShopCartBean;
+import com.youai.aistore.Bean.ShopCartBean;
 
 public class Send {
 	private Context context;
@@ -138,6 +140,7 @@ public class Send {
 		ListCommentsBean list = new ListCommentsBean();
 		CommentsBean bean = null;
 		String url = ServiceUrl.Product_comments_Url_head+id+ServiceUrl.Product_comments_Url_foot+page;
+		System.out.println("pinglunurl================="+url);
 		String jsonStr = null;
 		jsonStr = GetHttp.sendGet(url);
 
@@ -296,6 +299,7 @@ public class Send {
 				if (object.get("code") != null && object.getInt("code") == 200) {
 					bean.setCode(200);
 					bean.setMsg(object.getString("message"));
+					System.out.println("result==============="+jsonStr);
 					return bean;
 				} else {
 					bean.setMsg(object.getString("message"));
@@ -316,6 +320,57 @@ public class Send {
 
 		return null;
 
+	}
+	/**
+	 * 加入购物车
+	 */
+	public ListShopCartBean getShopCartlist(String sessionid,String userid){
+		ListShopCartBean list = new ListShopCartBean(); 
+		String url = ServiceUrl.GetShopCartList_Url_head+sessionid+
+				ServiceUrl.GetShopCartList_Url_foot+userid;
+		String jsonStr = null;
+		jsonStr = GetHttp.sendGet(url);
+		
+		if (jsonStr != null && !jsonStr.equals("")) {
+			JSONObject object = null;
+			try {
+				object = new JSONObject(jsonStr);
+				if (object.get("code") != null && object.getInt("code") == 200) {
+					ArrayList<ShopCartBean> l = new ArrayList<ShopCartBean>();
+					JSONObject data = object.getJSONObject("data");
+					JSONArray datas = data.getJSONArray("datas");
+					for(int i = 0;i<datas.length();i++){
+						JSONObject j = datas.getJSONObject(i);
+						String json = j.toString();
+						Type type = new TypeToken<ShopCartBean>() {}.getType();
+						ShopCartBean b = gson.fromJson(json, type);
+						l.add(b);
+					}
+					String count_price = String.valueOf(data.getInt("count_price"));
+					list.setList(l);
+					list.setCode(200);
+					list.setCount_price(count_price);
+					list.setMsg(object.getString("message"));
+					return list;
+				} else {
+					list.setMsg(object.getString("message"));
+					list.setCode(object.getInt("code"));
+					return list;
+					
+				}
+				
+			} catch (JSONException e) {
+				e.printStackTrace();
+			}
+		} else {
+			list.setCode(500);
+			list.setMsg(context.getResources().getString(
+					R.string.http_status_code_error));
+			return list;
+		}
+		
+		return null;
+		
 	}
 
 

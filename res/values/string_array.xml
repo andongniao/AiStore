@@ -88,4 +88,12 @@
         <item>SM</item>
         <item>情趣其他</item>
     </string-array>
+    <string-array name="order_chose_time">
+        <item>工作日、双休日和假日，均可送货</item>
+        <item>双休日（周六、周日）</item>
+        <item>工作日（周一至周五）</item>
+    </string-array>
+    
+    
+    
 </resources>

@@ -3,140 +3,137 @@
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
     android:background="@color/home_text_grey"
-    android:paddingTop="0.5dp"
-    android:paddingBottom="0.5dp"
     android:gravity="center_vertical"
+    android:orientation="horizontal"
     android:padding="5dp"
-    android:orientation="horizontal" >
-    <RelativeLayout 
+    android:paddingBottom="0.5dp"
+    android:paddingTop="0.5dp" >
+
+    <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="fill_parent"
-        android:padding="5dp"
-         android:background="@color/white"
-         android:gravity="center"
-        >
-    <ImageView 
-        android:id="@+id/shopcart_item_pp_iv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@drawable/ic_launcher"
-        />
-    </RelativeLayout>
-    <LinearLayout 
-        android:layout_width="0dp"
-        android:layout_weight="1"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
         android:background="@color/white"
-        android:paddingTop="0.5dp"
-        android:paddingBottom="0.5dp"
+        android:gravity="center"
+        android:padding="5dp" >
+
+        <ImageView
+            android:id="@+id/shopcart_item_pp_iv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/ic_launcher" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:background="@color/white"
         android:gravity="center_vertical"
-        
-        >
-        <TextView 
+        android:orientation="vertical"
+        android:paddingBottom="0.5dp"
+        android:paddingTop="0.5dp" >
+
+        <TextView
             android:id="@+id/shopcart_item_title_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
             android:text="@string/base_test"
             android:textColor="@color/black"
-            android:textSize="16dp"
-            />
-        <LinearLayout 
+            android:textSize="16dp" />
+
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
             android:gravity="center_vertical"
-            >
-            <TextView 
+            android:orientation="horizontal" >
+
+            <TextView
                 android:id="@+id/shopcart_item_price_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/home_text_red"
-                android:text="@string/base_test"
                 android:layout_marginRight="5dp"
-                android:textSize="16dp"
-                />
-            <TextView 
+                android:text="@string/base_test"
+                android:textColor="@color/home_text_red"
+                android:textSize="16dp" />
+
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/home_text_grey"
-                android:text="X"
                 android:layout_marginRight="5dp"
-                />
-            <EditText 
+                android:text="X"
+                android:textColor="@color/home_text_grey" />
+
+            <EditText
                 android:id="@+id/shopcart_item_num_et"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@color/white"
-                android:singleLine="true"
-				android:numeric="integer"
-                android:text="0"
                 android:enabled="false"
                 android:gravity="center"
-                android:textColor="@color/black"
-                />
-            <ImageButton 
+                android:numeric="integer"
+                android:singleLine="true"
+                android:text="0"
+                android:textColor="@color/black" />
+
+            <ImageButton
                 android:id="@+id/shopcart_lv_item_add_ibt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@drawable/ic_launcher"
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="5dp"
-                />
-            <ImageButton 
+                android:background="@drawable/ic_launcher" />
+
+            <ImageButton
                 android:id="@+id/shopcart_lv_item_jian_ibt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@drawable/ic_launcher"
-                />
-          
+                android:background="@drawable/ic_launcher" />
         </LinearLayout>
-        <LinearLayout 
+
+        <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
             android:gravity="center_vertical"
-            >
-              <TextView 
+            android:orientation="horizontal" >
+
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/black"
-                android:text="@string/shopcart_kucun"
                 android:layout_marginRight="5dp"
                 android:gravity="center"
-                />
-            <TextView 
+                android:text="@string/shopcart_kucun"
+                android:textColor="@color/black" />
+
+            <TextView
                 android:id="@+id/shopcart_lv_item_kucun_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:textColor="@color/black"
                 android:text="@string/base_test"
-                />
+                android:textColor="@color/black" />
         </LinearLayout>
     </LinearLayout>
-    <LinearLayout 
+
+    <LinearLayout
+        android:id="@+id/shopcart_item_delete_ll"
         android:layout_width="wrap_content"
         android:layout_height="fill_parent"
-        android:orientation="vertical"
-        android:paddingTop="0.5dp"
-        android:paddingBottom="0.5dp"
         android:background="@color/white"
         android:gravity="center"
-        >
-        <TextView 
+        android:orientation="vertical"
+        android:paddingBottom="0.5dp"
+        android:paddingTop="0.5dp" >
+
+        <TextView
             android:id="@+id/shopcart_item_delete_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/shopcart_delete"
             android:gravity="center"
-            android:textSize="18dp"
             android:padding="5dp"
-            android:textColor="@color/home_text_grey"
-            />
+            android:text="@string/shopcart_delete"
+            android:textColor="@color/black"
+            android:textSize="18dp" />
     </LinearLayout>
-	
-   
 
 </LinearLayout>

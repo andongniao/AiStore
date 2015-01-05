@@ -78,6 +78,14 @@
             android:name="com.youai.aistore.Home.SearchResultActivity"
             android:label="@string/app_name" >
         </activity>
+        <activity
+            android:name="com.youai.aistore.ShopCart.ConsigneeInfoActivity"
+            android:label="@string/app_name" >
+        </activity>
+        <activity
+            android:name="com.youai.aistore.Order.OrderActivity"
+            android:label="@string/app_name" >
+        </activity>
     </application>
 
 </manifest>

@@ -20,7 +20,7 @@ import com.youai.aistore.ShopCart.ShopCartActivity;
  */
 public class ExampleActivity extends TabHostActivity {
 
-	private List<TabItem> mItems;
+	private  List<TabItem> mItems;
 	/**在初始化TabWidget前调用
 	 * 和TabWidget有关的必须在这里初始化*/
 	@Override
@@ -95,6 +95,7 @@ public class ExampleActivity extends TabHostActivity {
 	protected int getTabItemCount() {
 		return mItems.size();
 	}
+	
 	
 //	/**自定义头部文件*/
 //	@Override
