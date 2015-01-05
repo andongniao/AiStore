@@ -66,11 +66,11 @@ public class FclassActivity extends BaseActivity {
 		avimgproduct.recycle();
 		// 获取列表的id
 		gridview_av = (MyGridview) findViewById(R.id.fclass_gridview_av);
-		gridview_av.setAdapter(getCategoryAdapter(resIds,avtextmoney,avtextcomment,avtextproduct));
+		//gridview_av.setAdapter(getCategoryAdapter(resIds,avtextmoney,avtextcomment,avtextproduct));
 
 	}
 
-	private SimpleAdapter getCategoryAdapter(int[] avimgproduct,
+/*	private SimpleAdapter getCategoryAdapter(int[] avimgproduct,
 			String[] avtextmoney, String[] avtextcomment, String[] avtextproduct) {
 		ArrayList<HashMap<String, Object>> date = new ArrayList<HashMap<String, Object>>();
 		for (int i = 0; i < avtextmoney.length; i++) {
@@ -89,10 +89,7 @@ public class FclassActivity extends BaseActivity {
 						R.id.fclass_gridview_item_textmoney,
 						R.id.fclass_gridview_item_textcomment,
 						R.id.fclass_gridview_item_textproduct });
-		return simperAdapter;
-
-		
-		
-	}
+		return simperAdapter;		
+	}*/
 
 }// 结束

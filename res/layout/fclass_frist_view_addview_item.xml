@@ -3,78 +3,75 @@
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
     android:background="@drawable/bg"
-    android:gravity="center"
     android:orientation="vertical" >
 
- 	 <!-- 女性用品，girdview，自定义每个网格的格式,3行 -->
- 	 
-     <!-- 第一行：产品图片 -->
-    <ImageView 
-        android:id="@+id/fclass_frist_view_addview_item_iv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        />    
+    <!-- 女性用品，girdview，自定义每个网格的格式,3行 -->
 
-     <!-- 第二行：￥图片+价格文字+❤图片+评论文字 -->
-    <LinearLayout 
+
+    <!-- 第一行：产品图片 -->
+
+
+
+        <ImageView
+            android:id="@+id/fclass_frist_view_addview_item_iv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" 
+            android:layout_margin="10dp"
+            />
+
+
+    <!-- 第二行：￥图片+价格文字+❤图片+评论文字 -->
+
+    <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
         android:gravity="center_vertical"
-        >
-        <TextView 
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@color/home_text_red"
-            android:text="￥"
-            android:layout_marginLeft="5dp"
-            />
-        <TextView 
+        android:orientation="horizontal" >
+
+        <TextView
             android:id="@+id/fclass_frist_view_addview_item_price_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:textColor="@color/home_text_red"
             android:text="@string/base_test"
-            />
-        <TextView 
+            android:textColor="@color/home_text_red" />
+
+        <TextView
             android:layout_width="0dp"
-            android:layout_weight="1"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:gravity="center"
-            android:textColor="@color/home_text_red"
-            />
-        <ImageView 
+            android:textColor="@color/home_text_red" />
+
+        <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/detail_favbutton_bg_highlighted"
             android:layout_marginRight="3dp"
-            />
-        <TextView 
+            android:background="@drawable/detail_favbutton_bg_highlighted" />
+
+        <TextView
             android:id="@+id/fclass_frist_view_addview_item_likes_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:textColor="@color/home_text_red"
-            android:text="@string/base_test"
             android:layout_marginRight="5dp"
-            />
+            android:gravity="center"
+            android:text="@string/base_test"
+            android:textColor="@color/home_text_red" />
     </LinearLayout>
-    
+
     <!-- 第三行：产品名字 -->
-    <TextView 
+
+    <TextView
         android:id="@+id/fclass_frist_view_addview_item_title_tv"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="5dip"
+        android:ellipsize="end"
         android:gravity="center"
         android:padding="3dp"
-        android:textColor="@color/black"
-        android:textSize="16sp"
-        android:ellipsize="end"
         android:singleLine="true"
-        android:layout_marginBottom="5dip"
         android:text="@string/base_test"
-        />
+        android:textColor="@color/black"
+        android:textSize="16sp" />
 
 </LinearLayout>

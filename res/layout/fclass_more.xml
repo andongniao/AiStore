@@ -91,7 +91,7 @@
     
 
     <com.youai.aistore.xlistview.XListView
-        android:id="@+id/search_result_lv"
+        android:id="@+id/fclass_more_lv"
         android:layout_width="fill_parent"
         android:layout_height="0dp"
         android:layout_weight="1"

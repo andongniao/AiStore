@@ -3,17 +3,26 @@ package com.youai.aistore.Fclass;
 import java.util.ArrayList;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.Resources;
 import android.content.res.TypedArray;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.LinearLayout;
 
 import com.youai.aistore.BaseActivity;
+import com.youai.aistore.MyApplication;
 import com.youai.aistore.R;
+import com.youai.aistore.Util;
 import com.youai.aistore.Bean.GoodsBean;
+import com.youai.aistore.Bean.ListFclassTwo;
 import com.youai.aistore.Home.SearchResultAdapter;
+import com.youai.aistore.NetInterface.Send;
+import com.youai.aistore.Product.ProductDetailsActivity;
 import com.youai.aistore.xlistview.XListView;
 import com.youai.aistore.xlistview.XListView.IXListViewListener;
 
@@ -21,19 +30,25 @@ import com.youai.aistore.xlistview.XListView.IXListViewListener;
 public class FclassMoreActivity extends BaseActivity implements IXListViewListener,OnClickListener {
 	private LinearLayout popll,numll,pricell;
 	private XListView listView;
-	private SearchResultAdapter adapter;
+	private FclassMoreAdapter adapter;
 	private Context context;
-	
+	private MyTask myTask;
 	private ArrayList<GoodsBean>list;
+	private ListFclassTwo listf;
 	@Override
 	protected void onCreate(Bundle arg0) {
 		// TODO Auto-generated method stub
 		super.onCreate(arg0);
 		setContentXml(R.layout.fclass_more);
 		String title = getIntent().getStringExtra("title");
-		setTitleTxt(title);
-		
+		setTitleTxt(title);		
 		init();
+		if(Util.detect(context)){
+			myTask = new MyTask();
+			myTask.execute("");
+		}else{
+			Util.ShowToast(context, R.string.net_work_is_error);
+		}
 	}
 
 	private void init() {
@@ -41,38 +56,25 @@ public class FclassMoreActivity extends BaseActivity implements IXListViewListen
 		popll = (LinearLayout) findViewById(R.id.fclass_more_popularity_ll);
 		numll = (LinearLayout) findViewById(R.id.fclass_more_number_ll);
 		pricell = (LinearLayout) findViewById(R.id.fclass_more_price_ll);
+		
 		popll.setOnClickListener(this);
 		numll.setOnClickListener(this);
 		pricell.setOnClickListener(this);
-		listView = (XListView) findViewById(R.id.search_result_lv);
-		/***********************模拟数据***************************/
-		Resources rs = getResources();
-		String[] tv_shop_price = rs
-				.getStringArray(R.array.fclass_gridview_avtextmoney);
-		String[] tv_market_price = rs
-				.getStringArray(R.array.fclass_gridview_avtextmoney);
-		String[] tv_comment = rs
-				.getStringArray(R.array.fclass_gridview_avtextcomment);
-		String[] tv_title = rs
-				.getStringArray(R.array.fclass_gridview_avtextproduct);
-		TypedArray imgproduct = rs
-				.obtainTypedArray(R.array.fclass_gridview_avimgproduct);
-		int len = imgproduct.length();
-		int[] resIds = new int[len];
-		for (int i = 0; i < len; i++) {
-			resIds[i] = imgproduct.getResourceId(i, 0);
-		}
-		imgproduct.recycle();
-		//list = (ArrayList<GoodsBean>) getIntent().getExtras().get("list");
-		list = new ArrayList<GoodsBean>();
-		GoodsBean a=new GoodsBean();
-		list.add(a);
-			//list.add(tv_shop_price[i]);
-	
+		listView = (XListView) findViewById(R.id.fclass_more_lv);
+		listView.setOnItemClickListener(new mylistener());
 		
-		if(list!=null){
-		adapter = new SearchResultAdapter(context, list);
-		listView.setAdapter(adapter);
+	}
+	
+	class mylistener implements OnItemClickListener{
+
+		@Override
+		public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
+				long arg3) {
+			// TODO Auto-generated method stub
+			Intent intent = new Intent(FclassMoreActivity.this,ProductDetailsActivity.class);
+			intent.setFlags(intent.FLAG_ACTIVITY_CLEAR_TOP);
+			intent.putExtra("id",listf.getList().get(arg2-1).getId() );
+			startActivity(intent);
 		}
 		
 	}
@@ -101,11 +103,7 @@ public class FclassMoreActivity extends BaseActivity implements IXListViewListen
 
 	@Override
 	public void onLoadMore() {
-		GoodsBean s = new GoodsBean();
-		list.add(s);
-		adapter.setdata(list);
-		adapter.notifyDataSetChanged();
-		onLoad();
+
 	}
 	
 	private void onLoad(){
@@ -113,5 +111,59 @@ public class FclassMoreActivity extends BaseActivity implements IXListViewListen
 		listView.stopLoadMore();
 	}
 
+	private class MyTask extends AsyncTask<Object, Object, Object> {
+
+		//onPreExecute方法用于在执行后台任务前做一些UI操作  
+		@Override  
+		protected void onPreExecute() {  
+			//	            textView.setText("loading...");  
+			Util.startProgressDialog(context);
+		}  
+
+		//doInBackground方法内部执行后台任务,不可在此方法内修改UI  
+		@Override  
+		protected Object doInBackground(Object... params) {  
+			try {  
+				Send send = new Send(context);
+				listf  = send.GetFclassTwo(MyApplication.woman_av, MyApplication.clickdesc, 1);
+				return listf;//new String(baos.toByteArray(), "gb2312");  
+			} catch (Exception e) {  
+				e.printStackTrace();
+			}  
+			return null;  
+		}  
+
+		//onProgressUpdate方法用于更新进度信息  
+		@Override  
+		protected void onProgressUpdate(Object... progresses) {  
+		}  
+
+		//onPostExecute方法用于在执行完后台任务后更新UI,显示结果  
+		@Override  
+		protected void onPostExecute(Object result) {  
+			Util.stopProgressDialog();
+			listf = (ListFclassTwo) result;
+			if(listf!=null){
+				if(listf.getCode()==200){
+					Util.ShowToast(context, listf.getMsg());
+					
+					adapter = new FclassMoreAdapter(context, listf.getList());
+					listView.setAdapter(adapter);
+					
+					
+				}else{
+					Util.ShowToast(context, listf.getMsg());
+				}
+			}
+		
+		}  
+
+		//onCancelled方法用于在取消执行中的任务时更改UI  
+		@Override  
+		protected void onCancelled() {  
+			Util.stopProgressDialog();
+		}  
+		
+	}
 }
 

@@ -15,11 +15,6 @@ import com.youai.aistore.R;
  * @author Qzr
  *
  */
-/**
- * ∑÷¿‡ ◊“≥
- * @author Qzr
- *
- */
 public class FclassHomeActivity extends BaseActivity{
 	private long exitTime = 0;
 	private ExpandableListView listView;

@@ -21,16 +21,21 @@ import android.widget.SimpleAdapter;
 import android.widget.TextView;
 
 import com.youai.aistore.BaseActivity;
+import com.youai.aistore.MyApplication;
 import com.youai.aistore.R;
 import com.youai.aistore.Util;
 import com.youai.aistore.Bean.GoodsBean;
+import com.youai.aistore.Bean.ListFclassTwo;
+import com.youai.aistore.Bean.ListGoodsBean;
 import com.youai.aistore.Home.HomeActivity;
 import com.youai.aistore.Home.MyGridview;
 import com.youai.aistore.Home.SearchResultActivity;
+import com.youai.aistore.Home.SearchResultAdapter;
 import com.youai.aistore.NetInterface.Send;
 
-public class FclassFristViewActivity extends BaseActivity {
-	private MyGridview toptitlegridview; // 上面标题gridview
+public class FclassFristViewActivity extends BaseActivity implements
+		OnItemClickListener {
+	private MyGridview toptitlegridview, g; // 上面标题gridview
 	private LinearLayout addviewll; // 添加动态布局
 	private int listindex;
 	private Resources rs;
@@ -40,6 +45,9 @@ public class FclassFristViewActivity extends BaseActivity {
 	private Context context;
 	private ArrayList<MyGridview> gridviewlist;
 	private MyTask myTask;
+	private ListGoodsBean fclasslist;
+	private ArrayList<GoodsBean> womenListBean;
+	private FclassFristViewAdapter fclassAdapter;
 
 	@Override
 	protected void onCreate(Bundle arg0) {
@@ -49,6 +57,12 @@ public class FclassFristViewActivity extends BaseActivity {
 		listindex = getIntent().getIntExtra("listindex", 0);
 		setTitleTxt(title);
 		init();
+		if (Util.detect(context)) {
+			myTask = new MyTask();
+			myTask.execute("");
+		} else {
+			Util.ShowToast(context, R.string.net_work_is_error);
+		}
 
 	}
 
@@ -81,108 +95,49 @@ public class FclassFristViewActivity extends BaseActivity {
 						titlelist));
 		toptitlegridview.setOnItemClickListener(new Titlegridviewonclick());
 
-		// 测试，女性用品数据
-		String[] avtextmoney = rs
-				.getStringArray(R.array.fclass_gridview_avtextmoney);
-		String[] avtextcomment = rs
-				.getStringArray(R.array.fclass_gridview_avtextcomment);
-		String[] avtextproduct = rs
-				.getStringArray(R.array.fclass_gridview_avtextproduct);
-		TypedArray avimgproduct = rs
-				.obtainTypedArray(R.array.fclass_gridview_avimgproduct);
-		int len = avimgproduct.length();
-		int[] resIds = new int[len];
-		for (int i = 0; i < len; i++) {
-			resIds[i] = avimgproduct.getResourceId(i, 0);
-		}
-		avimgproduct.recycle();
-		//
-
-		for (int i = 0; i < titlelist.length; i++) {
-			View v = inflater.inflate(R.layout.fclass_frist_view_added_view,
-					null);
-			TextView tv = (TextView) v
-					.findViewById(R.id.fclass_frist_view_addview_title_tv);
-			tv.setText(titlelist[i]);
-			MyGridview g = (MyGridview) v
-					.findViewById(R.id.fclass_frist_view_addview_gridview);
-			g.setAdapter(getCategoryAdapter(resIds, avtextmoney, avtextcomment,
-					avtextproduct));
-			gridviewlist.add(g);
-			addviewlist.add(v);
-			addviewll.addView(v);
-
-		}
-		
 		// TODO
 		/**
 		 * item view in adapter 2 import and setData
 		 */
 	}
 
-
-	private SimpleAdapter getCategoryAdapter(int[] avimgproduct,
-			String[] avtextmoney, String[] avtextcomment, String[] avtextproduct) {
-		ArrayList<HashMap<String, Object>> date = new ArrayList<HashMap<String, Object>>();
-		for (int i = 0; i < avtextmoney.length; i++) {
-			HashMap<String, Object> map = new HashMap<String, Object>();
-			map.put("imgproduct", avimgproduct[i]);
-			map.put("textmoney", avtextmoney[i]);
-			map.put("textcomment", avtextcomment[i]);
-			map.put("textproduct", avtextproduct[i]);
-			date.add(map);
-		}
-		SimpleAdapter simperAdapter = new SimpleAdapter(
-				getApplicationContext(), date,
-				R.layout.fclass_frist_view_addview_item,
-				new String[] { "imgproduct", "textmoney", "textcomment",
-						"textproduct" }, new int[] {
-						R.id.fclass_frist_view_addview_item_iv,
-						R.id.fclass_frist_view_addview_item_price_tv,
-						R.id.fclass_frist_view_addview_item_likes_tv,
-						R.id.fclass_frist_view_addview_item_title_tv });
-		return simperAdapter;
-
-	}
-	
 	/*
 	 * 详细分类监听器
 	 */
-	class Titlegridviewonclick implements OnItemClickListener   {
-
+	class Titlegridviewonclick implements OnItemClickListener {
 
 		@Override
 		public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
 				long arg3) {
 			// TODO Auto-generated method stub
-		
-				Intent intent = new Intent(FclassFristViewActivity.this,FclassMoreActivity.class);
-				//titlelist数组传值给FclassFristViewActivity的标题
-				intent.putExtra("title", titlelist[arg2].toString());
-				startActivity(intent);
-				Util.ShowToast(context, "点击了"+titlelist[arg2]);
+
+			Intent intent = new Intent(FclassFristViewActivity.this,
+					FclassMoreActivity.class);
+			// titlelist数组传值给FclassFristViewActivity的标题
+			intent.putExtra("title", titlelist[arg2].toString());
+			startActivity(intent);
+			Util.ShowToast(context, "点击了" + titlelist[arg2]);
 		}
-	
-		
-		
+
 	}
-	
-	
+
 	private class MyTask extends AsyncTask<Object, Object, Object> {
 		// onPreExecute方法用于在执行后台任务前做一些UI操作
 		@Override
 		protected void onPreExecute() {
 			Util.startProgressDialog(context);
-			
+
 		}
 
 		// doInBackground方法内部执行后台任务,不可在此方法内修改UI
 		@Override
-		protected GoodsBean doInBackground(Object... params) {
+		protected ListGoodsBean doInBackground(Object... params) {
 			try {
-
+				Send send = new Send(context);
+				String time = String.valueOf(System.currentTimeMillis());
+				fclasslist = send.RequestHome(time);
+				return fclasslist;// new String(baos.toByteArray(), "gb2312");
 				// TODO getdata
-				return null;
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -198,16 +153,47 @@ public class FclassFristViewActivity extends BaseActivity {
 		@Override
 		protected void onPostExecute(Object result) {
 			Util.stopProgressDialog();
+			fclasslist = (ListGoodsBean) result;
+			if (fclasslist != null && fclasslist.getCode() == 200) {
+				womenListBean = fclasslist.getList().get(
+						fclasslist.getList().size() - 1);
+				fclassAdapter = new FclassFristViewAdapter(context,
+						womenListBean);
+				for (int i = 0; i < titlelist.length; i++) {
+					View v = inflater.inflate(
+							R.layout.fclass_frist_view_added_view, null);
+					TextView tv = (TextView) v
+							.findViewById(R.id.fclass_frist_view_addview_title_tv);
+					tv.setText(titlelist[i]);
+					g = (MyGridview) v
+							.findViewById(R.id.fclass_frist_view_addview_gridview);
+					g.setAdapter(fclassAdapter);
+					gridviewlist.add(g);
+					addviewlist.add(v);
+					addviewll.addView(v);
+
+				}
+
+			} else {
+				if (fclasslist != null)
+					Util.ShowToast(context, fclasslist.getMsg());
+
+			}
 
 			// setadapter
 
 		}
 
 		// onCancelled方法用于在取消执行中的任务时更改UI
-		@Override
 		protected void onCancelled() {
 			Util.stopProgressDialog();
 		}
+	}
+
+	@Override
+	public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
+		// TODO Auto-generated method stub
+
 	}
 
 }

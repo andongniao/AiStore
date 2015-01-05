@@ -4,6 +4,7 @@
     android:background="@color/white"
     android:orientation="horizontal" >
 
+    <!-- 产品图片 -->
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -30,11 +31,12 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:orientation="vertical" >
-
+			<!-- 产品标题 -->
             <TextView
                 android:id="@+id/fclass_more_item_title_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textColor="@color/black"
                 android:gravity="center_vertical" />
 
             <LinearLayout
@@ -44,7 +46,7 @@
                 android:layout_marginTop="5dp"
                 android:gravity="center_vertical"
                 android:orientation="horizontal" >
-
+				<!-- 产品价格 -->
                 <TextView
                     android:id="@+id/fclass_more_item_shop_price_tv"
                     android:layout_width="wrap_content"
@@ -52,7 +54,7 @@
                     android:text="@string/base_test"
                     android:textColor="@color/home_text_red"
                     android:textSize="16dp" />
-
+				<!-- 市场价 -->
                 <TextView
                     android:id="@+id/fclass_more_item_market_price_tv"
                     android:layout_width="wrap_content"
@@ -68,14 +70,14 @@
                 android:layout_marginBottom="15dp"
                 android:gravity="center_vertical"
                 android:orientation="horizontal" >
-
+					<!-- 评论 -->
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/search_result_comments"
                     android:textColor="@color/home_text_grey"
                     android:textSize="16dp" />
-
+					<!-- 评论数-->
                 <TextView
                     android:id="@+id/fclass_more_item_comments_tv"
                     android:layout_width="wrap_content"
@@ -92,14 +94,15 @@
             android:gravity="center"
             android:orientation="horizontal"
             android:padding="3dp" >
-
+				<!-- ❤图片-->
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="5dp"
                 android:background="@drawable/detail_favbutton_bg_highlighted" />
-
+				<!-- 喜欢数量 -->
             <TextView
+                android:id="@+id/fclass_more_item_click_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center"
