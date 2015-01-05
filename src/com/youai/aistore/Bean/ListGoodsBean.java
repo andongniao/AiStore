@@ -3,7 +3,7 @@ package com.youai.aistore.Bean;
 import java.io.Serializable;
 import java.util.ArrayList;
 /**
- * Ê×Ò³ÊµÌå
+ * ArrayList<ArrayList<GoodsBean>>
  * @author Qzr
  *
  */

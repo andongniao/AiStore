@@ -54,6 +54,7 @@ public class ShopCartAdapter extends BaseAdapter{
 			myShopItem.tv_titlt = (TextView) arg1.findViewById(R.id.shopcart_item_title_tv);
 			myShopItem.tv_price = (TextView) arg1.findViewById(R.id.shopcart_item_price_tv);
 			myShopItem.tv_delete = (TextView) arg1.findViewById(R.id.shopcart_item_delete_tv);
+			myShopItem.tv_kucun = (TextView) arg1.findViewById(R.id.shopcart_lv_item_kucun_tv);
 			myShopItem.et_num = (EditText) arg1.findViewById(R.id.shopcart_item_num_et);
 			arg1.setTag(myShopItem);
 		}else{
@@ -74,7 +75,7 @@ public class ShopCartAdapter extends BaseAdapter{
 	
 	class MyShopItem{
 		private ImageView iv;
-		private TextView tv_titlt,tv_price,tv_delete;
+		private TextView tv_titlt,tv_price,tv_delete,tv_kucun;
 		private EditText et_num;
 	}
 }

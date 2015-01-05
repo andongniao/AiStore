@@ -17,6 +17,7 @@ public class GoodsBean extends Base implements Serializable{
 	private String shop_price;
 	private String click;
 	private String good_desc;
+	private String comments_num;
 	private ArrayList<String> picurls;
 	public int getId() {
 		return id;
@@ -65,6 +66,12 @@ public class GoodsBean extends Base implements Serializable{
 	}
 	public void setGood_desc(String good_desc) {
 		this.good_desc = good_desc;
+	}
+	public String getComments_num() {
+		return comments_num;
+	}
+	public void setComments_num(String comments_num) {
+		this.comments_num = comments_num;
 	}
 	public ArrayList<String> getPicurls() {
 		return picurls;

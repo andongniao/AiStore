@@ -2,7 +2,7 @@ package com.youai.aistore.Bean;
 
 /**
  * »ù´¡Àà
- * @author ym
+ * @author Qzr
  *
  */
 public class Base {

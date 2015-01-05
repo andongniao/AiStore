@@ -251,6 +251,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:background="@color/white"
+                android:layout_marginTop="5dp"
                 android:orientation="horizontal" >
 
                 <TextView
@@ -260,6 +261,7 @@
                     android:layout_weight="1"
                     android:gravity="center"
                     android:text="@string/base_test"
+                    android:singleLine="true"
                     android:textColor="@color/home_text_grey" />
 
                 <TextView
@@ -269,6 +271,7 @@
                     android:layout_weight="1"
                     android:gravity="center"
                     android:text="@string/base_test"
+                     android:singleLine="true"
                     android:textColor="@color/home_text_grey" />
 
                 <TextView
@@ -278,6 +281,7 @@
                     android:layout_weight="1"
                     android:gravity="center"
                     android:text="@string/base_test"
+                     android:singleLine="true"
                     android:textColor="@color/home_text_grey" />
             </LinearLayout>
 

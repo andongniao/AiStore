@@ -10,6 +10,19 @@ public class ServiceUrl {
 	//产品评论
 	static String Product_comments_Url_head = BaseUrl+"?module=comment&goods_id=";
 	static String Product_comments_Url_foot = "&action=list&page=";
+	//一级分类
+	static String Product_fclass_Url_frist = BaseUrl+"?module=category&category_id=";
+	//二级分类
+	static String Product_fclass_Url_two_head = BaseUrl+"?module=sub_category&sub_cate_id=";
+	static String Product_fclass_Url_two_center = "&sort=";
+	static String Product_fclass_Url_two_foot= "&page=";
+	//加入购物车
+	static String Product_AddShopCart_Url_head = BaseUrl+"?module=add_to_cart&goods_id=";
+	static String Product_AddShopCart_Url_center = "&number=";
+	static String Product_AddShopCart_Url_foot = "&session_id=";
+	//获取购物车列表 
+	static String Product_GetShopCartList_Url_head = BaseUrl+"?module=cart_list&session_id=";
+	static String Product_GetShopCartList_Url_foot = "&user_id=";
 	
 
 }

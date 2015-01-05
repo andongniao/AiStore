@@ -37,6 +37,7 @@
     <string name="shopcart_see_again">再逛逛</string>
     <string name="shopcart_gopay">去结算</string>
     <string name="shopcart_gongji">共计:</string>
+    <string name="shopcart_kucun">库存:</string>
    
     <!-- 搜索 -->
     <string name="search_et_text">请输入关键词</string>

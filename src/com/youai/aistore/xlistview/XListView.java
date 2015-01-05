@@ -19,7 +19,7 @@ import com.youai.aistore.R;
 
 
 public class XListView extends ListView implements OnScrollListener {
-
+	public int statu = 1; 
 	private float mLastY = -1; // save event y
 	private Scroller mScroller; // used for scroll back
 	private OnScrollListener mScrollListener; // user's scroll listener
@@ -53,10 +53,10 @@ public class XListView extends ListView implements OnScrollListener {
 
 	private final static int SCROLL_DURATION = 400; // scroll back duration
 	private final static int PULL_LOAD_MORE_DELTA = 50; // when pull up >= 50px
-														// at bottom, trigger
-														// load more.
+	// at bottom, trigger
+	// load more.
 	private final static float OFFSET_RADIO = 1.8f; // support iOS like pull
-													// feature.
+	// feature.
 
 	/**
 	 * @param context
@@ -100,7 +100,7 @@ public class XListView extends ListView implements OnScrollListener {
 					public void onGlobalLayout() {
 						mHeaderViewHeight = mHeaderViewContent.getHeight();
 						getViewTreeObserver()
-								.removeGlobalOnLayoutListener(this);
+						.removeGlobalOnLayoutListener(this);
 					}
 				});
 	}
@@ -229,7 +229,7 @@ public class XListView extends ListView implements OnScrollListener {
 		int height = mFooterView.getBottomMargin() + (int) delta;
 		if (mEnablePullLoad && !mPullLoading) {
 			if (height > PULL_LOAD_MORE_DELTA) { // height enough to invoke load
-													// more.
+				// more.
 				mFooterView.setState(XListViewFooter.STATE_READY);
 			} else {
 				mFooterView.setState(XListViewFooter.STATE_NORMAL);
@@ -368,13 +368,18 @@ public class XListView extends ListView implements OnScrollListener {
 
 		public void onLoadMore();
 	}
-	
-	 @Override  
-	    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {  
-	        // TODO Auto-generated method stub  
-	        int expandSpec = MeasureSpec.makeMeasureSpec(Integer.MAX_VALUE >> 2,  
-	                MeasureSpec.AT_MOST);  
-	        super.onMeasure(widthMeasureSpec, expandSpec);  
-	    }  
+
+	@Override  
+	protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {  
+		// TODO Auto-generated method stub  
+		int expandSpec = MeasureSpec.makeMeasureSpec(Integer.MAX_VALUE >> 2,  
+				MeasureSpec.AT_MOST);  
+		if(statu==2){
+			super.onMeasure(widthMeasureSpec, expandSpec);  
+		}else{
+			super.onMeasure(widthMeasureSpec, heightMeasureSpec);  
+		}
+	}  
+
 }
 

@@ -24,6 +24,43 @@ public class MyApplication extends Application {
 	public static SharedPreferences mSharedPreferences;
 	public static String callnumber = "4000965585";
 	public static String smsnumber = "13331054789";
+	public static int neiyi = 4;//内衣类
+	public static int neiyi_qingqvshuiyi = 40;
+	public static int neiyi_zhifuyouhuo = 37;
+	public static int neiyi_xingganneiyi = 86;
+	public static int neiyi_siwaneiku = 85;
+	public static int neiyi_liantiwangyi = 83;
+	public static int neiyi_sandiantoushi = 84;
+	public static int woman = 74;//女性类
+	public static int woman_av = 75;
+	public static int woman_fangzhenyangjv = 76;
+	public static int woman_qingqvtiaodan = 91;
+	public static int woman_shensuozhuanhzu = 19;
+	public static int woman_hulibaojian = 77;
+	public static int woman_otherwoman = 78;
+	public static int man = 69;//男性类
+	public static int man_feijibei = 70;
+	public static int man_daomo = 73;
+	public static int man_fuzhu = 98;
+	public static int tt = 63;//tt
+	public static int tt_jingdian = 67;
+	public static int tt_yanshi = 64;
+	public static int tt_nvyong = 68;
+	public static int tt_daxiaohao = 65;
+	public static int tt_huayang = 66;
+	public static int tosex = 87;//双人
+	public static int tosex_zhuqing = 93;
+	public static int tosex_houting = 71;
+	public static int tosex_huantao = 89;
+	public static int tosex_runhua = 92;
+	public static int tosex_sm = 88;
+	public static int tosex_other = 90;
+	public static String clickdesc = "clickdesc";//人气倒序
+	public static String clickdasc = "clickdasc";//人气正序
+	public static String salesdesc = "salesdesc";//销量倒序
+	public static String salesdasc = "salesdasc";//销量正序
+	public static String pricedesc = "pricedesc";//价格倒序
+	public static String priceasc = "priceasc";//价格正序
 
 	@Override
 	public void onCreate() {

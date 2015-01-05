@@ -6,10 +6,11 @@
     android:paddingTop="0.5dp"
     android:paddingBottom="0.5dp"
     android:gravity="center_vertical"
+    android:padding="5dp"
     android:orientation="horizontal" >
     <RelativeLayout 
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="fill_parent"
         android:padding="5dp"
          android:background="@color/white"
          android:gravity="center"
@@ -24,7 +25,7 @@
     <LinearLayout 
         android:layout_width="0dp"
         android:layout_weight="1"
-        android:layout_height="fill_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
         android:background="@color/white"
         android:paddingTop="0.5dp"
@@ -42,7 +43,7 @@
             android:textSize="16dp"
             />
         <LinearLayout 
-            android:layout_width="fill_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:gravity="center_vertical"
@@ -88,6 +89,30 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/ic_launcher"
+                />
+          
+        </LinearLayout>
+        <LinearLayout 
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            >
+              <TextView 
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:text="@string/shopcart_kucun"
+                android:layout_marginRight="5dp"
+                android:gravity="center"
+                />
+            <TextView 
+                android:id="@+id/shopcart_lv_item_kucun_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:text="@string/base_test"
                 />
         </LinearLayout>
     </LinearLayout>

@@ -22,6 +22,7 @@ import android.view.View.OnClickListener;
 import android.webkit.WebSettings.LayoutAlgorithm;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -34,6 +35,7 @@ import com.youai.aistore.ImageCycleView.ImageCycleViewListener;
 import com.youai.aistore.MyApplication;
 import com.youai.aistore.R;
 import com.youai.aistore.Util;
+import com.youai.aistore.Bean.Base;
 import com.youai.aistore.Bean.CommentsBean;
 import com.youai.aistore.Bean.GoodsBean;
 import com.youai.aistore.Bean.ListCommentsBean;
@@ -62,7 +64,9 @@ public class ProductDetailsActivity extends BaseActivity implements IXListViewLi
 	private ArrayList<CommentsBean> list;
 	private Handler handler,myHandler;
 	private ListCommentsBean listcombean,nextpagelist;
-	private  Dialog alertDialog;
+	private Dialog alertDialog;
+	private Button addshopcartbtn,gopaynowbtn;
+	private Base beanresult;
 
 	@Override
 	protected void onCreate(Bundle arg0) {
@@ -97,6 +101,10 @@ public class ProductDetailsActivity extends BaseActivity implements IXListViewLi
 		id = getIntent().getIntExtra("id", -1);
 		context = ProductDetailsActivity.this;
 		inflater = LayoutInflater.from(context);
+		addshopcartbtn = (Button) findViewById(R.id.product_add_shopcart_btn);
+		addshopcartbtn.setOnClickListener(this);
+		gopaynowbtn = (Button) findViewById(R.id.product_gopaynow_btn);
+		gopaynowbtn.setOnClickListener(this);
 		call_ll = (LinearLayout) findViewById(R.id.product_details_call_ll);
 		call_ll.setOnClickListener(this);
 		sms_ll = (LinearLayout) findViewById(R.id.product_details_sms_ll);
@@ -106,6 +114,7 @@ public class ProductDetailsActivity extends BaseActivity implements IXListViewLi
 		webView = (WebView) view_webview.findViewById(R.id.product_webview);
 		webView.setFocusable(false);
 		xListView = (XListView) view_listview.findViewById(R.id.product_xListView);
+		xListView.statu = 2;
 		xListView.setFocusable(false);
 		xListView.setPullLoadEnable(true);
 		xListView.setXListViewListener(this);
@@ -233,6 +242,13 @@ public class ProductDetailsActivity extends BaseActivity implements IXListViewLi
 					Send send = new Send(context);
 					nextpagelist = send.GetProductComments(id, page);
 					return nextpagelist;//new String(baos.toByteArr
+				}else if(getstatu == 4){
+					Send send = new Send(context);
+					int good_id = id;
+					int number = 1;
+					String session_id = MyApplication.SessionId;
+					beanresult = send.AddShopCart(good_id, number, session_id);
+					return beanresult;
 				}
 			} catch (Exception e) {  
 				e.printStackTrace();
@@ -251,82 +267,102 @@ public class ProductDetailsActivity extends BaseActivity implements IXListViewLi
 			Util.stopProgressDialog();
 			if(getstatu==1){
 				bean = (GoodsBean) result;
-				if(bean!=null && bean.getCode()==200){
-					//图片
-					topshowic.setImageResources(bean.getPicurls(), mAdCycleViewListener);
-					tv_shop_price.setText("￥"+bean.getShop_price()+"元");
-					tv_market_price.setText("￥"+bean.getMarket_price()+"元");
-					tv_click_num.setText(bean.getClick());
-					tv_title.setText(bean.getTitle());
-					//webview
-					URL = bean.getGood_desc();
-					webView.loadUrl(URL);
-					DisplayMetrics dm = new DisplayMetrics();//获取当前显示的界面大小
-					getWindowManager().getDefaultDisplay().getMetrics(dm);
-					int width=dm.widthPixels;
-					int height=dm.heightPixels;//获取当前界面的高度
-					LinearLayout.LayoutParams linearParams = (LinearLayout.LayoutParams) webView.getLayoutParams(); 
-					linearParams.height = height;//linearParams.WRAP_CONTENT;
-					webView.setLayoutParams(linearParams);
-					handler.postDelayed(new Runnable() {
+				if(bean!=null){
+					if(bean.getCode() == 200){
+						//图片
+						topshowic.setImageResources(bean.getPicurls(), mAdCycleViewListener);
+						tv_shop_price.setText("￥"+bean.getShop_price()+"元");
+						tv_market_price.setText("￥"+bean.getMarket_price()+"元");
+						tv_click_num.setText(bean.getClick());
+						tv_title.setText(bean.getTitle());
+						//webview
+						URL = bean.getGood_desc();
+						webView.loadUrl(URL);
+						DisplayMetrics dm = new DisplayMetrics();//获取当前显示的界面大小
+						getWindowManager().getDefaultDisplay().getMetrics(dm);
+						int width=dm.widthPixels;
+						int height=dm.heightPixels;//获取当前界面的高度
+						LinearLayout.LayoutParams linearParams = (LinearLayout.LayoutParams) webView.getLayoutParams(); 
+						linearParams.height = height;//linearParams.WRAP_CONTENT;
+						webView.setLayoutParams(linearParams);
+						handler.postDelayed(new Runnable() {
 
-						@Override
-						public void run() {
-							DisplayMetrics dm = new DisplayMetrics();//获取当前显示的界面大小
-							getWindowManager().getDefaultDisplay().getMetrics(dm);
-							int width=dm.widthPixels;
-							int height=dm.heightPixels;//获取当前界面的高度
-							LinearLayout.LayoutParams linearParams = (LinearLayout.LayoutParams) webView.getLayoutParams(); 
-							linearParams.height = linearParams.WRAP_CONTENT;
-							webView.setLayoutParams(linearParams);
-						}
-					}, 2000);
-				}else{
-					if(bean!=null)
+							@Override
+							public void run() {
+								DisplayMetrics dm = new DisplayMetrics();//获取当前显示的界面大小
+								getWindowManager().getDefaultDisplay().getMetrics(dm);
+								int width=dm.widthPixels;
+								int height=dm.heightPixels;//获取当前界面的高度
+								LinearLayout.LayoutParams linearParams = (LinearLayout.LayoutParams) webView.getLayoutParams(); 
+								linearParams.height = linearParams.WRAP_CONTENT;
+								webView.setLayoutParams(linearParams);
+							}
+						}, 2000);
+					}else{
 						Util.ShowToast(context, bean.getMsg());
+					}
+				}else{
+					Util.ShowToast(context,R.string.net_work_is_error);
 				}
 			}else if(getstatu == 2){
 				listcombean = (ListCommentsBean) result;
-				if(listcombean!=null && listcombean.getCode()==200){
+				if(listcombean!=null ){
+					if(listcombean.getCode()==200){
 					list = listcombean.getList();
 					adapter = new UserCommentAdapter(context,list);
 					xListView.setAdapter(adapter);
 					Util.setListViewHeightBasedOnChildren(xListView);
-				}else{
-					if(listcombean!=null)
+					}else{
 						Util.ShowToast(context, listcombean.getMsg());
+					}
+				}else{
+					Util.ShowToast(context,R.string.net_work_is_error);
 				}
 			}else if(getstatu == 3){
 				onLoad();
 				nextpagelist = (ListCommentsBean) result;
-				if(nextpagelist!=null && nextpagelist.getCode()==200){
-					if(nextpagelist.getList().size()>0){
-						if(page==1){
-							list = nextpagelist.getList();
-							if(adapter==null){
-								adapter = new UserCommentAdapter(context, list);
-								xListView.setAdapter(adapter);
+				if(nextpagelist!=null){
+					if(nextpagelist.getCode()==200){
+						if(nextpagelist.getList().size()>0){
+							if(page==1){
+								list = nextpagelist.getList();
+								if(adapter==null){
+									adapter = new UserCommentAdapter(context, list);
+									xListView.setAdapter(adapter);
+								}else{
+									adapter.setdata(list);
+									adapter.notifyDataSetInvalidated();
+								}
 							}else{
-								adapter.setdata(list);
-								adapter.notifyDataSetInvalidated();
+								list.addAll(nextpagelist.getList());
+								if(adapter==null){
+									adapter = new UserCommentAdapter(context, list);
+									xListView.setAdapter(adapter);
+								}else{
+									adapter.setdata(list);
+									adapter.notifyDataSetInvalidated();
+								}
 							}
+							Util.setListViewHeightBasedOnChildren(xListView);
 						}else{
-							list.addAll(nextpagelist.getList());
-							if(adapter==null){
-								adapter = new UserCommentAdapter(context, list);
-								xListView.setAdapter(adapter);
-							}else{
-								adapter.setdata(list);
-								adapter.notifyDataSetInvalidated();
-							}
+							Util.ShowToast(context, "最后一页了，亲");
 						}
-						Util.setListViewHeightBasedOnChildren(xListView);
 					}else{
-						Util.ShowToast(context, "最后一页了，亲");
+						Util.ShowToast(context, listcombean.getMsg());
 					}
 				}else{
-					if(listcombean!=null)
-						Util.ShowToast(context, listcombean.getMsg());
+					Util.ShowToast(context,R.string.net_work_is_error);
+				}
+			}else if(getstatu == 4){
+				beanresult = (Base) result;
+				if(beanresult!=null){
+					if(beanresult.getCode()==200){
+						Util.ShowToast(context, "已加入购物车");
+					}else{
+						Util.ShowToast(context,beanresult.getMsg());
+					}
+				}else{
+					Util.ShowToast(context,R.string.net_work_is_error);
 				}
 			}
 
@@ -383,6 +419,10 @@ public class ProductDetailsActivity extends BaseActivity implements IXListViewLi
 			break;
 		case R.id.product_details_sms_ll:
 			ShowDialog(2);
+			break;
+		case R.id.product_add_shopcart_btn:
+			myTask = new MyTask(4);
+			myTask.execute("");  
 			break;
 
 		}

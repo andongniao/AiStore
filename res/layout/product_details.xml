@@ -102,6 +102,7 @@
              android:layout_height="fill_parent"
              />
          <Button 
+             android:id="@+id/product_add_shopcart_btn"
              android:layout_width="wrap_content"
              android:layout_height="wrap_content"
              android:padding="3dp"
@@ -110,6 +111,7 @@
              android:text="@string/product_add_shopcart"
              />
          <Button 
+             android:id="@+id/product_gopaynow_btn"
              android:layout_width="wrap_content"
              android:layout_height="wrap_content"
              android:padding="3dp"
