@@ -67,6 +67,10 @@
             android:label="@string/app_name" >
         </activity>
         <activity
+            android:name="com.youai.aistore.Fclass.FclassMoreActivity"
+            android:label="@string/app_name" >
+        </activity>
+        <activity
             android:name="com.youai.aistore.Product.ProductDetailsActivity"
             android:label="@string/app_name" >
         </activity>

@@ -17,7 +17,7 @@
 
             <ImageView
                 android:id="@+id/imageView1"
-                android:layout_width="10dp"
+                android:layout_width="5dp"
                 android:layout_height="25dp"
                 android:layout_margin="3dp"
                 android:background="@drawable/home_red_bg" />

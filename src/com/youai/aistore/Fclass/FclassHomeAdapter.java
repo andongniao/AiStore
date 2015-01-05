@@ -190,6 +190,7 @@ public class FclassHomeAdapter extends BaseExpandableListAdapter{
 				context.startActivity(intent);
 			}
 			Util.ShowToast(context, "µã»÷ÁË"+childname.get(index).get(arg2));
+			
 		}
 
 	}
