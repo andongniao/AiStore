@@ -260,99 +260,135 @@ public class HomeActivity extends BaseActivity implements OnClickListener{
 			toFclassFrist(title, postion);
 			break;
 		case R.id.home_new_iv_l:
+			if(homeBeanList!=null){
 			type = homeBeanList.getList().get(1).get(0).getType();
 			id = homeBeanList.getList().get(1).get(0).getId();
 			toActivity(type, id);
+			}
 			break;
 		case R.id.home_new_iv_c:
+			if(homeBeanList!=null){
 			type = homeBeanList.getList().get(1).get(1).getType();
 			id = homeBeanList.getList().get(1).get(1).getId();
 			toActivity(type, id);
+			}
 			break;
 		case R.id.home_new_iv_r:
+			if(homeBeanList!=null){
 			type = homeBeanList.getList().get(1).get(2).getType();
 			id = homeBeanList.getList().get(1).get(2).getId();
 			toActivity(type, id);
+			}
 			break;
 			
 		case R.id.home_woman_hot_iv_l:
+			if(homeBeanList!=null){
 			type = homeBeanList.getList().get(2).get(0).getType();
 			id = homeBeanList.getList().get(2).get(0).getId();
 			toActivity(type, id);
+			}
 			break;
 		case R.id.home_woman_hot_iv_r_t:
+			if(homeBeanList!=null){
 			type = homeBeanList.getList().get(2).get(1).getType();
 			id = homeBeanList.getList().get(2).get(1).getId();
 			toActivity(type, id);
+			}
 			break;
 		case R.id.home_woman_hot_iv_r_b:
+			if(homeBeanList!=null){
 			type = homeBeanList.getList().get(2).get(2).getType();
 			id = homeBeanList.getList().get(2).get(2).getId();
 			toActivity(type, id);
+			}
 			break;
 			
 		case R.id.home_man_hot_iv_l:
+			if(homeBeanList!=null){
 			type = homeBeanList.getList().get(3).get(0).getType();
 			id = homeBeanList.getList().get(3).get(0).getId();
 			toActivity(type, id);
+			}
 			break;
 		case R.id.home_man_hot_iv_r_t:
+			if(homeBeanList!=null){
 			type = homeBeanList.getList().get(3).get(1).getType();
 			id = homeBeanList.getList().get(3).get(1).getId();
 			toActivity(type, id);
+			}
 			break;
 		case R.id.home_man_hot_iv_r_b:
+			if(homeBeanList!=null){
 			type = homeBeanList.getList().get(3).get(2).getType();
 			id = homeBeanList.getList().get(3).get(2).getId();
 			toActivity(type, id);
+			}
 			break;
 			
 		case R.id.home_neiyi_hot_iv_l:
+			if(homeBeanList!=null){
 			type = homeBeanList.getList().get(4).get(0).getType();
 			id = homeBeanList.getList().get(4).get(0).getId();
 			toActivity(type, id);
+			}
 			break;
 		case R.id.home_neiyi_hot_iv_r_t:
+			if(homeBeanList!=null){
 			type = homeBeanList.getList().get(4).get(1).getType();
 			id = homeBeanList.getList().get(4).get(1).getId();
 			toActivity(type, id);
+			}
 			break;
 		case R.id.home_neiyi_hot_iv_r_b:
+			if(homeBeanList!=null){
 			type = homeBeanList.getList().get(4).get(2).getType();
 			id = homeBeanList.getList().get(4).get(2).getId();
 			toActivity(type, id);
+			}
 			break;
 			
 		case R.id.home_tt_hot_iv_l:
+			if(homeBeanList!=null){
 			type = homeBeanList.getList().get(5).get(0).getType();
 			id = homeBeanList.getList().get(5).get(0).getId();
 			toActivity(type, id);
+			}
 			break;
 		case R.id.home_tt_hot_iv_r_t:
+			if(homeBeanList!=null){
 			type = homeBeanList.getList().get(5).get(1).getType();
 			id = homeBeanList.getList().get(5).get(1).getId();
 			toActivity(type, id);
+			}
 			break;
 		case R.id.home_tt_hot_iv_r_b:
+			if(homeBeanList!=null){
 			type = homeBeanList.getList().get(5).get(2).getType();
 			id = homeBeanList.getList().get(5).get(2).getId();
 			toActivity(type, id);
+			}
 			break;
 			
 		case R.id.home_tosex_hot_iv_l:
+			if(homeBeanList!=null){
 			type = homeBeanList.getList().get(6).get(0).getType();
 			id = homeBeanList.getList().get(6).get(0).getId();
 			toActivity(type, id);
+			}
 			break;
 		case R.id.home_tosex_hot_iv_r_t:
+			if(homeBeanList!=null){
 			type = homeBeanList.getList().get(6).get(1).getType();
 			id = homeBeanList.getList().get(6).get(1).getId();
 			toActivity(type, id);
+			}
 			break;
 		case R.id.home_tosex_hot_iv_r_b:
+			if(homeBeanList!=null){
 			type = homeBeanList.getList().get(6).get(2).getType();
 			id = homeBeanList.getList().get(6).get(2).getId();
 			toActivity(type, id);
+			}
 			break;
 
 		}

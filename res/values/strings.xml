@@ -38,7 +38,32 @@
     <string name="shopcart_gopay">去结算</string>
     <string name="shopcart_gongji">共计:</string>
     <string name="shopcart_kucun">库存:</string>
+    
+    <!-- 收货人信息 -->
+    <string name="consignee_info">收货人信息</string>
+    <string name="consignee_consignee">收货人</string>
+    <string name="consignee_number">手机号码</string>
+    <string name="consignee_address">详细地址</string>
+    <string name="consignee_save">确认保存</string>
+    <string name="consignee_number_can_not_null">手机号不能为空</string>
+    <string name="consignee_check_number_type">请检查手机号格式</string>
+    <string name="consignee_consignee_can_not_null">收货人不能为空</string>
+    <string name="consignee_address_can_not_null">地址不能为空</string>
    
+    <!-- 结算订单 -->
+    <string name="order_goods_list">商品清单</string>
+    <string name="order_goods_receipt">收货信息</string>
+    <string name="order_pay_type">付款方式</string>
+    <string name="order_distribution_time">配送时间</string>
+    <string name="order_goods_price">商品总价</string>
+    <string name="order_express_cost">快递费用</string>
+    <string name="order_final_pay">最终支付</string>
+    <string name="order_commit">提交订单</string>
+    <string name="order_zhifubao">支付宝转账</string>
+    <string name="order_gongzuo_xiuxi">工作日、双休日和假日，均可送货</string>
+    <string name="order_xiuxi">双休日（周六、周日）</string>
+    <string name="order_gopnzuo">工作日（周一至周五）</string>
+    
     <!-- 搜索 -->
     <string name="search_et_text">请输入关键词</string>
     <string name="search_bt_text">搜索</string>

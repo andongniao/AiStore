@@ -43,7 +43,7 @@
             android:layout_height="wrap_content"
             android:text="@string/shopcart_isnull"
             android:layout_marginTop="10dp"
-            android:textColor="@color/home_text_grey" />
+            android:textColor="@color/black" />
     </LinearLayout>
     	    
 	</LinearLayout>

@@ -17,6 +17,7 @@ import android.os.Handler;
 import android.util.DisplayMetrics;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.webkit.WebSettings.LayoutAlgorithm;
@@ -25,6 +26,7 @@ import android.webkit.WebViewClient;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -247,6 +249,7 @@ public class ProductDetailsActivity extends BaseActivity implements IXListViewLi
 					int good_id = id;
 					int number = 1;
 					String session_id = MyApplication.SessionId;
+					System.out.println("加入购物车所用sessionid======"+session_id);
 					beanresult = send.AddShopCart(good_id, number, session_id);
 					return beanresult;
 				}

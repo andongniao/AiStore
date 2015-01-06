@@ -21,6 +21,7 @@ import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
  */
 public class MyApplication extends Application {
 	public static String SessionId = ""; 
+	public static String UserId = "0"; 
 	public static SharedPreferences mSharedPreferences;
 	public static String callnumber = "4000965585";
 	public static String smsnumber = "13331054789";
@@ -84,14 +85,20 @@ public class MyApplication extends Application {
 		String time = String.valueOf(System.currentTimeMillis());
 		mSharedPreferences = getSharedPreferences("aistoresp", 0);
 		String sessionid = mSharedPreferences.getString("sessionid", "nulla");
+		SharedPreferences.Editor mEditor = mSharedPreferences.edit();
 		if(sessionid!=null && !sessionid.equals("nulla")){
 			SessionId = sessionid;
 		}else{
 			SessionId = Util.hashKeyForDisk(DEVICE_ID+time);
-		SharedPreferences.Editor mEditor = mSharedPreferences.edit();
-		mEditor.putString("ukuuid", SessionId);
-		mEditor.commit();  
 		}
+		UserId = mSharedPreferences.getString("userid", "0");
+		mEditor.putString("sessionid", SessionId);
+		mEditor.commit();  
+	}
+	public static void setUserId(String userid){
+		SharedPreferences.Editor mEditor = mSharedPreferences.edit();
+		mEditor.putString("userid", userid);
+		mEditor.commit();  
 	}
 
 }
