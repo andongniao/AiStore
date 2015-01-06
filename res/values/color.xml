@@ -16,6 +16,7 @@
     <color name="onsell">#D1D1D1</color>
     <color name="bg_color">#f8f7f5</color>
     <color name="text_color">#ff424242</color>
+    <color name="fen">#D4D4D4</color>
 
     <!-- custom light theme: -->
     <color name="dialog_message_text">#333333</color>

@@ -149,10 +149,15 @@ public class Send {
 			try {
 				object = new JSONObject(jsonStr);
 				if (object.get("code") != null && object.getInt("code") == 200) {
-					JSONArray data = object.getJSONArray("data");
-					Type type = new TypeToken<ArrayList<CommentsBean>>() {}.getType();
-					String json = data.toString();
-					ArrayList<CommentsBean> l = gson.fromJson(json, type);
+					JSONObject data = object.getJSONObject("data");
+					ArrayList<CommentsBean> l = new ArrayList<CommentsBean>();
+					for(int i=0;i<10;i++){
+						JSONObject s = data.getJSONObject(""+i);
+						String json = s.toString();
+						Type type = new TypeToken<CommentsBean>() {}.getType();
+						CommentsBean c = gson.fromJson(json, type);
+						l.add(c);
+					}
 					list.setList(l);
 					list.setCode(200);
 					list.setMsg(object.getString("message"));
