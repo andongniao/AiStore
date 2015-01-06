@@ -9,6 +9,7 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -69,6 +70,8 @@ public class ShopCartAdapter extends BaseAdapter{
 			myShopItem.tv_kucun = (TextView) arg1.findViewById(R.id.shopcart_lv_item_kucun_tv);
 			myShopItem.et_num = (EditText) arg1.findViewById(R.id.shopcart_item_num_et);
 			myShopItem.delete_ll = (LinearLayout) arg1.findViewById(R.id.shopcart_item_delete_ll);
+			myShopItem.btn_add = (ImageButton) arg1.findViewById(R.id.shopcart_lv_item_add_ibt);
+			myShopItem.btn_jian = (ImageButton) arg1.findViewById(R.id.shopcart_lv_item_jian_ibt);
 			arg1.setTag(myShopItem);
 		}else{
 			myShopItem = (MyShopItem) arg1.getTag();
@@ -104,5 +107,6 @@ public class ShopCartAdapter extends BaseAdapter{
 		private TextView tv_titlt,tv_price,tv_delete,tv_kucun;
 		private EditText et_num;
 		private LinearLayout delete_ll;
+		private ImageButton btn_add,btn_jian;
 	}
 }

@@ -10,6 +10,7 @@ import android.widget.TabWidget;
 
 import com.youai.aistore.Fclass.FclassHomeActivity;
 import com.youai.aistore.Home.HomeActivity;
+import com.youai.aistore.Mycenter.MycenterHomeActivity;
 import com.youai.aistore.Product.ProductDetailsActivity;
 import com.youai.aistore.ShopCart.ShopCartActivity;
 
@@ -39,7 +40,7 @@ public class ExampleActivity extends TabHostActivity {
 		
 		TabItem MyCenter = new TabItem(
 				R.drawable.base_mycenter,
-				new Intent(this, ProductDetailsActivity.class));
+				new Intent(this, MycenterHomeActivity.class));
 		
 //		TabItem more = new TabItem(
 //				"¸ü¶à",

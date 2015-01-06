@@ -42,7 +42,7 @@ public class ShopCartActivity extends BaseActivity implements OnClickListener{
 	//,IXListViewListener{
 	private long exitTime = 0;
 	private Context context;
-	private ListView lv;
+	private XListView lv;
 	private ImageView isnull_iv;
 	private View isnull;
 	private ShopCartAdapter adapter;
@@ -132,12 +132,14 @@ public class ShopCartActivity extends BaseActivity implements OnClickListener{
 		};
 		isnull = findViewById(R.id.shopcart_isnull_ll);
 		showviewll = (LinearLayout) findViewById(R.id.shopcart_showview_ll);
+		showviewll.setVisibility(View.GONE);
 		seeagainbt = (Button) findViewById(R.id.shopcart_see_again_bt);
 		seeagainbt.setOnClickListener(this);
 		goypaybt = (Button) findViewById(R.id.shopcart_gopay_bt);
 		goypaybt.setOnClickListener(this);
 		tv_gongji = (TextView) findViewById(R.id.shopcart_gongji_tv);
-		lv = (ListView) findViewById(R.id.shopcart_listview);
+		lv = (XListView) findViewById(R.id.shopcart_listview);
+		lv.GoneFooterView();
 		isnull_iv = (ImageView)findViewById(R.id.shopcart_isnull_iv);
 		isnull_iv.setOnClickListener(this);
 		lv.setEmptyView(isnull);
@@ -254,16 +256,27 @@ public class ShopCartActivity extends BaseActivity implements OnClickListener{
 	}
 	@Override
 	public boolean onTouchEvent(MotionEvent event) {
-		if(listbean==null || listbean.getList().size()==0){
-			if(event.getAction()==MotionEvent.ACTION_DOWN && event.getAction()==MotionEvent.ACTION_UP){
+		if(listbean==null){
+//			if(event.getAction()==MotionEvent.ACTION_DOWN && event.getAction()==MotionEvent.ACTION_UP){
 				if(Util.detect(context)){
 					myTask = new MyTask();
 					myTask.execute("");  
 				}else{
 					Util.ShowToast(context, R.string.net_work_is_error);
 				}
+//			}
+		}else if(listbean!=null){
+			if(listbean.getList()==null || (listbean.getList()!=null && listbean.getList().size()==0)){
+//				if(event.getAction()==MotionEvent.ACTION_DOWN && event.getAction()==MotionEvent.ACTION_UP){
+					if(Util.detect(context)){
+						myTask = new MyTask();
+						myTask.execute("");  
+					}else{
+						Util.ShowToast(context, R.string.net_work_is_error);
+					}
+				}
 			}
-		}
+//		}
 		return super.onTouchEvent(event);
 	}
 }

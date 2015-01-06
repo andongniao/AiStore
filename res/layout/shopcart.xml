@@ -11,9 +11,9 @@
    		 android:orientation="vertical"
 	    >
 <!-- 
-    <com.youai.aistore.xlistview.XListView
- -->
     <ListView
+ -->
+    <com.youai.aistore.xlistview.XListView
         android:id="@+id/shopcart_listview"
         android:layout_width="fill_parent"
         android:layout_height="0dp"
@@ -98,15 +98,22 @@
 	        android:layout_width="0dp"
 	        android:layout_height="wrap_content"
 	        android:layout_weight="1"
+	        android:textColor="@color/home_text_red"
+	        android:background="@drawable/btn_bg_red_line"
 	        android:text="@string/shopcart_see_again"
-	        android:layout_marginLeft="5dp"
+	        android:layout_margin="5dp"
+	        android:padding="10dp"
 	        />
 	    <Button 
 	        android:id="@+id/shopcart_gopay_bt"
 	        android:layout_width="0dp"
 	        android:layout_height="wrap_content"
 	        android:layout_weight="1"
+	        android:textColor="@color/white"
+	        android:background="@drawable/btn_bg_red"
 	        android:text="@string/shopcart_gopay"
+	        android:layout_margin="5dp"
+	         android:padding="10dp"
 	        />
 	</LinearLayout>
 	</LinearLayout>

@@ -24,7 +24,7 @@ public class MyApplication extends Application {
 	public static String UserId = "0"; 
 	public static SharedPreferences mSharedPreferences;
 	public static String callnumber = "4000965585";
-	public static String smsnumber = "13331054789";
+	public static String smsnumber = "13331054189";
 	public static int neiyi = 4;//ÄÚÒÂÀà
 	public static int neiyi_qingqvshuiyi = 40;
 	public static int neiyi_zhifuyouhuo = 37;

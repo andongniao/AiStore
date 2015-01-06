@@ -105,18 +105,28 @@
              android:id="@+id/product_add_shopcart_btn"
              android:layout_width="wrap_content"
              android:layout_height="wrap_content"
-             android:padding="3dp"
+             android:paddingTop="5dp"
+             android:paddingBottom="5dp"
+             android:paddingLeft="15dp"
+             android:paddingRight="15dp"
+             android:textColor="@color/home_text_red"
              android:gravity="center"
              android:layout_margin="5dp"
+             android:background="@drawable/btn_bg_red_line"
              android:text="@string/product_add_shopcart"
              />
          <Button 
              android:id="@+id/product_gopaynow_btn"
              android:layout_width="wrap_content"
              android:layout_height="wrap_content"
-             android:padding="3dp"
+             android:paddingTop="5dp"
+             android:paddingBottom="5dp"
+             android:paddingLeft="15dp"
+             android:paddingRight="15dp"
+             android:textColor="@color/white"
              android:gravity="center"
              android:layout_margin="5dp"
+              android:background="@drawable/btn_bg_red"
              android:text="@string/product_pay_now"
              />
          
@@ -142,7 +152,7 @@
              <ImageView 
                  android:layout_width="wrap_content"
                  android:layout_height="wrap_content"
-                 android:background="@drawable/ic_launcher"
+                 android:background="@drawable/call_icon"
                  />
              <LinearLayout 
                  android:layout_width="wrap_content"
@@ -153,7 +163,7 @@
                  <TextView 
                      android:layout_width="wrap_content"
                      android:layout_height="wrap_content"
-                     android:textColor="@color/home_text_grey"
+                     android:textColor="@color/black"
                      android:textSize="12dp"
                      android:gravity="center"
                      android:text="@string/product_call_text"
@@ -161,7 +171,7 @@
                  <TextView 
                      android:layout_width="wrap_content"
                      android:layout_height="wrap_content"
-                     android:textColor="@color/home_text_grey"
+                     android:textColor="@color/black"
                      android:textSize="12dp"
                      android:gravity="center"
                      android:text="@string/product_call_number"
@@ -179,7 +189,7 @@
              <ImageView 
                  android:layout_width="wrap_content"
                  android:layout_height="wrap_content"
-                 android:background="@drawable/ic_launcher"
+                 android:background="@drawable/sms_icon"
                  />
              <LinearLayout 
                  android:layout_width="wrap_content"
@@ -190,7 +200,7 @@
                  <TextView 
                      android:layout_width="wrap_content"
                      android:layout_height="wrap_content"
-                     android:textColor="@color/home_text_grey"
+                     android:textColor="@color/black"
                      android:textSize="12dp"
                      android:gravity="center"
                      android:text="@string/product_sms_text"
@@ -198,7 +208,7 @@
                  <TextView 
                      android:layout_width="wrap_content"
                      android:layout_height="wrap_content"
-                     android:textColor="@color/home_text_grey"
+                     android:textColor="@color/black"
                      android:textSize="12dp"
                      android:gravity="center"
                      android:text="@string/product_sms_number"
