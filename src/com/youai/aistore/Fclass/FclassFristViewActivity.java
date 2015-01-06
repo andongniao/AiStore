@@ -32,6 +32,7 @@ import com.youai.aistore.Home.MyGridview;
 import com.youai.aistore.Home.SearchResultActivity;
 import com.youai.aistore.Home.SearchResultAdapter;
 import com.youai.aistore.NetInterface.Send;
+import com.youai.aistore.Product.ProductDetailsActivity;
 
 public class FclassFristViewActivity extends BaseActivity implements
 		OnItemClickListener {
@@ -48,6 +49,7 @@ public class FclassFristViewActivity extends BaseActivity implements
 	private ListGoodsBean fclasslist;
 	private ArrayList<GoodsBean> womenListBean;
 	private FclassFristViewAdapter fclassAdapter;
+	private int type,id,postion;
 
 	@Override
 	protected void onCreate(Bundle arg0) {
@@ -120,7 +122,28 @@ public class FclassFristViewActivity extends BaseActivity implements
 		}
 
 	}
+	/*
+	 * 详细分类gridview监听器
+	 */
+	class gridviewonclick implements OnItemClickListener {
 
+		@Override
+		public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
+				long arg3) {
+			// TODO Auto-generated method stub
+			//type = fclasslist.getList().get(0).get(arg2).getType();
+			id = fclasslist.getList().get(7).get(arg2).getId();
+		//	toActivity(type, id);
+			Intent intent = new Intent(FclassFristViewActivity.this,
+					ProductDetailsActivity.class);
+			intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+			intent.putExtra("id",id);
+			
+			startActivity(intent);
+			
+		}
+
+	}
 	private class MyTask extends AsyncTask<Object, Object, Object> {
 		// onPreExecute方法用于在执行后台任务前做一些UI操作
 		@Override
@@ -168,6 +191,7 @@ public class FclassFristViewActivity extends BaseActivity implements
 					g = (MyGridview) v
 							.findViewById(R.id.fclass_frist_view_addview_gridview);
 					g.setAdapter(fclassAdapter);
+					g.setOnItemClickListener(new gridviewonclick());
 					gridviewlist.add(g);
 					addviewlist.add(v);
 					addviewll.addView(v);
@@ -193,6 +217,7 @@ public class FclassFristViewActivity extends BaseActivity implements
 	@Override
 	public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
 		// TODO Auto-generated method stub
+
 
 	}
 

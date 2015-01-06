@@ -34,7 +34,7 @@
             <ImageView 
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@drawable/ic_launcher"
+                android:background="@drawable/result_order"
                 />
         </LinearLayout>
         <LinearLayout 
@@ -59,7 +59,7 @@
             <ImageView 
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@drawable/ic_launcher"
+                android:background="@drawable/result_order"
                 />
         </LinearLayout>
         <LinearLayout 
@@ -83,7 +83,7 @@
             <ImageView 
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@drawable/ic_launcher"
+                android:background="@drawable/result_order"
                 />
         </LinearLayout>
     </LinearLayout>

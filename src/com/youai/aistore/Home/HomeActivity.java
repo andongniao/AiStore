@@ -178,6 +178,7 @@ public class HomeActivity extends BaseActivity implements OnClickListener{
 		tv_newpp_c_price = (TextView) findViewById(R.id.home_new_tv_c_two);
 		tv_newpp_r_tttle = (TextView) findViewById(R.id.home_new_tv_r_one);
 		tv_newpp_r_price = (TextView) findViewById(R.id.home_new_tv_r_two);
+		
 		gridView = (MyGridview) findViewById(R.id.home_gridview);
 		gridView.setOnItemClickListener(new myitemlistener());
 		

@@ -10,68 +10,67 @@
 
     <!-- 第一行：产品图片 -->
 
-
-
         <ImageView
             android:id="@+id/fclass_frist_view_addview_item_iv"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" 
-            android:layout_margin="10dp"
-            />
+            android:layout_height="wrap_content"
+            android:layout_margin="5dip"
+            android:src="@drawable/wumen_av1" />
 
 
-    <!-- 第二行：￥图片+价格文字+❤图片+评论文字 -->
+        <!-- 第二行：价格文字+❤图片+评论文字 -->
 
-    <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center_vertical"
-        android:orientation="horizontal" >
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:id="@+id/fclass_frist_view_addview_item_price_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="@string/base_test"
+                android:textColor="@color/home_text_red" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:textColor="@color/home_text_red" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="3dp"
+                android:background="@drawable/detail_favbutton_bg_highlighted" />
+
+            <TextView
+                android:id="@+id/fclass_frist_view_addview_item_likes_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="5dp"
+                android:gravity="center"
+                android:text="@string/base_test"
+                android:textColor="@color/home_text_red" />
+        </LinearLayout>
+
+        <!-- 第三行：产品名字 -->
 
         <TextView
-            android:id="@+id/fclass_frist_view_addview_item_price_tv"
-            android:layout_width="wrap_content"
+            android:id="@+id/fclass_frist_view_addview_item_title_tv"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="5dip"
+            android:ellipsize="end"
             android:gravity="center"
+            android:padding="3dp"
+            android:singleLine="true"
             android:text="@string/base_test"
-            android:textColor="@color/home_text_red" />
+            android:textColor="@color/black"
+            android:textSize="16sp" />
 
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:textColor="@color/home_text_red" />
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="3dp"
-            android:background="@drawable/detail_favbutton_bg_highlighted" />
-
-        <TextView
-            android:id="@+id/fclass_frist_view_addview_item_likes_tv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="5dp"
-            android:gravity="center"
-            android:text="@string/base_test"
-            android:textColor="@color/home_text_red" />
-    </LinearLayout>
-
-    <!-- 第三行：产品名字 -->
-
-    <TextView
-        android:id="@+id/fclass_frist_view_addview_item_title_tv"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="5dip"
-        android:ellipsize="end"
-        android:gravity="center"
-        android:padding="3dp"
-        android:singleLine="true"
-        android:text="@string/base_test"
-        android:textColor="@color/black"
-        android:textSize="16sp" />
 
 </LinearLayout>
