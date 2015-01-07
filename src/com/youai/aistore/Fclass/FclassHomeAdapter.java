@@ -63,8 +63,8 @@ public class FclassHomeAdapter extends BaseExpandableListAdapter{
 		}else{
 			halderItem = (MyHalderItem) convertView.getTag();
 		}
-		halderItem.myGridview.setAdapter(new MyGridviewAdapter(arg0));
-		halderItem.myGridview.setOnItemClickListener(new MygridviewItenlistener(arg0));
+		halderItem.myGridview.setAdapter(new MyGridviewAdapter(arg0));//子类添加适配器
+		halderItem.myGridview.setOnItemClickListener(new MygridviewItenlistener(arg0));//子类点击事件
 		return convertView;
 	}
 
@@ -102,8 +102,8 @@ public class FclassHomeAdapter extends BaseExpandableListAdapter{
 		//		ImageView groupImg = (ImageView) convertView
 		//				.findViewById(R.id.group_img);
 		//		TextView groupTv = (TextView) convertView.findViewById(R.id.group_tv);
-		halderLabel.iv.setImageResource(groumimg.get(arg0));
-		halderLabel.tv.setText(groupname.get(arg0).toString());
+		halderLabel.iv.setImageResource(groumimg.get(arg0));//父类添加图片
+		halderLabel.tv.setText(groupname.get(arg0).toString());//父类添加文字
 		return convertView;
 	}
 
@@ -173,8 +173,12 @@ public class FclassHomeAdapter extends BaseExpandableListAdapter{
 	//		
 	//		return simpleAdapter;
 	//	}
+	
+	/*
+	 * 适配器，子类点击事件
+	 */	
 	class MygridviewItenlistener implements OnItemClickListener{
-		private int index;
+		private int index;//
 		public MygridviewItenlistener(int index){
 			this.index = index;
 		}
@@ -182,14 +186,29 @@ public class FclassHomeAdapter extends BaseExpandableListAdapter{
 		@Override
 		public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
 				long arg3) {
-			if(arg2==0){
+			
+			switch (arg2) {
+			case 0:
 				Intent intent = new Intent(context,FclassFristViewActivity.class);
 				intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 				//groupname数组传值给FclassFristViewActivity的标题
 				intent.putExtra("title", groupname.get(arg2).toString());
 				context.startActivity(intent);
+				Util.ShowToast(context, "点击了"+childname.get(index).get(arg2));
+				break;
+
+			default:
+				break;
 			}
-			Util.ShowToast(context, "点击了"+childname.get(index).get(arg2));
+			/*if(arg2==0){
+				Intent intent = new Intent(context,FclassFristViewActivity.class);
+				intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+				//groupname数组传值给FclassFristViewActivity的标题
+				intent.putExtra("title", groupname.get(arg2).toString());
+				context.startActivity(intent);
+			}*/
+
+			
 			
 		}
 

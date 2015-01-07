@@ -53,7 +53,7 @@ public class FclassHomeActivity extends BaseActivity{
 		for(int i =0;i<womanc.length;i++){
 			woman.add(womanc[i]);
 		}
-		childnamelist.add(woman);
+		childnamelist.add(woman);//女性用品，子列表
 		
 		ArrayList<String> man = new ArrayList<String>();
 		String[] manc = rs.getStringArray(R.array.fclass_home_man_gridview);

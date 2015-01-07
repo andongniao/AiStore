@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.youai.aistore.BaseActivity;
@@ -57,6 +58,7 @@ public class FclassMoreActivity extends BaseActivity implements IXListViewListen
 		numll = (LinearLayout) findViewById(R.id.fclass_more_number_ll);
 		pricell = (LinearLayout) findViewById(R.id.fclass_more_price_ll);
 		
+		//popll.setClickable(true);
 		popll.setOnClickListener(this);
 		numll.setOnClickListener(this);
 		pricell.setOnClickListener(this);
@@ -81,9 +83,13 @@ public class FclassMoreActivity extends BaseActivity implements IXListViewListen
 
 	@Override
 	public void onClick(View arg0) {
-		switch (arg0.getId()) {
+		
+		switch (arg0.getId()) {		
 		case R.id.fclass_more_popularity_ll:
 			
+			
+
+			//Util.ShowToast(context, "ÈËÆø");
 			break;
 		case R.id.fclass_more_number_ll:
 			

@@ -32,9 +32,11 @@
                 android:layout_marginRight="15dp"
                 />
             <ImageView 
+                android:id="@+id/fclass_more_popularity_img"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/result_order"
+               
                 />
         </LinearLayout>
         <LinearLayout 
@@ -60,6 +62,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/result_order"
+                android:clickable="true"
                 />
         </LinearLayout>
         <LinearLayout 
@@ -84,7 +87,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/result_order"
+                android:clickable="true"
                 />
+
+            
         </LinearLayout>
     </LinearLayout>
     
