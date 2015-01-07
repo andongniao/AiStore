@@ -15,7 +15,11 @@ import com.youai.aistore.BaseActivity;
 import com.youai.aistore.MyApplication;
 import com.youai.aistore.R;
 import com.youai.aistore.View.CircleImageView;
-
+/**
+ * 个人中心首页
+ * @author Qzr
+ *
+ */
 public class MycenterHomeActivity extends BaseActivity implements OnClickListener{
 	private CircleImageView headeriv;
 	private LinearLayout dingdan_ll,youhui_ll,kefu_ll,set_ll,call_ll,sms_ll,show_ll;

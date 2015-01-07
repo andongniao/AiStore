@@ -15,326 +15,334 @@
         <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
             android:layout_marginBottom="1dp"
+            android:orientation="vertical"
             android:padding="5dp" >
-             <TextView 
+
+            <TextView
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:textColor="@color/black"
                 android:text="@string/order_goods_list"
-                />
+                android:textColor="@color/black" />
 
             <com.youai.aistore.Order.OrderListview
                 android:id="@+id/order_goods_list_lv"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:scrollbars="none"
-                android:fadingEdge="none" 
                 android:cacheColorHint="#00000000"
-                android:padding="5dp" />
-           
+                android:divider="#00000000"
+                android:fadingEdge="none"
+                android:padding="5dp"
+                android:scrollbars="none" />
         </LinearLayout>
+
         <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
             android:layout_marginBottom="1dp"
+            android:orientation="vertical"
             android:padding="5dp" >
-            <TextView 
+
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/black"
                 android:text="@string/order_goods_receipt"
-                />
-            <LinearLayout 
+                android:textColor="@color/black" />
+
+            <LinearLayout
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
                 android:background="@color/white"
-                android:padding="5dp"
-                >
-                <LinearLayout 
+                android:orientation="vertical"
+                android:padding="5dp" >
+
+                <LinearLayout
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
                     android:gravity="center_vertical"
-                    android:padding="5dp"
-                    >
-                    <TextView 
+                    android:orientation="horizontal"
+                    android:padding="5dp" >
+
+                    <TextView
                         android:layout_width="0dp"
-                        android:layout_weight="1"
                         android:layout_height="wrap_content"
-                        android:textColor="@color/black"
-                        android:text="@string/consignee_consignee"
+                        android:layout_weight="1"
                         android:gravity="center"
-                        android:textSize="12dp"
-                        />
-                    <TextView 
+                        android:text="@string/consignee_consignee"
+                        android:textColor="@color/black"
+                        android:textSize="12dp" />
+
+                    <TextView
                         android:id="@+id/order_consignee_tv"
                         android:layout_width="0dp"
-                        android:layout_weight="3"
                         android:layout_height="wrap_content"
-                        android:textColor="@color/black"
+                        android:layout_weight="3"
                         android:gravity="center_vertical"
-                        android:textSize="12dp"
-                        />
+                        android:textColor="@color/black"
+                        android:textSize="12dp" />
                 </LinearLayout>
-                <LinearLayout 
+
+                <LinearLayout
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
                     android:gravity="center_vertical"
-                    android:padding="5dp"
-                    >
-                    <TextView 
+                    android:orientation="horizontal"
+                    android:padding="5dp" >
+
+                    <TextView
                         android:layout_width="0dp"
-                        android:layout_weight="1"
                         android:layout_height="wrap_content"
-                        android:textColor="@color/black"
-                        android:text="@string/consignee_address"
+                        android:layout_weight="1"
                         android:gravity="center"
-                        android:textSize="12dp"
-                        />
-                    <TextView 
+                        android:text="@string/consignee_address"
+                        android:textColor="@color/black"
+                        android:textSize="12dp" />
+
+                    <TextView
                         android:id="@+id/order_address_tv"
                         android:layout_width="0dp"
-                        android:layout_weight="3"
                         android:layout_height="wrap_content"
-                        android:textColor="@color/black"
+                        android:layout_weight="3"
                         android:gravity="center_vertical"
-                        android:textSize="12dp"
-                        />
+                        android:textColor="@color/black"
+                        android:textSize="12dp" />
                 </LinearLayout>
-                <LinearLayout 
+
+                <LinearLayout
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
                     android:gravity="center_vertical"
-                    android:padding="5dp"
-                    >
-                    <TextView 
+                    android:orientation="horizontal"
+                    android:padding="5dp" >
+
+                    <TextView
                         android:layout_width="0dp"
-                        android:layout_weight="1"
                         android:layout_height="wrap_content"
-                        android:textColor="@color/black"
-                        android:text="@string/consignee_number"
+                        android:layout_weight="1"
                         android:gravity="center"
-                        android:textSize="12dp"
-                        />
-                    <TextView 
+                        android:text="@string/consignee_number"
+                        android:textColor="@color/black"
+                        android:textSize="12dp" />
+
+                    <TextView
                         android:id="@+id/order_number_tv"
                         android:layout_width="0dp"
-                        android:layout_weight="3"
                         android:layout_height="wrap_content"
-                        android:textColor="@color/black"
+                        android:layout_weight="3"
                         android:gravity="center_vertical"
-                        android:textSize="12dp"
-                        />
+                        android:textColor="@color/black"
+                        android:textSize="12dp" />
                 </LinearLayout>
             </LinearLayout>
-
-           
         </LinearLayout>
+
         <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
             android:layout_marginBottom="1dp"
+            android:orientation="vertical"
             android:padding="5dp" >
-            <TextView 
+
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/black"
                 android:text="@string/order_pay_type"
-                />
-            <LinearLayout 
+                android:textColor="@color/black" />
+
+            <LinearLayout
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
                 android:background="@color/white"
-                android:padding="5dp"
-                >
-                <LinearLayout 
+                android:orientation="vertical"
+                android:padding="5dp" >
+
+                <LinearLayout
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
                     android:gravity="center_vertical"
-                    android:padding="5dp"
-                    >
-                  	<RadioButton 
-                  	    android:layout_width="wrap_content"
-                  	    android:layout_height="wrap_content"
-                  	    android:checked="true"
-                  	    />
-                    <TextView 
-                        android:layout_width="0dp"
-                        android:layout_weight="3"
+                    android:orientation="horizontal"
+                    android:padding="5dp" >
+
+                    <RadioGroup
+                        android:id="@+id/order_radio_group"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textColor="@color/black"
-                        android:gravity="center_vertical"
-                        android:textSize="18dp"
-                        android:text="@string/order_zhifubao"
-                        android:layout_marginLeft="5dp"
-                        />
+                        android:contentDescription="性别" >
+
+                        <RadioButton
+                            android:id="@+id/order_radio_zhifu"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:checked="true"
+                            android:text="@string/order_zhifubao"
+                            android:textColor="@color/black" >
+                        </RadioButton>
+
+                        <RadioButton
+                            android:id="@+id/order_radio_huodao"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/order_huodao"
+                            android:textColor="@color/black" >
+                        </RadioButton>
+                    </RadioGroup>
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>
-        
+
         <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
             android:layout_marginBottom="1dp"
+            android:orientation="vertical"
             android:padding="5dp" >
-            <TextView 
+
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/black"
                 android:text="@string/order_distribution_time"
-                />
-            <LinearLayout 
+                android:textColor="@color/black" />
+
+            <LinearLayout
                 android:id="@+id/order_chose_time_ll"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
+                android:background="@drawable/bg_gray_line"
                 android:gravity="center_vertical"
-                >
-                <TextView 
+                android:orientation="horizontal" >
+
+                <TextView
                     android:id="@+id/order_chose_time_tv"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/black"
-                    android:text="@string/order_gongzuo_xiuxi"
+                    android:layout_height="fill_parent"
                     android:background="@color/white"
-                    />
-                <ImageView 
+                    android:gravity="center_vertical"
+                    android:text="@string/order_gongzuo_xiuxi"
+                    android:textColor="@color/black"
+                    android:textSize="15dp" />
+
+                <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/ic_launcher"
-                    />
+                    android:background="@drawable/ic_launcher" />
             </LinearLayout>
         </LinearLayout>
-        
-        <LinearLayout 
+
+        <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:padding="5dp"
             android:orientation="vertical"
-            >
-            <LinearLayout 
+            android:padding="5dp" >
+
+            <LinearLayout
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:gravity="center_vertical"
-                android:layout_marginTop="5dp"
                 android:layout_marginBottom="5dp"
-                >
-                <TextView 
+                android:layout_marginTop="5dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal" >
+
+                <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center_vertical"
-                    android:textColor="@color/black"
                     android:text="@string/order_goods_price"
-                    />
-                <TextView 
+                    android:textColor="@color/black" />
+
+                <TextView
                     android:layout_width="0dp"
-                    android:layout_weight="1"
                     android:layout_height="wrap_content"
-                    />
-                <TextView 
+                    android:layout_weight="1" />
+
+                <TextView
                     android:id="@+id/order_goods_price_tv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center_vertical"
-                    android:textColor="@color/home_text_red"
                     android:text="@string/base_test"
-                    />
+                    android:textColor="@color/home_text_red" />
             </LinearLayout>
-            <LinearLayout 
+
+            <LinearLayout
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:gravity="center_vertical"
-                android:layout_marginTop="5dp"
                 android:layout_marginBottom="5dp"
-                >
-                <TextView 
+                android:layout_marginTop="5dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal" >
+
+                <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center_vertical"
-                    android:textColor="@color/black"
                     android:text="@string/order_express_cost"
-                    />
-                <TextView 
+                    android:textColor="@color/black" />
+
+                <TextView
                     android:layout_width="0dp"
-                    android:layout_weight="1"
                     android:layout_height="wrap_content"
-                    />
-                <TextView 
+                    android:layout_weight="1" />
+
+                <TextView
                     android:id="@+id/order_express_cost_tv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center_vertical"
-                    android:textColor="@color/home_text_red"
                     android:text="@string/base_test"
-                    />
+                    android:textColor="@color/home_text_red" />
             </LinearLayout>
-            
         </LinearLayout>
-        
-        <LinearLayout 
+
+        <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
             android:gravity="center_vertical"
-            android:padding="5dp"
-            >
-            <TextView 
+            android:orientation="horizontal"
+            android:padding="5dp" >
+
+            <TextView
                 android:layout_width="0dp"
-                android:layout_weight="1"
                 android:layout_height="wrap_content"
-                />
-            <TextView 
+                android:layout_weight="1" />
+
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:textColor="@color/black"
-                android:textSize="10dp"
                 android:text="@string/order_final_pay"
-                />
-            <TextView 
+                android:textColor="@color/black"
+                android:textSize="10dp" />
+
+            <TextView
                 android:id="@+id/order_final_pay_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:gravity="center"
-                android:textColor="@color/home_text_red"
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="5dp"
-                android:textSize="23dp"
+                android:gravity="center"
                 android:text="@string/base_test"
-                />
+                android:textColor="@color/home_text_red"
+                android:textSize="23dp" />
         </LinearLayout>
-        <LinearLayout 
+
+        <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:padding="5dp"
-            android:orientation="horizontal"
             android:layout_marginTop="20dp"
-            >
-            <Button 
+            android:orientation="horizontal"
+            android:padding="5dp" >
+
+            <Button
                 android:id="@+id/order_commit_btn"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:textColor="@color/white"
-                android:textSize="18dp"
-                android:text="@string/order_commit"
                 android:background="@drawable/btn_bg_red"
                 android:padding="5dp"
-                />
+                android:text="@string/order_commit"
+                android:textColor="@color/white"
+                android:textSize="18dp" />
         </LinearLayout>
-        
-        
     </LinearLayout>
+
 </ScrollView>

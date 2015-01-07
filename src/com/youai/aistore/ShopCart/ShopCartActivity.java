@@ -1,5 +1,6 @@
 package com.youai.aistore.ShopCart;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 import android.content.Context;
@@ -13,7 +14,6 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -22,15 +22,12 @@ import com.youai.aistore.ExampleActivity;
 import com.youai.aistore.MyApplication;
 import com.youai.aistore.R;
 import com.youai.aistore.Util;
-import com.youai.aistore.WelcomeActivity;
-import com.youai.aistore.Bean.GoodsBean;
-import com.youai.aistore.Bean.ListFclassTwo;
+import com.youai.aistore.Bean.Base;
 import com.youai.aistore.Bean.ListShopCartBean;
 import com.youai.aistore.Bean.ShopCartBean;
-import com.youai.aistore.Home.SearchResultAdapter;
 import com.youai.aistore.NetInterface.Send;
 import com.youai.aistore.NetInterface.ServiceUrl;
-import com.youai.aistore.Order.OrderActivity;
+import com.youai.aistore.View.SlideView;
 import com.youai.aistore.xlistview.XListView;
 import com.youai.aistore.xlistview.XListView.IXListViewListener;
 /**
@@ -38,7 +35,7 @@ import com.youai.aistore.xlistview.XListView.IXListViewListener;
  * @author Qzr
  *
  */
-public class ShopCartActivity extends BaseActivity implements OnClickListener{
+public class ShopCartActivity extends BaseActivity implements IXListViewListener,OnClickListener{
 	//,IXListViewListener{
 	private long exitTime = 0;
 	private Context context;
@@ -54,6 +51,9 @@ public class ShopCartActivity extends BaseActivity implements OnClickListener{
 	private boolean isshowing;
 	private MyTask myTask;
 	private ListShopCartBean listbean;
+	private Base beanresult;
+	private double price;
+	private int statu;
 
 	@Override
 	protected void onCreate(Bundle arg0) {
@@ -73,14 +73,16 @@ public class ShopCartActivity extends BaseActivity implements OnClickListener{
 			public void onClick(View arg0) {
 				if(!isshowing){
 					if(adapter!=null){
-						adapter.setdata(listbean.getList(), 2);
+						statu = 2;
+						adapter.setdata(listbean.getList(), statu);
 						adapter.notifyDataSetChanged();
 						tv_topright.setText("完成");
 						isshowing = true;
 					}
 				}else{
 					if(adapter!=null){
-						adapter.setdata(listbean.getList(), 1);
+						statu = 1;
+						adapter.setdata(listbean.getList(), statu);
 						adapter.notifyDataSetChanged();
 						tv_topright.setText("编辑");
 						isshowing = false;
@@ -96,7 +98,7 @@ public class ShopCartActivity extends BaseActivity implements OnClickListener{
 		//
 
 		if(Util.detect(context)){
-			myTask = new MyTask();
+			myTask = new MyTask(1,0);
 			myTask.execute("");  
 		}else{
 			Util.ShowToast(context, R.string.net_work_is_error);
@@ -109,23 +111,59 @@ public class ShopCartActivity extends BaseActivity implements OnClickListener{
 
 			@Override
 			public void delete(ArrayList<ShopCartBean> list, int index) {
-				list.remove(index);
-				ListShopCartBean l = new ListShopCartBean();
-				double price = 0.00;
-				for(int i=0;i<list.size();i++){
-					price +=(Double.parseDouble(list.get(i).getGoods_price())*Integer.parseInt(list.get(i).getGoods_number()));
-				}
-				l.setList(list);
-				l.setCount_price("￥"+String.valueOf(price)+"元");
-				tv_gongji.setText(String.valueOf(price));
-				listbean = l;
-				adapter.setdata(list, 2);
-				adapter.notifyDataSetChanged();
-				if(listbean!=null && listbean.getList().size()>0){
-					showviewll.setVisibility(View.VISIBLE);
+//				list.remove(index);
+//				ListShopCartBean l = new ListShopCartBean();
+//				price = 0.00;
+//				for(int i=0;i<list.size();i++){
+//					price +=(Double.parseDouble(list.get(i).getGoods_price())*Integer.parseInt(list.get(i).getGoods_number()));
+//				}
+//				l.setList(list);
+//				l.setCount_price("￥"+String.valueOf(price)+"元");
+//				tv_gongji.setText(String.valueOf(price));
+//				listbean = l;
+//				statu = 2;
+//				adapter.setdata(list, statu);
+//				adapter.notifyDataSetChanged();
+//				if(listbean!=null && listbean.getList().size()>0){
+//					showviewll.setVisibility(View.VISIBLE);
+//				}else{
+//					showviewll.setVisibility(View.GONE);
+//				}
+				if(Util.detect(context)){
+					myTask = new MyTask(2,0);
+					myTask.setdata(list, index);
+					myTask.execute("");  
 				}else{
-					showviewll.setVisibility(View.GONE);
+					Util.ShowToast(context, R.string.net_work_is_error);
 				}
+			}
+
+			@Override
+			public void add(ArrayList<ShopCartBean> list, int index) {
+				if(Util.detect(context)){
+					myTask = new MyTask(0,1);
+					myTask.setdata(list, index);
+					myTask.execute("");  
+				}else{
+					Util.ShowToast(context, R.string.net_work_is_error);
+				}
+			}
+
+			@Override
+			public void jian(ArrayList<ShopCartBean> list, int index) {
+				// TODO Auto-generated method stub
+				if(Util.detect(context)){
+					myTask = new MyTask(0,0);
+					myTask.setdata(list, index);
+					myTask.execute("");  
+				}else{
+					Util.ShowToast(context, R.string.net_work_is_error);
+				}
+			}
+
+			@Override
+			public void setlvdata(SlideView data) {
+				lv.setdata(data);
 			}
 
 
@@ -139,7 +177,11 @@ public class ShopCartActivity extends BaseActivity implements OnClickListener{
 		goypaybt.setOnClickListener(this);
 		tv_gongji = (TextView) findViewById(R.id.shopcart_gongji_tv);
 		lv = (XListView) findViewById(R.id.shopcart_listview);
+		lv.isSliding = true;
 		lv.GoneFooterView();
+		lv.setFocusable(false);
+		lv.setPullLoadEnable(true);
+		lv.setXListViewListener(this);
 		isnull_iv = (ImageView)findViewById(R.id.shopcart_isnull_iv);
 		isnull_iv.setOnClickListener(this);
 		lv.setEmptyView(isnull);
@@ -183,6 +225,17 @@ public class ShopCartActivity extends BaseActivity implements OnClickListener{
 	}
 
 	private class MyTask extends AsyncTask<Object, Object, Object> {  
+		private int index,type,number;
+		private ArrayList<ShopCartBean> list;
+		private int postion;
+		public MyTask(int index,int type){
+			this.index = index;
+			this.type = type;
+		}
+		public void setdata(ArrayList<ShopCartBean> list, int index){
+			this.list = list;
+			this.postion = index;
+		}
 		//onPreExecute方法用于在执行后台任务前做一些UI操作  
 		@Override  
 		protected void onPreExecute() {  
@@ -194,9 +247,30 @@ public class ShopCartActivity extends BaseActivity implements OnClickListener{
 		@Override  
 		protected Object doInBackground(Object... params) {  
 			try {  
-				Send send = new Send(context);
-				listbean  = send.getShopCartlist(MyApplication.SessionId, MyApplication.UserId);
-				return listbean;//new String(baos.toByteArray(), "gb2312");  
+				if(index==1){
+					Send send = new Send(context);
+					listbean  = send.getShopCartlist(MyApplication.SessionId, MyApplication.UserId);
+					return listbean;//new String(baos.toByteArray(), "gb2312");  
+				}else if(index == 2){
+					Send send = new Send(context);
+					String rec_id =list.get(postion).getRec_id();
+					String session_id = MyApplication.SessionId;
+					String user_id = MyApplication.UserId;
+					beanresult = send.DeletefromShopCart(rec_id, session_id,user_id);
+					return beanresult;
+				}else{
+					Send send = new Send(context);
+					int good_id =Integer.parseInt(list.get(postion).getGoods_id());
+					if(type==1){
+						number = 1;
+					}else{
+						number = -1;
+					}
+					String session_id = MyApplication.SessionId;
+					String user_id = MyApplication.UserId;
+					beanresult = send.AddShopCart(good_id, number, session_id,user_id);
+					return beanresult;
+				}
 			} catch (Exception e) {  
 				e.printStackTrace();
 			}  
@@ -212,20 +286,62 @@ public class ShopCartActivity extends BaseActivity implements OnClickListener{
 		@Override  
 		protected void onPostExecute(Object result) {  
 			Util.stopProgressDialog();
-			listbean = (ListShopCartBean) result;
-			if(listbean!=null){
-				if(listbean.getCode()==200){
-					UpUI();
-					tv_gongji.setText("￥"+listbean.getCount_price()+"元");
+			if(index == 1){
+				onLoad();
+				listbean = (ListShopCartBean) result;
+				if(listbean!=null){
+					if(listbean.getCode()==200){
+						UpUI();
+						price = Double.parseDouble(listbean.getCount_price());
+						tv_gongji.setText("￥"+listbean.getCount_price()+"元");
+					}else{
+						showviewll.setVisibility(View.GONE);
+						Util.ShowToast(context, listbean.getMsg());
+					}
 				}else{
 					showviewll.setVisibility(View.GONE);
-					Util.ShowToast(context, listbean.getMsg());
+					Util.ShowToast(context, R.string.net_work_is_error);
+				}
+
+			}else if(index == 2){
+				beanresult = (Base) result;
+				if(beanresult!=null){
+					if(beanresult.getCode()==200){
+						list.get(postion).setGoods_number(String.valueOf(Integer.parseInt(list.get(postion).getGoods_number())+number));
+						price -=Double.parseDouble(list.get(postion).getGoods_price())*
+								Integer.parseInt(list.get(postion).getGoods_number());
+						tv_gongji.setText(String.valueOf(price));
+						list.remove(list.get(postion));
+						adapter.setdata(list, 2);
+						adapter.notifyDataSetChanged();
+					}else{
+						Util.ShowToast(context,beanresult.getMsg());
+					}
+				}else{
+					Util.ShowToast(context,R.string.net_work_is_error);
 				}
 			}else{
-				showviewll.setVisibility(View.GONE);
-				Util.ShowToast(context, R.string.net_work_is_error);
+				beanresult = (Base) result;
+				if(beanresult!=null){
+					if(beanresult.getCode()==200){
+						//						if(Util.detect(context)){
+						//							myTask = new MyTask(1);
+						//							myTask.execute("");  
+						//						}else{
+						//							Util.ShowToast(context, R.string.net_work_is_error);
+						//						}
+						list.get(postion).setGoods_number(String.valueOf(Integer.parseInt(list.get(postion).getGoods_number())+number));
+						adapter.setdata(list, 1);
+						adapter.notifyDataSetChanged();
+						price +=Double.parseDouble(list.get(postion).getGoods_price());
+						tv_gongji.setText(String.valueOf(price));
+					}else{
+						Util.ShowToast(context,beanresult.getMsg());
+					}
+				}else{
+					Util.ShowToast(context,R.string.net_work_is_error);
+				}
 			}
-
 		}  
 
 		//onCancelled方法用于在取消执行中的任务时更改UI  
@@ -237,6 +353,9 @@ public class ShopCartActivity extends BaseActivity implements OnClickListener{
 
 	public interface ShopcartInterface{
 		void delete(ArrayList<ShopCartBean> list,int index);
+		void add(ArrayList<ShopCartBean> list,int index);
+		void jian(ArrayList<ShopCartBean> list,int index);
+		void setlvdata(SlideView data);
 	}
 
 
@@ -245,7 +364,8 @@ public class ShopCartActivity extends BaseActivity implements OnClickListener{
 			adapter = new ShopCartAdapter(context, listbean.getList(),1,inter);
 			lv.setAdapter(adapter);
 		}else{
-			adapter.setdata(listbean.getList(), 1);
+			statu = 1;
+			adapter.setdata(listbean.getList(), statu);
 			adapter.notifyDataSetChanged();
 		}
 		if(listbean!=null && listbean.getList().size()>0){
@@ -257,26 +377,50 @@ public class ShopCartActivity extends BaseActivity implements OnClickListener{
 	@Override
 	public boolean onTouchEvent(MotionEvent event) {
 		if(listbean==null){
-//			if(event.getAction()==MotionEvent.ACTION_DOWN && event.getAction()==MotionEvent.ACTION_UP){
+			//if(event.getAction()==MotionEvent.ACTION_DOWN && event.getAction()==MotionEvent.ACTION_UP){
+			if(Util.detect(context)){
+				myTask = new MyTask(1,0);
+				myTask.execute("");  
+			}else{
+				Util.ShowToast(context, R.string.net_work_is_error);
+			}
+			//}
+		}else if(listbean!=null){
+			if(listbean.getList()==null || (listbean.getList()!=null && listbean.getList().size()==0)){
+				//if(event.getAction()==MotionEvent.ACTION_DOWN && event.getAction()==MotionEvent.ACTION_UP){
 				if(Util.detect(context)){
-					myTask = new MyTask();
+					myTask = new MyTask(1,0);
 					myTask.execute("");  
 				}else{
 					Util.ShowToast(context, R.string.net_work_is_error);
 				}
-//			}
-		}else if(listbean!=null){
-			if(listbean.getList()==null || (listbean.getList()!=null && listbean.getList().size()==0)){
-//				if(event.getAction()==MotionEvent.ACTION_DOWN && event.getAction()==MotionEvent.ACTION_UP){
-					if(Util.detect(context)){
-						myTask = new MyTask();
-						myTask.execute("");  
-					}else{
-						Util.ShowToast(context, R.string.net_work_is_error);
-					}
-				}
 			}
-//		}
+		}
+		//}
 		return super.onTouchEvent(event);
 	}
+
+	@Override
+	public void onRefresh() {
+		if(Util.detect(context)){
+			myTask = new MyTask(1,0);
+			myTask.execute("");  
+		}else{
+			Util.ShowToast(context, R.string.net_work_is_error);
+		}
+	}
+
+	@Override
+	public void onLoadMore() {
+		// TODO Auto-generated method stub
+
+	}
+	private void onLoad() {
+		lv.stopRefresh();
+		lv.stopLoadMore();
+		SimpleDateFormat    sDateFormat    =   new    SimpleDateFormat("yyyy-MM-dd    hh:mm:ss");       
+		String    date    =    sDateFormat.format(new    java.util.Date());    
+		lv.setRefreshTime(date);
+	}
+	
 }

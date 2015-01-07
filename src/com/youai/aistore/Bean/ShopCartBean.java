@@ -8,6 +8,7 @@ public class ShopCartBean{
 	private String goods_name;
 	private String goods_price;
 	private String goods_number;
+	private String rec_id;
 	public String getPic_url() {
 		return pic_url;
 	}
@@ -50,6 +51,12 @@ public class ShopCartBean{
 	public void setGoods_number(String goods_number) {
 		this.goods_number = goods_number;
 	}
+	public String getRec_id() {
+		return rec_id;
+	}
+	public void setRec_id(String rec_id) {
+		this.rec_id = rec_id;
+	}
 	
-
+	
 }
