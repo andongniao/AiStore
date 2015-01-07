@@ -21,15 +21,14 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:background="@color/home_text_grey"
-            android:orientation="vertical"
-             >
+            android:orientation="vertical" >
 
             <LinearLayout
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/white"
-                android:padding="5dp"
-                android:orientation="horizontal" >
+                android:orientation="horizontal"
+                android:padding="5dp" >
 
                 <LinearLayout
                     android:layout_width="0dp"
@@ -126,10 +125,10 @@
                 android:layout_height="wrap_content"
                 android:background="@color/white"
                 android:orientation="horizontal"
-                android:paddingTop="15dp"
                 android:paddingBottom="5dp"
                 android:paddingLeft="5dp"
                 android:paddingRight="5dp"
+                android:paddingTop="15dp"
                 android:visibility="gone" >
 
                 <LinearLayout
@@ -216,13 +215,14 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:background="@color/home_text_grey"
-            android:orientation="vertical"
-            >
+            android:background="@color/white"
+            android:paddingBottom="5dp"
+            android:paddingTop="5dp"
+            android:orientation="vertical" >
 
             <LinearLayout
                 android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="fill_parent"
                 android:layout_gravity="center_vertical"
                 android:background="@color/white"
                 android:orientation="horizontal" >
@@ -248,10 +248,11 @@
 
             <LinearLayout
                 android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="0dp"
                 android:layout_gravity="center_vertical"
-                android:background="@color/white"
                 android:layout_marginTop="5dp"
+                android:layout_weight="1"
+                android:background="@color/white"
                 android:orientation="horizontal" >
 
                 <TextView
@@ -260,8 +261,8 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:text="@string/base_test"
                     android:singleLine="true"
+                    android:text="@string/base_test"
                     android:textColor="@color/black" />
 
                 <TextView
@@ -270,8 +271,8 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center"
+                    android:singleLine="true"
                     android:text="@string/base_test"
-                     android:singleLine="true"
                     android:textColor="@color/black" />
 
                 <TextView
@@ -280,8 +281,8 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center"
+                    android:singleLine="true"
                     android:text="@string/base_test"
-                     android:singleLine="true"
                     android:textColor="@color/black" />
             </LinearLayout>
 
@@ -360,8 +361,7 @@
                 android:layout_height="200dp"
                 android:background="@color/home_text_grey"
                 android:gravity="center"
-                android:orientation="horizontal"
-                >
+                android:orientation="horizontal" >
 
                 <LinearLayout
                     android:layout_width="0dp"
@@ -458,8 +458,7 @@
                 android:layout_height="200dp"
                 android:background="@color/home_text_grey"
                 android:gravity="center"
-                android:orientation="horizontal"
-                >
+                android:orientation="horizontal" >
 
                 <LinearLayout
                     android:layout_width="0dp"
@@ -555,8 +554,7 @@
                 android:layout_marginBottom="0.5dp"
                 android:background="@color/home_text_grey"
                 android:gravity="center"
-                android:orientation="horizontal"
-                 >
+                android:orientation="horizontal" >
 
                 <LinearLayout
                     android:layout_width="0dp"
@@ -651,8 +649,7 @@
                 android:layout_height="200dp"
                 android:background="@color/home_text_grey"
                 android:gravity="center"
-                android:orientation="horizontal"
-                >
+                android:orientation="horizontal" >
 
                 <LinearLayout
                     android:layout_width="0dp"
@@ -747,8 +744,7 @@
                 android:layout_height="200dp"
                 android:background="@color/home_text_grey"
                 android:gravity="center"
-                android:orientation="horizontal"
-                 >
+                android:orientation="horizontal" >
 
                 <LinearLayout
                     android:layout_width="0dp"

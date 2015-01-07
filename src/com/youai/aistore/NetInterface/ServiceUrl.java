@@ -19,10 +19,20 @@ public class ServiceUrl {
 	//加入购物车
 	public static String Product_AddShopCart_Url_head = BaseUrl+"?module=add_to_cart&goods_id=";
 	public static String Product_AddShopCart_Url_center = "&number=";
-	public static String Product_AddShopCart_Url_foot = "&session_id=";
+	public static String Product_AddShopCart_Url_foot_sessid = "&session_id=";
+	public static String Product_AddShopCart_Url_foot_userid = "&user_id=";
 	//获取购物车列表 
 	public static String GetShopCartList_Url_head = BaseUrl+"?module=cart_list&session_id=";
 	public static String GetShopCartList_Url_foot = "&user_id=";
-	
+	//从购物车删除
+	public static String Product_deletefromShopCart_Url_head = BaseUrl+"?module=drop_cart_goods&rec_id=";
+	public static String Product_deletefromShopCart_Url_foot_sessid = "&session_id=";
+	public static String Product_deletefromShopCart_Url_foot_userid = "&user_id=";
+	//注册   
+	public static String Regist_Url_username = BaseUrl+"?module=register&user_name=";
+	public static String Regist_Url_password = "&password=";
+	//登录   
+	public static String Login_Url_username = BaseUrl+"?module=login&user_name=";
+	public static String Login_Url_password = "&password=";
 
 }

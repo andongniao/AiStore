@@ -7,6 +7,8 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import android.content.Context;
 import android.content.res.Resources;
@@ -42,6 +44,19 @@ public class Util {
 			return false;
 		else
 			return mobiles.matches(telRegex);
+	}
+
+	/**
+	 * 判断email格式是否正确
+	 * @param email
+	 * @return
+	 */
+	public static boolean isEmail(String email) {
+		String str = "^([a-zA-Z0-9_\\-\\.]+)@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.)|(([a-zA-Z0-9\\-]+\\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\\]?)$";
+		Pattern p = Pattern.compile(str);
+		Matcher m = p.matcher(email);
+
+		return m.matches();
 	}
 
 	/**
@@ -140,7 +155,7 @@ public class Util {
 		}
 	}
 
-	
+
 
 
 	/**
@@ -206,7 +221,7 @@ public class Util {
 	public static void ShowToast(Context context,int i){
 		Toast.makeText(context, i, 1000).show();
 	}
-	
+
 	/**
 	 * md5加密
 	 * @param key
@@ -235,41 +250,41 @@ public class Util {
 		}
 		return sb.toString();
 	}
-	
-	 public static void setListViewHeightBasedOnChildren(ListView listView) {  
-	        // 获取ListView对应的Adapter  
-	        ListAdapter listAdapter = listView.getAdapter();  
-	        if(listAdapter == null) {  
-	            return;  
-	        }  
-	        int totalHeight = 0;  
-	        for(int i = 0, len = listAdapter.getCount(); i < len; i++) { // listAdapter.getCount()返回数据项的数目  
-	            View listItem = listAdapter.getView(i, null, listView);  
-	            listItem.measure(0, 0); // 计算子项View 的宽高  
-	            totalHeight += listItem.getMeasuredHeight(); // 统计所有子项的总高度  
-	        }  
-	        ViewGroup.LayoutParams params = listView.getLayoutParams();  
-	        params.height = totalHeight  
-	                + (listView.getDividerHeight() * (listAdapter.getCount() - 1));  
-	        // listView.getDividerHeight()获取子项间分隔符占用的高度  
-	        // params.height最后得到整个ListView完整显示需要的高度  
-	        listView.setLayoutParams(params);  
-	    }  
-	 
-		/**
-		 * 把时间戳转化成时间类型
-		 * 
-		 * @param str
-		 *            时间类型格式
-		 * @param time
-		 *            时间戳 单位毫秒
-		 * @return
-		 */
-		public static String getTimeForData(String str, long time) {
-			// yyyy-MM-dd hh:mm:ss
-			SimpleDateFormat sdf = new SimpleDateFormat(str);
-			String date = sdf.format(new Date(time));
-			return date;
-		}
+
+	public static void setListViewHeightBasedOnChildren(ListView listView) {  
+		// 获取ListView对应的Adapter  
+		ListAdapter listAdapter = listView.getAdapter();  
+		if(listAdapter == null) {  
+			return;  
+		}  
+		int totalHeight = 0;  
+		for(int i = 0, len = listAdapter.getCount(); i < len; i++) { // listAdapter.getCount()返回数据项的数目  
+			View listItem = listAdapter.getView(i, null, listView);  
+			listItem.measure(0, 0); // 计算子项View 的宽高  
+			totalHeight += listItem.getMeasuredHeight(); // 统计所有子项的总高度  
+		}  
+		ViewGroup.LayoutParams params = listView.getLayoutParams();  
+		params.height = totalHeight  
+				+ (listView.getDividerHeight() * (listAdapter.getCount() - 1));  
+		// listView.getDividerHeight()获取子项间分隔符占用的高度  
+		// params.height最后得到整个ListView完整显示需要的高度  
+		listView.setLayoutParams(params);  
+	}  
+
+	/**
+	 * 把时间戳转化成时间类型
+	 * 
+	 * @param str
+	 *            时间类型格式
+	 * @param time
+	 *            时间戳 单位毫秒
+	 * @return
+	 */
+	public static String getTimeForData(String str, long time) {
+		// yyyy-MM-dd hh:mm:ss
+		SimpleDateFormat sdf = new SimpleDateFormat(str);
+		String date = sdf.format(new Date(time));
+		return date;
+	}
 
 }

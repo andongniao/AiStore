@@ -34,6 +34,7 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 import com.youai.aistore.BaseActivity;
 import com.youai.aistore.ImageCycleView;
 import com.youai.aistore.ImageCycleView.ImageCycleViewListener;
+import com.youai.aistore.ExampleActivity;
 import com.youai.aistore.MyApplication;
 import com.youai.aistore.R;
 import com.youai.aistore.Util;
@@ -69,6 +70,7 @@ public class ProductDetailsActivity extends BaseActivity implements IXListViewLi
 	private Dialog alertDialog;
 	private Button addshopcartbtn,gopaynowbtn;
 	private Base beanresult;
+	private boolean stat;
 
 	@Override
 	protected void onCreate(Bundle arg0) {
@@ -214,10 +216,14 @@ public class ProductDetailsActivity extends BaseActivity implements IXListViewLi
 
 
 
-	private class MyTask extends AsyncTask<Object, Object, Object> {  
+	private class MyTask extends AsyncTask<Object, Object, Object> { 
+		private boolean s;
 		private int getstatu = 1;
 		public MyTask(int getstatu){
 			this.getstatu = getstatu;
+		}
+		private void setdata(boolean s){
+			this.s = s;
 		}
 		//onPreExecute方法用于在执行后台任务前做一些UI操作  
 		@Override  
@@ -249,8 +255,9 @@ public class ProductDetailsActivity extends BaseActivity implements IXListViewLi
 					int good_id = id;
 					int number = 1;
 					String session_id = MyApplication.SessionId;
+					String user_id = MyApplication.UserId;
 					System.out.println("加入购物车所用sessionid======"+session_id);
-					beanresult = send.AddShopCart(good_id, number, session_id);
+					beanresult = send.AddShopCart(good_id, number, session_id,user_id);
 					return beanresult;
 				}
 			} catch (Exception e) {  
@@ -360,7 +367,12 @@ public class ProductDetailsActivity extends BaseActivity implements IXListViewLi
 				beanresult = (Base) result;
 				if(beanresult!=null){
 					if(beanresult.getCode()==200){
+						if(s){
+							stat = false;
+							ExampleActivity.setCurrentTab(2);
+						}else{
 						Util.ShowToast(context, "已加入购物车");
+						}
 					}else{
 						Util.ShowToast(context,beanresult.getMsg());
 					}
@@ -425,6 +437,12 @@ public class ProductDetailsActivity extends BaseActivity implements IXListViewLi
 			break;
 		case R.id.product_add_shopcart_btn:
 			myTask = new MyTask(4);
+			myTask.execute("");  
+			break;
+		case R.id.product_gopaynow_btn:
+			myTask = new MyTask(4);
+			stat = true;
+			myTask.setdata(stat);
 			myTask.execute("");  
 			break;
 

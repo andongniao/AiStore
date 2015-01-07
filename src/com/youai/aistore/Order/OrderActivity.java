@@ -1,19 +1,26 @@
 package com.youai.aistore.Order;
 
+import java.util.ArrayList;
+
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
+import android.widget.RadioGroup.OnCheckedChangeListener;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.youai.aistore.BaseActivity;
 import com.youai.aistore.R;
+import com.youai.aistore.Util;
+import com.youai.aistore.Bean.ShopCartBean;
 /**
  * 结算订单界面
  * @author Qzr
@@ -25,8 +32,12 @@ public class OrderActivity extends BaseActivity implements OnClickListener{
 	tv_kuaidi_price,tv_final_price,tv_chose_time;
 	private LinearLayout chose_time_ll;
 	private Button commitbtn;
+	private RadioButton zhifu_rbt,huodao_rbt;
 	private Context context;
 	private Dialog alertDialog;
+	private OrderLvAdapter adapter;
+	private ArrayList<ShopCartBean>list;
+	private int type,postion;
 	
 	@Override
 	protected void onCreate(Bundle arg0) {
@@ -38,7 +49,13 @@ public class OrderActivity extends BaseActivity implements OnClickListener{
 	}
 
 	private void init() {
+		postion = 0;
+		type = 1;
 		context = this;
+		zhifu_rbt = (RadioButton) findViewById(R.id.order_radio_zhifu);
+		zhifu_rbt.setOnClickListener(this);
+		huodao_rbt = (RadioButton) findViewById(R.id.order_radio_huodao);
+		huodao_rbt.setOnClickListener(this);
 		lv = (OrderListview) findViewById(R.id.order_goods_list_lv);
 		tv_consignee = (TextView) findViewById(R.id.order_consignee_tv);
 		tv_address = (TextView) findViewById(R.id.order_address_tv);
@@ -54,6 +71,18 @@ public class OrderActivity extends BaseActivity implements OnClickListener{
 		tv_consignee.setText(getIntent().getStringExtra("consignee"));
 		tv_address.setText(getIntent().getStringExtra("address"));
 		tv_number.setText(getIntent().getStringExtra("number"));
+		/************************模拟数据**********************************/
+		list = new ArrayList<ShopCartBean>();
+		ShopCartBean a = new ShopCartBean();
+		ShopCartBean s = new ShopCartBean();
+		ShopCartBean d = new ShopCartBean();
+		ShopCartBean f = new ShopCartBean();
+		list.add(a);
+		list.add(s);
+		list.add(d);
+		list.add(f);
+		adapter = new OrderLvAdapter(context, list);
+		lv.setAdapter(adapter);
 	}
 
 	@Override
@@ -65,6 +94,14 @@ public class OrderActivity extends BaseActivity implements OnClickListener{
 		case R.id.order_chose_time_ll:
 			TosatDialog();
 			break;
+		case R.id.order_radio_zhifu:
+			type = 1;
+			Util.ShowToast(context, ""+type);
+			break;
+		case R.id.order_radio_huodao:
+			type = 2;
+			Util.ShowToast(context, ""+type);
+			break;
 
 		}
 	}
@@ -73,10 +110,11 @@ public class OrderActivity extends BaseActivity implements OnClickListener{
 		  final String[] arrayFruit = getResources().getStringArray(R.array.order_chose_time);
 
 		  alertDialog = new AlertDialog.Builder(this).
-		    setSingleChoiceItems(arrayFruit, 0, new DialogInterface.OnClickListener() {
+		    setSingleChoiceItems(arrayFruit, postion, new DialogInterface.OnClickListener() {
 		 
 		     @Override
 		     public void onClick(DialogInterface dialog, int which) {
+		    	 postion = which;
 		    	 tv_chose_time.setText(arrayFruit[which]);
 		    	 if(alertDialog!=null && alertDialog.isShowing()){
 						alertDialog.dismiss();
@@ -88,4 +126,12 @@ public class OrderActivity extends BaseActivity implements OnClickListener{
 		  alertDialog.show();
 		 }
 
+	@Override
+	public boolean onTouchEvent(MotionEvent event) {
+		 if(alertDialog!=null && alertDialog.isShowing()){
+				alertDialog.dismiss();
+				alertDialog = null;
+			}
+		return super.onTouchEvent(event);
+	}
 }

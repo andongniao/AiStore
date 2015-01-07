@@ -61,6 +61,7 @@ public class OrderLvAdapter extends BaseAdapter{
 			myItem.tv_price = (TextView) v.findViewById(R.id.shopcart_item_price_tv);
 			myItem.tv_delete = (TextView) v.findViewById(R.id.shopcart_item_delete_tv);
 			myItem.tv_kucun = (TextView) v.findViewById(R.id.shopcart_lv_item_kucun_tv);
+			myItem.kuncun_ll = (LinearLayout) v.findViewById(R.id.shopcart_lv_item_kucun_ll);
 			myItem.et_num = (EditText) v.findViewById(R.id.shopcart_item_num_et);
 			myItem.delete_ll = (LinearLayout) v.findViewById(R.id.shopcart_item_delete_ll);
 			myItem.btn_add = (ImageButton) v.findViewById(R.id.shopcart_lv_item_add_ibt);
@@ -72,6 +73,7 @@ public class OrderLvAdapter extends BaseAdapter{
 		myItem.btn_add.setVisibility(View.GONE);
 		myItem.btn_jian.setVisibility(View.GONE);
 		myItem.delete_ll.setVisibility(View.GONE);
+		myItem.kuncun_ll.setVisibility(View.GONE);
 		
 		
 		
@@ -83,7 +85,7 @@ public class OrderLvAdapter extends BaseAdapter{
 		private ImageView iv;
 		private TextView tv_titlt,tv_price,tv_delete,tv_kucun;
 		private EditText et_num;
-		private LinearLayout delete_ll;
+		private LinearLayout delete_ll,kuncun_ll;
 		private ImageButton btn_add,btn_jian;
 	}
 

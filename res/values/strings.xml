@@ -32,7 +32,7 @@
     <string name="home_more_text">更多</string>
     <!-- 购物车 -->
     <string name="shopcart_title">购物车</string>
-    <string name="shopcart_isnull">购物车里还没有东西</string>
+    <string name="shopcart_isnull">购物车里为空，点击刷新</string>
     <string name="shopcart_delete">删除</string>
     <string name="shopcart_see_again">再逛逛</string>
     <string name="shopcart_gopay">去结算</string>
@@ -51,6 +51,7 @@
     <string name="consignee_address_can_not_null">地址不能为空</string>
    
     <!-- 结算订单 -->
+    <string name="order_gopay_title">结算订单</string>
     <string name="order_goods_list">商品清单</string>
     <string name="order_goods_receipt">收货信息</string>
     <string name="order_pay_type">付款方式</string>
@@ -60,9 +61,27 @@
     <string name="order_final_pay">最终支付</string>
     <string name="order_commit">提交订单</string>
     <string name="order_zhifubao">支付宝转账</string>
+    <string name="order_huodao">货到付款</string>
     <string name="order_gongzuo_xiuxi">工作日、双休日和假日，均可送货</string>
     <string name="order_xiuxi">双休日（周六、周日）</string>
     <string name="order_gopnzuo">工作日（周一至周五）</string>
+    
+    <!-- 全部订单 -->
+    <string name="all_order_title">全部订单</string>
+    <string name="all_order_item_number">订单号：</string>
+    <string name="all_order_item_type">支付方式：</string>
+    <string name="all_order_item_type_zhifubao">支付宝支付</string>
+    <string name="all_order_item_statu">订单状态：</string>
+    <string name="all_order_item_time">下单时间：</string>
+    <string name="all_order_item_title">订单:</string>
+    
+    <!-- 订单详情-->
+    <string name="order_details_title">订单详情</string>
+    <string name="order_details_number">数量：</string>
+    <string name="order_details_shouhuo_info">收货信息</string>
+    <string name="order_details_oeder_money">订单金额</string>
+    <string name="order_details_youfei_l">（邮费</string>
+    <string name="order_details_youfei_r">）</string>
     
     <!-- 搜索 -->
     <string name="search_et_text">请输入关键词</string>

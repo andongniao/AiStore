@@ -149,15 +149,20 @@ public class Send {
 			try {
 				object = new JSONObject(jsonStr);
 				if (object.get("code") != null && object.getInt("code") == 200) {
-					JSONObject data = object.getJSONObject("data");
-					ArrayList<CommentsBean> l = new ArrayList<CommentsBean>();
-					for(int i=0;i<10;i++){
-						JSONObject s = data.getJSONObject(""+i);
-						String json = s.toString();
-						Type type = new TypeToken<CommentsBean>() {}.getType();
-						CommentsBean c = gson.fromJson(json, type);
-						l.add(c);
-					}
+					//					JSONObject data = object.getJSONObject("data");
+					//					ArrayList<CommentsBean> l = new ArrayList<CommentsBean>();
+					//					for(int i=0;i<10;i++){
+					//						JSONObject s = data.getJSONObject(""+i);
+					//						String json = s.toString();
+					//						Type type = new TypeToken<CommentsBean>() {}.getType();
+					//						CommentsBean c = gson.fromJson(json, type);
+					//						l.add(c);
+					//					}
+					JSONArray data = object.getJSONArray("data");
+					String json = data.toString();
+					Type type = new TypeToken<ArrayList<CommentsBean>>() {}.getType();
+					ArrayList<CommentsBean> l = gson.fromJson(json, type);
+
 					list.setList(l);
 					list.setCode(200);
 					list.setMsg(object.getString("message"));
@@ -289,11 +294,12 @@ public class Send {
 	/**
 	 * 加入购物车
 	 */
-	public Base AddShopCart(int good_id,int number,String session_id){
+	public Base AddShopCart(int good_id,int number,String session_id,String userid){
 		Base bean = new Base();
 		String url = ServiceUrl.Product_AddShopCart_Url_head+good_id+
 				ServiceUrl.Product_AddShopCart_Url_center+number+
-				ServiceUrl.Product_AddShopCart_Url_foot+session_id;
+				ServiceUrl.Product_AddShopCart_Url_foot_sessid+session_id+
+		ServiceUrl.Product_AddShopCart_Url_foot_userid+userid;
 		String jsonStr = null;
 		jsonStr = GetHttp.sendGet(url);
 
@@ -327,7 +333,7 @@ public class Send {
 
 	}
 	/**
-	 * 加入购物车
+	 * 购物车列表
 	 */
 	public ListShopCartBean getShopCartlist(String sessionid,String userid){
 		ListShopCartBean list = new ListShopCartBean(); 
@@ -335,7 +341,7 @@ public class Send {
 				ServiceUrl.GetShopCartList_Url_foot+userid;
 		String jsonStr = null;
 		jsonStr = GetHttp.sendGet(url);
-		
+
 		if (jsonStr != null && !jsonStr.equals("")) {
 			JSONObject object = null;
 			try {
@@ -361,9 +367,9 @@ public class Send {
 					list.setMsg(object.getString("message"));
 					list.setCode(object.getInt("code"));
 					return list;
-					
+
 				}
-				
+
 			} catch (JSONException e) {
 				e.printStackTrace();
 			}
@@ -373,12 +379,50 @@ public class Send {
 					R.string.http_status_code_error));
 			return list;
 		}
-		
+
 		return null;
-		
+
 	}
 
+	/**
+	 * 从购物车删除
+	 */
+	public Base DeletefromShopCart(String res_id,String session_id,String userid){
+		Base bean = new Base();
+		String url = ServiceUrl.Product_deletefromShopCart_Url_head+res_id+
+				ServiceUrl.Product_deletefromShopCart_Url_foot_sessid+session_id+
+		ServiceUrl.Product_deletefromShopCart_Url_foot_userid+userid;
+		String jsonStr = null;
+		jsonStr = GetHttp.sendGet(url);
 
+		if (jsonStr != null && !jsonStr.equals("")) {
+			JSONObject object = null;
+			try {
+				object = new JSONObject(jsonStr);
+				if (object.get("code") != null && object.getInt("code") == 200) {
+					bean.setCode(200);
+					bean.setMsg(object.getString("message"));
+					return bean;
+				} else {
+					bean.setMsg(object.getString("message"));
+					bean.setCode(object.getInt("code"));
+					return bean;
+
+				}
+
+			} catch (JSONException e) {
+				e.printStackTrace();
+			}
+		} else {
+			bean.setCode(500);
+			bean.setMsg(context.getResources().getString(
+					R.string.http_status_code_error));
+			return bean;
+		}
+
+		return null;
+
+	}
 
 
 
