@@ -8,24 +8,31 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.Button;
 import android.widget.LinearLayout;
 
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.youai.aistore.BaseActivity;
 import com.youai.aistore.MyApplication;
 import com.youai.aistore.R;
+import com.youai.aistore.Util;
 import com.youai.aistore.View.CircleImageView;
+
 /**
  * 个人中心首页
+ * 
  * @author Qzr
- *
+ * 
  */
-public class MycenterHomeActivity extends BaseActivity implements OnClickListener{
+public class MycenterHomeActivity extends BaseActivity implements
+		OnClickListener {
 	private CircleImageView headeriv;
-	private LinearLayout dingdan_ll,youhui_ll,kefu_ll,set_ll,call_ll,sms_ll,show_ll;
+	private LinearLayout dingdan_ll, youhui_ll, kefu_ll, set_ll, call_ll,
+			sms_ll, show_ll, login_ll;
+	private	Button login_btn,regist_btn;
 	private boolean isshowing;
 	private Dialog alertDialog;
-	
+
 	@Override
 	protected void onCreate(Bundle arg0) {
 		super.onCreate(arg0);
@@ -35,6 +42,7 @@ public class MycenterHomeActivity extends BaseActivity implements OnClickListene
 		setContentXml(R.layout.mycenter_home_view);
 		init();
 	}
+
 	private void init() {
 		isshowing = false;
 		headeriv = (CircleImageView) findViewById(R.id.mycenter_home_header_iv);
@@ -52,36 +60,51 @@ public class MycenterHomeActivity extends BaseActivity implements OnClickListene
 		sms_ll = (LinearLayout) findViewById(R.id.mycenter_home_sms_ll);
 		sms_ll.setOnClickListener(this);
 		show_ll = (LinearLayout) findViewById(R.id.mycenter_home_show_ll);
-		
+		// 登陆和注册
+		login_btn = (Button) findViewById(R.id.mycenter_home_login_btn);
+		login_btn.setOnClickListener(this);
+		regist_btn = (Button) findViewById(R.id.mycenter_home_regist_btn);
+		regist_btn.setOnClickListener(this);
 		
 		String url = "http://img5.imgtn.bdimg.com/it/u=3292851460,915918973&fm=116&gp=0.jpg";
 		ImageLoader.getInstance().displayImage(url, headeriv);
-		
+
 	}
+
 	@Override
 	public void onClick(View arg0) {
 		switch (arg0.getId()) {
 		case R.id.mycenter_home_header_iv:
-			
+			break;
+
+		case R.id.mycenter_home_login_btn: 
+			Intent intent = new Intent(MycenterHomeActivity.this,MyLoginActivity.class);
+			intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+			startActivity(intent);
+			break;
+		case R.id.mycenter_home_regist_btn: 
+			Intent intent1 = new Intent(MycenterHomeActivity.this,MyRegistActivity.class);
+			intent1.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+			startActivity(intent1);
 			break;
 		case R.id.mycenter_home_dingdan_ll:
-			
+
 			break;
 		case R.id.mycenter_home_youhui_ll:
-			
+
 			break;
 		case R.id.mycenter_home_kefu_ll:
-			if(isshowing){
+			if (isshowing) {
 				show_ll.setVisibility(View.GONE);
 				isshowing = false;
-			}else{
+			} else {
 				show_ll.setVisibility(View.VISIBLE);
 				isshowing = true;
 			}
-			
+
 			break;
 		case R.id.mycenter_home_set_ll:
-			
+
 			break;
 		case R.id.mycenter_home_call_ll:
 			ShowDialog(1);
@@ -92,42 +115,49 @@ public class MycenterHomeActivity extends BaseActivity implements OnClickListene
 		}
 	}
 
-	private void ShowDialog(final int statu){
-		int index,title;
-		if(statu == 1){
+	private void ShowDialog(final int statu) {
+		int index, title;
+		if (statu == 1) {
 			title = R.string.product_iscall;
 			index = R.string.product_cll_tell;
-		}else{
+		} else {
 			title = R.string.product_issms;
 			index = R.string.product_sms_send;
 
 		}
-		alertDialog = new AlertDialog.Builder(this).
-				setTitle(title).
-				setIcon(null).
-				setPositiveButton(R.string.product_cancle, new DialogInterface.OnClickListener() {
+		alertDialog = new AlertDialog.Builder(this)
+				.setTitle(title)
+				.setIcon(null)
+				.setPositiveButton(R.string.product_cancle,
+						new DialogInterface.OnClickListener() {
 
-					@Override
-					public void onClick(DialogInterface dialog, int which) {
-					}
-				}).
-				setNegativeButton(index, new DialogInterface.OnClickListener() {
+							@Override
+							public void onClick(DialogInterface dialog,
+									int which) {
+							}
+						})
+				.setNegativeButton(index,
+						new DialogInterface.OnClickListener() {
 
-					@Override
-					public void onClick(DialogInterface dialog, int which) {
-						if(statu==1){
-							Intent phoneIntent = new Intent("android.intent.action.CALL",
-									Uri.parse("tel:" + MyApplication.callnumber));
-							startActivity(phoneIntent); 
-						}else{
-							Uri uri=Uri.parse("smsto:"+MyApplication.smsnumber);
-							Intent ii=new Intent(Intent.ACTION_SENDTO,uri);
-							ii.putExtra("sms_body", "");
-							startActivity(ii);
-						}
-					}
-				}).
-				create();
+							@Override
+							public void onClick(DialogInterface dialog,
+									int which) {
+								if (statu == 1) {
+									Intent phoneIntent = new Intent(
+											"android.intent.action.CALL",
+											Uri.parse("tel:"
+													+ MyApplication.callnumber));
+									startActivity(phoneIntent);
+								} else {
+									Uri uri = Uri.parse("smsto:"
+											+ MyApplication.smsnumber);
+									Intent ii = new Intent(
+											Intent.ACTION_SENDTO, uri);
+									ii.putExtra("sms_body", "");
+									startActivity(ii);
+								}
+							}
+						}).create();
 		alertDialog.show();
 	}
 }

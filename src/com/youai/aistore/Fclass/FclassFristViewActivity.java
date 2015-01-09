@@ -116,6 +116,7 @@ public class FclassFristViewActivity extends BaseActivity implements
 			Intent intent = new Intent(FclassFristViewActivity.this,
 					FclassMoreActivity.class);
 			// titlelist数组传值给FclassFristViewActivity的标题
+			intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 			intent.putExtra("title", titlelist[arg2].toString());
 			startActivity(intent);
 			Util.ShowToast(context, "点击了" + titlelist[arg2]);

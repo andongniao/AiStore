@@ -54,7 +54,11 @@
     <color name="home_text_red">#EF2E5B</color>
  <!-- 分类背景颜色 -->
  	<color name="fclass_bg_grey">#F5F5F5</color>
- 
+ 	
+  <!-- 登陆边框颜色 -->
+ 	<color name="my_login_border_bg">#E6E6E6</color>
+ 	<color name="my_login_tv">#333333</color>
+ 	
     
     
 

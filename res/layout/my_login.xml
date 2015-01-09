@@ -1,0 +1,93 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@color/bg_color"
+    android:orientation="vertical" >
+
+    <!-- 第一行账号 -->
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="20dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/my_login_ID_tv"
+            android:textColor="@color/my_login_tv"
+            android:textSize="15sp" />
+
+        <EditText
+            android:id="@+id/my_login_ID_et"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:background="@drawable/my_login_border_bg"
+            android:hint="@string/my_login_ID_et"
+            android:maxLength="16"
+            android:paddingTop="10dip"
+            android:paddingBottom="10dip"
+            android:paddingLeft="20dip"
+            android:singleLine="true"
+            android:textSize="12sp" />
+    </LinearLayout>
+
+    <!-- 第二行密码 -->
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/my_login_password_tv"
+            android:textColor="@color/my_login_tv"
+            android:textSize="15sp" />
+
+        <EditText
+            android:id="@+id/my_login_password_et"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:background="@drawable/my_login_border_bg"
+            android:hint="@string/my_login_password_et"
+            android:maxLength="16"
+            android:paddingTop="10dip"
+            android:paddingBottom="10dip"
+            android:paddingLeft="20dip"
+            android:inputType="textPassword"
+            android:singleLine="true"
+            android:textSize="12sp" />
+    </LinearLayout>
+    <!-- 第三行登陆按钮 -->
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="30dp"
+        android:orientation="horizontal" >
+
+        <Button
+            android:id="@+id/my_login_btn"
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:background="@color/home_text_red"
+            android:text="@string/my_login_tv"
+            android:textColor="@color/white"
+            android:textSize="20sp" />
+    </LinearLayout>
+
+</LinearLayout>

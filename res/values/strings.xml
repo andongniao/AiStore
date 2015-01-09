@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    
-    <string name="base_test">测试文字</string>
 
+    <string name="base_test">测试文字</string>
     <string name="app_name">AiStore</string>
     <string name="hello_world">Hello world!</string>
     <string name="menu_settings">Settings</string>
-    
     <string name="base_null"></string>
     <!-- 导航栏 -->
     <string name="but_home">首页</string>
@@ -38,7 +36,7 @@
     <string name="shopcart_gopay">去结算</string>
     <string name="shopcart_gongji">共计:</string>
     <string name="shopcart_kucun">库存:</string>
-    
+
     <!-- 收货人信息 -->
     <string name="consignee_info">收货人信息</string>
     <string name="consignee_consignee">收货人</string>
@@ -49,7 +47,7 @@
     <string name="consignee_check_number_type">请检查手机号格式</string>
     <string name="consignee_consignee_can_not_null">收货人不能为空</string>
     <string name="consignee_address_can_not_null">地址不能为空</string>
-   
+
     <!-- 结算订单 -->
     <string name="order_gopay_title">结算订单</string>
     <string name="order_goods_list">商品清单</string>
@@ -65,7 +63,7 @@
     <string name="order_gongzuo_xiuxi">工作日、双休日和假日，均可送货</string>
     <string name="order_xiuxi">双休日（周六、周日）</string>
     <string name="order_gopnzuo">工作日（周一至周五）</string>
-    
+
     <!-- 全部订单 -->
     <string name="all_order_title">全部订单</string>
     <string name="all_order_item_number">订单号：</string>
@@ -74,15 +72,15 @@
     <string name="all_order_item_statu">订单状态：</string>
     <string name="all_order_item_time">下单时间：</string>
     <string name="all_order_item_title">订单:</string>
-    
-    <!-- 订单详情-->
+
+    <!-- 订单详情 -->
     <string name="order_details_title">订单详情</string>
     <string name="order_details_number">数量：</string>
     <string name="order_details_shouhuo_info">收货信息</string>
     <string name="order_details_oeder_money">订单金额</string>
     <string name="order_details_youfei_l">（邮费</string>
     <string name="order_details_youfei_r">）</string>
-    
+
     <!-- 搜索 -->
     <string name="search_et_text">请输入关键词</string>
     <string name="search_bt_text">搜索</string>
@@ -98,7 +96,7 @@
     <string name="product_user_comments">用户评论</string>
     <string name="product_user_comments_fans">粉丝：</string>
     <string name="product_user_comments_likes">喜欢</string>
-     <string name="product_call_text">官方热线:</string>
+    <string name="product_call_text">官方热线:</string>
     <string name="product_call_number">400-096-5585</string>
     <string name="product_sms_text">短信订购</string>
     <string name="product_sms_number">13331054189</string>
@@ -107,20 +105,33 @@
     <string name="product_cancle">取消</string>
     <string name="product_sms_send">发送</string>
     <string name="product_cll_tell">呼叫</string>
-    
+
     <!-- 个人中心 -->
     <string name="mycenter_home_all_dingdan">全部订单</string>
     <string name="mycenter_home_youhuiquan">优惠券</string>
     <string name="mycenter_home_zaixiankehu">在线客服</string>
     <string name="mycenter_home_geren_set">个人设置</string>
+
+    <!-- 登陆和注册 -->
+    <string name="my_login_tv">登陆</string>
+    <string name="my_login_ID_tv">账号:</string>
+    <string name="my_login_ID_et">请输入您的账号</string>
+    <string name="my_login_password_tv">密码:</string>
+    <string name="my_login_password_et">请输入您的密码</string>
     
-    
+    <string name="my_regist_tv">注册</string>
+    <string name="my_regist_ID_tv">手机/邮箱:</string>
+    <string name="my_regist_ID_et">手机号码或者邮箱</string>
+    <string name="my_regist_password_tv">登陆密码:</string>
+    <string name="my_regist_password_et">至少5位</string>
+    <string name="my_regist_repassword_tv">确认密码:</string>
+    <string name="my_regist_repassword_et">请再输一次密码</string>
     <!-- NetREquest -->
     <string name="http_status_code_error">请求失败</string>
     <string name="net_work_is_error">网络异常，请检查网络</string>
-    
+
     <!-- xlistview -->
-     
+
     <string name="xlistview_header_hint_normal">下拉刷新</string>
     <string name="xlistview_header_hint_ready">松开刷新数据</string>
     <string name="xlistview_header_hint_loading">正在加载...</string>

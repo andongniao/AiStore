@@ -1,14 +1,20 @@
 package com.youai.aistore.NetInterface;
 
 import java.io.BufferedReader;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.List;
 import java.util.Map;
 
+import org.json.JSONException;
 import org.json.JSONObject;
+
+import android.content.Context;
+
 
 public class GetHttp {
 	//	String uriAPI = "http://192.168.1.100:8080/test/test.jsp?u=wangyi&p=456";  
@@ -95,4 +101,6 @@ public class GetHttp {
 		}  
 		return result;  
 	} 
+	
+	
 }

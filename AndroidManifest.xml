@@ -86,6 +86,16 @@
             android:name="com.youai.aistore.Mycenter.MycenterHomeActivity"
             android:label="@string/app_name" >
         </activity>
+        <!-- 登陆界面 -->
+        <activity
+            android:name="com.youai.aistore.Mycenter.MyLoginActivity"
+            android:label="@string/app_name" >
+        </activity>
+        <!-- 注册界面 -->
+        <activity
+            android:name="com.youai.aistore.Mycenter.MyRegistActivity"
+            android:label="@string/app_name" >
+        </activity>
     </application>
 
 </manifest>
