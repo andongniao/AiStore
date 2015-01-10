@@ -66,36 +66,7 @@ public class ShopCartActivity extends BaseActivity implements OnClickListener{
 		topRightGone();
 		setTitleTxt(R.string.shopcart_title);
 		setContentXml(R.layout.shopcart);
-//		topRightVisible();
-//		tv_topright = (TextView) getTopRightView();
-//		tv_topright.setText("±à¼­");
-//		isshowing = false;
-//		tv_topright.setTextColor(getResources().getColor(R.color.white));
-//		tv_topright.setOnClickListener(new OnClickListener() {
-//			@Override
-//			public void onClick(View arg0) {
-//				if(!isshowing){
-//					if(adapter!=null){
-//						adapter.setdata(listbean.getList());
-//						adapter.notifyDataSetChanged();
-//						tv_topright.setText("Íê³É");
-//						isshowing = true;
-//					}
-//				}else{
-//					if(adapter!=null){
-//						adapter.setdata(listbean.getList());
-//						adapter.notifyDataSetChanged();
-//						tv_topright.setText("±à¼­");
-//						isshowing = false;
-//					}
-//				}
-//			}
-//		});
-		//getLayoutInflater().inflate(R.layout.shorcart_isnull_show, null);
 		init();
-
-		//
-
 		if(Util.detect(context)){
 			myTask = new MyTask(1,0);
 			myTask.execute("");  
@@ -111,24 +82,6 @@ public class ShopCartActivity extends BaseActivity implements OnClickListener{
 
 			@Override
 			public void delete(ArrayList<ShopCartBean> list, int index) {
-//				list.remove(index);
-//				ListShopCartBean l = new ListShopCartBean();
-//				price = 0.00;
-//				for(int i=0;i<list.size();i++){
-//					price +=(Double.parseDouble(list.get(i).getGoods_price())*Integer.parseInt(list.get(i).getGoods_number()));
-//				}
-//				l.setList(list);
-//				l.setCount_price("£¤"+String.valueOf(price)+"Ôª");
-//				tv_gongji.setText(String.valueOf(price));
-//				listbean = l;
-//				statu = 2;
-//				adapter.setdata(list, statu);
-//				adapter.notifyDataSetChanged();
-//				if(listbean!=null && listbean.getList().size()>0){
-//					showviewll.setVisibility(View.VISIBLE);
-//				}else{
-//					showviewll.setVisibility(View.GONE);
-//				}
 				if(Util.detect(context)){
 					myTask = new MyTask(2,0);
 					myTask.setdata(list, index);

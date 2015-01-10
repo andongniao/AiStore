@@ -16,6 +16,7 @@ import com.youai.aistore.R;
 import com.youai.aistore.Util;
 import com.youai.aistore.Bean.Base;
 import com.youai.aistore.Bean.CommentsBean;
+import com.youai.aistore.Bean.ConsigneeBean;
 import com.youai.aistore.Bean.GoodsBean;
 import com.youai.aistore.Bean.ListCommentsBean;
 import com.youai.aistore.Bean.ListFclassTwo;
@@ -511,7 +512,90 @@ public class Send {
 		return null;
 	}
 	
+	/**
+	 * 获取收货人信息
+	 * @param id
+	 * @param password
+	 * @return
+	 */
+	public ConsigneeBean getConsigneeInfo(String userid) {
+		ConsigneeBean bean = new ConsigneeBean();
+		String url = ServiceUrl.get_consignee_info+userid;
+		String jsonStr= GetHttp.sendGet(url);
+		
+		if (jsonStr != null && !jsonStr.equals("")) {
+			JSONObject object = null;
+			try {
+				object = new JSONObject(jsonStr);
+				if (object.get("code") != null && object.getInt("code") == 200) {
+					JSONObject data = object.getJSONObject("data");
+					String json = data.toString();
+					Type type = new TypeToken<ConsigneeBean>() {
+					}.getType();
+					bean = gson.fromJson(json, type);
+					bean.setCode(200);
+					bean.setMsg(object.getString("message"));
+					return bean;
+				} else {
+					bean.setMsg(object.getString("message"));
+					bean.setCode(object.getInt("code"));
+					return bean;
+					
+				}
+				
+			} catch (JSONException e) {
+				e.printStackTrace();
+			}
+		} else {
+			bean.setCode(500);
+			bean.setMsg(context.getResources().getString(
+					R.string.http_status_code_error));
+			return bean;
+		}
+		return null;
+	}
 	
+	
+	/**
+	 * save收货人信息
+	 * @param id
+	 * @param password
+	 * @return
+	 */
+	public Base saveConsigneeInfo(String userid,String consignee,String tel,String address) {
+		Base bean = new Base();
+		String url = ServiceUrl.save_consignee_info+userid+
+				ServiceUrl.save_consignee_info_consignee+consignee+
+				ServiceUrl.save_consignee_info_tel+tel+
+				ServiceUrl.save_consignee_info_address+address;
+		String jsonStr= GetHttp.sendGet(url);
+		
+		if (jsonStr != null && !jsonStr.equals("")) {
+			JSONObject object = null;
+			try {
+				object = new JSONObject(jsonStr);
+				if (object.get("code") != null && object.getInt("code") == 200) {
+					bean.setCode(200);
+					bean.setMsg(object.getString("message"));
+					return bean;
+				} else {
+					bean.setMsg(object.getString("message"));
+					bean.setCode(object.getInt("code"));
+					return bean;
+					
+				}
+				
+			} catch (JSONException e) {
+				e.printStackTrace();
+			}
+		} else {
+			bean.setCode(500);
+			bean.setMsg(context.getResources().getString(
+					R.string.http_status_code_error));
+			return bean;
+		}
+		return null;
+	}
 	
 	
 	

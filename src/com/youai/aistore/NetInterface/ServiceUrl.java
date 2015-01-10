@@ -34,5 +34,12 @@ public class ServiceUrl {
 	//登录   
 	public static String Login_Url_username = BaseUrl+"?module=login&user_name=";
 	public static String Login_Url_password = "&password=";
+	//获取收货人信息   
+	public static String get_consignee_info = BaseUrl+"?module=get_user_information&user_id=";
+	//保存收货人信息      
+	public static String save_consignee_info = BaseUrl+"?module=save_user_information&user_id=";
+	public static String save_consignee_info_consignee ="&consignee=";
+	public static String save_consignee_info_tel ="&tel=";
+	public static String save_consignee_info_address ="&address=";
 
 }

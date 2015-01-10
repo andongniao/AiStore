@@ -25,7 +25,7 @@ public abstract class BaseActivity extends Activity {
 	public TextView topLeftTv;// 左上 控件（返回）
 	public TextView topRightTv;// 右上 控件（返回）
 	private LinearLayout baseContentLayout;// 添加内容控件
-	public RelativeLayout baseTopLayout;// 顶部layout
+	public RelativeLayout baseTopLayout,toplefttl;// 顶部layout
 
 	private BaseLeftClickListener leftClickListener;// 左上 点击监听
 
@@ -37,7 +37,8 @@ public abstract class BaseActivity extends Activity {
 		baseTopLayout = (RelativeLayout) findViewById(R.id.Base_Layout);
 		titleTv = (TextView) findViewById(R.id.base_title_tv);
 		topLeftTv = (TextView) findViewById(R.id.base_top_left_tv);
-		topLeftTv.setOnClickListener(new OnClickListener() {
+		toplefttl = (RelativeLayout) findViewById(R.id.base_top_left_tv_rl);
+		toplefttl.setOnClickListener(new OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
