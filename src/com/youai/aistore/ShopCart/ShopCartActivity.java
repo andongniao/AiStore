@@ -181,54 +181,21 @@ public class ShopCartActivity extends BaseActivity implements OnClickListener{
 
 			@Override
 			public void create(SwipeMenu menu) {
-				// create "open" item
-//				SwipeMenuItem openItem = new SwipeMenuItem(
-//						getApplicationContext());
-//				// set item background
-//				openItem.setBackground(new ColorDrawable(Color.rgb(0xC9, 0xC9,
-//						0xCE)));
-//				// set item width
-//				openItem.setWidth(dp2px(90));
-//				// set item title
-//				openItem.setTitle("Open");
-//				// set item title fontsize
-//				openItem.setTitleSize(18);
-//				// set item title font color
-//				openItem.setTitleColor(Color.WHITE);
-//				// add to menu
-//				menu.addMenuItem(openItem);
-
-				// create "delete" item
 				SwipeMenuItem deleteItem = new SwipeMenuItem(
 						getApplicationContext());
-				// set item background
 				deleteItem.setBackground(new ColorDrawable(Color.rgb(0xF9,
 						0x3F, 0x25)));
-				// set item width
 				deleteItem.setWidth(dp2px(90));
-				// set a icon
 				deleteItem.setIcon(R.drawable.del_icon_normal);
-				// add to menu
 				menu.addMenuItem(deleteItem);
 			}
 		};
-		// set creator
 		lv.setMenuCreator(creator);
-
-		// step 2. listener item click event
 		lv.setOnMenuItemClickListener(new OnMenuItemClickListener() {
 			@Override
 			public void onMenuItemClick(int position, SwipeMenu menu, int index) {
 				switch (index) {
-//				case 0:
-//					// open
-////					open(item);
-//					break;
 				case 0:
-					// delete
-//					delete(item);
-//					mAppList.remove(position);
-//					mAdapter.notifyDataSetChanged();
 					if(Util.detect(context)){
 						myTask = new MyTask(2,0);
 						myTask.setdata(listbean.getList(), position);
@@ -266,19 +233,9 @@ public class ShopCartActivity extends BaseActivity implements OnClickListener{
 			ExampleActivity.setCurrentTab(0);
 			break;
 		case R.id.shopcart_gopay_bt:
-			Util.ShowToast(context, "È¥Ö§¸¶");
-//			Intent intent = new Intent(ShopCartActivity.this,ConsigneeInfoActivity.class);
-//			intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-//			startActivity(intent);
-			new Thread(){public void run() {
-				Send s = new Send(context);
-//				Base b = s.regist("13000000000", "1233");
-				Base b = s.getLogin("13000000000", "1233");
-				if(b!=null && b.getCode()==200){
-//					Util.ShowToast(context, "success");
-				}else{
-				}
-			};}.start();
+			Intent intent = new Intent(ShopCartActivity.this,ConsigneeInfoActivity.class);
+			intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+			startActivity(intent);
 			break;
 
 		}
