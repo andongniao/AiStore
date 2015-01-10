@@ -18,6 +18,7 @@ import com.youai.aistore.BaseActivity;
 import com.youai.aistore.R;
 import com.youai.aistore.Util;
 import com.youai.aistore.Bean.Base;
+import com.youai.aistore.Bean.UserBean;
 import com.youai.aistore.NetInterface.GetHttp;
 import com.youai.aistore.NetInterface.Send;
 import com.youai.aistore.NetInterface.ServiceUrl;
@@ -39,21 +40,15 @@ public class MyRegistActivity extends BaseActivity implements OnClickListener {
 		public void handleMessage(Message msg) {
 			super.handleMessage(msg);
 			if (msg.what == 1) {
-				Util.ShowToast(MyRegistActivity.this, "服务器连接异常，请重试");
-
-			} else if (msg.what == 2) {
-				Util.ShowToast(MyRegistActivity.this, "注册失败");
-				System.out.println("密码错误");
-			} else if (msg.what == 3) {
-				Util.ShowToast(context, "抛异常");
-			} else if (msg.what == 4) {
 				Intent intent = new Intent(MyRegistActivity.this,
 						MyLoginActivity.class);
 				intent.setFlags(intent.FLAG_ACTIVITY_CLEAR_TOP);
 				startActivity(intent);
+			} else if (msg.what == 2) {
+				Util.ShowToast(MyRegistActivity.this, "注册失败");
 
-				System.out.println(code + messagetxt);
 			}
+
 		}
 	};
 
@@ -93,8 +88,8 @@ public class MyRegistActivity extends BaseActivity implements OnClickListener {
 		if (id.equals("")) {
 			Util.ShowToast(MyRegistActivity.this, R.string.login_id_not_null);// 账号不能空
 			return false;
-		}else{
-			if(Util.isMobileNO(id) || Util.isEmail(id)){	
+		} else {
+			if (Util.isMobileNO(id) || Util.isEmail(id)) {
 				String pwd = regist_password.getText().toString();
 				if (pwd.equals("")) {
 					Util.ShowToast(MyRegistActivity.this,
@@ -124,62 +119,35 @@ public class MyRegistActivity extends BaseActivity implements OnClickListener {
 					}
 
 				}
-			}else {
-				Util.ShowToast(MyRegistActivity.this, R.string.regist_format_error);	//格式错误
+			} else {
+				Util.ShowToast(MyRegistActivity.this,
+						R.string.regist_format_error); // 格式错误
 				return false;
 			}
 		}
-		
 
 	}// validate
 
-	/*
-	 * 业务方法，登录业务 private boolean addUser() { String id =
-	 * regist_ID.getText().toString(); String pwd =
-	 * regist_password.getText().toString(); Send send = new
-	 * Send(MyRegistActivity.this); Base result = send.regist(id, pwd); if
-	 * (result != null && result.equals("1")) { return true; } else { return
-	 * false; } }
-	 */
 	private void addUser() {
 		final String id = regist_ID.getText().toString();
 		final String pwd = regist_password.getText().toString();
 		new Thread() {
 			public void run() {
-				try {
-					String url = ServiceUrl.Regist_Url_username + id
-							+ ServiceUrl.Regist_Url_password + pwd;
-					Log.i("地址", url);
-					String jsonStr = GetHttp.sendGet(url);
-					JSONObject loginjson = new JSONObject(jsonStr);
-					if (loginjson.has("result")) {
-						String result = loginjson.getString("result");
-						if (!result.equals("true")) {
-							errormsg = "请求出错";
-							Message message = new Message();
-							message.what = 2;
-							LoginMessageHandler.sendMessage(message);
 
-						} else {
-							code = loginjson.getString("code");
-							messagetxt = loginjson.getString("message");
-							JSONObject data = loginjson.getJSONObject("data");
-							Message msg = new Message();
-							msg.what = 4;
-							LoginMessageHandler.sendMessage(msg);
+				Send send = new Send(MyRegistActivity.this);
+				UserBean result = send.regist(id, pwd);
+				if (result.getUser_id() != null
+						&& !result.getUser_id().equals("200")) {
 
-						}
+					Message msg = new Message();
+					msg.what = 1;
+					LoginMessageHandler.sendMessage(msg);
 
-					} else {
-						Message message = new Message();
-						message.what = 1;
-						LoginMessageHandler.sendMessage(message);
-					}
-
-				} catch (Exception e) {
+				} else {
 					Message message = new Message();
-					message.what = 3;
+					message.what = 2;
 					LoginMessageHandler.sendMessage(message);
+
 				}
 
 			}

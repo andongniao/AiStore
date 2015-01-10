@@ -87,8 +87,10 @@ public class FclassMoreActivity extends BaseActivity implements IXListViewListen
 
 	@Override
 	public void onClick(View arg0) {
+		
 		switch (arg0.getId()) {		
 		case R.id.fclass_more_popularity_ll:
+			
 			if(cou%2!=0)
 			{
 				popll_iv.setImageResource(R.drawable.order_bottom);
@@ -100,6 +102,7 @@ public class FclassMoreActivity extends BaseActivity implements IXListViewListen
 				popll_iv.setImageResource(R.drawable.order_top);
 			cou++;
 			}
+			//order();
 			
 			break;
 		case R.id.fclass_more_popularity_img:

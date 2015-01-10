@@ -460,6 +460,7 @@ public class Send {
 					bean = gson.fromJson(json, type);
 					bean.setCode(200);
 					bean.setMsg(object.getString("message"));
+					System.out.println(object.get("code")+"登陆成功");//测试是不是200
 					return bean;
 				} else {
 					bean.setMsg(object.getString("message"));
@@ -485,8 +486,8 @@ public class Send {
 	 * @param password
 	 * @return
 	 */
-	public Base regist(String username, String password) {
-		Base bean = new Base();
+	public UserBean regist(String username, String password) {
+		UserBean bean =  new UserBean();
 		String url = ServiceUrl.Regist_Url_username + username
 				+ ServiceUrl.Regist_Url_password + password;
 		String jsonStr= GetHttp.sendGet(url);
@@ -496,8 +497,14 @@ public class Send {
 			try {
 				object = new JSONObject(jsonStr);
 				if (object.get("code") != null && object.getInt("code") == 200) {
+					JSONObject data = object.getJSONObject("data");
+					String json = data.toString();
+					Type type = new TypeToken<UserBean>() {
+					}.getType();
+					bean = gson.fromJson(json, type);
 					bean.setCode(200);
 					bean.setMsg(object.getString("message"));
+					System.out.println(object.get("code") +"注册成功");//测试是不是200
 					return bean;
 				} else {
 					bean.setMsg(object.getString("message"));
