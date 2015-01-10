@@ -6,6 +6,7 @@ import com.youai.aistore.R;
 import com.youai.aistore.Util;
 import com.youai.aistore.Bean.Base;
 import com.youai.aistore.Bean.ConsigneeBean;
+import com.youai.aistore.Bean.ListShopCartBean;
 import com.youai.aistore.NetInterface.Send;
 import com.youai.aistore.Order.OrderActivity;
 
@@ -30,6 +31,7 @@ public class ConsigneeInfoActivity extends BaseActivity implements OnClickListen
 	private MyTask myTask;
 	private ConsigneeBean bean;
 	private Base b;
+	private ListShopCartBean listbean;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -44,10 +46,12 @@ public class ConsigneeInfoActivity extends BaseActivity implements OnClickListen
 		}else{
 			Util.ShowToast(context, R.string.net_work_is_error);
 		}
+		
 	}
 
 	private void init() {
 		context = this;
+		listbean = (ListShopCartBean) getIntent().getExtras().get("list");
 		consigneeet = (EditText) findViewById(R.id.consignee_consignee_et);
 		consigneeet.setOnClickListener(this);
 		numberet = (EditText) findViewById(R.id.consignee_number_et);
@@ -123,14 +127,14 @@ public class ConsigneeInfoActivity extends BaseActivity implements OnClickListen
 			try {  
 				if(statu == 1){
 					Send s = new Send(context);
-					String userid = MyApplication.UserId;
-//					String userid = "188";
+//					String userid = MyApplication.UserId;
+					String userid = "188";
 					bean = s.getConsigneeInfo(userid);
 					return bean;
 				}else{
 					Send s = new Send(context);
-					String userid = MyApplication.UserId;
-//					String userid = "188";
+//					String userid = MyApplication.UserId;
+					String userid = "188";
 					b = s.saveConsigneeInfo(userid, consignee, number, address);
 					return b;
 				}
@@ -171,6 +175,7 @@ public class ConsigneeInfoActivity extends BaseActivity implements OnClickListen
 						intent.putExtra("consignee", consignee);
 						intent.putExtra("number", number);
 						intent.putExtra("address", address);
+						intent.putExtra("list", listbean);
 						startActivity(intent);
 					}else{
 						Util.ShowToast(context,b.getMsg());	

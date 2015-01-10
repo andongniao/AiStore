@@ -1,8 +1,9 @@
 package com.youai.aistore.Bean;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class ListShopCartBean extends Base{
+public class ListShopCartBean extends Base implements Serializable{
 	private ArrayList<ShopCartBean> list;
 	private String count_price;
 	public ArrayList<ShopCartBean> getList() {

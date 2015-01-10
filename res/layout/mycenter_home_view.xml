@@ -22,6 +22,13 @@
                 android:layout_width="90dp"
                 android:layout_height="90dp"
                 android:src="@drawable/head_de" />
+            <TextView 
+                android:id="@+id/mycenter_home_username_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:gravity="center"
+                />
 
             <LinearLayout
                 android:id="@+id/mycenter_home_login_ll"

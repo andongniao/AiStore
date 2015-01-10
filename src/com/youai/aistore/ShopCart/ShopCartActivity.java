@@ -187,6 +187,7 @@ public class ShopCartActivity extends BaseActivity implements OnClickListener{
 			break;
 		case R.id.shopcart_gopay_bt:
 			Intent intent = new Intent(ShopCartActivity.this,ConsigneeInfoActivity.class);
+			intent.putExtra("list", listbean);
 			intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 			startActivity(intent);
 			break;
