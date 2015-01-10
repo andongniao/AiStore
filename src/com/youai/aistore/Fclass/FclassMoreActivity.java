@@ -36,6 +36,8 @@ public class FclassMoreActivity extends BaseActivity implements IXListViewListen
 	private MyTask myTask;
 	private ArrayList<GoodsBean>list;
 	private ListFclassTwo listf;
+	private ImageView popll_iv;
+	private int cou=1;
 	@Override
 	protected void onCreate(Bundle arg0) {
 		// TODO Auto-generated method stub
@@ -57,7 +59,9 @@ public class FclassMoreActivity extends BaseActivity implements IXListViewListen
 		popll = (LinearLayout) findViewById(R.id.fclass_more_popularity_ll);
 		numll = (LinearLayout) findViewById(R.id.fclass_more_number_ll);
 		pricell = (LinearLayout) findViewById(R.id.fclass_more_price_ll);
-		
+
+		popll_iv = (ImageView) findViewById(R.id.fclass_more_popularity_img);
+		popll_iv.setOnClickListener(this);
 		//popll.setClickable(true);
 		popll.setOnClickListener(this);
 		numll.setOnClickListener(this);
@@ -83,12 +87,23 @@ public class FclassMoreActivity extends BaseActivity implements IXListViewListen
 
 	@Override
 	public void onClick(View arg0) {
-		
 		switch (arg0.getId()) {		
 		case R.id.fclass_more_popularity_ll:
+			if(cou%2!=0)
+			{
+				popll_iv.setImageResource(R.drawable.order_bottom);
+				
+			cou++;
+			}
+			else
+			{
+				popll_iv.setImageResource(R.drawable.order_top);
+			cou++;
+			}
 			
+			break;
+		case R.id.fclass_more_popularity_img:
 			
-
 			//Util.ShowToast(context, "ÈËÆø");
 			break;
 		case R.id.fclass_more_number_ll:
@@ -130,6 +145,8 @@ public class FclassMoreActivity extends BaseActivity implements IXListViewListen
 		@Override  
 		protected Object doInBackground(Object... params) {  
 			try {  
+				
+				/*Ìí¼ÓÅÐ¶Ï¾ä*/
 				Send send = new Send(context);
 				listf  = send.GetFclassTwo(MyApplication.woman_av, MyApplication.clickdesc, 1);
 				return listf;//new String(baos.toByteArray(), "gb2312");  

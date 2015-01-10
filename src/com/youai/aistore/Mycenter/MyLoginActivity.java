@@ -2,9 +2,13 @@ package com.youai.aistore.Mycenter;
 
 import org.json.JSONObject;
 
+import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.Message;
+import android.test.UiThreadTest;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -29,6 +33,32 @@ import com.youai.aistore.NetInterface.ServiceUrl;
 public class MyLoginActivity extends BaseActivity implements OnClickListener {
 	private EditText login_ID, login_password;
 	private Button login_btn;
+	Context context;
+	String errormsg = "";
+	String code, messagetxt;
+	Handler LoginMessageHandler = new Handler() {
+		@SuppressLint("HandlerLeak")
+		public void handleMessage(Message msg) {
+			super.handleMessage(msg);
+			if (msg.what == 1) {
+				Util.ShowToast(MyLoginActivity.this, "服务器连接异常，请重试");
+				
+			} else if (msg.what == 2) {
+				Util.ShowToast(MyLoginActivity.this, "输入的用户名或密码有问题，请重来");
+				System.out.println("密码错误");
+			} else if (msg.what == 3) {
+				Util.ShowToast(context, "抛异常");
+			} else if (msg.what == 4) {
+				Intent intent = new Intent(MyLoginActivity.this,
+						MycenterHomeActivity.class);
+				intent.setFlags(intent.FLAG_ACTIVITY_CLEAR_TOP);
+				startActivity(intent);
+				
+				System.out.println(code+messagetxt);
+			}
+		}
+	};
+
 
 	@Override
 	protected void onCreate(Bundle arg0) {
@@ -52,15 +82,7 @@ public class MyLoginActivity extends BaseActivity implements OnClickListener {
 		// TODO Auto-generated method stub
 		if (validate()) {// 判断验证是不是成功了
 			 login();
-			/*if (login()) {// 判断登陆是不是成功了
-				Util.ShowToast(MyLoginActivity.this, "登陆成功");
-				Intent intent = new Intent(MyLoginActivity.this,
-						MycenterHomeActivity.class);
-				startActivity(intent);
-			} else {
-				Util.ShowToast(MyLoginActivity.this, "输入的用户名或密码有问题，请重来");
-			}
-*/
+
 		}
 	}
 
@@ -68,15 +90,25 @@ public class MyLoginActivity extends BaseActivity implements OnClickListener {
 	private boolean validate() {
 		String id = login_ID.getText().toString();
 		if (id.equals("")) {
-			Util.ShowToast(MyLoginActivity.this, "用户名必须输入");
+			Util.ShowToast(MyLoginActivity.this, R.string.login_id_not_null);//账号不能空
 			return false;
+		}else{
+			if(Util.isMobileNO(id) || Util.isEmail(id)){		
+				String pwd = login_password.getText().toString();
+				if (pwd.equals("")) {
+					Util.ShowToast(MyLoginActivity.this, R.string.login_password_not_null);//密码不能空
+					return false;
+				}else{
+					return true;
+				}
+			}else {
+				Util.ShowToast(MyLoginActivity.this, R.string.login_format_error);	//格式错误
+				return false;
+			}
 		}
-		String pwd = login_password.getText().toString();
-		if (pwd.equals("")) {
-			Util.ShowToast(MyLoginActivity.this, "密码必须输入");
-			return false;
-		}
-		return true;
+		
+		
+		
 	}// validate
 
 	/*
@@ -97,7 +129,7 @@ public class MyLoginActivity extends BaseActivity implements OnClickListener {
 	}// login
 */	 
 
-	private void login() {
+	/*private void login() {
 		final String id = login_ID.getText().toString();
 		final String pwd = login_password.getText().toString();
 		new Thread(){
@@ -124,6 +156,54 @@ public class MyLoginActivity extends BaseActivity implements OnClickListener {
 			}
 			}.start();
 		
+
+	}*/
+	
+	
+	private void login() {
+		final String id = login_ID.getText().toString();
+		final String pwd = login_password.getText().toString();
+		new Thread() {
+			public void run() {
+				try {
+					/* 登录 */
+					String url = ServiceUrl.Login_Url_username + id
+							+ ServiceUrl.Login_Url_password + pwd;
+					Log.i("地址", url);
+					String jsonStr = GetHttp.sendGet(url);
+					JSONObject loginjson =new JSONObject(jsonStr);
+					if (loginjson.has("result")) {
+						String result = loginjson.getString("result");
+						if (!result.equals("true")) {
+							errormsg = "请求出错";
+							Message message = new Message();
+							message.what = 2;
+							LoginMessageHandler.sendMessage(message);
+
+						} else {
+							code = loginjson.getString("code");
+							messagetxt = loginjson.getString("message");
+							JSONObject data = loginjson.getJSONObject("data");
+							Message msg = new Message();
+							msg.what = 4;
+							LoginMessageHandler.sendMessage(msg);
+
+						}
+
+					} else {
+						Message message = new Message();
+						message.what = 1;
+						LoginMessageHandler.sendMessage(message);
+					}
+
+				} catch (Exception e) {
+					Message message = new Message();
+					message.what = 3;
+					LoginMessageHandler.sendMessage(message);
+				}
+
+			}
+		}.start();
 
 	}
 }

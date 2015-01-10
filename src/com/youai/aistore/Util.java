@@ -58,7 +58,19 @@ public class Util {
 
 		return m.matches();
 	}
+	/**
+	 * 密码位数限制，大于4位，小于10位
+	 * @param password
+	 * @return
+	 */
+	public static boolean ispassword(String password) {
+		String str = "[0-9A-Za-z]{4,10}";
+		Pattern p = Pattern.compile(str);
+		Matcher m = p.matcher(password);
 
+		return m.matches();
+	}
+	
 	/**
 	 * 判断字符串是否为空
 	 * 

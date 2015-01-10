@@ -27,7 +27,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/black"
-                android:textSize="18dp"
+                android:textSize="18sp"
                 android:text="@string/search_result_popularity"
                 android:layout_marginRight="15dp"
                 />
@@ -35,7 +35,7 @@
                 android:id="@+id/fclass_more_popularity_img"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@drawable/result_order"
+                android:background="@drawable/order_bottom"
                
                 />
         </LinearLayout>
@@ -54,7 +54,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/black"
-                android:textSize="18dp"
+                android:textSize="18sp"
                 android:text="@string/search_result_number"
                 android:layout_marginRight="15dp"
                 />
@@ -79,7 +79,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/black"
-                android:textSize="18dp"
+                android:textSize="18sp"
                 android:text="@string/search_result_price"
                 android:layout_marginRight="15dp"
                 />
