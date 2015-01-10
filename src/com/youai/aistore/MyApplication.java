@@ -93,14 +93,27 @@ public class MyApplication extends Application {
 		}else{
 			SessionId = Util.hashKeyForDisk(DEVICE_ID+time);
 		}
-		UserId = mSharedPreferences.getString("userid", "0");
+		UserId = "188";//mSharedPreferences.getString("userid", "0");
 		mEditor.putString("sessionid", SessionId);
 		mEditor.commit();  
-		userBean = new UserBean();
+		String name = mSharedPreferences.getString("username", "");
+		String userid = mSharedPreferences.getString("userid", "");
+		if(Util.IsNull(name)){
+			userBean = new UserBean();
+			userBean.setUser_id(userid);
+			userBean.setUser_name(name);
+		}
 	}
 	public static void setUserId(String userid){
 		SharedPreferences.Editor mEditor = mSharedPreferences.edit();
 		mEditor.putString("userid", userid);
+		mEditor.commit();  
+	}
+	public static void SaveUserBean(UserBean bean){
+		userBean = bean;
+		SharedPreferences.Editor mEditor = mSharedPreferences.edit();
+		mEditor.putString("userid", bean.getUser_id());
+		mEditor.putString("username", bean.getUser_name());
 		mEditor.commit();  
 	}
 

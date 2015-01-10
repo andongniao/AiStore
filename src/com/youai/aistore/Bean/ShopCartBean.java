@@ -1,6 +1,8 @@
 package com.youai.aistore.Bean;
 
-public class ShopCartBean{
+import java.io.Serializable;
+
+public class ShopCartBean implements Serializable{
 	private String pic_url;
 	private String goods_count;
 	private String goods_id;

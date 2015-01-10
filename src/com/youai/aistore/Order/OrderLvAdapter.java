@@ -2,6 +2,7 @@ package com.youai.aistore.Order;
 
 import java.util.ArrayList;
 
+import com.nostra13.universalimageloader.core.ImageLoader;
 import com.youai.aistore.R;
 import com.youai.aistore.Bean.ShopCartBean;
 
@@ -59,7 +60,6 @@ public class OrderLvAdapter extends BaseAdapter{
 			myItem.iv = (ImageView) v.findViewById(R.id.shopcart_item_pp_iv);
 			myItem.tv_titlt = (TextView) v.findViewById(R.id.shopcart_item_title_tv);
 			myItem.tv_price = (TextView) v.findViewById(R.id.shopcart_item_price_tv);
-			myItem.tv_kucun = (TextView) v.findViewById(R.id.shopcart_lv_item_kucun_tv);
 			myItem.kuncun_ll = (LinearLayout) v.findViewById(R.id.shopcart_lv_item_kucun_ll);
 			myItem.et_num = (EditText) v.findViewById(R.id.shopcart_item_num_et);
 			myItem.btn_add = (ImageButton) v.findViewById(R.id.shopcart_lv_item_add_ibt);
@@ -72,6 +72,12 @@ public class OrderLvAdapter extends BaseAdapter{
 		myItem.btn_jian.setVisibility(View.GONE);
 		myItem.kuncun_ll.setVisibility(View.GONE);
 		
+		myItem.iv.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
+		ImageLoader.getInstance().displayImage(list.get(postion).getPic_url(), myItem.iv);
+		myItem.tv_titlt.setText(list.get(postion).getGoods_name());
+		myItem.tv_price.setText("ฃค"+list.get(postion).getGoods_price()+"ิช");
+		myItem.et_num.setText(list.get(postion).getGoods_number());
+		
 		
 		
 		
@@ -80,7 +86,7 @@ public class OrderLvAdapter extends BaseAdapter{
 	}
 	class MyItem{
 		private ImageView iv;
-		private TextView tv_titlt,tv_price,tv_delete,tv_kucun;
+		private TextView tv_titlt,tv_price;
 		private EditText et_num;
 		private LinearLayout kuncun_ll;
 		private ImageButton btn_add,btn_jian;

@@ -20,7 +20,7 @@
             android:id="@+id/shopcart_item_pp_iv"
             android:layout_width="100dp"
             android:layout_height="100dp"
-            android:background="@drawable/ic_launcher" />
+            />
     </RelativeLayout>
 
     <LinearLayout

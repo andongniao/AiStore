@@ -68,7 +68,6 @@ public class ShopCartAdapter extends BaseAdapter 	{
 				}else{
 					myShopItem = (MyShopItem) v.getTag();
 				}
-				myShopItem.tv_titlt.setText(""+postion);
 				myShopItem.iv.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
 				ImageLoader.getInstance().displayImage(list.get(postion).getPic_url(), myShopItem.iv);
 				myShopItem.tv_titlt.setText(list.get(postion).getGoods_name());

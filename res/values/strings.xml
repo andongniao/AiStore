@@ -137,6 +137,11 @@
     <!-- NetREquest -->
     <string name="http_status_code_error">请求失败</string>
     <string name="net_work_is_error">网络异常，请检查网络</string>
+    <!-- pay -->
+    <string name="pay_tishi">提示</string>
+    <string name="pay_queding">确定</string>
+    <string name="pay_paying">正在支付</string>
+    <string name="pay_order_changed">您的订单信息已被非法篡改。</string>
 
     <!-- xlistview -->
 

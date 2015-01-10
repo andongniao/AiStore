@@ -610,6 +610,46 @@ public class Send {
 		return null;
 	}
 	
+	/**
+	 * Ã·Ωª∂©µ•
+	 * @param id
+	 * @param password
+	 * @return
+	 */
+	public Base CommitOrder(String userid,String time,String type,String fee) {
+		Base bean = new Base();
+		String url = ServiceUrl.save_order_info+userid+
+				ServiceUrl.save_order_info_time+time+
+				ServiceUrl.save_order_info_type+type+
+				ServiceUrl.save_order_info_time_fee+fee;
+		String jsonStr= GetHttp.sendGet(url);
+		
+		if (jsonStr != null && !jsonStr.equals("")) {
+			JSONObject object = null;
+			try {
+				object = new JSONObject(jsonStr);
+				if (object.get("code") != null && object.getInt("code") == 200) {
+					bean.setCode(200);
+					bean.setMsg(object.getString("message"));
+					return bean;
+				} else {
+					bean.setMsg(object.getString("message"));
+					bean.setCode(object.getInt("code"));
+					return bean;
+					
+				}
+				
+			} catch (JSONException e) {
+				e.printStackTrace();
+			}
+		} else {
+			bean.setCode(500);
+			bean.setMsg(context.getResources().getString(
+					R.string.http_status_code_error));
+			return bean;
+		}
+		return null;
+	}
 	
 	
 	

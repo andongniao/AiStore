@@ -41,5 +41,10 @@ public class ServiceUrl {
 	public static String save_consignee_info_consignee ="&consignee=";
 	public static String save_consignee_info_tel ="&tel=";
 	public static String save_consignee_info_address ="&address=";
+	//Ã·Ωª∂©µ•    
+	public static String save_order_info = BaseUrl+"?module=order_lise&user_id=";
+	public static String save_order_info_time ="&best_time=";
+	public static String save_order_info_type ="&pay_type=";
+	public static String save_order_info_time_fee ="&shipping_fee=";
 
 }

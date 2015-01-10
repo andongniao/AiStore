@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.youai.aistore.BaseActivity;
@@ -30,6 +31,7 @@ public class MycenterHomeActivity extends BaseActivity implements
 	private LinearLayout dingdan_ll, youhui_ll, kefu_ll, set_ll, call_ll,
 			sms_ll, show_ll, login_ll;
 	private	Button login_btn,regist_btn;
+	private TextView uernametv;
 	private boolean isshowing;
 	private Dialog alertDialog;
 
@@ -60,15 +62,17 @@ public class MycenterHomeActivity extends BaseActivity implements
 		sms_ll = (LinearLayout) findViewById(R.id.mycenter_home_sms_ll);
 		sms_ll.setOnClickListener(this);
 		show_ll = (LinearLayout) findViewById(R.id.mycenter_home_show_ll);
+		uernametv = (TextView) findViewById(R.id.mycenter_home_username_tv);
 		// µÇÂ½ºÍ×¢²á
 		login_btn = (Button) findViewById(R.id.mycenter_home_login_btn);
 		login_btn.setOnClickListener(this);
 		regist_btn = (Button) findViewById(R.id.mycenter_home_regist_btn);
 		regist_btn.setOnClickListener(this);
-		
+		if(MyApplication.userBean!=null){
+			uernametv.setText(MyApplication.userBean.getUser_name());
+		}
 		String url = "http://img5.imgtn.bdimg.com/it/u=3292851460,915918973&fm=116&gp=0.jpg";
 		ImageLoader.getInstance().displayImage(url, headeriv);
-
 	}
 
 	@Override
