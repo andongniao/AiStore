@@ -105,6 +105,7 @@
     <string name="product_cancle">取消</string>
     <string name="product_sms_send">发送</string>
     <string name="product_cll_tell">呼叫</string>
+    <string name="product_add_shopcart_success">已加入购物车</string>
 
     <!-- 个人中心 -->
     <string name="mycenter_home_all_dingdan">全部订单</string>

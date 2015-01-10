@@ -43,7 +43,7 @@ public class Send {
 		String url = ServiceUrl.HomeUrl + key;
 		String jsonStr = null;
 		jsonStr = GetHttp.sendGet(url);
-		
+
 		if (jsonStr != null && !jsonStr.equals("")) {
 			JSONObject object = null;
 			try {
@@ -434,12 +434,16 @@ public class Send {
 		return null;
 
 	}
-    /*µÇÂ½*/
-	public Base getLogin(String id, String password) {
+	/**
+	 * µÇÂ¼
+	 * @param id
+	 * @param password
+	 * @return
+	 */
+	public Base getLogin(String username, String password) {
 		Base bean = new Base();
-		String url = ServiceUrl.Login_Url_username + id
+		String url = ServiceUrl.Login_Url_username + username
 				+ ServiceUrl.Login_Url_password + password;
-		Log.i("µØÖ·", url);
 		String jsonStr= GetHttp.sendGet(url);
 
 		if (jsonStr != null && !jsonStr.equals("")) {
@@ -468,39 +472,50 @@ public class Send {
 		}
 		return null;
 	}
-	 /*×¢²á*/
-		public Base regist(String id, String password) {
-			Base bean = new Base();
-			String url = ServiceUrl.Regist_Url_username + id
-					+ ServiceUrl.Regist_Url_password + password;
-			Log.i("µØÖ·", url);
-			String jsonStr= GetHttp.sendGet(url);
+	/**
+	 * ×¢²á
+	 * @param id
+	 * @param password
+	 * @return
+	 */
+	public Base regist(String username, String password) {
+		Base bean = new Base();
+		String url = ServiceUrl.Regist_Url_username + username
+				+ ServiceUrl.Regist_Url_password + password;
+		String jsonStr= GetHttp.sendGet(url);
 
-			if (jsonStr != null && !jsonStr.equals("")) {
-				JSONObject object = null;
-				try {
-					object = new JSONObject(jsonStr);
-					if (object.get("code") != null && object.getInt("code") == 200) {
-						bean.setCode(200);
-						bean.setMsg(object.getString("message"));
-						return bean;
-					} else {
-						bean.setMsg(object.getString("message"));
-						bean.setCode(object.getInt("code"));
-						return bean;
+		if (jsonStr != null && !jsonStr.equals("")) {
+			JSONObject object = null;
+			try {
+				object = new JSONObject(jsonStr);
+				if (object.get("code") != null && object.getInt("code") == 200) {
+					bean.setCode(200);
+					bean.setMsg(object.getString("message"));
+					return bean;
+				} else {
+					bean.setMsg(object.getString("message"));
+					bean.setCode(object.getInt("code"));
+					return bean;
 
-					}
-
-				} catch (JSONException e) {
-					e.printStackTrace();
 				}
-			} else {
-				bean.setCode(500);
-				bean.setMsg(context.getResources().getString(
-						R.string.http_status_code_error));
-				return bean;
+
+			} catch (JSONException e) {
+				e.printStackTrace();
 			}
-			return null;
+		} else {
+			bean.setCode(500);
+			bean.setMsg(context.getResources().getString(
+					R.string.http_status_code_error));
+			return bean;
 		}
+		return null;
+	}
+	
+	
+	
+	
+	
+	
+	
 
 }

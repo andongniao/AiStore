@@ -1,8 +1,6 @@
 package com.youai.aistore.xlistview;
 
 
-import java.util.ArrayList;
-
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
@@ -18,13 +16,9 @@ import android.widget.Scroller;
 import android.widget.TextView;
 
 import com.youai.aistore.R;
-import com.youai.aistore.View.SlideView;
 
 
 public class XListView extends ListView implements OnScrollListener {
-	private SlideView data;
-	private SlideView mFocusedItemView;
-	public boolean isSliding = false;
 	public int statu = 1; 
 	private float mLastY = -1; // save event y
 	private Scroller mScroller; // used for scroll back
@@ -266,7 +260,6 @@ public class XListView extends ListView implements OnScrollListener {
 
 	@Override
 	public boolean onTouchEvent(MotionEvent ev) {
-		if(!isSliding){
 		if (mLastY == -1) {
 			mLastY = ev.getRawY();
 		}
@@ -315,31 +308,7 @@ public class XListView extends ListView implements OnScrollListener {
 			}
 			break;
 		}
-		}else{
-			switch (ev.getAction()) {  
-		    case MotionEvent.ACTION_DOWN: {  
-		        int x = (int) ev.getX();  
-		        int y = (int) ev.getY();  
-		        //我们想知道当前点击了哪一行  
-		        int position = pointToPosition(x, y);  
-		        if (position != INVALID_POSITION) {  
-		            //得到当前点击行的数据从而取出当前行的item。  
-		            //可能有人怀疑，为什么要这么干？为什么不用getChildAt(position)？  
-		            //因为ListView会进行缓存，如果你不这么干，有些行的view你是得不到的。  
-//		            MessageItem data = (MessageItem) getItemAtPosition(position);  
-		            mFocusedItemView = data;  
-		        }  
-		    }  
-		    default:  
-		        break;  
-		    }  
-		  
-		    //向当前点击的view发送滑动事件请求，其实就是向SlideView发请求  
-		    if (mFocusedItemView != null) {  
-		        mFocusedItemView.onRequireTouchEvent(ev);  
-		    }  
-		  
-		}
+		
 		return super.onTouchEvent(ev);
 	}
 
@@ -415,9 +384,6 @@ public class XListView extends ListView implements OnScrollListener {
 
 	public void GoneFooterView(){
 		mFooterView.setVisibility(View.GONE);
-	}
-	public void setdata(SlideView data){
-		this.data = data;
 	}
 }
 

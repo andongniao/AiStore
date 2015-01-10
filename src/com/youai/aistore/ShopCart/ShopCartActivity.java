@@ -1,12 +1,15 @@
 package com.youai.aistore.ShopCart;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.ApplicationInfo;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.TypedValue;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
@@ -26,34 +29,34 @@ import com.youai.aistore.Bean.Base;
 import com.youai.aistore.Bean.ListShopCartBean;
 import com.youai.aistore.Bean.ShopCartBean;
 import com.youai.aistore.NetInterface.Send;
-import com.youai.aistore.NetInterface.ServiceUrl;
-import com.youai.aistore.View.SlideView;
-import com.youai.aistore.xlistview.XListView;
-import com.youai.aistore.xlistview.XListView.IXListViewListener;
+import com.youai.aistore.View.SwipeMenuListView.SwipeMenu;
+import com.youai.aistore.View.SwipeMenuListView.SwipeMenuCreator;
+import com.youai.aistore.View.SwipeMenuListView.SwipeMenuItem;
+import com.youai.aistore.View.SwipeMenuListView.SwipeMenuListView;
+import com.youai.aistore.View.SwipeMenuListView.SwipeMenuListView.OnMenuItemClickListener;
+import com.youai.aistore.View.SwipeMenuListView.SwipeMenuListView.OnSwipeListener;
 /**
  * 购物车首页
  * @author Qzr
  *
  */
-public class ShopCartActivity extends BaseActivity implements IXListViewListener,OnClickListener{
+public class ShopCartActivity extends BaseActivity implements OnClickListener{
 	//,IXListViewListener{
 	private long exitTime = 0;
 	private Context context;
-	private XListView lv;
+	private SwipeMenuListView lv;
 	private ImageView isnull_iv;
 	private View isnull;
 	private ShopCartAdapter adapter;
 	private LinearLayout showviewll;
 	private Button seeagainbt,goypaybt;
 	private TextView tv_topright,tv_gongji;
-	String s;
 	private ShopcartInterface inter;
-	private boolean isshowing;
+	public static boolean shopcartchaneged;
 	private MyTask myTask;
 	private ListShopCartBean listbean;
 	private Base beanresult;
 	private double price;
-	private int statu;
 
 	@Override
 	protected void onCreate(Bundle arg0) {
@@ -63,38 +66,34 @@ public class ShopCartActivity extends BaseActivity implements IXListViewListener
 		topRightGone();
 		setTitleTxt(R.string.shopcart_title);
 		setContentXml(R.layout.shopcart);
-		topRightVisible();
-		tv_topright = (TextView) getTopRightView();
-		tv_topright.setText("编辑");
-		isshowing = false;
-		tv_topright.setTextColor(getResources().getColor(R.color.white));
-		tv_topright.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View arg0) {
-				if(!isshowing){
-					if(adapter!=null){
-						statu = 2;
-						adapter.setdata(listbean.getList(), statu);
-						adapter.notifyDataSetChanged();
-						tv_topright.setText("完成");
-						isshowing = true;
-					}
-				}else{
-					if(adapter!=null){
-						statu = 1;
-						adapter.setdata(listbean.getList(), statu);
-						adapter.notifyDataSetChanged();
-						tv_topright.setText("编辑");
-						isshowing = false;
-					}
-				}
-			}
-		});
+//		topRightVisible();
+//		tv_topright = (TextView) getTopRightView();
+//		tv_topright.setText("编辑");
+//		isshowing = false;
+//		tv_topright.setTextColor(getResources().getColor(R.color.white));
+//		tv_topright.setOnClickListener(new OnClickListener() {
+//			@Override
+//			public void onClick(View arg0) {
+//				if(!isshowing){
+//					if(adapter!=null){
+//						adapter.setdata(listbean.getList());
+//						adapter.notifyDataSetChanged();
+//						tv_topright.setText("完成");
+//						isshowing = true;
+//					}
+//				}else{
+//					if(adapter!=null){
+//						adapter.setdata(listbean.getList());
+//						adapter.notifyDataSetChanged();
+//						tv_topright.setText("编辑");
+//						isshowing = false;
+//					}
+//				}
+//			}
+//		});
 		//getLayoutInflater().inflate(R.layout.shorcart_isnull_show, null);
 		init();
 
-		s = ServiceUrl.GetShopCartList_Url_head+MyApplication.SessionId+
-				ServiceUrl.GetShopCartList_Url_foot+MyApplication.UserId;
 		//
 
 		if(Util.detect(context)){
@@ -108,6 +107,7 @@ public class ShopCartActivity extends BaseActivity implements IXListViewListener
 
 	private void init() {
 		inter = new ShopcartInterface() {
+
 
 			@Override
 			public void delete(ArrayList<ShopCartBean> list, int index) {
@@ -161,10 +161,6 @@ public class ShopCartActivity extends BaseActivity implements IXListViewListener
 				}
 			}
 
-			@Override
-			public void setlvdata(SlideView data) {
-				lv.setdata(data);
-			}
 
 
 		};
@@ -176,33 +172,113 @@ public class ShopCartActivity extends BaseActivity implements IXListViewListener
 		goypaybt = (Button) findViewById(R.id.shopcart_gopay_bt);
 		goypaybt.setOnClickListener(this);
 		tv_gongji = (TextView) findViewById(R.id.shopcart_gongji_tv);
-		lv = (XListView) findViewById(R.id.shopcart_listview);
-		lv.isSliding = true;
-		lv.GoneFooterView();
+		lv = (SwipeMenuListView) findViewById(R.id.shopcart_listview);
 		lv.setFocusable(false);
-		lv.setPullLoadEnable(true);
-		lv.setXListViewListener(this);
-		isnull_iv = (ImageView)findViewById(R.id.shopcart_isnull_iv);
-		isnull_iv.setOnClickListener(this);
+//		isnull_iv = (ImageView)findViewById(R.id.shopcart_isnull_iv);
+//		isnull_iv.setOnClickListener(this);
 		lv.setEmptyView(isnull);
+		SwipeMenuCreator creator = new SwipeMenuCreator() {
+
+			@Override
+			public void create(SwipeMenu menu) {
+				// create "open" item
+//				SwipeMenuItem openItem = new SwipeMenuItem(
+//						getApplicationContext());
+//				// set item background
+//				openItem.setBackground(new ColorDrawable(Color.rgb(0xC9, 0xC9,
+//						0xCE)));
+//				// set item width
+//				openItem.setWidth(dp2px(90));
+//				// set item title
+//				openItem.setTitle("Open");
+//				// set item title fontsize
+//				openItem.setTitleSize(18);
+//				// set item title font color
+//				openItem.setTitleColor(Color.WHITE);
+//				// add to menu
+//				menu.addMenuItem(openItem);
+
+				// create "delete" item
+				SwipeMenuItem deleteItem = new SwipeMenuItem(
+						getApplicationContext());
+				// set item background
+				deleteItem.setBackground(new ColorDrawable(Color.rgb(0xF9,
+						0x3F, 0x25)));
+				// set item width
+				deleteItem.setWidth(dp2px(90));
+				// set a icon
+				deleteItem.setIcon(R.drawable.del_icon_normal);
+				// add to menu
+				menu.addMenuItem(deleteItem);
+			}
+		};
+		// set creator
+		lv.setMenuCreator(creator);
+
+		// step 2. listener item click event
+		lv.setOnMenuItemClickListener(new OnMenuItemClickListener() {
+			@Override
+			public void onMenuItemClick(int position, SwipeMenu menu, int index) {
+				switch (index) {
+//				case 0:
+//					// open
+////					open(item);
+//					break;
+				case 0:
+					// delete
+//					delete(item);
+//					mAppList.remove(position);
+//					mAdapter.notifyDataSetChanged();
+					if(Util.detect(context)){
+						myTask = new MyTask(2,0);
+						myTask.setdata(listbean.getList(), position);
+						myTask.execute("");  
+					}else{
+						Util.ShowToast(context, R.string.net_work_is_error);
+					}
+					break;
+				}
+			}
+		});
+		
+		// set SwipeListener
+		lv.setOnSwipeListener(new OnSwipeListener() {
+			
+			@Override
+			public void onSwipeStart(int position) {
+				// swipe start
+			}
+			
+			@Override
+			public void onSwipeEnd(int position) {
+				// swipe end
+			}
+		});
 	}
 
 	@Override
 	public void onClick(View v) {
 		switch (v.getId()) {
-		case R.id.shopcart_isnull_iv:
-			Util.ShowToast(context, "没有数据");
-			break;
+//		case R.id.shopcart_isnull_iv:
+//			Util.ShowToast(context, "没有数据");
+//			break;
 		case R.id.shopcart_see_again_bt:
-			Util.ShowToast(context, "再看看");
 			ExampleActivity.setCurrentTab(0);
 			break;
 		case R.id.shopcart_gopay_bt:
 			Util.ShowToast(context, "去支付");
-			System.out.println("购物车列表所用sessionid======"+s);
-			Intent intent = new Intent(ShopCartActivity.this,ConsigneeInfoActivity.class);
-			intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-			startActivity(intent);
+//			Intent intent = new Intent(ShopCartActivity.this,ConsigneeInfoActivity.class);
+//			intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+//			startActivity(intent);
+			new Thread(){public void run() {
+				Send s = new Send(context);
+//				Base b = s.regist("13000000000", "1233");
+				Base b = s.getLogin("13000000000", "1233");
+				if(b!=null && b.getCode()==200){
+//					Util.ShowToast(context, "success");
+				}else{
+				}
+			};}.start();
 			break;
 
 		}
@@ -287,7 +363,6 @@ public class ShopCartActivity extends BaseActivity implements IXListViewListener
 		protected void onPostExecute(Object result) {  
 			Util.stopProgressDialog();
 			if(index == 1){
-				onLoad();
 				listbean = (ListShopCartBean) result;
 				if(listbean!=null){
 					if(listbean.getCode()==200){
@@ -312,7 +387,7 @@ public class ShopCartActivity extends BaseActivity implements IXListViewListener
 								Integer.parseInt(list.get(postion).getGoods_number());
 						tv_gongji.setText(String.valueOf(price));
 						list.remove(list.get(postion));
-						adapter.setdata(list, 2);
+						adapter.setdata(list);
 						adapter.notifyDataSetChanged();
 					}else{
 						Util.ShowToast(context,beanresult.getMsg());
@@ -324,16 +399,14 @@ public class ShopCartActivity extends BaseActivity implements IXListViewListener
 				beanresult = (Base) result;
 				if(beanresult!=null){
 					if(beanresult.getCode()==200){
-						//						if(Util.detect(context)){
-						//							myTask = new MyTask(1);
-						//							myTask.execute("");  
-						//						}else{
-						//							Util.ShowToast(context, R.string.net_work_is_error);
-						//						}
 						list.get(postion).setGoods_number(String.valueOf(Integer.parseInt(list.get(postion).getGoods_number())+number));
-						adapter.setdata(list, 1);
+						adapter.setdata(list);
 						adapter.notifyDataSetChanged();
+						if(type==1){
 						price +=Double.parseDouble(list.get(postion).getGoods_price());
+						}else{
+							price -=Double.parseDouble(list.get(postion).getGoods_price());
+						}
 						tv_gongji.setText(String.valueOf(price));
 					}else{
 						Util.ShowToast(context,beanresult.getMsg());
@@ -355,17 +428,15 @@ public class ShopCartActivity extends BaseActivity implements IXListViewListener
 		void delete(ArrayList<ShopCartBean> list,int index);
 		void add(ArrayList<ShopCartBean> list,int index);
 		void jian(ArrayList<ShopCartBean> list,int index);
-		void setlvdata(SlideView data);
 	}
 
 
 	private void UpUI(){
 		if(adapter == null){
-			adapter = new ShopCartAdapter(context, listbean.getList(),1,inter);
+			adapter = new ShopCartAdapter(context, listbean.getList(),inter);
 			lv.setAdapter(adapter);
 		}else{
-			statu = 1;
-			adapter.setdata(listbean.getList(), statu);
+			adapter.setdata(listbean.getList());
 			adapter.notifyDataSetChanged();
 		}
 		if(listbean!=null && listbean.getList().size()>0){
@@ -396,31 +467,28 @@ public class ShopCartActivity extends BaseActivity implements IXListViewListener
 				}
 			}
 		}
+		
 		//}
 		return super.onTouchEvent(event);
 	}
 
+	
 	@Override
-	public void onRefresh() {
-		if(Util.detect(context)){
-			myTask = new MyTask(1,0);
-			myTask.execute("");  
-		}else{
-			Util.ShowToast(context, R.string.net_work_is_error);
+	protected void onResume() {
+		super.onResume();
+		if(shopcartchaneged){
+			if(Util.detect(context)){
+				myTask = new MyTask(1,0);
+				myTask.execute("");  
+			}else{
+				Util.ShowToast(context, R.string.net_work_is_error);
+			}
+			shopcartchaneged = false;
 		}
 	}
-
-	@Override
-	public void onLoadMore() {
-		// TODO Auto-generated method stub
-
-	}
-	private void onLoad() {
-		lv.stopRefresh();
-		lv.stopLoadMore();
-		SimpleDateFormat    sDateFormat    =   new    SimpleDateFormat("yyyy-MM-dd    hh:mm:ss");       
-		String    date    =    sDateFormat.format(new    java.util.Date());    
-		lv.setRefreshTime(date);
+	private int dp2px(int dp) {
+		return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp,
+				getResources().getDisplayMetrics());
 	}
 	
 }
