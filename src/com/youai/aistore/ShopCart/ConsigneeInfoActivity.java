@@ -1,14 +1,17 @@
 package com.youai.aistore.ShopCart;
 
 import com.youai.aistore.BaseActivity;
-import com.youai.aistore.ExampleActivity;
+import com.youai.aistore.MyApplication;
 import com.youai.aistore.R;
 import com.youai.aistore.Util;
-import com.youai.aistore.WelcomeActivity;
+import com.youai.aistore.Bean.Base;
+import com.youai.aistore.Bean.ConsigneeBean;
+import com.youai.aistore.NetInterface.Send;
 import com.youai.aistore.Order.OrderActivity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -24,6 +27,10 @@ public class ConsigneeInfoActivity extends BaseActivity implements OnClickListen
 	private Button savebtn;
 	private String consignee,number,address;
 	private Context context;
+	private MyTask myTask;
+	private ConsigneeBean bean;
+	private Base b;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -31,6 +38,12 @@ public class ConsigneeInfoActivity extends BaseActivity implements OnClickListen
 		setContentXml(R.layout.consignee_info);
 		setTopLeftBackground(R.drawable.btn_back);
 		init();
+		if(Util.detect(context)){
+			myTask = new MyTask(1);
+			myTask.execute("");  
+		}else{
+			Util.ShowToast(context, R.string.net_work_is_error);
+		}
 	}
 
 	private void init() {
@@ -66,14 +79,12 @@ public class ConsigneeInfoActivity extends BaseActivity implements OnClickListen
 				if(Util.IsNull(number)){
 					if(Util.isMobileNO(number)){
 						if(Util.IsNull(address)){
-							Intent intent = new Intent(ConsigneeInfoActivity.this,OrderActivity.class);
-							intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-							intent.putExtra("consignee", consignee);
-							intent.putExtra("number", number);
-							intent.putExtra("address", address);
-							startActivity(intent);
-							
-							
+							if(Util.detect(context)){
+								myTask = new MyTask(2);
+								myTask.execute("");  
+							}else{
+								Util.ShowToast(context, R.string.net_work_is_error);
+							}
 						}else{
 							Util.ShowToast(context, R.string.consignee_address_can_not_null);
 						}
@@ -91,5 +102,90 @@ public class ConsigneeInfoActivity extends BaseActivity implements OnClickListen
 			break;
 
 		}
+	}
+	
+	
+	private class MyTask extends AsyncTask<Object, Object, Object> {  
+		private int statu;
+		public MyTask(int statu){
+			this.statu = statu;
+		}
+		
+		//onPreExecute方法用于在执行后台任务前做一些UI操作  
+		@Override  
+		protected void onPreExecute() {  
+			Util.startProgressDialog(context);
+		}  
+
+		//doInBackground方法内部执行后台任务,不可在此方法内修改UI  
+		@Override  
+		protected Object doInBackground(Object... params) {  
+			try {  
+				if(statu == 1){
+					Send s = new Send(context);
+					String userid = MyApplication.UserId;
+//					String userid = "188";
+					bean = s.getConsigneeInfo(userid);
+					return bean;
+				}else{
+					Send s = new Send(context);
+					String userid = MyApplication.UserId;
+//					String userid = "188";
+					b = s.saveConsigneeInfo(userid, consignee, number, address);
+					return b;
+				}
+			} catch (Exception e) {  
+				e.printStackTrace();
+			}  
+			return null;  
+		}  
+
+		//onProgressUpdate方法用于更新进度信息  
+		@Override  
+		protected void onProgressUpdate(Object... progresses) {  
+			
+		}  
+
+		//onPostExecute方法用于在执行完后台任务后更新UI,显示结果  
+		@Override  
+		protected void onPostExecute(Object result) {  
+			Util.stopProgressDialog();
+			if(statu == 1){
+				bean = (ConsigneeBean) result;
+				if(bean!=null){
+					if(bean.getCode() == 200){
+						consigneeet.setText(bean.getConsignee());
+						addresset.setText(bean.getAddress());
+						numberet.setText(bean.getTel());
+					}else{
+						Util.ShowToast(context,bean.getMsg());
+					}
+				}else{
+					Util.ShowToast(context,R.string.net_work_is_error);
+				}
+			}else{
+				if(b!=null){
+					if(b.getCode()==200){
+						Intent intent = new Intent(ConsigneeInfoActivity.this,OrderActivity.class);
+						intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+						intent.putExtra("consignee", consignee);
+						intent.putExtra("number", number);
+						intent.putExtra("address", address);
+						startActivity(intent);
+					}else{
+						Util.ShowToast(context,b.getMsg());	
+					}
+				}else{
+					Util.ShowToast(context,R.string.net_work_is_error);
+				}
+			}
+		}  
+
+		//onCancelled方法用于在取消执行中的任务时更改UI  
+		@Override  
+		protected void onCancelled() {  
+//			Util.stopProgressDialog();
+		}  
+	
 	}
 }

@@ -13,6 +13,7 @@ import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
+import com.youai.aistore.Bean.UserBean;
 
 /**
  * MyApplication
@@ -20,6 +21,7 @@ import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
  * @author Qzr
  */
 public class MyApplication extends Application {
+	public static UserBean userBean;
 	public static String SessionId = ""; 
 	public static String UserId = "0"; 
 	public static SharedPreferences mSharedPreferences;
@@ -94,6 +96,7 @@ public class MyApplication extends Application {
 		UserId = mSharedPreferences.getString("userid", "0");
 		mEditor.putString("sessionid", SessionId);
 		mEditor.commit();  
+		userBean = new UserBean();
 	}
 	public static void setUserId(String userid){
 		SharedPreferences.Editor mEditor = mSharedPreferences.edit();

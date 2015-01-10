@@ -43,6 +43,7 @@ import com.youai.aistore.Bean.CommentsBean;
 import com.youai.aistore.Bean.GoodsBean;
 import com.youai.aistore.Bean.ListCommentsBean;
 import com.youai.aistore.NetInterface.Send;
+import com.youai.aistore.ShopCart.ShopCartActivity;
 import com.youai.aistore.xlistview.XListView;
 import com.youai.aistore.xlistview.XListView.IXListViewListener;
 /**
@@ -370,8 +371,10 @@ public class ProductDetailsActivity extends BaseActivity implements IXListViewLi
 						if(s){
 							stat = false;
 							ExampleActivity.setCurrentTab(2);
+							ShopCartActivity.shopcartchaneged = true;
 						}else{
-						Util.ShowToast(context, "已加入购物车");
+						Util.ShowToast(context, R.string.product_add_shopcart_success);
+						ShopCartActivity.shopcartchaneged = true;
 						}
 					}else{
 						Util.ShowToast(context,beanresult.getMsg());

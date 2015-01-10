@@ -16,12 +16,14 @@ import com.youai.aistore.R;
 import com.youai.aistore.Util;
 import com.youai.aistore.Bean.Base;
 import com.youai.aistore.Bean.CommentsBean;
+import com.youai.aistore.Bean.ConsigneeBean;
 import com.youai.aistore.Bean.GoodsBean;
 import com.youai.aistore.Bean.ListCommentsBean;
 import com.youai.aistore.Bean.ListFclassTwo;
 import com.youai.aistore.Bean.ListGoodsBean;
 import com.youai.aistore.Bean.ListShopCartBean;
 import com.youai.aistore.Bean.ShopCartBean;
+import com.youai.aistore.Bean.UserBean;
 
 public class Send {
 	private Context context;
@@ -43,7 +45,7 @@ public class Send {
 		String url = ServiceUrl.HomeUrl + key;
 		String jsonStr = null;
 		jsonStr = GetHttp.sendGet(url);
-		
+
 		if (jsonStr != null && !jsonStr.equals("")) {
 			JSONObject object = null;
 			try {
@@ -434,12 +436,59 @@ public class Send {
 		return null;
 
 	}
-    /*登陆*/
-	public Base getLogin(String id, String password) {
-		Base bean = new Base();
-		String url = ServiceUrl.Login_Url_username + id
+	/**
+	 * 登录
+	 * @param id
+	 * @param password
+	 * @return
+	 */
+	public UserBean getLogin(String username, String password) {
+		UserBean bean = new UserBean();
+		String url = ServiceUrl.Login_Url_username + username
 				+ ServiceUrl.Login_Url_password + password;
-		Log.i("地址", url);
+		String jsonStr= GetHttp.sendGet(url);
+
+		if (jsonStr != null && !jsonStr.equals("")) {
+			JSONObject object = null;
+			try {
+				object = new JSONObject(jsonStr);
+				if (object.get("code") != null && object.getInt("code") == 200) {
+					JSONObject data = object.getJSONObject("data");
+					String json = data.toString();
+					Type type = new TypeToken<UserBean>() {
+					}.getType();
+					bean = gson.fromJson(json, type);
+					bean.setCode(200);
+					bean.setMsg(object.getString("message"));
+					return bean;
+				} else {
+					bean.setMsg(object.getString("message"));
+					bean.setCode(object.getInt("code"));
+					return bean;
+
+				}
+
+			} catch (JSONException e) {
+				e.printStackTrace();
+			}
+		} else {
+			bean.setCode(500);
+			bean.setMsg(context.getResources().getString(
+					R.string.http_status_code_error));
+			return bean;
+		}
+		return null;
+	}
+	/**
+	 * 注册
+	 * @param id
+	 * @param password
+	 * @return
+	 */
+	public Base regist(String username, String password) {
+		Base bean = new Base();
+		String url = ServiceUrl.Regist_Url_username + username
+				+ ServiceUrl.Regist_Url_password + password;
 		String jsonStr= GetHttp.sendGet(url);
 
 		if (jsonStr != null && !jsonStr.equals("")) {
@@ -468,39 +517,95 @@ public class Send {
 		}
 		return null;
 	}
-	 /*注册*/
-		public Base regist(String id, String password) {
-			Base bean = new Base();
-			String url = ServiceUrl.Regist_Url_username + id
-					+ ServiceUrl.Regist_Url_password + password;
-			Log.i("地址", url);
-			String jsonStr= GetHttp.sendGet(url);
-
-			if (jsonStr != null && !jsonStr.equals("")) {
-				JSONObject object = null;
-				try {
-					object = new JSONObject(jsonStr);
-					if (object.get("code") != null && object.getInt("code") == 200) {
-						bean.setCode(200);
-						bean.setMsg(object.getString("message"));
-						return bean;
-					} else {
-						bean.setMsg(object.getString("message"));
-						bean.setCode(object.getInt("code"));
-						return bean;
-
-					}
-
-				} catch (JSONException e) {
-					e.printStackTrace();
+	
+	/**
+	 * 获取收货人信息
+	 * @param id
+	 * @param password
+	 * @return
+	 */
+	public ConsigneeBean getConsigneeInfo(String userid) {
+		ConsigneeBean bean = new ConsigneeBean();
+		String url = ServiceUrl.get_consignee_info+userid;
+		String jsonStr= GetHttp.sendGet(url);
+		
+		if (jsonStr != null && !jsonStr.equals("")) {
+			JSONObject object = null;
+			try {
+				object = new JSONObject(jsonStr);
+				if (object.get("code") != null && object.getInt("code") == 200) {
+					JSONObject data = object.getJSONObject("data");
+					String json = data.toString();
+					Type type = new TypeToken<ConsigneeBean>() {
+					}.getType();
+					bean = gson.fromJson(json, type);
+					bean.setCode(200);
+					bean.setMsg(object.getString("message"));
+					return bean;
+				} else {
+					bean.setMsg(object.getString("message"));
+					bean.setCode(object.getInt("code"));
+					return bean;
+					
 				}
-			} else {
-				bean.setCode(500);
-				bean.setMsg(context.getResources().getString(
-						R.string.http_status_code_error));
-				return bean;
+				
+			} catch (JSONException e) {
+				e.printStackTrace();
 			}
-			return null;
+		} else {
+			bean.setCode(500);
+			bean.setMsg(context.getResources().getString(
+					R.string.http_status_code_error));
+			return bean;
 		}
+		return null;
+	}
+	
+	
+	/**
+	 * save收货人信息
+	 * @param id
+	 * @param password
+	 * @return
+	 */
+	public Base saveConsigneeInfo(String userid,String consignee,String tel,String address) {
+		Base bean = new Base();
+		String url = ServiceUrl.save_consignee_info+userid+
+				ServiceUrl.save_consignee_info_consignee+consignee+
+				ServiceUrl.save_consignee_info_tel+tel+
+				ServiceUrl.save_consignee_info_address+address;
+		String jsonStr= GetHttp.sendGet(url);
+		
+		if (jsonStr != null && !jsonStr.equals("")) {
+			JSONObject object = null;
+			try {
+				object = new JSONObject(jsonStr);
+				if (object.get("code") != null && object.getInt("code") == 200) {
+					bean.setCode(200);
+					bean.setMsg(object.getString("message"));
+					return bean;
+				} else {
+					bean.setMsg(object.getString("message"));
+					bean.setCode(object.getInt("code"));
+					return bean;
+					
+				}
+				
+			} catch (JSONException e) {
+				e.printStackTrace();
+			}
+		} else {
+			bean.setCode(500);
+			bean.setMsg(context.getResources().getString(
+					R.string.http_status_code_error));
+			return bean;
+		}
+		return null;
+	}
+	
+	
+	
+	
+	
 
 }
