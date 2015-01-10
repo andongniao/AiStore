@@ -23,6 +23,7 @@ import com.youai.aistore.Bean.ListFclassTwo;
 import com.youai.aistore.Bean.ListGoodsBean;
 import com.youai.aistore.Bean.ListShopCartBean;
 import com.youai.aistore.Bean.ShopCartBean;
+import com.youai.aistore.Bean.UserBean;
 
 public class Send {
 	private Context context;
@@ -441,8 +442,8 @@ public class Send {
 	 * @param password
 	 * @return
 	 */
-	public Base getLogin(String username, String password) {
-		Base bean = new Base();
+	public UserBean getLogin(String username, String password) {
+		UserBean bean = new UserBean();
 		String url = ServiceUrl.Login_Url_username + username
 				+ ServiceUrl.Login_Url_password + password;
 		String jsonStr= GetHttp.sendGet(url);
@@ -452,6 +453,11 @@ public class Send {
 			try {
 				object = new JSONObject(jsonStr);
 				if (object.get("code") != null && object.getInt("code") == 200) {
+					JSONObject data = object.getJSONObject("data");
+					String json = data.toString();
+					Type type = new TypeToken<UserBean>() {
+					}.getType();
+					bean = gson.fromJson(json, type);
 					bean.setCode(200);
 					bean.setMsg(object.getString("message"));
 					return bean;
