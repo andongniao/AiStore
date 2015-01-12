@@ -17,6 +17,7 @@ import com.youai.aistore.BaseActivity;
 import com.youai.aistore.MyApplication;
 import com.youai.aistore.R;
 import com.youai.aistore.Util;
+import com.youai.aistore.Order.AllOrderActivity;
 import com.youai.aistore.View.CircleImageView;
 
 /**
@@ -63,6 +64,7 @@ public class MycenterHomeActivity extends BaseActivity implements
 		sms_ll.setOnClickListener(this);
 		show_ll = (LinearLayout) findViewById(R.id.mycenter_home_show_ll);
 		uernametv = (TextView) findViewById(R.id.mycenter_home_username_tv);
+		login_ll = (LinearLayout) findViewById(R.id.mycenter_home_login_ll);
 		// µÇÂ½ºÍ×¢²á
 		login_btn = (Button) findViewById(R.id.mycenter_home_login_btn);
 		login_btn.setOnClickListener(this);
@@ -73,6 +75,10 @@ public class MycenterHomeActivity extends BaseActivity implements
 		}
 		String url = "http://img5.imgtn.bdimg.com/it/u=3292851460,915918973&fm=116&gp=0.jpg";
 		ImageLoader.getInstance().displayImage(url, headeriv);
+		if(MyApplication.logined){
+			login_ll.setVisibility(View.GONE);
+			uernametv.setText(MyApplication.UserName);
+		}
 	}
 
 	@Override
@@ -92,7 +98,14 @@ public class MycenterHomeActivity extends BaseActivity implements
 			startActivity(intent1);
 			break;
 		case R.id.mycenter_home_dingdan_ll:
-
+			Intent dd = null;
+//			if(MyApplication.logined){
+				dd = new Intent(MycenterHomeActivity.this,AllOrderActivity.class);
+//			}else{
+//				dd = new Intent(MycenterHomeActivity.this,MyLoginActivity.class);
+//			}
+			dd.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+			startActivity(dd);
 			break;
 		case R.id.mycenter_home_youhui_ll:
 

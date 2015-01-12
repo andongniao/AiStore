@@ -21,7 +21,11 @@ import com.youai.aistore.Bean.GoodsBean;
 import com.youai.aistore.Bean.ListCommentsBean;
 import com.youai.aistore.Bean.ListFclassTwo;
 import com.youai.aistore.Bean.ListGoodsBean;
+import com.youai.aistore.Bean.ListOrderBean;
+import com.youai.aistore.Bean.ListOrderBean.OrderBean;
 import com.youai.aistore.Bean.ListShopCartBean;
+import com.youai.aistore.Bean.OrderDetailsBean;
+import com.youai.aistore.Bean.OrderDetailsBean.Goods;
 import com.youai.aistore.Bean.ShopCartBean;
 import com.youai.aistore.Bean.UserBean;
 
@@ -644,6 +648,101 @@ public class Send {
 		return null;
 	}
 	
+	
+	/**
+	 * 获取全部订单
+	 * @param id
+	 * @param password
+	 * @return
+	 */
+	public ListOrderBean getAllOrderlist(String userid,int page) {
+		ListOrderBean bean = new ListOrderBean();
+		String url = ServiceUrl.get_order_list_userid+userid+
+				ServiceUrl.get_order_list_page+page+
+				ServiceUrl.get_order_list_action;
+		String jsonStr= GetHttp.sendGet(url);
+		
+		if (jsonStr != null && !jsonStr.equals("")) {
+			JSONObject object = null;
+			try {
+				object = new JSONObject(jsonStr);
+				if (object.get("code") != null && object.getInt("code") == 200) {
+					JSONArray data = object.getJSONArray("data");
+					String json = data.toString();
+					Type t = new TypeToken<ArrayList<OrderBean>>() {
+					}.getType();
+					ArrayList<OrderBean> b = gson.fromJson(json, t);
+					bean.setList(b);
+					bean.setCode(200);
+					bean.setMsg(object.getString("message"));
+					return bean;
+				} else {
+					bean.setMsg(object.getString("message"));
+					bean.setCode(object.getInt("code"));
+					return bean;
+					
+				}
+				
+			} catch (JSONException e) {
+				e.printStackTrace();
+			}
+		} else {
+			bean.setCode(500);
+			bean.setMsg(context.getResources().getString(
+					R.string.http_status_code_error));
+			return bean;
+		}
+		return null;
+	}
+	
+	/**
+	 * 获取订单详情
+	 * @param id
+	 * @param password
+	 * @return
+	 */
+	public OrderDetailsBean getOrderDetalis(String orderid,String userid) {
+		OrderDetailsBean bean = new OrderDetailsBean();
+		String url = ServiceUrl.get_order_details_orderid+orderid+
+				ServiceUrl.get_order_details_userid+userid;
+		String jsonStr= GetHttp.sendGet(url);
+		
+		if (jsonStr != null && !jsonStr.equals("")) {
+			JSONObject object = null;
+			try {
+				object = new JSONObject(jsonStr);
+				if (object.get("code") != null && object.getInt("code") == 200) {
+					JSONObject data = object.getJSONObject("data");
+					String json = data.toString();
+					Type t = new TypeToken<OrderDetailsBean>() {
+					}.getType();
+					bean = gson.fromJson(json, t);
+					JSONArray j = data.getJSONArray("goods");
+					Type tg = new TypeToken<ArrayList<Goods>>() {
+					}.getType();
+					ArrayList<Goods> gs =  gson.fromJson(j.toString(), tg);
+					bean.setGoods(gs);
+					bean.setCode(200);
+					bean.setMsg(object.getString("message"));
+					return bean;
+				} else {
+					bean.setMsg(object.getString("message"));
+					bean.setCode(object.getInt("code"));
+					return bean;
+					
+				}
+				
+			} catch (JSONException e) {
+				e.printStackTrace();
+			}
+		} else {
+			bean.setCode(500);
+			bean.setMsg(context.getResources().getString(
+					R.string.http_status_code_error));
+			return bean;
+		}
+		return null;
+	}
 	
 	
 	

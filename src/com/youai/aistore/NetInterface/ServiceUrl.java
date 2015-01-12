@@ -46,5 +46,12 @@ public class ServiceUrl {
 	public static String save_order_info_time ="&best_time=";
 	public static String save_order_info_type ="&pay_type=";
 	public static String save_order_info_time_fee ="&shipping_fee=";
+	//全部订单  
+	public static String get_order_list_userid = BaseUrl+"?module=user&&user_id=";
+	public static String get_order_list_page = "&page=";
+	public static String get_order_list_action = "&action=order_list";
+	//订单详情  http://www.aiai.cn/services/api.php=296188
+	public static String get_order_details_orderid = BaseUrl+"?module=user&action=order_detail&order_id=";
+	public static String get_order_details_userid = "&user_id=";
 
 }

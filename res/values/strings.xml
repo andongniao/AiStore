@@ -66,6 +66,7 @@
 
     <!-- 全部订单 -->
     <string name="all_order_title">全部订单</string>
+    <string name="order_isnull">还没有订单哦！</string>
     <string name="all_order_item_number">订单号：</string>
     <string name="all_order_item_type">支付方式：</string>
     <string name="all_order_item_type_zhifubao">支付宝支付</string>
@@ -77,9 +78,15 @@
     <string name="order_details_title">订单详情</string>
     <string name="order_details_number">数量：</string>
     <string name="order_details_shouhuo_info">收货信息</string>
-    <string name="order_details_oeder_money">订单金额</string>
-    <string name="order_details_youfei_l">（邮费</string>
+    <string name="order_details_oeder_money">订单金额:</string>
+    <string name="order_details_oeder_pp">收货人:</string>
+    <string name="order_details_oeder_tel">电话:</string>
+    <string name="order_details_oeder_address">收获地址:</string>
+    <string name="order_details_statu">订单状态：</string>
+    <string name="order_details_youfei_l">（邮费:</string>
     <string name="order_details_youfei_r">）</string>
+    <string name="order_details_cancel">取消订单</string>
+    <string name="order_details_gopay">去支付</string>
 
     <!-- 搜索 -->
     <string name="search_et_text">请输入关键词</string>
@@ -144,5 +151,6 @@
     <string name="xlistview_header_last_time">上次更新时间：</string>
     <string name="xlistview_footer_hint_normal">查看更多</string>
     <string name="xlistview_footer_hint_ready">松开载入更多</string>
+    <string name="page_is_final">当前为最后一页</string>
 
 </resources>

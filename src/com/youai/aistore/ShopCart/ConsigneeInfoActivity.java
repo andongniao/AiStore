@@ -127,14 +127,14 @@ public class ConsigneeInfoActivity extends BaseActivity implements OnClickListen
 			try {  
 				if(statu == 1){
 					Send s = new Send(context);
-//					String userid = MyApplication.UserId;
-					String userid = "188";
+					String userid = MyApplication.UserId;
+//					String userid = "188";
 					bean = s.getConsigneeInfo(userid);
 					return bean;
 				}else{
 					Send s = new Send(context);
-//					String userid = MyApplication.UserId;
-					String userid = "188";
+					String userid = MyApplication.UserId;
+//					String userid = "188";
 					b = s.saveConsigneeInfo(userid, consignee, number, address);
 					return b;
 				}

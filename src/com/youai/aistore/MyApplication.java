@@ -3,6 +3,9 @@
  */
 package com.youai.aistore;
 
+import java.util.ArrayList;
+
+import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -21,9 +24,11 @@ import com.youai.aistore.Bean.UserBean;
  * @author Qzr
  */
 public class MyApplication extends Application {
+	public static boolean logined;
 	public static UserBean userBean;
 	public static String SessionId = ""; 
 	public static String UserId = "0"; 
+	public static String UserName = ""; 
 	public static SharedPreferences mSharedPreferences;
 	public static String callnumber = "4000965585";
 	public static String smsnumber = "13331054189";
@@ -93,15 +98,18 @@ public class MyApplication extends Application {
 		}else{
 			SessionId = Util.hashKeyForDisk(DEVICE_ID+time);
 		}
-		UserId = "188";//mSharedPreferences.getString("userid", "0");
 		mEditor.putString("sessionid", SessionId);
 		mEditor.commit();  
-		String name = mSharedPreferences.getString("username", "");
-		String userid = mSharedPreferences.getString("userid", "");
-		if(Util.IsNull(name)){
+		UserName = mSharedPreferences.getString("username", "");
+		UserId = "188";//mSharedPreferences.getString("userid", "0");
+//		UserId = mSharedPreferences.getString("userid", "0");
+		if(Util.IsNull(UserName)){
+			logined = true;
 			userBean = new UserBean();
-			userBean.setUser_id(userid);
-			userBean.setUser_name(name);
+			userBean.setUser_id(UserId);
+			userBean.setUser_name(UserName);
+		}else{
+			logined = false;
 		}
 	}
 	public static void setUserId(String userid){
