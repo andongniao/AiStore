@@ -70,6 +70,18 @@ public class Util {
 
 		return m.matches();
 	}
+	/**
+	 *检查开头或结尾是否有空格
+	 * @param password
+	 * @return
+	 */
+	public static boolean isnullstring(String password) {
+		String str = "\\s+";
+		Pattern p = Pattern.compile(str);
+		Matcher m = p.matcher(password);
+
+		return m.matches();
+	}
 	
 	/**
 	 * 判断字符串是否为空

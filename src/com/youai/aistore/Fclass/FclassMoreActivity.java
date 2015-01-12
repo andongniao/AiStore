@@ -8,6 +8,8 @@ import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.provider.Settings.System;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
@@ -36,14 +38,15 @@ public class FclassMoreActivity extends BaseActivity implements IXListViewListen
 	private MyTask myTask;
 	private ArrayList<GoodsBean>list;
 	private ListFclassTwo listf;
-	private ImageView popll_iv;
-	private int cou=1;
+	private ImageView popll_iv,numll_iv,pricell_iv;
+	private int p=1,n=1,j=1;
 	@Override
 	protected void onCreate(Bundle arg0) {
 		// TODO Auto-generated method stub
 		super.onCreate(arg0);
 		setContentXml(R.layout.fclass_more);
 		String title = getIntent().getStringExtra("title");
+
 		setTitleTxt(title);		
 		init();
 		if(Util.detect(context)){
@@ -56,16 +59,19 @@ public class FclassMoreActivity extends BaseActivity implements IXListViewListen
 
 	private void init() {
 		context = FclassMoreActivity.this;
+		//人气，销量,价格的布局
 		popll = (LinearLayout) findViewById(R.id.fclass_more_popularity_ll);
 		numll = (LinearLayout) findViewById(R.id.fclass_more_number_ll);
 		pricell = (LinearLayout) findViewById(R.id.fclass_more_price_ll);
-
+		//箭头图片
 		popll_iv = (ImageView) findViewById(R.id.fclass_more_popularity_img);
-		popll_iv.setOnClickListener(this);
-		//popll.setClickable(true);
-		popll.setOnClickListener(this);
+		numll_iv = (ImageView) findViewById(R.id.fclass_more_number_img);
+		pricell_iv = (ImageView) findViewById(R.id.fclass_more_price_img);
+		
+		popll.setOnClickListener(this);		
 		numll.setOnClickListener(this);
 		pricell.setOnClickListener(this);
+		
 		listView = (XListView) findViewById(R.id.fclass_more_lv);
 		listView.setOnItemClickListener(new mylistener());
 		
@@ -90,30 +96,49 @@ public class FclassMoreActivity extends BaseActivity implements IXListViewListen
 		
 		switch (arg0.getId()) {		
 		case R.id.fclass_more_popularity_ll:
-			
-			if(cou%2!=0)
+			if(p%2!=0)
 			{
-				popll_iv.setImageResource(R.drawable.order_bottom);
+				popll_iv.setImageResource(R.drawable.order_top);
 				
-			cou++;
+			p++;
 			}
 			else
 			{
-				popll_iv.setImageResource(R.drawable.order_top);
-			cou++;
+				popll_iv.setImageResource(R.drawable.order_bottom);
+			p++;
 			}
+			
 			//order();
 			
 			break;
-		case R.id.fclass_more_popularity_img:
+
 			
-			//Util.ShowToast(context, "人气");
-			break;
+
 		case R.id.fclass_more_number_ll:
-			
+			if(n%2!=0)
+			{
+				numll_iv.setImageResource(R.drawable.order_top);
+				
+			n++;
+			}
+			else
+			{
+				numll_iv.setImageResource(R.drawable.order_bottom);
+			n++;
+			}
 			break;
 		case R.id.fclass_more_price_ll:
-			
+			if(j%2!=0)
+			{
+				pricell_iv.setImageResource(R.drawable.order_top);
+				
+			j++;
+			}
+			else
+			{
+				pricell_iv.setImageResource(R.drawable.order_bottom);
+			j++;
+			}
 			break;
 
 		}
@@ -136,7 +161,9 @@ public class FclassMoreActivity extends BaseActivity implements IXListViewListen
 	}
 
 	private class MyTask extends AsyncTask<Object, Object, Object> {
-
+		int getid = getIntent().getIntExtra("id", -1);
+		
+		
 		//onPreExecute方法用于在执行后台任务前做一些UI操作  
 		@Override  
 		protected void onPreExecute() {  
@@ -146,16 +173,28 @@ public class FclassMoreActivity extends BaseActivity implements IXListViewListen
 
 		//doInBackground方法内部执行后台任务,不可在此方法内修改UI  
 		@Override  
-		protected Object doInBackground(Object... params) {  
-			try {  
-				
-				/*添加判断句*/
-				Send send = new Send(context);
-				listf  = send.GetFclassTwo(MyApplication.woman_av, MyApplication.clickdesc, 1);
-				return listf;//new String(baos.toByteArray(), "gb2312");  
-			} catch (Exception e) {  
+		protected Object doInBackground(Object... params) {
+			/* 添加判断句 */
+			Send send = new Send(context);
+
+			try {
+				switch (getid) {
+				case 0:
+/*					listf = send.GetFclassTwo(MyApplication.woman_fangzhenyangjv,
+							MyApplication.clickdesc, 1);
+					return listf;*/
+				case 1:
+					listf = send.GetFclassTwo(MyApplication.woman_av,
+							MyApplication.clickdesc, 1);
+					return listf;
+				default:
+					break;
+				}
+
+				// new String(baos.toByteArray(), "gb2312");
+			} catch (Exception e) {
 				e.printStackTrace();
-			}  
+			}
 			return null;  
 		}  
 

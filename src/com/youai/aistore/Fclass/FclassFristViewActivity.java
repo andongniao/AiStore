@@ -74,9 +74,9 @@ public class FclassFristViewActivity extends BaseActivity implements
 		addviewlist = new ArrayList<View>();
 		inflater = LayoutInflater.from(context);
 		gridviewlist = new ArrayList<MyGridview>();
-
+		//顶部网格
 		toptitlegridview = (MyGridview) findViewById(R.id.fclass_frist_view_topgridview);
-
+		//商品网格
 		addviewll = (LinearLayout) findViewById(R.id.fclass_frist_view_addview_ll);
 
 		if (listindex == 0) {
@@ -90,7 +90,7 @@ public class FclassFristViewActivity extends BaseActivity implements
 		} else if (listindex == 5) {
 			titlelist = rs.getStringArray(R.array.fclass_frist_tosex_gridview);
 		}
-
+		//顶部网格适配器
 		toptitlegridview
 				.setAdapter(new ArrayAdapter<String>(this,
 						R.layout.fclass_gridview, R.id.fclass_gridview_text,
@@ -112,14 +112,31 @@ public class FclassFristViewActivity extends BaseActivity implements
 		public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
 				long arg3) {
 			// TODO Auto-generated method stub
+			switch (arg2) {
+			case 0:
+				Intent intent = new Intent(FclassFristViewActivity.this,
+						FclassMoreActivity.class);
+				// titlelist数组传值给FclassFristViewActivity的标题
+				intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+				intent.putExtra("title", titlelist[arg2].toString());
+				intent.putExtra("id",arg2);
+				startActivity(intent);
+				Util.ShowToast(context, "点击了" + titlelist[arg2]);
+				break;
+			case 1:
+				Intent intent1 = new Intent(FclassFristViewActivity.this,
+						FclassMoreActivity.class);
+				// titlelist数组传值给FclassFristViewActivity的标题
+				intent1.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+				intent1.putExtra("title", titlelist[arg2].toString());
+				
+				startActivity(intent1);
+				Util.ShowToast(context, "点击了" + titlelist[arg2]);
+				break;
+			default:
+				break;
+			}
 
-			Intent intent = new Intent(FclassFristViewActivity.this,
-					FclassMoreActivity.class);
-			// titlelist数组传值给FclassFristViewActivity的标题
-			intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-			intent.putExtra("title", titlelist[arg2].toString());
-			startActivity(intent);
-			Util.ShowToast(context, "点击了" + titlelist[arg2]);
 		}
 
 	}

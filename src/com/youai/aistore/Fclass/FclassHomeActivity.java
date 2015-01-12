@@ -48,27 +48,28 @@ public class FclassHomeActivity extends BaseActivity{
 		groupimagelist.add(R.drawable.fclass_neiyi);
 		groupimagelist.add(R.drawable.fclass_tt);
 		groupimagelist.add(R.drawable.fclass_tosex);
+		//女性用品，子名字列表
 		ArrayList<String> woman = new ArrayList<String>();
 		String[] womanc = rs.getStringArray(R.array.fclass_home_woman_gridview);
 		for(int i =0;i<womanc.length;i++){
 			woman.add(womanc[i]);
 		}
-		childnamelist.add(woman);//女性用品，子列表
-		
+		childnamelist.add(woman);
+		//男性用品，子名字列表
 		ArrayList<String> man = new ArrayList<String>();
 		String[] manc = rs.getStringArray(R.array.fclass_home_man_gridview);
 		for(int i =0;i<manc.length;i++){
 			man.add(manc[i]);
 		}
 		childnamelist.add(man);
-		
+		//内衣，子名字列表
 		ArrayList<String> neiyi = new ArrayList<String>();
 		String[] neiyic = rs.getStringArray(R.array.fclass_home_neiyi_gridview);
 		for(int i =0;i<neiyic.length;i++){
 			neiyi.add(neiyic[i]);
 		}
 		childnamelist.add(neiyi);
-		
+		//安全套，子名字列表
 		ArrayList<String> tt = new ArrayList<String>();
 		String[] ttc = rs.getStringArray(R.array.fclass_home_tt_gridview);
 		for(int i =0;i<ttc.length;i++){
@@ -82,7 +83,7 @@ public class FclassHomeActivity extends BaseActivity{
 //			runhua.add(runhuac[i]);
 //		}
 //		childnamelist.add(runhua);
-		
+		//双人，子名字列表
 		ArrayList<String> tosex = new ArrayList<String>();
 		String[] tosexc = rs.getStringArray(R.array.fclass_home_tosex_gridview);
 		for(int i =0;i<tosexc.length;i++){
@@ -91,7 +92,7 @@ public class FclassHomeActivity extends BaseActivity{
 		childnamelist.add(tosex);
 		
 		
-		
+		//折叠式列表
 		listView = (ExpandableListView) findViewById(R.id.fclass_expandableListView);
 		adapter = new FclassHomeAdapter(this, groupnamelist, groupimagelist, childnamelist);
 		listView.setAdapter(adapter);

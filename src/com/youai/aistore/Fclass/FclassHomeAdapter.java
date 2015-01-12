@@ -57,6 +57,7 @@ public class FclassHomeAdapter extends BaseExpandableListAdapter{
 			ViewGroup arg4) {
 		if (convertView == null) {
 			halderItem = new MyHalderItem();
+			//inflate载入界面，
 			convertView = inflater.inflate(R.layout.fclass_home_gridview, null);
 			halderItem.myGridview = (MyGridview) convertView.findViewById(R.id.fclass_home_gridview);
 			convertView.setTag(halderItem);
@@ -192,11 +193,18 @@ public class FclassHomeAdapter extends BaseExpandableListAdapter{
 				Intent intent = new Intent(context,FclassFristViewActivity.class);
 				intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 				//groupname数组传值给FclassFristViewActivity的标题
-				intent.putExtra("title", groupname.get(arg2).toString());
+				intent.putExtra("title", groupname.get(0).toString());
 				context.startActivity(intent);
-				Util.ShowToast(context, "点击了"+childname.get(index).get(arg2));
+				Util.ShowToast(context, "点击了"+childname.get(index).get(0));
 				break;
-
+			case 1:
+				Intent intent1 = new Intent(context,FclassFristViewActivity.class);
+				intent1.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+				//groupname数组传值给FclassFristViewActivity的标题
+				intent1.putExtra("title", childname.get(1).toString());
+				context.startActivity(intent1);
+				Util.ShowToast(context, "点击了"+childname.get(index).get(1));
+				break;
 			default:
 				break;
 			}

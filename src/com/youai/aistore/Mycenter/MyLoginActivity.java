@@ -45,11 +45,13 @@ public class MyLoginActivity extends BaseActivity implements OnClickListener {
 				// 把ID传值到MyApplication中
 				MyApplication.setUserId(login_ID.getText().toString());
 				
-				Intent intent = new Intent(MyLoginActivity.this,
-						MycenterHomeActivity.class);
-				intent.setFlags(intent.FLAG_ACTIVITY_CLEAR_TOP);
-				startActivity(intent);
+//				Intent intent = new Intent(MyLoginActivity.this,
+//						MycenterHomeActivity.class);
+//				intent.setFlags(intent.FLAG_ACTIVITY_CLEAR_TOP);
+//				startActivity(intent);
 				//Util.ShowToast(context, "登陆成功");
+				finish();
+				
 
 			} else if (msg.what == 2) {
 				Util.ShowToast(MyLoginActivity.this, "输入的用户名或密码有问题，请重来");
