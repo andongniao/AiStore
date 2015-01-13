@@ -119,6 +119,8 @@ public class MyApplication extends Application {
 	}
 	public static void SaveUserBean(UserBean bean){
 		userBean = bean;
+		UserId = userBean.getUser_id();
+		UserName = userBean.getUser_name();
 		SharedPreferences.Editor mEditor = mSharedPreferences.edit();
 		mEditor.putString("userid", bean.getUser_id());
 		mEditor.putString("username", bean.getUser_name());

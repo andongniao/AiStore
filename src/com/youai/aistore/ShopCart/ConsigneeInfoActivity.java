@@ -32,6 +32,7 @@ public class ConsigneeInfoActivity extends BaseActivity implements OnClickListen
 	private ConsigneeBean bean;
 	private Base b;
 	private ListShopCartBean listbean;
+	public static boolean isfinish;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +52,7 @@ public class ConsigneeInfoActivity extends BaseActivity implements OnClickListen
 
 	private void init() {
 		context = this;
+		isfinish = false;
 		listbean = (ListShopCartBean) getIntent().getExtras().get("list");
 		consigneeet = (EditText) findViewById(R.id.consignee_consignee_et);
 		consigneeet.setOnClickListener(this);
@@ -134,7 +136,6 @@ public class ConsigneeInfoActivity extends BaseActivity implements OnClickListen
 				}else{
 					Send s = new Send(context);
 					String userid = MyApplication.UserId;
-//					String userid = "188";
 					b = s.saveConsigneeInfo(userid, consignee, number, address);
 					return b;
 				}
@@ -192,5 +193,13 @@ public class ConsigneeInfoActivity extends BaseActivity implements OnClickListen
 //			Util.stopProgressDialog();
 		}  
 	
+	}
+	
+	@Override
+	protected void onResume() {
+		super.onResume();
+		if(isfinish){
+			finish();
+		}
 	}
 }

@@ -1,6 +1,5 @@
 package com.youai.aistore.Order;
 
-import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
@@ -10,6 +9,7 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.youai.aistore.BaseActivity;
+import com.youai.aistore.MyApplication;
 import com.youai.aistore.R;
 import com.youai.aistore.Util;
 import com.youai.aistore.Bean.ListOrderBean;
@@ -100,8 +100,7 @@ public class AllOrderActivity extends BaseActivity implements IXListViewListener
 		protected Object doInBackground(Object... params) {  
 			try {  
 				Send s = new Send(context);
-//				String userid = MyApplication.UserId;
-				String userid = "188";
+				String userid = MyApplication.UserId;
 				listbean = s.getAllOrderlist(userid, page);
 				return listbean;
 			} catch (Exception e) {  
@@ -139,6 +138,7 @@ public class AllOrderActivity extends BaseActivity implements IXListViewListener
 								adapter.notifyDataSetChanged();
 							}
 						}else{
+							page-=1;
 							Util.ShowToast(context,R.string.page_is_final);
 						}
 					}

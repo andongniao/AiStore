@@ -11,15 +11,12 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.youai.aistore.BaseActivity;
+import com.youai.aistore.MyApplication;
 import com.youai.aistore.R;
 import com.youai.aistore.Util;
-import com.youai.aistore.Bean.ListOrderBean;
-import com.youai.aistore.Bean.OrderDetailsBean.Goods;
-import com.youai.aistore.Bean.ShopCartBean;
-import com.youai.aistore.Bean.ListOrderBean.OrderBean;
 import com.youai.aistore.Bean.OrderDetailsBean;
+import com.youai.aistore.Bean.OrderDetailsBean.Goods;
 import com.youai.aistore.NetInterface.Send;
-import com.youai.aistore.ShopCart.ShopCartAdapter;
 
 /**
  * 订单详情
@@ -86,8 +83,7 @@ public class OrderDetailActivity extends BaseActivity{
 			try {  
 				if(type==1){
 				Send s = new Send(context);
-//				String userid = MyApplication.UserId;
-				String userid = "188";
+				String userid = MyApplication.UserId;
 				bean = s.getOrderDetalis(getIntent().getStringExtra("orderid"), userid);
 				return bean;
 				}
@@ -115,8 +111,8 @@ public class OrderDetailActivity extends BaseActivity{
 						time_tv.setText(bean.getFormated_add_time());
 						pp_tv.setText(bean.getConsignee());
 						tel_tv.setText(bean.getTel());
-						money_tv.setText(bean.getFormated_goods_amount());
-						youfei_tv.setText(bean.getFormated_shipping_fee());
+						money_tv.setText("￥"+bean.getFormated_goods_amount()+"元");
+						youfei_tv.setText("￥"+bean.getFormated_shipping_fee()+"元");
 						address_tv.setText(bean.getAddress());
 						list = bean.getGoods();
 						adapter = new OrderDetailsAdapter(context, list);

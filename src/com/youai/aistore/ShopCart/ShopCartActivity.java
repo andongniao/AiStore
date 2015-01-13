@@ -322,6 +322,9 @@ public class ShopCartActivity extends BaseActivity implements OnClickListener{
 						list.remove(list.get(postion));
 						adapter.setdata(list);
 						adapter.notifyDataSetChanged();
+						if(list.size()==0){
+							showviewll.setVisibility(View.GONE);
+						}
 					}else{
 						Util.ShowToast(context,beanresult.getMsg());
 					}

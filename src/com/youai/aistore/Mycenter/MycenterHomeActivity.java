@@ -99,11 +99,11 @@ public class MycenterHomeActivity extends BaseActivity implements
 			break;
 		case R.id.mycenter_home_dingdan_ll:
 			Intent dd = null;
-//			if(MyApplication.logined){
+			if(MyApplication.logined){
 				dd = new Intent(MycenterHomeActivity.this,AllOrderActivity.class);
-//			}else{
-//				dd = new Intent(MycenterHomeActivity.this,MyLoginActivity.class);
-//			}
+			}else{
+				dd = new Intent(MycenterHomeActivity.this,MyLoginActivity.class);
+			}
 			dd.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 			startActivity(dd);
 			break;
@@ -176,5 +176,13 @@ public class MycenterHomeActivity extends BaseActivity implements
 							}
 						}).create();
 		alertDialog.show();
+	}
+	@Override
+	protected void onResume() {
+		super.onResume();
+		if(MyApplication.logined){
+			login_ll.setVisibility(View.GONE);
+			uernametv.setText(MyApplication.userBean.getUser_name());
+		}
 	}
 }
