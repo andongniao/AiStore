@@ -371,6 +371,7 @@ public class ProductDetailsActivity extends BaseActivity implements IXListViewLi
 						if(s){
 							stat = false;
 							ExampleActivity.setCurrentTab(2);
+							finish();
 							ShopCartActivity.shopcartchaneged = true;
 						}else{
 						Util.ShowToast(context, R.string.product_add_shopcart_success);

@@ -28,6 +28,7 @@ import com.youai.aistore.Util;
 import com.youai.aistore.Bean.Base;
 import com.youai.aistore.Bean.ListShopCartBean;
 import com.youai.aistore.Bean.ShopCartBean;
+import com.youai.aistore.Mycenter.MyLoginActivity;
 import com.youai.aistore.NetInterface.Send;
 import com.youai.aistore.View.SwipeMenuListView.SwipeMenu;
 import com.youai.aistore.View.SwipeMenuListView.SwipeMenuCreator;
@@ -127,8 +128,6 @@ public class ShopCartActivity extends BaseActivity implements OnClickListener{
 		tv_gongji = (TextView) findViewById(R.id.shopcart_gongji_tv);
 		lv = (SwipeMenuListView) findViewById(R.id.shopcart_listview);
 		lv.setFocusable(false);
-//		isnull_iv = (ImageView)findViewById(R.id.shopcart_isnull_iv);
-//		isnull_iv.setOnClickListener(this);
 		lv.setEmptyView(isnull);
 		SwipeMenuCreator creator = new SwipeMenuCreator() {
 
@@ -160,15 +159,15 @@ public class ShopCartActivity extends BaseActivity implements OnClickListener{
 				}
 			}
 		});
-		
+
 		// set SwipeListener
 		lv.setOnSwipeListener(new OnSwipeListener() {
-			
+
 			@Override
 			public void onSwipeStart(int position) {
 				// swipe start
 			}
-			
+
 			@Override
 			public void onSwipeEnd(int position) {
 				// swipe end
@@ -179,15 +178,20 @@ public class ShopCartActivity extends BaseActivity implements OnClickListener{
 	@Override
 	public void onClick(View v) {
 		switch (v.getId()) {
-//		case R.id.shopcart_isnull_iv:
-//			Util.ShowToast(context, "没有数据");
-//			break;
+		//		case R.id.shopcart_isnull_iv:
+		//			Util.ShowToast(context, "没有数据");
+		//			break;
 		case R.id.shopcart_see_again_bt:
 			ExampleActivity.setCurrentTab(0);
 			break;
 		case R.id.shopcart_gopay_bt:
-			Intent intent = new Intent(ShopCartActivity.this,ConsigneeInfoActivity.class);
-			intent.putExtra("list", listbean);
+			Intent intent = null;
+			if(MyApplication.logined){
+				intent = new Intent(ShopCartActivity.this,ConsigneeInfoActivity.class);
+				intent.putExtra("list", listbean);
+			}else{
+				intent = new Intent(ShopCartActivity.this,MyLoginActivity.class);
+			}
 			intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 			startActivity(intent);
 			break;
@@ -281,10 +285,28 @@ public class ShopCartActivity extends BaseActivity implements OnClickListener{
 						price = Double.parseDouble(listbean.getCount_price());
 						tv_gongji.setText("￥"+listbean.getCount_price()+"元");
 					}else{
+						list = null;
+						list = new ArrayList<ShopCartBean>();
+						if(adapter!=null){
+							adapter.setdata(list);
+							adapter.notifyDataSetChanged();
+						}else{
+							adapter = new ShopCartAdapter(context, list,inter);
+							lv.setAdapter(adapter);
+						}
 						showviewll.setVisibility(View.GONE);
 						Util.ShowToast(context, listbean.getMsg());
 					}
 				}else{
+					list = null;
+					list = new ArrayList<ShopCartBean>();
+					if(adapter!=null){
+						adapter.setdata(list);
+						adapter.notifyDataSetChanged();
+					}else{
+						adapter = new ShopCartAdapter(context, list,inter);
+						lv.setAdapter(adapter);
+					}
 					showviewll.setVisibility(View.GONE);
 					Util.ShowToast(context, R.string.net_work_is_error);
 				}
@@ -314,7 +336,7 @@ public class ShopCartActivity extends BaseActivity implements OnClickListener{
 						adapter.setdata(list);
 						adapter.notifyDataSetChanged();
 						if(type==1){
-						price +=Double.parseDouble(list.get(postion).getGoods_price());
+							price +=Double.parseDouble(list.get(postion).getGoods_price());
 						}else{
 							price -=Double.parseDouble(list.get(postion).getGoods_price());
 						}
@@ -378,12 +400,12 @@ public class ShopCartActivity extends BaseActivity implements OnClickListener{
 				}
 			}
 		}
-		
+
 		//}
 		return super.onTouchEvent(event);
 	}
 
-	
+
 	@Override
 	protected void onResume() {
 		super.onResume();
@@ -401,5 +423,5 @@ public class ShopCartActivity extends BaseActivity implements OnClickListener{
 		return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp,
 				getResources().getDisplayMetrics());
 	}
-	
+
 }

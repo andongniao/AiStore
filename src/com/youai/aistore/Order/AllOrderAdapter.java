@@ -13,8 +13,10 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.youai.aistore.ExampleActivity;
+import com.youai.aistore.MyApplication;
 import com.youai.aistore.R;
 import com.youai.aistore.WelcomeActivity;
+import com.youai.aistore.Bean.ListOrderBean.OrderBean;
 
 /**
  * »´≤ø∂©µ•  ≈‰
@@ -23,17 +25,21 @@ import com.youai.aistore.WelcomeActivity;
  */
 public class AllOrderAdapter extends BaseAdapter{
 	private Context context;
-	private ArrayList<String> list;
+	private ArrayList<OrderBean> list;
 	private LayoutInflater inflater;
 	private MyItem myitem;
 	
-	public AllOrderAdapter(Context context,ArrayList<String> list){
+	public AllOrderAdapter(Context context,ArrayList<OrderBean> list){
 		this.context = context;
 		this.list = list;
 		inflater = LayoutInflater.from(context);
 		
 	}
 
+	public void setdata(ArrayList<OrderBean> list){
+		this.list = list;
+	}
+	
 	@Override
 	public int getCount() {
 		return list!=null?list.size():0;
@@ -50,10 +56,10 @@ public class AllOrderAdapter extends BaseAdapter{
 	}
 
 	@Override
-	public View getView(int arg0, View v, ViewGroup arg2) {
+	public View getView(final int postion, View v, ViewGroup arg2) {
 		if(v == null){
 			myitem = new MyItem();
-			v = inflater.inflate(R.layout.all_order_item, null);
+			v = inflater.inflate(R.layout.order_all_item, null);
 			myitem.btn_detail = (Button) v.findViewById(R.id.all_order_item_detail_btn);
 			myitem.tv_number = (TextView) v.findViewById(R.id.all_order_item_number_tv);
 			myitem.tv_time = (TextView) v.findViewById(R.id.all_order_item_time_tv);
@@ -65,14 +71,20 @@ public class AllOrderAdapter extends BaseAdapter{
 		}else{
 			myitem = (MyItem) v.getTag();
 		}
-		
+		myitem.tv_number.setText(list.get(postion).getOrder_sn());
+		myitem.tv_time.setText(list.get(postion).getOrder_time());
+		myitem.tv_type.setText(list.get(postion).getPay_name());
+		myitem.tv_statu.setText(list.get(postion).getOrder_status());
 		//TODO
 		myitem.btn_detail.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View arg0) {
-//				Intent intent = new Intent(context,.class);
-//				intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-//				context.startActivity(intent);
+				Intent intent = new Intent(context,OrderDetailActivity.class);
+				String oer = list.get(postion).getOrder_id();
+				intent.putExtra("orderid", list.get(postion).getOrder_id());
+				intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+				context.startActivity(intent);
+				
 			}
 		});
 		return v;

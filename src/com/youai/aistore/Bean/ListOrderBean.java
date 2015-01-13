@@ -2,7 +2,7 @@ package com.youai.aistore.Bean;
 
 import java.util.ArrayList;
 /**
- * 
+ * 全部订单实体
  * @author Qzr
  *
  */
@@ -23,7 +23,7 @@ public class ListOrderBean extends Base{
 		private String order_id;
 		private String order_sn;
 		private String order_time;
-		private String order_statu;
+		private String order_status;
 		private String pay_name;
 		public String getOrder_id() {
 			return order_id;
@@ -43,11 +43,11 @@ public class ListOrderBean extends Base{
 		public void setOrder_time(String order_time) {
 			this.order_time = order_time;
 		}
-		public String getOrder_statu() {
-			return order_statu;
+		public String getOrder_status() {
+			return order_status;
 		}
-		public void setOrder_statu(String order_statu) {
-			this.order_statu = order_statu;
+		public void setOrder_status(String order_status) {
+			this.order_status = order_status;
 		}
 		public String getPay_name() {
 			return pay_name;
@@ -55,6 +55,7 @@ public class ListOrderBean extends Base{
 		public void setPay_name(String pay_name) {
 			this.pay_name = pay_name;
 		}
+
 
 	}
 }

@@ -73,18 +73,18 @@ public class HomeActivity extends BaseActivity implements OnClickListener{
 		setTopLeftBackground(R.drawable.btn_search_navigation_back);
 		setTopTitleBackground(R.drawable.logo);
 		setTopRightBackground(R.drawable.search);
-		topRightVisible();
-		TextView topright = (TextView) getTopRightView();
-		topright.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View arg0) {
-				Util.ShowToast(HomeActivity.this, "search");
-				Intent intent = new Intent(HomeActivity.this,SearchActivity.class);
-				intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-				startActivity(intent);
-				overridePendingTransition(R.anim.in_rightleft, R.anim.out_rightleft);
-			}
-		});
+//		topRightVisible();
+//		TextView topright = (TextView) getTopRightView();
+//		topright.setOnClickListener(new OnClickListener() {
+//			@Override
+//			public void onClick(View arg0) {
+//				Util.ShowToast(HomeActivity.this, "search");
+//				Intent intent = new Intent(HomeActivity.this,SearchActivity.class);
+//				intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+//				startActivity(intent);
+//				overridePendingTransition(R.anim.in_rightleft, R.anim.out_rightleft);
+//			}
+//		});
 		setContentXml(R.layout.home);
 		init();
 		if(Util.detect(context)){
