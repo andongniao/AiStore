@@ -22,29 +22,29 @@ public abstract class TabHostActivity extends TabActivity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		requestWindowFeature(Window.FEATURE_NO_TITLE);  
+		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		super.onCreate(savedInstanceState);
 		// set theme because we do not want the shadow
 		setTheme(R.style.Theme_Tabhost);
 		setContentView(R.layout.api_tab_host);
-		
+
 		mLayoutflater = getLayoutInflater();
 
 		mTabHost = getTabHost();
 		mTabWidget = getTabWidget();
-		//mTabWidget.setStripEnabled(false);	// need android2.2
-		
+		// mTabWidget.setStripEnabled(false); // need android2.2
+
 		prepare();
 
-//		initTop();
+		// initTop();
 		initTabSpec();
 	}
-	
-//	private void initTop() {
-//		View child = getTop();
-//		LinearLayout layout = (LinearLayout) findViewById(R.id.tab_top);
-//		layout.addView(child);
-//	}
+
+	// private void initTop() {
+	// View child = getTop();
+	// LinearLayout layout = (LinearLayout) findViewById(R.id.tab_top);
+	// layout.addView(child);
+	// }
 
 	@SuppressLint("InflateParams")
 	private void initTabSpec() {
@@ -54,8 +54,9 @@ public abstract class TabHostActivity extends TabActivity {
 		for (int i = 0; i < count; i++) {
 			// set text view
 			View tabItem = mLayoutflater.inflate(R.layout.api_tab_item, null);
-			
-			ImageView tvTabItem = (ImageView) tabItem.findViewById(R.id.tab_item_iv);
+
+			ImageView tvTabItem = (ImageView) tabItem
+					.findViewById(R.id.tab_item_iv);
 			setTabItemTextView(tvTabItem, i);
 			// set id
 			String tabItemId = getTabItemId(i);
@@ -63,7 +64,7 @@ public abstract class TabHostActivity extends TabActivity {
 			TabSpec tabSpec = mTabHost.newTabSpec(tabItemId);
 			tabSpec.setIndicator(tabItem);
 			tabSpec.setContent(getTabItemIntent(i));
-			
+
 			mTabHost.addTab(tabSpec);
 		}
 
@@ -74,29 +75,29 @@ public abstract class TabHostActivity extends TabActivity {
 		// do nothing or you override it
 	}
 
-//	/** 自定义头部布局 */
-//	protected View getTop() {
-//		// do nothing or you override it
-//		return null;
-//	}
-	
+	// /** 自定义头部布局 */
+	// protected View getTop() {
+	// // do nothing or you override it
+	// return null;
+	// }
+
 	protected int getTabCount() {
 		return mTabHost.getTabWidget().getTabCount();
 	}
 
-	/** 设置TabItem的图标和标题等*/
+	/** 设置TabItem的图标和标题等 */
 	abstract protected void setTabItemTextView(ImageView textView, int position);
 
 	abstract protected String getTabItemId(int position);
-	
+
 	abstract protected Intent getTabItemIntent(int position);
 
 	abstract protected int getTabItemCount();
-	
+
 	public static void setCurrentTab(int index) {
 		mTabHost.setCurrentTab(index);
 	}
-	
+
 	protected void focusCurrentTab(int index) {
 		mTabWidget.focusCurrentTab(index);
 	}

@@ -1,6 +1,5 @@
 package com.youai.aistore.View.SwipeMenuListView;
 
-
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 

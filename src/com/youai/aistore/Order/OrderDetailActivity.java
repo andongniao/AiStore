@@ -23,19 +23,21 @@ import com.youai.aistore.ShopCart.ShopCartAdapter;
 
 /**
  * 订单详情
+ * 
  * @author Qzr
- *
+ * 
  */
-public class OrderDetailActivity extends BaseActivity{
+public class OrderDetailActivity extends BaseActivity {
 	private MyTask myTask;
 	private Context context;
 	private OrderDetailsBean bean;
-	private TextView number_tv,statu_tv,time_tv,pp_tv,tel_tv,money_tv,youfei_tv,address_tv;
+	private TextView number_tv, statu_tv, time_tv, pp_tv, tel_tv, money_tv,
+			youfei_tv, address_tv;
 	private LinearLayout gopay_ll;
 	private OrderDetailsAdapter adapter;
-	private ArrayList<Goods>list;
+	private ArrayList<Goods> list;
 	private ListView lv;
-	
+
 	@Override
 	protected void onCreate(Bundle arg0) {
 		super.onCreate(arg0);
@@ -43,10 +45,10 @@ public class OrderDetailActivity extends BaseActivity{
 		setTopLeftBackground(R.drawable.btn_back);
 		setContentXml(R.layout.order_detail);
 		init();
-		if(Util.detect(context)){
+		if (Util.detect(context)) {
 			myTask = new MyTask(1);
-			myTask.execute("");  
-		}else{
+			myTask.execute("");
+		} else {
 			Util.ShowToast(context, R.string.net_work_is_error);
 		}
 	}
@@ -65,51 +67,51 @@ public class OrderDetailActivity extends BaseActivity{
 		gopay_ll = (LinearLayout) findViewById(R.id.order_detail_gopay_ll);
 	}
 
-	
-	private class MyTask extends AsyncTask<Object, Object, Object> {  
+	private class MyTask extends AsyncTask<Object, Object, Object> {
 		private int type;
-		
+
 		public MyTask(int type) {
 			this.type = type;
 		}
 
-		//onPreExecute方法用于在执行后台任务前做一些UI操作  
-		@Override  
-		protected void onPreExecute() {  
-			//	            textView.setText("loading...");  
+		// onPreExecute方法用于在执行后台任务前做一些UI操作
+		@Override
+		protected void onPreExecute() {
+			// textView.setText("loading...");
 			Util.startProgressDialog(context);
-		}  
+		}
 
-		//doInBackground方法内部执行后台任务,不可在此方法内修改UI  
-		@Override  
-		protected Object doInBackground(Object... params) {  
-			try {  
-				if(type==1){
-				Send s = new Send(context);
-//				String userid = MyApplication.UserId;
-				String userid = "188";
-				bean = s.getOrderDetalis(getIntent().getStringExtra("orderid"), userid);
-				return bean;
+		// doInBackground方法内部执行后台任务,不可在此方法内修改UI
+		@Override
+		protected Object doInBackground(Object... params) {
+			try {
+				if (type == 1) {
+					Send s = new Send(context);
+					// String userid = MyApplication.UserId;
+					String userid = "188";
+					bean = s.getOrderDetalis(
+							getIntent().getStringExtra("orderid"), userid);
+					return bean;
 				}
-			} catch (Exception e) {  
+			} catch (Exception e) {
 				e.printStackTrace();
-			}  
-			return null;  
-		}  
+			}
+			return null;
+		}
 
-		//onProgressUpdate方法用于更新进度信息  
-		@Override  
-		protected void onProgressUpdate(Object... progresses) {  
-		}  
+		// onProgressUpdate方法用于更新进度信息
+		@Override
+		protected void onProgressUpdate(Object... progresses) {
+		}
 
-		//onPostExecute方法用于在执行完后台任务后更新UI,显示结果  
-		@Override  
-		protected void onPostExecute(Object result) { 
+		// onPostExecute方法用于在执行完后台任务后更新UI,显示结果
+		@Override
+		protected void onPostExecute(Object result) {
 			Util.stopProgressDialog();
-			if(type==1){
+			if (type == 1) {
 				bean = (OrderDetailsBean) result;
-				if(bean!=null){
-					if(bean.getCode()==200){
+				if (bean != null) {
+					if (bean.getCode() == 200) {
 						number_tv.setText(bean.getOrder_sn());
 						statu_tv.setText(bean.getOrder_zt());
 						time_tv.setText(bean.getFormated_add_time());
@@ -121,27 +123,26 @@ public class OrderDetailActivity extends BaseActivity{
 						list = bean.getGoods();
 						adapter = new OrderDetailsAdapter(context, list);
 						lv.setAdapter(adapter);
-						if(bean.getPay_status()==2){
+						if (bean.getPay_status() == 2) {
 							gopay_ll.setVisibility(View.VISIBLE);
 						}
-					}else{
+					} else {
 						Util.ShowToast(context, bean.getMsg());
 					}
-				}else{
+				} else {
 					Util.ShowToast(context, R.string.net_work_is_error);
 				}
-			}else{
-				
-			}
-			
-			
-		} 
+			} else {
 
-		//onCancelled方法用于在取消执行中的任务时更改UI  
-		@Override  
-		protected void onCancelled() {  
+			}
+
+		}
+
+		// onCancelled方法用于在取消执行中的任务时更改UI
+		@Override
+		protected void onCancelled() {
 			Util.stopProgressDialog();
-		}  
+		}
 	}
-	
+
 }

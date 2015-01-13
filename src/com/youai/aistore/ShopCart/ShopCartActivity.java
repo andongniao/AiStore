@@ -36,13 +36,15 @@ import com.youai.aistore.View.SwipeMenuListView.SwipeMenuItem;
 import com.youai.aistore.View.SwipeMenuListView.SwipeMenuListView;
 import com.youai.aistore.View.SwipeMenuListView.SwipeMenuListView.OnMenuItemClickListener;
 import com.youai.aistore.View.SwipeMenuListView.SwipeMenuListView.OnSwipeListener;
+
 /**
  * 购物车首页
+ * 
  * @author Qzr
- *
+ * 
  */
-public class ShopCartActivity extends BaseActivity implements OnClickListener{
-	//,IXListViewListener{
+public class ShopCartActivity extends BaseActivity implements OnClickListener {
+	// ,IXListViewListener{
 	private long exitTime = 0;
 	private Context context;
 	private SwipeMenuListView lv;
@@ -50,8 +52,8 @@ public class ShopCartActivity extends BaseActivity implements OnClickListener{
 	private View isnull;
 	private ShopCartAdapter adapter;
 	private LinearLayout showviewll;
-	private Button seeagainbt,goypaybt;
-	private TextView tv_topright,tv_gongji;
+	private Button seeagainbt, goypaybt;
+	private TextView tv_topright, tv_gongji;
 	private ShopcartInterface inter;
 	public static boolean shopcartchaneged;
 	private MyTask myTask;
@@ -68,10 +70,10 @@ public class ShopCartActivity extends BaseActivity implements OnClickListener{
 		setTitleTxt(R.string.shopcart_title);
 		setContentXml(R.layout.shopcart);
 		init();
-		if(Util.detect(context)){
-			myTask = new MyTask(1,0);
-			myTask.execute("");  
-		}else{
+		if (Util.detect(context)) {
+			myTask = new MyTask(1, 0);
+			myTask.execute("");
+		} else {
 			Util.ShowToast(context, R.string.net_work_is_error);
 		}
 
@@ -80,25 +82,24 @@ public class ShopCartActivity extends BaseActivity implements OnClickListener{
 	private void init() {
 		inter = new ShopcartInterface() {
 
-
 			@Override
 			public void delete(ArrayList<ShopCartBean> list, int index) {
-				if(Util.detect(context)){
-					myTask = new MyTask(2,0);
+				if (Util.detect(context)) {
+					myTask = new MyTask(2, 0);
 					myTask.setdata(list, index);
-					myTask.execute("");  
-				}else{
+					myTask.execute("");
+				} else {
 					Util.ShowToast(context, R.string.net_work_is_error);
 				}
 			}
 
 			@Override
 			public void add(ArrayList<ShopCartBean> list, int index) {
-				if(Util.detect(context)){
-					myTask = new MyTask(0,1);
+				if (Util.detect(context)) {
+					myTask = new MyTask(0, 1);
 					myTask.setdata(list, index);
-					myTask.execute("");  
-				}else{
+					myTask.execute("");
+				} else {
 					Util.ShowToast(context, R.string.net_work_is_error);
 				}
 			}
@@ -106,16 +107,14 @@ public class ShopCartActivity extends BaseActivity implements OnClickListener{
 			@Override
 			public void jian(ArrayList<ShopCartBean> list, int index) {
 				// TODO Auto-generated method stub
-				if(Util.detect(context)){
-					myTask = new MyTask(0,0);
+				if (Util.detect(context)) {
+					myTask = new MyTask(0, 0);
 					myTask.setdata(list, index);
-					myTask.execute("");  
-				}else{
+					myTask.execute("");
+				} else {
 					Util.ShowToast(context, R.string.net_work_is_error);
 				}
 			}
-
-
 
 		};
 		isnull = findViewById(R.id.shopcart_isnull_ll);
@@ -148,11 +147,11 @@ public class ShopCartActivity extends BaseActivity implements OnClickListener{
 			public void onMenuItemClick(int position, SwipeMenu menu, int index) {
 				switch (index) {
 				case 0:
-					if(Util.detect(context)){
-						myTask = new MyTask(2,0);
+					if (Util.detect(context)) {
+						myTask = new MyTask(2, 0);
 						myTask.setdata(listbean.getList(), position);
-						myTask.execute("");  
-					}else{
+						myTask.execute("");
+					} else {
 						Util.ShowToast(context, R.string.net_work_is_error);
 					}
 					break;
@@ -178,19 +177,21 @@ public class ShopCartActivity extends BaseActivity implements OnClickListener{
 	@Override
 	public void onClick(View v) {
 		switch (v.getId()) {
-		//		case R.id.shopcart_isnull_iv:
-		//			Util.ShowToast(context, "没有数据");
-		//			break;
+		// case R.id.shopcart_isnull_iv:
+		// Util.ShowToast(context, "没有数据");
+		// break;
 		case R.id.shopcart_see_again_bt:
 			ExampleActivity.setCurrentTab(0);
 			break;
 		case R.id.shopcart_gopay_bt:
 			Intent intent = null;
-			if(MyApplication.logined){
-				intent = new Intent(ShopCartActivity.this,ConsigneeInfoActivity.class);
+			if (MyApplication.logined) {
+				intent = new Intent(ShopCartActivity.this,
+						ConsigneeInfoActivity.class);
 				intent.putExtra("list", listbean);
-			}else{
-				intent = new Intent(ShopCartActivity.this,MyLoginActivity.class);
+			} else {
+				intent = new Intent(ShopCartActivity.this,
+						MyLoginActivity.class);
 			}
 			intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 			startActivity(intent);
@@ -199,226 +200,250 @@ public class ShopCartActivity extends BaseActivity implements OnClickListener{
 		}
 	}
 
-
 	@Override
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
-		if(keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_DOWN){   
-			if((System.currentTimeMillis()-exitTime) > 2000){  
-				Toast.makeText(getApplicationContext(), "再按一次退出程序", Toast.LENGTH_SHORT).show();                                
-				exitTime = System.currentTimeMillis();   
+		if (keyCode == KeyEvent.KEYCODE_BACK
+				&& event.getAction() == KeyEvent.ACTION_DOWN) {
+			if ((System.currentTimeMillis() - exitTime) > 2000) {
+				Toast.makeText(getApplicationContext(), "再按一次退出程序",
+						Toast.LENGTH_SHORT).show();
+				exitTime = System.currentTimeMillis();
 			} else {
 				finish();
 				System.exit(0);
 			}
-			return true;   
+			return true;
 		}
 		return super.onKeyDown(keyCode, event);
 	}
 
-	private class MyTask extends AsyncTask<Object, Object, Object> {  
-		private int index,type,number;
+	private class MyTask extends AsyncTask<Object, Object, Object> {
+		private int index, type, number;
 		private ArrayList<ShopCartBean> list;
 		private int postion;
-		public MyTask(int index,int type){
+
+		public MyTask(int index, int type) {
 			this.index = index;
 			this.type = type;
 		}
-		public void setdata(ArrayList<ShopCartBean> list, int index){
+
+		public void setdata(ArrayList<ShopCartBean> list, int index) {
 			this.list = list;
 			this.postion = index;
 		}
-		//onPreExecute方法用于在执行后台任务前做一些UI操作  
-		@Override  
-		protected void onPreExecute() {  
-			//	            textView.setText("loading...");  
-			Util.startProgressDialog(context);
-		}  
 
-		//doInBackground方法内部执行后台任务,不可在此方法内修改UI  
-		@Override  
-		protected Object doInBackground(Object... params) {  
-			try {  
-				if(index==1){
+		// onPreExecute方法用于在执行后台任务前做一些UI操作
+		@Override
+		protected void onPreExecute() {
+			// textView.setText("loading...");
+			Util.startProgressDialog(context);
+		}
+
+		// doInBackground方法内部执行后台任务,不可在此方法内修改UI
+		@Override
+		protected Object doInBackground(Object... params) {
+			try {
+				if (index == 1) {
 					Send send = new Send(context);
-					listbean  = send.getShopCartlist(MyApplication.SessionId, MyApplication.UserId);
-					return listbean;//new String(baos.toByteArray(), "gb2312");  
-				}else if(index == 2){
+					listbean = send.getShopCartlist(MyApplication.SessionId,
+							MyApplication.UserId);
+					return listbean;// new String(baos.toByteArray(), "gb2312");
+				} else if (index == 2) {
 					Send send = new Send(context);
-					String rec_id =list.get(postion).getRec_id();
+					String rec_id = list.get(postion).getRec_id();
 					String session_id = MyApplication.SessionId;
 					String user_id = MyApplication.UserId;
-					beanresult = send.DeletefromShopCart(rec_id, session_id,user_id);
+					beanresult = send.DeletefromShopCart(rec_id, session_id,
+							user_id);
 					return beanresult;
-				}else{
+				} else {
 					Send send = new Send(context);
-					int good_id =Integer.parseInt(list.get(postion).getGoods_id());
-					if(type==1){
+					int good_id = Integer.parseInt(list.get(postion)
+							.getGoods_id());
+					if (type == 1) {
 						number = 1;
-					}else{
+					} else {
 						number = -1;
 					}
 					String session_id = MyApplication.SessionId;
 					String user_id = MyApplication.UserId;
-					beanresult = send.AddShopCart(good_id, number, session_id,user_id);
+					beanresult = send.AddShopCart(good_id, number, session_id,
+							user_id);
 					return beanresult;
 				}
-			} catch (Exception e) {  
+			} catch (Exception e) {
 				e.printStackTrace();
-			}  
-			return null;  
-		}  
+			}
+			return null;
+		}
 
-		//onProgressUpdate方法用于更新进度信息  
-		@Override  
-		protected void onProgressUpdate(Object... progresses) {  
-		}  
+		// onProgressUpdate方法用于更新进度信息
+		@Override
+		protected void onProgressUpdate(Object... progresses) {
+		}
 
-		//onPostExecute方法用于在执行完后台任务后更新UI,显示结果  
-		@Override  
-		protected void onPostExecute(Object result) {  
+		// onPostExecute方法用于在执行完后台任务后更新UI,显示结果
+		@Override
+		protected void onPostExecute(Object result) {
 			Util.stopProgressDialog();
-			if(index == 1){
+			if (index == 1) {
 				listbean = (ListShopCartBean) result;
-				if(listbean!=null){
-					if(listbean.getCode()==200){
+				if (listbean != null) {
+					if (listbean.getCode() == 200) {
 						UpUI();
 						price = Double.parseDouble(listbean.getCount_price());
-						tv_gongji.setText("￥"+listbean.getCount_price()+"元");
-					}else{
+						tv_gongji
+								.setText("￥" + listbean.getCount_price() + "元");
+					} else {
 						list = null;
 						list = new ArrayList<ShopCartBean>();
-						if(adapter!=null){
+						if (adapter != null) {
 							adapter.setdata(list);
 							adapter.notifyDataSetChanged();
-						}else{
-							adapter = new ShopCartAdapter(context, list,inter);
+						} else {
+							adapter = new ShopCartAdapter(context, list, inter);
 							lv.setAdapter(adapter);
 						}
 						showviewll.setVisibility(View.GONE);
 						Util.ShowToast(context, listbean.getMsg());
 					}
-				}else{
+				} else {
 					list = null;
 					list = new ArrayList<ShopCartBean>();
-					if(adapter!=null){
+					if (adapter != null) {
 						adapter.setdata(list);
 						adapter.notifyDataSetChanged();
-					}else{
-						adapter = new ShopCartAdapter(context, list,inter);
+					} else {
+						adapter = new ShopCartAdapter(context, list, inter);
 						lv.setAdapter(adapter);
 					}
 					showviewll.setVisibility(View.GONE);
 					Util.ShowToast(context, R.string.net_work_is_error);
 				}
 
-			}else if(index == 2){
+			} else if (index == 2) {
 				beanresult = (Base) result;
-				if(beanresult!=null){
-					if(beanresult.getCode()==200){
-						list.get(postion).setGoods_number(String.valueOf(Integer.parseInt(list.get(postion).getGoods_number())+number));
-						price -=Double.parseDouble(list.get(postion).getGoods_price())*
-								Integer.parseInt(list.get(postion).getGoods_number());
+				if (beanresult != null) {
+					if (beanresult.getCode() == 200) {
+						list.get(postion).setGoods_number(
+								String.valueOf(Integer.parseInt(list.get(
+										postion).getGoods_number())
+										+ number));
+						price -= Double.parseDouble(list.get(postion)
+								.getGoods_price())
+								* Integer.parseInt(list.get(postion)
+										.getGoods_number());
 						tv_gongji.setText(String.valueOf(price));
 						list.remove(list.get(postion));
 						adapter.setdata(list);
 						adapter.notifyDataSetChanged();
-					}else{
-						Util.ShowToast(context,beanresult.getMsg());
+					} else {
+						Util.ShowToast(context, beanresult.getMsg());
 					}
-				}else{
-					Util.ShowToast(context,R.string.net_work_is_error);
+				} else {
+					Util.ShowToast(context, R.string.net_work_is_error);
 				}
-			}else{
+			} else {
 				beanresult = (Base) result;
-				if(beanresult!=null){
-					if(beanresult.getCode()==200){
-						list.get(postion).setGoods_number(String.valueOf(Integer.parseInt(list.get(postion).getGoods_number())+number));
+				if (beanresult != null) {
+					if (beanresult.getCode() == 200) {
+						list.get(postion).setGoods_number(
+								String.valueOf(Integer.parseInt(list.get(
+										postion).getGoods_number())
+										+ number));
 						adapter.setdata(list);
 						adapter.notifyDataSetChanged();
-						if(type==1){
-							price +=Double.parseDouble(list.get(postion).getGoods_price());
-						}else{
-							price -=Double.parseDouble(list.get(postion).getGoods_price());
+						if (type == 1) {
+							price += Double.parseDouble(list.get(postion)
+									.getGoods_price());
+						} else {
+							price -= Double.parseDouble(list.get(postion)
+									.getGoods_price());
 						}
 						tv_gongji.setText(String.valueOf(price));
-					}else{
-						Util.ShowToast(context,beanresult.getMsg());
+					} else {
+						Util.ShowToast(context, beanresult.getMsg());
 					}
-				}else{
-					Util.ShowToast(context,R.string.net_work_is_error);
-				}
-			}
-		}  
-
-		//onCancelled方法用于在取消执行中的任务时更改UI  
-		@Override  
-		protected void onCancelled() {  
-			Util.stopProgressDialog();
-		}  
-	}
-
-	public interface ShopcartInterface{
-		void delete(ArrayList<ShopCartBean> list,int index);
-		void add(ArrayList<ShopCartBean> list,int index);
-		void jian(ArrayList<ShopCartBean> list,int index);
-	}
-
-
-	private void UpUI(){
-		if(adapter == null){
-			adapter = new ShopCartAdapter(context, listbean.getList(),inter);
-			lv.setAdapter(adapter);
-		}else{
-			adapter.setdata(listbean.getList());
-			adapter.notifyDataSetChanged();
-		}
-		if(listbean!=null && listbean.getList().size()>0){
-			showviewll.setVisibility(View.VISIBLE);
-		}else{
-			showviewll.setVisibility(View.GONE);
-		}
-	}
-	@Override
-	public boolean onTouchEvent(MotionEvent event) {
-		if(listbean==null){
-			//if(event.getAction()==MotionEvent.ACTION_DOWN && event.getAction()==MotionEvent.ACTION_UP){
-			if(Util.detect(context)){
-				myTask = new MyTask(1,0);
-				myTask.execute("");  
-			}else{
-				Util.ShowToast(context, R.string.net_work_is_error);
-			}
-			//}
-		}else if(listbean!=null){
-			if(listbean.getList()==null || (listbean.getList()!=null && listbean.getList().size()==0)){
-				//if(event.getAction()==MotionEvent.ACTION_DOWN && event.getAction()==MotionEvent.ACTION_UP){
-				if(Util.detect(context)){
-					myTask = new MyTask(1,0);
-					myTask.execute("");  
-				}else{
+				} else {
 					Util.ShowToast(context, R.string.net_work_is_error);
 				}
 			}
 		}
 
-		//}
-		return super.onTouchEvent(event);
+		// onCancelled方法用于在取消执行中的任务时更改UI
+		@Override
+		protected void onCancelled() {
+			Util.stopProgressDialog();
+		}
 	}
 
+	public interface ShopcartInterface {
+		void delete(ArrayList<ShopCartBean> list, int index);
+
+		void add(ArrayList<ShopCartBean> list, int index);
+
+		void jian(ArrayList<ShopCartBean> list, int index);
+	}
+
+	private void UpUI() {
+		if (adapter == null) {
+			adapter = new ShopCartAdapter(context, listbean.getList(), inter);
+			lv.setAdapter(adapter);
+		} else {
+			adapter.setdata(listbean.getList());
+			adapter.notifyDataSetChanged();
+		}
+		if (listbean != null && listbean.getList().size() > 0) {
+			showviewll.setVisibility(View.VISIBLE);
+		} else {
+			showviewll.setVisibility(View.GONE);
+		}
+	}
+
+	@Override
+	public boolean onTouchEvent(MotionEvent event) {
+		if (listbean == null) {
+			// if(event.getAction()==MotionEvent.ACTION_DOWN &&
+			// event.getAction()==MotionEvent.ACTION_UP){
+			if (Util.detect(context)) {
+				myTask = new MyTask(1, 0);
+				myTask.execute("");
+			} else {
+				Util.ShowToast(context, R.string.net_work_is_error);
+			}
+			// }
+		} else if (listbean != null) {
+			if (listbean.getList() == null
+					|| (listbean.getList() != null && listbean.getList().size() == 0)) {
+				// if(event.getAction()==MotionEvent.ACTION_DOWN &&
+				// event.getAction()==MotionEvent.ACTION_UP){
+				if (Util.detect(context)) {
+					myTask = new MyTask(1, 0);
+					myTask.execute("");
+				} else {
+					Util.ShowToast(context, R.string.net_work_is_error);
+				}
+			}
+		}
+
+		// }
+		return super.onTouchEvent(event);
+	}
 
 	@Override
 	protected void onResume() {
 		super.onResume();
-		if(shopcartchaneged){
-			if(Util.detect(context)){
-				myTask = new MyTask(1,0);
-				myTask.execute("");  
-			}else{
+		if (shopcartchaneged) {
+			if (Util.detect(context)) {
+				myTask = new MyTask(1, 0);
+				myTask.execute("");
+			} else {
 				Util.ShowToast(context, R.string.net_work_is_error);
 			}
 			shopcartchaneged = false;
 		}
 	}
+
 	private int dp2px(int dp) {
 		return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp,
 				getResources().getDisplayMetrics());

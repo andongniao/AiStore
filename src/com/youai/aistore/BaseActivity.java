@@ -1,4 +1,5 @@
 package com.youai.aistore;
+
 import android.app.Activity;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -12,7 +13,6 @@ import android.widget.Toast;
 import android.widget.RelativeLayout.LayoutParams;
 import android.widget.TextView;
 
-
 /**
  * 基本类
  * 
@@ -25,10 +25,9 @@ public abstract class BaseActivity extends Activity {
 	public TextView topLeftTv;// 左上 控件（返回）
 	public TextView topRightTv;// 右上 控件（返回）
 	private LinearLayout baseContentLayout;// 添加内容控件
-	public RelativeLayout baseTopLayout,toplefttl;// 顶部layout
+	public RelativeLayout baseTopLayout, toplefttl;// 顶部layout
 
 	private BaseLeftClickListener leftClickListener;// 左上 点击监听
-
 
 	@Override
 	protected void onCreate(Bundle arg0) {
@@ -137,7 +136,6 @@ public abstract class BaseActivity extends Activity {
 	public void setTitleTxt(int textId) {
 		titleTv.setText(textId);
 	}
-	
 
 	/**
 	 * 设置标题
@@ -162,6 +160,7 @@ public abstract class BaseActivity extends Activity {
 	public void visibleTitle() {
 		titleTv.setVisibility(View.VISIBLE);
 	}
+
 	/**
 	 * 设置顶部背景
 	 * 
@@ -213,7 +212,7 @@ public abstract class BaseActivity extends Activity {
 	public void topRightVisible() {
 		topRightTv.setVisibility(View.VISIBLE);
 	}
-	
+
 	/**
 	 * 设置右上角背景
 	 * 
@@ -224,6 +223,7 @@ public abstract class BaseActivity extends Activity {
 	public void setTopRightBackground(Drawable drawable) {
 		topRightTv.setBackgroundDrawable(drawable);
 	}
+
 	/**
 	 * 设置右上角背景
 	 * 
@@ -233,13 +233,14 @@ public abstract class BaseActivity extends Activity {
 	public void setTopRightBackground(int drawableId) {
 		topRightTv.setBackgroundResource(drawableId);
 	}
+
 	/**
 	 * 获取右上角view
+	 * 
 	 * @return
 	 */
-	public View getTopRightView(){
+	public View getTopRightView() {
 		return topRightTv;
 	}
-	
 
 }

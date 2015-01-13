@@ -51,8 +51,7 @@ public class FclassMoreAdapter extends BaseAdapter {
 		if (arg1 == null) {
 			myItem = new MyItem();
 			arg1 = inflater.inflate(R.layout.fclass_more_lv_item, null);
-			myItem.iv = (ImageView) arg1
-					.findViewById(R.id.fclass_more_item_iv);
+			myItem.iv = (ImageView) arg1.findViewById(R.id.fclass_more_item_iv);
 			myItem.tv_title = (TextView) arg1
 					.findViewById(R.id.fclass_more_item_title_tv);
 			myItem.tv_shop_price = (TextView) arg1
@@ -61,21 +60,25 @@ public class FclassMoreAdapter extends BaseAdapter {
 					.findViewById(R.id.fclass_more_item_market_price_tv);
 			myItem.tv_comments = (TextView) arg1
 					.findViewById(R.id.fclass_more_item_comments_tv);
-			myItem.tv_click = (TextView) arg1.findViewById(R.id.fclass_more_item_click_tv);
+			myItem.tv_click = (TextView) arg1
+					.findViewById(R.id.fclass_more_item_click_tv);
 			arg1.setTag(myItem);
-			
+
 		} else {
 			myItem = (MyItem) arg1.getTag();
 		}
 
 		// TODO s
 		myItem.iv.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
-		ImageLoader.getInstance().displayImage(list.get(arg0).getPicurl(), myItem.iv);
+		ImageLoader.getInstance().displayImage(list.get(arg0).getPicurl(),
+				myItem.iv);
 		myItem.tv_market_price.getPaint().setFlags(Paint.STRIKE_THRU_TEXT_FLAG); // 中划线
 		myItem.tv_market_price.getPaint().setAntiAlias(true);// 抗锯齿
 		myItem.tv_title.setText(list.get(arg0).getTitle());
-		myItem.tv_market_price.setText("￥"+list.get(arg0).getMarket_price()+"元");
-		myItem.tv_shop_price.setText("￥"+list.get(arg0).getShop_price()+"元");
+		myItem.tv_market_price.setText("￥" + list.get(arg0).getMarket_price()
+				+ "元");
+		myItem.tv_shop_price
+				.setText("￥" + list.get(arg0).getShop_price() + "元");
 		myItem.tv_comments.setText(list.get(arg0).getComments_num());
 		myItem.tv_click.setText(list.get(arg0).getClick());
 
@@ -84,6 +87,7 @@ public class FclassMoreAdapter extends BaseAdapter {
 
 	class MyItem {
 		public ImageView iv;
-		public TextView tv_title, tv_shop_price, tv_market_price, tv_comments,tv_click;
+		public TextView tv_title, tv_shop_price, tv_market_price, tv_comments,
+				tv_click;
 	}
 }

@@ -2,12 +2,14 @@ package com.youai.aistore.Bean;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+
 /**
  * ArrayList<ArrayList<GoodsBean>>
+ * 
  * @author Qzr
- *
+ * 
  */
-public class ListGoodsBean extends Base{
+public class ListGoodsBean extends Base {
 	private ArrayList<ArrayList<GoodsBean>> list;
 
 	public ArrayList<ArrayList<GoodsBean>> getList() {
@@ -17,7 +19,5 @@ public class ListGoodsBean extends Base{
 	public void setList(ArrayList<ArrayList<GoodsBean>> list) {
 		this.list = list;
 	}
-
-	
 
 }

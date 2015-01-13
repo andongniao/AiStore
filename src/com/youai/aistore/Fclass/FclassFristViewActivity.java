@@ -9,6 +9,7 @@ import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
@@ -49,7 +50,7 @@ public class FclassFristViewActivity extends BaseActivity implements
 	private ListGoodsBean fclasslist;
 	private ArrayList<GoodsBean> womenListBean;
 	private FclassFristViewAdapter fclassAdapter;
-	private int type,id,postion;
+	private int type, id, postion;
 
 	@Override
 	protected void onCreate(Bundle arg0) {
@@ -74,9 +75,9 @@ public class FclassFristViewActivity extends BaseActivity implements
 		addviewlist = new ArrayList<View>();
 		inflater = LayoutInflater.from(context);
 		gridviewlist = new ArrayList<MyGridview>();
-		//顶部网格
+		// 顶部网格
 		toptitlegridview = (MyGridview) findViewById(R.id.fclass_frist_view_topgridview);
-		//商品网格
+		// 商品网格
 		addviewll = (LinearLayout) findViewById(R.id.fclass_frist_view_addview_ll);
 
 		if (listindex == 0) {
@@ -90,7 +91,7 @@ public class FclassFristViewActivity extends BaseActivity implements
 		} else if (listindex == 5) {
 			titlelist = rs.getStringArray(R.array.fclass_frist_tosex_gridview);
 		}
-		//顶部网格适配器
+		// 顶部网格适配器
 		toptitlegridview
 				.setAdapter(new ArrayAdapter<String>(this,
 						R.layout.fclass_gridview, R.id.fclass_gridview_text,
@@ -111,7 +112,7 @@ public class FclassFristViewActivity extends BaseActivity implements
 		@Override
 		public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
 				long arg3) {
-			
+
 			// TODO Auto-generated method stub
 			switch (arg2) {
 			case 0:
@@ -120,19 +121,55 @@ public class FclassFristViewActivity extends BaseActivity implements
 				// titlelist数组传值给FclassFristViewActivity的标题
 				intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 				intent.putExtra("title", titlelist[arg2].toString());
-				intent.putExtra("id",arg2);
+				intent.putExtra("id", arg2);
 				startActivity(intent);
 				Util.ShowToast(context, "点击了" + titlelist[arg2]);
+				Log.i("点击了谁", titlelist[arg2]);
 				break;
 			case 1:
-/*				Intent intent1 = new Intent(FclassFristViewActivity.this,
+				Intent intent1 = new Intent(FclassFristViewActivity.this,
 						FclassMoreActivity.class);
-				// titlelist数组传值给FclassFristViewActivity的标题
 				intent1.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 				intent1.putExtra("title", titlelist[arg2].toString());
-				
+				intent1.putExtra("id", arg2);
 				startActivity(intent1);
-				Util.ShowToast(context, "点击了" + titlelist[arg2]);*/
+				Util.ShowToast(context, "点击了" + titlelist[arg2]);
+				break;
+			case 2:
+				Intent intent2 = new Intent(FclassFristViewActivity.this,
+						FclassMoreActivity.class);
+				intent2.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+				intent2.putExtra("title", titlelist[arg2].toString());
+				intent2.putExtra("id", arg2);
+				startActivity(intent2);
+				Util.ShowToast(context, "点击了" + titlelist[arg2]);
+				break;
+			case 3:
+				Intent intent3 = new Intent(FclassFristViewActivity.this,
+						FclassMoreActivity.class);
+				intent3.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+				intent3.putExtra("title", titlelist[arg2].toString());
+				intent3.putExtra("id", arg2);
+				startActivity(intent3);
+				Util.ShowToast(context, "点击了" + titlelist[arg2]);
+				break;
+			case 4:
+				Intent intent4 = new Intent(FclassFristViewActivity.this,
+						FclassMoreActivity.class);
+				intent4.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+				intent4.putExtra("title", titlelist[arg2].toString());
+				intent4.putExtra("id", arg2);
+				startActivity(intent4);
+				Util.ShowToast(context, "点击了" + titlelist[arg2]);
+				break;
+			case 5:
+				Intent intent5 = new Intent(FclassFristViewActivity.this,
+						FclassMoreActivity.class);
+				intent5.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+				intent5.putExtra("title", titlelist[arg2].toString());
+				intent5.putExtra("id", arg2);
+				startActivity(intent5);
+				Util.ShowToast(context, "点击了" + titlelist[arg2]);
 				break;
 			default:
 				break;
@@ -141,6 +178,7 @@ public class FclassFristViewActivity extends BaseActivity implements
 		}
 
 	}
+
 	/*
 	 * 详细分类gridview监听器
 	 */
@@ -150,19 +188,20 @@ public class FclassFristViewActivity extends BaseActivity implements
 		public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
 				long arg3) {
 			// TODO Auto-generated method stub
-			//type = fclasslist.getList().get(0).get(arg2).getType();
+			// type = fclasslist.getList().get(0).get(arg2).getType();
 			id = fclasslist.getList().get(7).get(arg2).getId();
-		//	toActivity(type, id);
+			// toActivity(type, id);
 			Intent intent = new Intent(FclassFristViewActivity.this,
 					ProductDetailsActivity.class);
 			intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-			intent.putExtra("id",id);
-			
+			intent.putExtra("id", id);
+
 			startActivity(intent);
-			
+
 		}
 
 	}
+
 	private class MyTask extends AsyncTask<Object, Object, Object> {
 		// onPreExecute方法用于在执行后台任务前做一些UI操作
 		@Override
@@ -236,7 +275,6 @@ public class FclassFristViewActivity extends BaseActivity implements
 	@Override
 	public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
 		// TODO Auto-generated method stub
-
 
 	}
 

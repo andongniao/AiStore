@@ -13,26 +13,29 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+
 /**
  * 订单详情适配器
+ * 
  * @author Qzr
- *
+ * 
  */
-public class OrderDetailsAdapter extends BaseAdapter{
+public class OrderDetailsAdapter extends BaseAdapter {
 	private Context context;
 	private ArrayList<Goods> list;
 	private LayoutInflater inflater;
 	private Item item;
-	public OrderDetailsAdapter(Context context,ArrayList<Goods> list){
+
+	public OrderDetailsAdapter(Context context, ArrayList<Goods> list) {
 		this.context = context;
 		this.list = list;
-		inflater =LayoutInflater.from(context);
+		inflater = LayoutInflater.from(context);
 	}
 
 	@Override
 	public int getCount() {
 		// TODO Auto-generated method stub
-		return list!=null?list.size():0;
+		return list != null ? list.size() : 0;
 	}
 
 	@Override
@@ -49,30 +52,35 @@ public class OrderDetailsAdapter extends BaseAdapter{
 
 	@Override
 	public View getView(int postion, View v, ViewGroup arg2) {
-		if(v==null){
+		if (v == null) {
 			item = new Item();
 			v = inflater.inflate(R.layout.order_detail_item, null);
 			item.view(v);
 			v.setTag(item);
-		}else{
+		} else {
 			item = (Item) v.getTag();
 		}
 		item.tv_title.setText(list.get(postion).getGoods_name());
-		item.tv_price.setText("￥"+list.get(postion).getGoods_price()+"元");
-		item.tv_number.setText(list.get(postion).getGoods_number()+"件");
+		item.tv_price.setText("￥" + list.get(postion).getGoods_price() + "元");
+		item.tv_number.setText(list.get(postion).getGoods_number() + "件");
 		item.iv.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
-		ImageLoader.getInstance().displayImage(list.get(postion).getGoods_thumb(), item.iv);
+		ImageLoader.getInstance().displayImage(
+				list.get(postion).getGoods_thumb(), item.iv);
 		return v;
 	}
 
-	class Item{
-		public TextView tv_title,tv_price,tv_number;
+	class Item {
+		public TextView tv_title, tv_price, tv_number;
 		public ImageView iv;
-		void view(View v){
+
+		void view(View v) {
 			iv = (ImageView) v.findViewById(R.id.order_detail_item_pp_iv);
-			tv_title = (TextView) v.findViewById(R.id.order_detail_item_title_tv);
-			tv_price = (TextView) v.findViewById(R.id.order_detail_item_price_tv);
-			tv_number = (TextView) v.findViewById(R.id.order_detail_item_number_tv);
+			tv_title = (TextView) v
+					.findViewById(R.id.order_detail_item_title_tv);
+			tv_price = (TextView) v
+					.findViewById(R.id.order_detail_item_price_tv);
+			tv_number = (TextView) v
+					.findViewById(R.id.order_detail_item_number_tv);
 		}
 	}
 }

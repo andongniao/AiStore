@@ -439,8 +439,10 @@ public class Send {
 		return null;
 
 	}
+
 	/**
 	 * 登录
+	 * 
 	 * @param id
 	 * @param password
 	 * @return
@@ -449,7 +451,7 @@ public class Send {
 		UserBean bean = new UserBean();
 		String url = ServiceUrl.Login_Url_username + username
 				+ ServiceUrl.Login_Url_password + password;
-		String jsonStr= GetHttp.sendGet(url);
+		String jsonStr = GetHttp.sendGet(url);
 
 		if (jsonStr != null && !jsonStr.equals("")) {
 			JSONObject object = null;
@@ -463,7 +465,7 @@ public class Send {
 					bean = gson.fromJson(json, type);
 					bean.setCode(200);
 					bean.setMsg(object.getString("message"));
-					System.out.println(object.get("code")+"登陆成功");//测试是不是200
+					System.out.println(object.get("code") + "登陆成功");// 测试是不是200
 					return bean;
 				} else {
 					bean.setMsg(object.getString("message"));
@@ -483,17 +485,19 @@ public class Send {
 		}
 		return null;
 	}
+
 	/**
 	 * 注册
+	 * 
 	 * @param id
 	 * @param password
 	 * @return
 	 */
 	public UserBean regist(String username, String password) {
-		UserBean bean =  new UserBean();
+		UserBean bean = new UserBean();
 		String url = ServiceUrl.Regist_Url_username + username
 				+ ServiceUrl.Regist_Url_password + password;
-		String jsonStr= GetHttp.sendGet(url);
+		String jsonStr = GetHttp.sendGet(url);
 
 		if (jsonStr != null && !jsonStr.equals("")) {
 			JSONObject object = null;
@@ -507,7 +511,7 @@ public class Send {
 					bean = gson.fromJson(json, type);
 					bean.setCode(200);
 					bean.setMsg(object.getString("message"));
-					System.out.println(object.get("code") +"注册成功");//测试是不是200
+					System.out.println(object.get("code") + "注册成功");// 测试是不是200
 					return bean;
 				} else {
 					bean.setMsg(object.getString("message"));
@@ -527,18 +531,19 @@ public class Send {
 		}
 		return null;
 	}
-	
+
 	/**
 	 * 获取收货人信息
+	 * 
 	 * @param id
 	 * @param password
 	 * @return
 	 */
 	public ConsigneeBean getConsigneeInfo(String userid) {
 		ConsigneeBean bean = new ConsigneeBean();
-		String url = ServiceUrl.get_consignee_info+userid;
-		String jsonStr= GetHttp.sendGet(url);
-		
+		String url = ServiceUrl.get_consignee_info + userid;
+		String jsonStr = GetHttp.sendGet(url);
+
 		if (jsonStr != null && !jsonStr.equals("")) {
 			JSONObject object = null;
 			try {
@@ -556,9 +561,9 @@ public class Send {
 					bean.setMsg(object.getString("message"));
 					bean.setCode(object.getInt("code"));
 					return bean;
-					
+
 				}
-				
+
 			} catch (JSONException e) {
 				e.printStackTrace();
 			}
@@ -570,22 +575,23 @@ public class Send {
 		}
 		return null;
 	}
-	
-	
+
 	/**
 	 * save收货人信息
+	 * 
 	 * @param id
 	 * @param password
 	 * @return
 	 */
-	public Base saveConsigneeInfo(String userid,String consignee,String tel,String address) {
+	public Base saveConsigneeInfo(String userid, String consignee, String tel,
+			String address) {
 		Base bean = new Base();
-		String url = ServiceUrl.save_consignee_info+userid+
-				ServiceUrl.save_consignee_info_consignee+consignee+
-				ServiceUrl.save_consignee_info_tel+tel+
-				ServiceUrl.save_consignee_info_address+address;
-		String jsonStr= GetHttp.sendGet(url);
-		
+		String url = ServiceUrl.save_consignee_info + userid
+				+ ServiceUrl.save_consignee_info_consignee + consignee
+				+ ServiceUrl.save_consignee_info_tel + tel
+				+ ServiceUrl.save_consignee_info_address + address;
+		String jsonStr = GetHttp.sendGet(url);
+
 		if (jsonStr != null && !jsonStr.equals("")) {
 			JSONObject object = null;
 			try {
@@ -598,9 +604,9 @@ public class Send {
 					bean.setMsg(object.getString("message"));
 					bean.setCode(object.getInt("code"));
 					return bean;
-					
+
 				}
-				
+
 			} catch (JSONException e) {
 				e.printStackTrace();
 			}
@@ -612,21 +618,22 @@ public class Send {
 		}
 		return null;
 	}
-	
+
 	/**
 	 * 提交订单
+	 * 
 	 * @param id
 	 * @param password
 	 * @return
 	 */
-	public Base CommitOrder(String userid,String time,String type,String fee) {
+	public Base CommitOrder(String userid, String time, String type, String fee) {
 		Base bean = new Base();
-		String url = ServiceUrl.save_order_info+userid+
-				ServiceUrl.save_order_info_time+time+
-				ServiceUrl.save_order_info_type+type+
-				ServiceUrl.save_order_info_time_fee+fee;
-		String jsonStr= GetHttp.sendGet(url);
-		
+		String url = ServiceUrl.save_order_info + userid
+				+ ServiceUrl.save_order_info_time + time
+				+ ServiceUrl.save_order_info_type + type
+				+ ServiceUrl.save_order_info_time_fee + fee;
+		String jsonStr = GetHttp.sendGet(url);
+
 		if (jsonStr != null && !jsonStr.equals("")) {
 			JSONObject object = null;
 			try {
@@ -639,9 +646,9 @@ public class Send {
 					bean.setMsg(object.getString("message"));
 					bean.setCode(object.getInt("code"));
 					return bean;
-					
+
 				}
-				
+
 			} catch (JSONException e) {
 				e.printStackTrace();
 			}
@@ -653,21 +660,21 @@ public class Send {
 		}
 		return null;
 	}
-	
-	
+
 	/**
 	 * 获取全部订单
+	 * 
 	 * @param id
 	 * @param password
 	 * @return
 	 */
-	public ListOrderBean getAllOrderlist(String userid,int page) {
+	public ListOrderBean getAllOrderlist(String userid, int page) {
 		ListOrderBean bean = new ListOrderBean();
-		String url = ServiceUrl.get_order_list_userid+userid+
-				ServiceUrl.get_order_list_page+page+
-				ServiceUrl.get_order_list_action;
-		String jsonStr= GetHttp.sendGet(url);
-		
+		String url = ServiceUrl.get_order_list_userid + userid
+				+ ServiceUrl.get_order_list_page + page
+				+ ServiceUrl.get_order_list_action;
+		String jsonStr = GetHttp.sendGet(url);
+
 		if (jsonStr != null && !jsonStr.equals("")) {
 			JSONObject object = null;
 			try {
@@ -686,9 +693,9 @@ public class Send {
 					bean.setMsg(object.getString("message"));
 					bean.setCode(object.getInt("code"));
 					return bean;
-					
+
 				}
-				
+
 			} catch (JSONException e) {
 				e.printStackTrace();
 			}
@@ -700,19 +707,20 @@ public class Send {
 		}
 		return null;
 	}
-	
+
 	/**
 	 * 获取订单详情
+	 * 
 	 * @param id
 	 * @param password
 	 * @return
 	 */
-	public OrderDetailsBean getOrderDetalis(String orderid,String userid) {
+	public OrderDetailsBean getOrderDetalis(String orderid, String userid) {
 		OrderDetailsBean bean = new OrderDetailsBean();
-		String url = ServiceUrl.get_order_details_orderid+orderid+
-				ServiceUrl.get_order_details_userid+userid;
-		String jsonStr= GetHttp.sendGet(url);
-		
+		String url = ServiceUrl.get_order_details_orderid + orderid
+				+ ServiceUrl.get_order_details_userid + userid;
+		String jsonStr = GetHttp.sendGet(url);
+
 		if (jsonStr != null && !jsonStr.equals("")) {
 			JSONObject object = null;
 			try {
@@ -726,7 +734,7 @@ public class Send {
 					JSONArray j = data.getJSONArray("goods");
 					Type tg = new TypeToken<ArrayList<Goods>>() {
 					}.getType();
-					ArrayList<Goods> gs =  gson.fromJson(j.toString(), tg);
+					ArrayList<Goods> gs = gson.fromJson(j.toString(), tg);
 					bean.setGoods(gs);
 					bean.setCode(200);
 					bean.setMsg(object.getString("message"));
@@ -735,9 +743,9 @@ public class Send {
 					bean.setMsg(object.getString("message"));
 					bean.setCode(object.getInt("code"));
 					return bean;
-					
+
 				}
-				
+
 			} catch (JSONException e) {
 				e.printStackTrace();
 			}
@@ -749,8 +757,5 @@ public class Send {
 		}
 		return null;
 	}
-	
-	
-	
 
 }

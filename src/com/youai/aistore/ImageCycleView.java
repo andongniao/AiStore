@@ -92,14 +92,14 @@ public class ImageCycleView extends LinearLayout {
 			@Override
 			public boolean onTouch(View v, MotionEvent event) {
 				switch (event.getAction()) {
-					case MotionEvent.ACTION_UP:
-						// 开始图片滚动
-						startImageTimerTask();
-						break;
-					default:
-						// 停止图片滚动
-						stopImageTimerTask();
-						break;
+				case MotionEvent.ACTION_UP:
+					// 开始图片滚动
+					startImageTimerTask();
+					break;
+				default:
+					// 停止图片滚动
+					stopImageTimerTask();
+					break;
 				}
 				return false;
 			}
@@ -114,7 +114,8 @@ public class ImageCycleView extends LinearLayout {
 	 * @param imageUrlList
 	 * @param imageCycleViewListener
 	 */
-	public void setImageResources(ArrayList<String> imageUrlList, ImageCycleViewListener imageCycleViewListener) {
+	public void setImageResources(ArrayList<String> imageUrlList,
+			ImageCycleViewListener imageCycleViewListener) {
 		// 清除所有子视图
 		mGroup.removeAllViews();
 		// 图片广告数量
@@ -124,8 +125,10 @@ public class ImageCycleView extends LinearLayout {
 			mImageView = new ImageView(mContext);
 			int imageParams = (int) (mScale * 10 + 0.5f);// XP与DP转换，适应不同分辨率
 			int imagePadding = (int) (mScale * 15 + 0.5f);
-			mImageView.setLayoutParams(new LayoutParams(imageParams, imageParams));
-			mImageView.setPadding(imagePadding, imagePadding, imagePadding, imagePadding);
+			mImageView.setLayoutParams(new LayoutParams(imageParams,
+					imageParams));
+			mImageView.setPadding(imagePadding, imagePadding, imagePadding,
+					imagePadding);
 			mImageViews[i] = mImageView;
 			if (i == 0) {
 				mImageViews[i].setBackgroundResource(R.drawable.cor_red);
@@ -134,7 +137,8 @@ public class ImageCycleView extends LinearLayout {
 			}
 			mGroup.addView(mImageViews[i]);
 		}
-		mAdvAdapter = new ImageCycleAdapter(mContext, imageUrlList, imageCycleViewListener);
+		mAdvAdapter = new ImageCycleAdapter(mContext, imageUrlList,
+				imageCycleViewListener);
 		mAdvPager.setAdapter(mAdvAdapter);
 		startImageTimerTask();
 	}
@@ -168,7 +172,8 @@ public class ImageCycleView extends LinearLayout {
 	public void stopImageTimerTask() {
 		mHandler.removeCallbacks(mImageTimerTask);
 	}
-	public void settime(long time){
+
+	public void settime(long time) {
 		this.time = time;
 	}
 
@@ -243,7 +248,8 @@ public class ImageCycleView extends LinearLayout {
 
 		private Context mContext;
 
-		public ImageCycleAdapter(Context context, ArrayList<String> adList, ImageCycleViewListener imageCycleViewListener) {
+		public ImageCycleAdapter(Context context, ArrayList<String> adList,
+				ImageCycleViewListener imageCycleViewListener) {
 			mContext = context;
 			mAdList = adList;
 			mImageCycleViewListener = imageCycleViewListener;
@@ -266,9 +272,10 @@ public class ImageCycleView extends LinearLayout {
 			ImageView imageView = null;
 			if (mImageViewCacheList.isEmpty()) {
 				imageView = new ImageView(mContext);
-				imageView.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
+				imageView.setLayoutParams(new LayoutParams(
+						LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
 				imageView.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
-				
+
 			} else {
 				imageView = mImageViewCacheList.remove(0);
 			}

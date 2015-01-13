@@ -27,7 +27,6 @@ public class FclassFristViewAdapter extends BaseAdapter {
 		inflater = LayoutInflater.from(context);
 	}
 
-
 	@Override
 	public int getCount() {
 		return list != null ? list.size() : 0;
@@ -47,24 +46,29 @@ public class FclassFristViewAdapter extends BaseAdapter {
 	public View getView(int arg0, View arg1, ViewGroup arg2) {
 		if (arg1 == null) {
 			myItem = new MyItem();
-			arg1 = inflater.inflate(R.layout.fclass_frist_view_addview_item, null);
+			arg1 = inflater.inflate(R.layout.fclass_frist_view_addview_item,
+					null);
 			myItem.iv = (ImageView) arg1
 					.findViewById(R.id.fclass_frist_view_addview_item_iv);
 			myItem.tv_title = (TextView) arg1
 					.findViewById(R.id.fclass_frist_view_addview_item_title_tv);
-			myItem.tv_shop_price = (TextView) arg1.findViewById(R.id.fclass_frist_view_addview_item_price_tv);
-			myItem.tv_click = (TextView) arg1.findViewById(R.id.fclass_frist_view_addview_item_likes_tv);
+			myItem.tv_shop_price = (TextView) arg1
+					.findViewById(R.id.fclass_frist_view_addview_item_price_tv);
+			myItem.tv_click = (TextView) arg1
+					.findViewById(R.id.fclass_frist_view_addview_item_likes_tv);
 			arg1.setTag(myItem);
-			
+
 		} else {
 			myItem = (MyItem) arg1.getTag();
 		}
 
 		// TODO s
 		myItem.iv.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
-		ImageLoader.getInstance().displayImage(list.get(arg0).getPicurl(), myItem.iv);
+		ImageLoader.getInstance().displayImage(list.get(arg0).getPicurl(),
+				myItem.iv);
 		myItem.tv_title.setText(list.get(arg0).getTitle());
-		myItem.tv_shop_price.setText("ฃค"+list.get(arg0).getShop_price()+"ิช");
+		myItem.tv_shop_price
+				.setText("ฃค" + list.get(arg0).getShop_price() + "ิช");
 		myItem.tv_click.setText(list.get(arg0).getClick());
 
 		return arg1;
@@ -72,6 +76,6 @@ public class FclassFristViewAdapter extends BaseAdapter {
 
 	class MyItem {
 		public ImageView iv;
-		public TextView tv_title, tv_shop_price,tv_click;
+		public TextView tv_title, tv_shop_price, tv_click;
 	}
 }

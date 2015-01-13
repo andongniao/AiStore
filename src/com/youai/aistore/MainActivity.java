@@ -14,38 +14,37 @@ import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
-
-/**主程序入口*/
+/** 主程序入口 */
 public class MainActivity extends ListActivity {
-    private ListView mListView;
+	private ListView mListView;
 	private ListAdapter mAdapter;
 	private ArrayList<Item> mItems;
 	private LayoutInflater mLayoutInflater;
 
 	/** Called when the activity is first created. */
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        
-        mLayoutInflater = getLayoutInflater();
-        
-        mItems = new ArrayList<Item>();
-    	Item item = new Item("Tab Host Example", ExampleActivity.class);
-    	mItems.add(item);
-    	
-        mAdapter = new MyAdapter();
-        mListView = getListView();
-        mListView.setAdapter(mAdapter);
-        
-    }
-    
-    @Override
-    protected void onListItemClick(ListView l, View v, int position, long id) {
-    	Item item = mItems.get(position);
-    	startActivity(new Intent(this, item.cls));
-    }
-    
-    class MyAdapter extends BaseAdapter {
+	@Override
+	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+
+		mLayoutInflater = getLayoutInflater();
+
+		mItems = new ArrayList<Item>();
+		Item item = new Item("Tab Host Example", ExampleActivity.class);
+		mItems.add(item);
+
+		mAdapter = new MyAdapter();
+		mListView = getListView();
+		mListView.setAdapter(mAdapter);
+
+	}
+
+	@Override
+	protected void onListItemClick(ListView l, View v, int position, long id) {
+		Item item = mItems.get(position);
+		startActivity(new Intent(this, item.cls));
+	}
+
+	class MyAdapter extends BaseAdapter {
 
 		@Override
 		public int getCount() {
@@ -65,27 +64,26 @@ public class MainActivity extends ListActivity {
 		@Override
 		public View getView(int position, View arg1, ViewGroup arg2) {
 			Item item = mItems.get(position);
-			
+
 			View view = mLayoutInflater.inflate(R.layout.listview_item, null);
 			TextView tv = (TextView) view.findViewById(R.id.list_item_tv);
 			tv.setText(item.text);
-			
+
 			return view;
 		}
-    	
-    }
-    
-    class Item { 
-    	Class<? extends Activity> cls;
-    	CharSequence text;
-    	
+
+	}
+
+	class Item {
+		Class<? extends Activity> cls;
+		CharSequence text;
+
 		public Item(CharSequence text, Class<? extends Activity> cls) {
 			super();
 			this.cls = cls;
 			this.text = text;
 		}
-    	
-    	
-    }
+
+	}
 
 }

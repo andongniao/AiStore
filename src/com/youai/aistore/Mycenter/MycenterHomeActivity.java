@@ -31,7 +31,7 @@ public class MycenterHomeActivity extends BaseActivity implements
 	private CircleImageView headeriv;
 	private LinearLayout dingdan_ll, youhui_ll, kefu_ll, set_ll, call_ll,
 			sms_ll, show_ll, login_ll;
-	private	Button login_btn,regist_btn;
+	private Button login_btn, regist_btn;
 	private TextView uernametv;
 	private boolean isshowing;
 	private Dialog alertDialog;
@@ -70,12 +70,12 @@ public class MycenterHomeActivity extends BaseActivity implements
 		login_btn.setOnClickListener(this);
 		regist_btn = (Button) findViewById(R.id.mycenter_home_regist_btn);
 		regist_btn.setOnClickListener(this);
-		if(MyApplication.userBean!=null){
+		if (MyApplication.userBean != null) {
 			uernametv.setText(MyApplication.userBean.getUser_name());
 		}
 		String url = "http://img5.imgtn.bdimg.com/it/u=3292851460,915918973&fm=116&gp=0.jpg";
 		ImageLoader.getInstance().displayImage(url, headeriv);
-		if(MyApplication.logined){
+		if (MyApplication.logined) {
 			login_ll.setVisibility(View.GONE);
 			uernametv.setText(MyApplication.UserName);
 		}
@@ -87,23 +87,25 @@ public class MycenterHomeActivity extends BaseActivity implements
 		case R.id.mycenter_home_header_iv:
 			break;
 
-		case R.id.mycenter_home_login_btn: 
-			Intent intent = new Intent(MycenterHomeActivity.this,MyLoginActivity.class);
+		case R.id.mycenter_home_login_btn:
+			Intent intent = new Intent(MycenterHomeActivity.this,
+					MyLoginActivity.class);
 			intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 			startActivity(intent);
 			break;
-		case R.id.mycenter_home_regist_btn: 
-			Intent intent1 = new Intent(MycenterHomeActivity.this,MyRegistActivity.class);
+		case R.id.mycenter_home_regist_btn:
+			Intent intent1 = new Intent(MycenterHomeActivity.this,
+					MyRegistActivity.class);
 			intent1.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 			startActivity(intent1);
 			break;
 		case R.id.mycenter_home_dingdan_ll:
 			Intent dd = null;
-//			if(MyApplication.logined){
-				dd = new Intent(MycenterHomeActivity.this,AllOrderActivity.class);
-//			}else{
-//				dd = new Intent(MycenterHomeActivity.this,MyLoginActivity.class);
-//			}
+			// if(MyApplication.logined){
+			dd = new Intent(MycenterHomeActivity.this, AllOrderActivity.class);
+			// }else{
+			// dd = new Intent(MycenterHomeActivity.this,MyLoginActivity.class);
+			// }
 			dd.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 			startActivity(dd);
 			break;

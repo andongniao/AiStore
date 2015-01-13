@@ -1,6 +1,5 @@
 package com.youai.aistore.xlistview;
 
-
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
@@ -17,9 +16,8 @@ import android.widget.TextView;
 
 import com.youai.aistore.R;
 
-
 public class XListView extends ListView implements OnScrollListener {
-	public int statu = 1; 
+	public int statu = 1;
 	private float mLastY = -1; // save event y
 	private Scroller mScroller; // used for scroll back
 	private OnScrollListener mScrollListener; // user's scroll listener
@@ -56,6 +54,7 @@ public class XListView extends ListView implements OnScrollListener {
 	// at bottom, trigger
 	// load more.
 	private final static float OFFSET_RADIO = 1.8f; // support iOS like pull
+
 	// feature.
 
 	/**
@@ -100,7 +99,7 @@ public class XListView extends ListView implements OnScrollListener {
 					public void onGlobalLayout() {
 						mHeaderViewHeight = mHeaderViewContent.getHeight();
 						getViewTreeObserver()
-						.removeGlobalOnLayoutListener(this);
+								.removeGlobalOnLayoutListener(this);
 					}
 				});
 	}
@@ -308,7 +307,7 @@ public class XListView extends ListView implements OnScrollListener {
 			}
 			break;
 		}
-		
+
 		return super.onTouchEvent(ev);
 	}
 
@@ -370,20 +369,19 @@ public class XListView extends ListView implements OnScrollListener {
 		public void onLoadMore();
 	}
 
-	@Override  
-	protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {  
-		// TODO Auto-generated method stub  
-		int expandSpec = MeasureSpec.makeMeasureSpec(Integer.MAX_VALUE >> 2,  
-				MeasureSpec.AT_MOST);  
-		if(statu==2){
-			super.onMeasure(widthMeasureSpec, expandSpec);  
-		}else{
-			super.onMeasure(widthMeasureSpec, heightMeasureSpec);  
+	@Override
+	protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+		// TODO Auto-generated method stub
+		int expandSpec = MeasureSpec.makeMeasureSpec(Integer.MAX_VALUE >> 2,
+				MeasureSpec.AT_MOST);
+		if (statu == 2) {
+			super.onMeasure(widthMeasureSpec, expandSpec);
+		} else {
+			super.onMeasure(widthMeasureSpec, heightMeasureSpec);
 		}
-	}  
+	}
 
-	public void GoneFooterView(){
+	public void GoneFooterView() {
 		mFooterView.setVisibility(View.GONE);
 	}
 }
-

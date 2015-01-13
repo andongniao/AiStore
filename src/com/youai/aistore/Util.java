@@ -26,6 +26,7 @@ import android.view.ViewGroup;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
+
 /**
  * 公用工具类
  * 
@@ -55,6 +56,7 @@ public class Util {
 
 	/**
 	 * 判断email格式是否正确
+	 * 
 	 * @param email
 	 * @return
 	 */
@@ -65,8 +67,10 @@ public class Util {
 
 		return m.matches();
 	}
+
 	/**
 	 * 密码位数限制，大于4位，小于10位
+	 * 
 	 * @param password
 	 * @return
 	 */
@@ -77,8 +81,10 @@ public class Util {
 
 		return m.matches();
 	}
+
 	/**
-	 *检查开头或结尾是否有空格
+	 * 检查开头或结尾是否有空格
+	 * 
 	 * @param password
 	 * @return
 	 */
@@ -89,7 +95,7 @@ public class Util {
 
 		return m.matches();
 	}
-	
+
 	/**
 	 * 判断字符串是否为空
 	 * 
@@ -102,6 +108,7 @@ public class Util {
 		}
 		return false;
 	}
+
 	/**
 	 * 获取图片宽度和高度
 	 * 
@@ -137,6 +144,7 @@ public class Util {
 		}
 		return true;
 	}
+
 	/**
 	 * 把时间戳转化成时间类型
 	 * 
@@ -165,32 +173,33 @@ public class Util {
 		SimpleDateFormat sdf = new SimpleDateFormat(str);
 		return sdf.format(date);
 	}
+
 	/**
 	 * 启动Loding...
+	 * 
 	 * @param context
 	 */
-	public static void startProgressDialog(Context context){
-		if (progressDialog == null){
+	public static void startProgressDialog(Context context) {
+		if (progressDialog == null) {
 			progressDialog = CustomProgressDialog.createDialog(context);
 		}
 
 		progressDialog.show();
 	}
+
 	/**
 	 * 关闭Loding...
 	 */
-	public static void stopProgressDialog(){
-		if (progressDialog != null && progressDialog.isShowing()){
+	public static void stopProgressDialog() {
+		if (progressDialog != null && progressDialog.isShowing()) {
 			progressDialog.dismiss();
 			progressDialog = null;
 		}
 	}
 
-
-
-
 	/**
-	 * 获取外置sd卡的根路径，如果沒有外置sd卡，則返回null 
+	 * 获取外置sd卡的根路径，如果沒有外置sd卡，則返回null
+	 * 
 	 * @return
 	 */
 	public String getSdPath() {
@@ -236,25 +245,30 @@ public class Util {
 		}
 		return sdcard_path;
 	}
+
 	/**
 	 * 呼出Toast
+	 * 
 	 * @param context
 	 * @param content
 	 */
-	public static void ShowToast(Context context,String content){
+	public static void ShowToast(Context context, String content) {
 		Toast.makeText(context, content, 1000).show();
 	}
+
 	/**
 	 * 呼出Toast
+	 * 
 	 * @param context
 	 * @param i
 	 */
-	public static void ShowToast(Context context,int i){
+	public static void ShowToast(Context context, int i) {
 		Toast.makeText(context, i, 1000).show();
 	}
 
 	/**
 	 * md5加密
+	 * 
 	 * @param key
 	 * @return
 	 */
@@ -282,25 +296,25 @@ public class Util {
 		return sb.toString();
 	}
 
-	public static void setListViewHeightBasedOnChildren(ListView listView) {  
-		// 获取ListView对应的Adapter  
-		ListAdapter listAdapter = listView.getAdapter();  
-		if(listAdapter == null) {  
-			return;  
-		}  
-		int totalHeight = 0;  
-		for(int i = 0, len = listAdapter.getCount(); i < len; i++) { // listAdapter.getCount()返回数据项的数目  
-			View listItem = listAdapter.getView(i, null, listView);  
-			listItem.measure(0, 0); // 计算子项View 的宽高  
-			totalHeight += listItem.getMeasuredHeight(); // 统计所有子项的总高度  
-		}  
-		ViewGroup.LayoutParams params = listView.getLayoutParams();  
-		params.height = totalHeight  
-				+ (listView.getDividerHeight() * (listAdapter.getCount() - 1));  
-		// listView.getDividerHeight()获取子项间分隔符占用的高度  
-		// params.height最后得到整个ListView完整显示需要的高度  
-		listView.setLayoutParams(params);  
-	}  
+	public static void setListViewHeightBasedOnChildren(ListView listView) {
+		// 获取ListView对应的Adapter
+		ListAdapter listAdapter = listView.getAdapter();
+		if (listAdapter == null) {
+			return;
+		}
+		int totalHeight = 0;
+		for (int i = 0, len = listAdapter.getCount(); i < len; i++) { // listAdapter.getCount()返回数据项的数目
+			View listItem = listAdapter.getView(i, null, listView);
+			listItem.measure(0, 0); // 计算子项View 的宽高
+			totalHeight += listItem.getMeasuredHeight(); // 统计所有子项的总高度
+		}
+		ViewGroup.LayoutParams params = listView.getLayoutParams();
+		params.height = totalHeight
+				+ (listView.getDividerHeight() * (listAdapter.getCount() - 1));
+		// listView.getDividerHeight()获取子项间分隔符占用的高度
+		// params.height最后得到整个ListView完整显示需要的高度
+		listView.setLayoutParams(params);
+	}
 
 	/**
 	 * 把时间戳转化成时间类型
@@ -317,7 +331,7 @@ public class Util {
 		String date = sdf.format(new Date(time));
 		return date;
 	}
-	
+
 	public static String sign(String content, String privateKey) {
 		try {
 			PKCS8EncodedKeySpec priPKCS8 = new PKCS8EncodedKeySpec(

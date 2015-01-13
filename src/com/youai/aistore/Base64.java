@@ -115,7 +115,7 @@ public final class Base64 {
 		if (fewerThan24bits == EIGHTBIT) {
 			b1 = binaryData[dataIndex];
 			k = (byte) (b1 & 0x03);
-			
+
 			byte val1 = ((b1 & SIGN) == 0) ? (byte) (b1 >> 2)
 					: (byte) ((b1) >> 2 ^ 0xc0);
 			encodedData[encodedIndex++] = lookUpBase64Alphabet[val1];

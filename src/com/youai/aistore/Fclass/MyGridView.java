@@ -5,8 +5,7 @@ import android.util.AttributeSet;
 import android.widget.GridView;
 
 /**
- * @Type: MyGridView 
- * 让GridView可以做ScrollView的子控件，但尺寸不会减小 
+ * @Type: MyGridView 让GridView可以做ScrollView的子控件，但尺寸不会减小
  */
 public class MyGridView extends GridView {
 
@@ -28,8 +27,8 @@ public class MyGridView extends GridView {
 	@Override
 	protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
 		// TODO Auto-generated method stub
-		int expandSpec = MeasureSpec.makeMeasureSpec(Integer.MAX_VALUE >> 2,    
-                MeasureSpec.AT_MOST);    
+		int expandSpec = MeasureSpec.makeMeasureSpec(Integer.MAX_VALUE >> 2,
+				MeasureSpec.AT_MOST);
 		super.onMeasure(widthMeasureSpec, expandSpec);
 	}
 

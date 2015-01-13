@@ -40,6 +40,7 @@ public class MyRegistActivity extends BaseActivity implements OnClickListener {
 		public void handleMessage(Message msg) {
 			super.handleMessage(msg);
 			if (msg.what == 1) {
+				Util.ShowToast(MyRegistActivity.this, R.string.regist_succeed);
 				Intent intent = new Intent(MyRegistActivity.this,
 						MyLoginActivity.class);
 				intent.setFlags(intent.FLAG_ACTIVITY_CLEAR_TOP);

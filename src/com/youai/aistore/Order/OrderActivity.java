@@ -37,27 +37,29 @@ import com.youai.aistore.Bean.ListShopCartBean;
 import com.youai.aistore.Bean.ShopCartBean;
 import com.youai.aistore.NetInterface.Send;
 import com.youai.aistore.ShopCart.ShopCartActivity;
+
 /**
  * 结算订单界面
+ * 
  * @author Qzr
- *
+ * 
  */
-public class OrderActivity extends BaseActivity implements OnClickListener{
+public class OrderActivity extends BaseActivity implements OnClickListener {
 	private OrderListview lv;
-	private TextView tv_consignee,tv_address,tv_number,tv_goods_prive,
-	tv_kuaidi_price,tv_final_price,tv_chose_time;
+	private TextView tv_consignee, tv_address, tv_number, tv_goods_prive,
+			tv_kuaidi_price, tv_final_price, tv_chose_time;
 	private LinearLayout chose_time_ll;
 	private Button commitbtn;
-	private RadioButton zhifu_rbt,huodao_rbt;
+	private RadioButton zhifu_rbt, huodao_rbt;
 	private Context context;
 	private Dialog alertDialog;
 	private OrderLvAdapter adapter;
-	private ArrayList<ShopCartBean>list;
-	private int type,postion,time;
+	private ArrayList<ShopCartBean> list;
+	private int type, postion, time;
 	private ListShopCartBean listbean;
 	private MyTask myTask;
 	private Base bean;
-	private double kuaidi,price,final_price;
+	private double kuaidi, price, final_price;
 	private Handler mHandler;
 	private static final int SDK_PAY_FLAG = 1;
 	private static final int SDK_CHECK_FLAG = 2;
@@ -73,48 +75,49 @@ public class OrderActivity extends BaseActivity implements OnClickListener{
 		setContentXml(R.layout.order);
 		setTopLeftBackground(R.drawable.btn_back);
 		init();
-		 mHandler = new Handler() {
-				public void handleMessage(Message msg) {
-					switch (msg.what) {
-					case SDK_PAY_FLAG: {
-						Result resultObj = new Result((String) msg.obj);
-						String resultStatus = resultObj.resultStatus;
-						String memo = resultObj.memo;
+		mHandler = new Handler() {
+			public void handleMessage(Message msg) {
+				switch (msg.what) {
+				case SDK_PAY_FLAG: {
+					Result resultObj = new Result((String) msg.obj);
+					String resultStatus = resultObj.resultStatus;
+					String memo = resultObj.memo;
 
-						// 判断resultStatus 为“9000”则代表支付成功，具体状态码代表含义可参考接口文档
-						if (TextUtils.equals(resultStatus, "9000")) {
-							Toast.makeText(OrderActivity.this, memo,//"支付成功",
+					// 判断resultStatus 为“9000”则代表支付成功，具体状态码代表含义可参考接口文档
+					if (TextUtils.equals(resultStatus, "9000")) {
+						Toast.makeText(OrderActivity.this, memo,// "支付成功",
+								Toast.LENGTH_SHORT).show();
+					} else {
+						// 判断resultStatus 为非“9000”则代表可能支付失败
+						// “8000”
+						// 代表支付结果因为支付渠道原因或者系统原因还在等待支付结果确认，最终交易是否成功以服务端异步通知为准（小概率状态）
+						if (TextUtils.equals(resultStatus, "8000")) {
+							Toast.makeText(OrderActivity.this, memo,// "支付结果确认中",
+									Toast.LENGTH_SHORT).show();
+
+						} else if (TextUtils.equals(resultStatus, "4000")) {
+							Toast.makeText(OrderActivity.this, memo,// "订单支付失败",
 									Toast.LENGTH_SHORT).show();
 						} else {
-							// 判断resultStatus 为非“9000”则代表可能支付失败
-							// “8000” 代表支付结果因为支付渠道原因或者系统原因还在等待支付结果确认，最终交易是否成功以服务端异步通知为准（小概率状态）
-							if (TextUtils.equals(resultStatus, "8000")) {
-								Toast.makeText(OrderActivity.this, memo,//"支付结果确认中",
-										Toast.LENGTH_SHORT).show();
+							Toast.makeText(OrderActivity.this, memo,// "支付失败",
+									Toast.LENGTH_SHORT).show();
 
-							} else if(TextUtils.equals(resultStatus, "4000")){
-								Toast.makeText(OrderActivity.this, memo,//"订单支付失败",
-										Toast.LENGTH_SHORT).show();
-							}else {
-								Toast.makeText(OrderActivity.this, memo,//"支付失败",
-										Toast.LENGTH_SHORT).show();
-
-							}
 						}
-						break;
 					}
-					case SDK_CHECK_FLAG: {
-						Toast.makeText(OrderActivity.this, "检查结果为：" + msg.obj,
-								Toast.LENGTH_SHORT).show();
-						break;
-					}
-					default:
-						ExampleActivity.setCurrentTab(2);
-						finish();
-						break;
-					}
-				};
+					break;
+				}
+				case SDK_CHECK_FLAG: {
+					Toast.makeText(OrderActivity.this, "检查结果为：" + msg.obj,
+							Toast.LENGTH_SHORT).show();
+					break;
+				}
+				default:
+					ExampleActivity.setCurrentTab(2);
+					finish();
+					break;
+				}
 			};
+		};
 	}
 
 	private void init() {
@@ -142,20 +145,20 @@ public class OrderActivity extends BaseActivity implements OnClickListener{
 		tv_consignee.setText(getIntent().getStringExtra("consignee"));
 		tv_address.setText(getIntent().getStringExtra("address"));
 		tv_number.setText(getIntent().getStringExtra("number"));
-		tv_goods_prive.setText("￥"+listbean.getCount_price()+"元");
+		tv_goods_prive.setText("￥" + listbean.getCount_price() + "元");
 		price = Double.parseDouble(listbean.getCount_price());
 		kuaidi = 0.00;
 		final_price = 0.00;
-		if(price>299){
+		if (price > 299) {
 			kuaidi = 0.00;
-		}else{
+		} else {
 			kuaidi = 12.00;
 		}
-		final_price = price+kuaidi;
-		tv_kuaidi_price.setText("￥"+kuaidi+"元");
-		tv_final_price.setText("￥"+final_price+"元");
-		
-		/************************模拟数据**********************************/
+		final_price = price + kuaidi;
+		tv_kuaidi_price.setText("￥" + kuaidi + "元");
+		tv_final_price.setText("￥" + final_price + "元");
+
+		/************************ 模拟数据 **********************************/
 		list = new ArrayList<ShopCartBean>();
 		ShopCartBean a = new ShopCartBean();
 		ShopCartBean s = new ShopCartBean();
@@ -173,10 +176,10 @@ public class OrderActivity extends BaseActivity implements OnClickListener{
 	public void onClick(View arg0) {
 		switch (arg0.getId()) {
 		case R.id.order_commit_btn:
-			if(Util.detect(context)){
+			if (Util.detect(context)) {
 				myTask = new MyTask();
-				myTask.execute("");  
-			}else{
+				myTask.execute("");
+			} else {
 				Util.ShowToast(context, R.string.net_work_is_error);
 			}
 			break;
@@ -185,120 +188,121 @@ public class OrderActivity extends BaseActivity implements OnClickListener{
 			break;
 		case R.id.order_radio_zhifu:
 			type = 1;
-			Util.ShowToast(context, ""+type);
+			Util.ShowToast(context, "" + type);
 			break;
 		case R.id.order_radio_huodao:
 			type = 2;
-			Util.ShowToast(context, ""+type);
+			Util.ShowToast(context, "" + type);
 			break;
 
 		}
 	}
 
-	private void TosatDialog(){
-		final String[] arrayFruit = getResources().getStringArray(R.array.order_chose_time);
+	private void TosatDialog() {
+		final String[] arrayFruit = getResources().getStringArray(
+				R.array.order_chose_time);
 
-		alertDialog = new AlertDialog.Builder(this).
-				setSingleChoiceItems(arrayFruit, postion, new DialogInterface.OnClickListener() {
+		alertDialog = new AlertDialog.Builder(this).setSingleChoiceItems(
+				arrayFruit, postion, new DialogInterface.OnClickListener() {
 
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
 						postion = which;
 						tv_chose_time.setText(arrayFruit[which]);
-						time = which+1;
-						if(alertDialog!=null && alertDialog.isShowing()){
+						time = which + 1;
+						if (alertDialog != null && alertDialog.isShowing()) {
 							alertDialog.dismiss();
 							alertDialog = null;
 						}
 					}
-				}).
-				create();
+				}).create();
 		alertDialog.show();
 	}
 
 	@Override
 	public boolean onTouchEvent(MotionEvent event) {
-		if(alertDialog!=null && alertDialog.isShowing()){
+		if (alertDialog != null && alertDialog.isShowing()) {
 			alertDialog.dismiss();
 			alertDialog = null;
 		}
 		return super.onTouchEvent(event);
 	}
-	
-	private class MyTask extends AsyncTask<Object, Object, Object> {  
-		
-		//onPreExecute方法用于在执行后台任务前做一些UI操作  
-		@Override  
-		protected void onPreExecute() {  
+
+	private class MyTask extends AsyncTask<Object, Object, Object> {
+
+		// onPreExecute方法用于在执行后台任务前做一些UI操作
+		@Override
+		protected void onPreExecute() {
 			Util.startProgressDialog(context);
-		}  
+		}
 
-		//doInBackground方法内部执行后台任务,不可在此方法内修改UI  
-		@Override  
-		protected Object doInBackground(Object... params) {  
-			try {  
-					Send s = new Send(context);
-//					String userid = MyApplication.UserId;
-					String userid = "188";
-					bean = s.CommitOrder(userid, ""+time, ""+type, ""+final_price);
-					return bean;
-			} catch (Exception e) {  
+		// doInBackground方法内部执行后台任务,不可在此方法内修改UI
+		@Override
+		protected Object doInBackground(Object... params) {
+			try {
+				Send s = new Send(context);
+				// String userid = MyApplication.UserId;
+				String userid = "188";
+				bean = s.CommitOrder(userid, "" + time, "" + type, ""
+						+ final_price);
+				return bean;
+			} catch (Exception e) {
 				e.printStackTrace();
-			}  
-			return null;  
-		}  
+			}
+			return null;
+		}
 
-		//onProgressUpdate方法用于更新进度信息  
-		@Override  
-		protected void onProgressUpdate(Object... progresses) {  
-			
-		}  
+		// onProgressUpdate方法用于更新进度信息
+		@Override
+		protected void onProgressUpdate(Object... progresses) {
 
-		//onPostExecute方法用于在执行完后台任务后更新UI,显示结果  
-		@Override  
-		protected void onPostExecute(Object result) {  
+		}
+
+		// onPostExecute方法用于在执行完后台任务后更新UI,显示结果
+		@Override
+		protected void onPostExecute(Object result) {
 			Util.stopProgressDialog();
 			bean = (Base) result;
-			if(bean!=null){
-				if(bean.getCode() == 200){
-					ShopCartActivity.shopcartchaneged=true;
-					if(type ==1){
-						Util.ShowToast(context,"调用支付宝");	
-//						 Fiap fiap = new Fiap(OrderActivity.this);  
-//					      // 调用支付方法，并传入支付金额  
-//					      fiap.pay(0.01,"测试商品","测试商品信息","测试订单号");  
-//						pay("0.01","测试商品","测试商品信息");
+			if (bean != null) {
+				if (bean.getCode() == 200) {
+					ShopCartActivity.shopcartchaneged = true;
+					if (type == 1) {
+						Util.ShowToast(context, "调用支付宝");
+						// Fiap fiap = new Fiap(OrderActivity.this);
+						// // 调用支付方法，并传入支付金额
+						// fiap.pay(0.01,"测试商品","测试商品信息","测试订单号");
+						// pay("0.01","测试商品","测试商品信息");
 						ExampleActivity.setCurrentTab(2);
 						finish();
-					}else{
-						Util.ShowToast(context,"已提交订单，请等待发货");	
+					} else {
+						Util.ShowToast(context, "已提交订单，请等待发货");
 						ExampleActivity.setCurrentTab(2);
 						finish();
 					}
-				}else{
-					Util.ShowToast(context,bean.getMsg());		
+				} else {
+					Util.ShowToast(context, bean.getMsg());
 				}
-			}else{
-				Util.ShowToast(context,R.string.net_work_is_error);
+			} else {
+				Util.ShowToast(context, R.string.net_work_is_error);
 			}
-		}  
+		}
 
-		//onCancelled方法用于在取消执行中的任务时更改UI  
-		@Override  
-		protected void onCancelled() {  
-//			Util.stopProgressDialog();
-		}  
-	
+		// onCancelled方法用于在取消执行中的任务时更改UI
+		@Override
+		protected void onCancelled() {
+			// Util.stopProgressDialog();
+		}
+
 	}
-	
+
 	/**
 	 * call alipay sdk pay. 调用SDK支付
 	 * 
 	 */
-	public void pay(String price,String goodname,String gooddes) {
+	public void pay(String price, String goodname, String gooddes) {
 		String orderInfo = getOrderInfo(goodname, gooddes, price);
-		String sign ="lBBK%2F0w5LOajrMrji7DUgEqNjIhQbidR13GovA5r3TgIbNqv231yC1NksLdw%2Ba3JnfHXoXuet6XNNHtn7VE%2BeCoRO1O%2BR1KugLrQEZMtG5jmJIe2pbjm%2F3kb%2FuGkpG%2BwYQYI51%2BhA3YBbvZHVQBYveBqK%2Bh8mUyb7GM1HxWs9k4%3D";
-		//= sign(orderInfo);
+		String sign = "lBBK%2F0w5LOajrMrji7DUgEqNjIhQbidR13GovA5r3TgIbNqv231yC1NksLdw%2Ba3JnfHXoXuet6XNNHtn7VE%2BeCoRO1O%2BR1KugLrQEZMtG5jmJIe2pbjm%2F3kb%2FuGkpG%2BwYQYI51%2BhA3YBbvZHVQBYveBqK%2Bh8mUyb7GM1HxWs9k4%3D";
+		// = sign(orderInfo);
 		try {
 			// 仅需对sign 做URL编码
 			sign = URLEncoder.encode(sign, "UTF-8");
@@ -335,8 +339,7 @@ public class OrderActivity extends BaseActivity implements OnClickListener{
 	public String getSignType() {
 		return "sign_type=\"RSA\"";
 	}
-	
-	
+
 	/**
 	 * create the order info. 创建订单信息
 	 * 
@@ -388,7 +391,7 @@ public class OrderActivity extends BaseActivity implements OnClickListener{
 
 		return orderInfo;
 	}
-	
+
 	/**
 	 * get the out_trade_no for an order. 获取外部订单号
 	 * 
@@ -404,7 +407,7 @@ public class OrderActivity extends BaseActivity implements OnClickListener{
 		key = key.substring(0, 15);
 		return key;
 	}
-	
+
 	/**
 	 * sign the order info. 对订单信息进行签名
 	 * 
@@ -414,7 +417,6 @@ public class OrderActivity extends BaseActivity implements OnClickListener{
 	public String sign(String content) {
 		return Util.sign(content, RSA_PRIVATE);
 	}
-	
 
 	/**
 	 * check whether the device has authentication alipay account.
@@ -440,7 +442,7 @@ public class OrderActivity extends BaseActivity implements OnClickListener{
 		checkThread.start();
 
 	}
-	
+
 	public class Result {
 		String resultStatus;
 		String result;

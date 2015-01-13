@@ -2,8 +2,9 @@ package com.youai.aistore.Bean;
 
 /**
  * 基础类
+ * 
  * @author Qzr
- *
+ * 
  */
 public class Base {
 	private int code;// 返回的状态码

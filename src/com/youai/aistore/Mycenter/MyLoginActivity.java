@@ -44,20 +44,20 @@ public class MyLoginActivity extends BaseActivity implements OnClickListener {
 			super.handleMessage(msg);
 			if (msg.what == 1) {
 				// 把ID传值到MyApplication中
-				//MyApplication.setUserId(login_ID.getText().toString());
-				
-//				Intent intent = new Intent(MyLoginActivity.this,
-//						MycenterHomeActivity.class);
-//				intent.setFlags(intent.FLAG_ACTIVITY_CLEAR_TOP);
-//				startActivity(intent);
-				//Util.ShowToast(context, "登陆成功");
-			
-				//保存登陆状态
-				result = (UserBean) msg.obj;//result,赋值
+				// MyApplication.setUserId(login_ID.getText().toString());
+
+				// Intent intent = new Intent(MyLoginActivity.this,
+				// MycenterHomeActivity.class);
+				// intent.setFlags(intent.FLAG_ACTIVITY_CLEAR_TOP);
+				// startActivity(intent);
+				// Util.ShowToast(context, "登陆成功");
+
+				// 保存登陆状态
+				Util.ShowToast(MyLoginActivity.this, R.string.login_succeed);
+				result = (UserBean) msg.obj;// result,赋值
 				MyApplication.logined = true;
 				MyApplication.SaveUserBean(result);
 				finish();
-				
 
 			} else if (msg.what == 2) {
 				Util.ShowToast(MyLoginActivity.this, R.string.login_error);
@@ -128,7 +128,7 @@ public class MyLoginActivity extends BaseActivity implements OnClickListener {
 			public void run() {
 
 				Send send = new Send(MyLoginActivity.this);
-				 result = send.getLogin(id, pwd);
+				result = send.getLogin(id, pwd);
 				if (result.getUser_id() != null
 						&& !result.getUser_id().equals("200")) {
 

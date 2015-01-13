@@ -143,6 +143,8 @@
     <string name="regist_format_error">请输入正确的账号格式，手机号或邮箱</string>
     <string name="regist_error">注册失败</string>
     <string name="login_error">输入的用户名或密码有问题</string>
+    <string name="regist_succeed">注册成功，请登录</string>
+    <string name="login_succeed">登录成功</string>
     <!-- NetREquest -->
     <string name="http_status_code_error">请求失败</string>
     <string name="net_work_is_error">网络异常，请检查网络</string>

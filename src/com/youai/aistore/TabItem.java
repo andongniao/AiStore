@@ -3,15 +3,15 @@ package com.youai.aistore;
 import android.content.Intent;
 
 public class TabItem {
-	private String title;		// tab item title
-	private int icon;			// tab item icon
-	private int bg;			// tab item background
-	private Intent intent;	// tab item intent
-	
+	private String title; // tab item title
+	private int icon; // tab item icon
+	private int bg; // tab item background
+	private Intent intent; // tab item intent
+
 	public TabItem(int bg, Intent intent) {
 		super();
-//		this.title = title;
-//		this.icon = icon;
+		// this.title = title;
+		// this.icon = icon;
 		this.bg = bg;
 		this.intent = intent;
 	}

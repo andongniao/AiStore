@@ -17,27 +17,29 @@ import com.youai.aistore.R;
 import com.youai.aistore.Bean.ShopCartBean;
 import com.youai.aistore.ShopCart.ShopCartActivity.ShopcartInterface;
 
-public class ShopCartAdapter extends BaseAdapter 	{
+public class ShopCartAdapter extends BaseAdapter {
 	private Context context;
 	private ArrayList<ShopCartBean> list;
 	private LayoutInflater inflater;
 	private ShopcartInterface inter;
 	private MyShopItem myShopItem;
 
-	public ShopCartAdapter(Context context,ArrayList<ShopCartBean> list,ShopcartInterface inter){
+	public ShopCartAdapter(Context context, ArrayList<ShopCartBean> list,
+			ShopcartInterface inter) {
 		this.context = context;
 		this.list = list;
 		this.inter = inter;
 		inflater = LayoutInflater.from(context);
 	}
-	public void setdata(ArrayList<ShopCartBean> list){
+
+	public void setdata(ArrayList<ShopCartBean> list) {
 		this.list = list;
 	}
 
 	@Override
 	public int getCount() {
 		// TODO Auto-generated method stub
-		return list!=null?list.size():0;
+		return list != null ? list.size() : 0;
 	}
 
 	@Override
@@ -54,56 +56,66 @@ public class ShopCartAdapter extends BaseAdapter 	{
 
 	@Override
 	public View getView(final int postion, View v, ViewGroup arg2) {
-				if(v==null){
-					myShopItem = new MyShopItem();
-					v = inflater.inflate(R.layout.shopcart_lv_item, null);
-					myShopItem.iv = (ImageView) v.findViewById(R.id.shopcart_item_pp_iv);
-					myShopItem.tv_titlt = (TextView) v.findViewById(R.id.shopcart_item_title_tv);
-					myShopItem.tv_price = (TextView) v.findViewById(R.id.shopcart_item_price_tv);
-					myShopItem.tv_kucun = (TextView) v.findViewById(R.id.shopcart_lv_item_kucun_tv);
-					myShopItem.et_num = (EditText) v.findViewById(R.id.shopcart_item_num_et);
-					myShopItem.btn_add = (ImageButton) v.findViewById(R.id.shopcart_lv_item_add_ibt);
-					myShopItem.btn_jian = (ImageButton) v.findViewById(R.id.shopcart_lv_item_jian_ibt);
-					v.setTag(myShopItem);
-				}else{
-					myShopItem = (MyShopItem) v.getTag();
+		if (v == null) {
+			myShopItem = new MyShopItem();
+			v = inflater.inflate(R.layout.shopcart_lv_item, null);
+			myShopItem.iv = (ImageView) v
+					.findViewById(R.id.shopcart_item_pp_iv);
+			myShopItem.tv_titlt = (TextView) v
+					.findViewById(R.id.shopcart_item_title_tv);
+			myShopItem.tv_price = (TextView) v
+					.findViewById(R.id.shopcart_item_price_tv);
+			myShopItem.tv_kucun = (TextView) v
+					.findViewById(R.id.shopcart_lv_item_kucun_tv);
+			myShopItem.et_num = (EditText) v
+					.findViewById(R.id.shopcart_item_num_et);
+			myShopItem.btn_add = (ImageButton) v
+					.findViewById(R.id.shopcart_lv_item_add_ibt);
+			myShopItem.btn_jian = (ImageButton) v
+					.findViewById(R.id.shopcart_lv_item_jian_ibt);
+			v.setTag(myShopItem);
+		} else {
+			myShopItem = (MyShopItem) v.getTag();
+		}
+		myShopItem.iv.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
+		ImageLoader.getInstance().displayImage(list.get(postion).getPic_url(),
+				myShopItem.iv);
+		myShopItem.tv_titlt.setText(list.get(postion).getGoods_name());
+		myShopItem.tv_price.setText("ฃค" + list.get(postion).getGoods_price()
+				+ "ิช");
+		myShopItem.tv_kucun.setText(list.get(postion).getGoods_count());
+		myShopItem.et_num.setText(list.get(postion).getGoods_number());
+
+		myShopItem.btn_add.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View arg0) {
+				if (0 < Integer.parseInt(list.get(postion).getGoods_number())
+						&& Integer
+								.parseInt(list.get(postion).getGoods_number()) < Integer
+								.parseInt(list.get(postion).getGoods_count())) {
+					inter.add(list, postion);
 				}
-				myShopItem.iv.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
-				ImageLoader.getInstance().displayImage(list.get(postion).getPic_url(), myShopItem.iv);
-				myShopItem.tv_titlt.setText(list.get(postion).getGoods_name());
-				myShopItem.tv_price.setText("ฃค"+list.get(postion).getGoods_price()+"ิช");
-				myShopItem.tv_kucun.setText(list.get(postion).getGoods_count());
-				myShopItem.et_num.setText(list.get(postion).getGoods_number());
-				
-				myShopItem.btn_add.setOnClickListener(new OnClickListener() {
-					@Override
-					public void onClick(View arg0) {
-						if(0<Integer.parseInt(list.get(postion).getGoods_number())&&
-								Integer.parseInt(list.get(postion).getGoods_number())<
-								Integer.parseInt(list.get(postion).getGoods_count())){
-						inter.add(list, postion);
-						}
-					}
-				});
-				myShopItem.btn_jian.setOnClickListener(new OnClickListener() {
-					@Override
-					public void onClick(View arg0) {
-						if(0<Integer.parseInt(list.get(postion).getGoods_number())&&
-								Integer.parseInt(list.get(postion).getGoods_number())<
-								Integer.parseInt(list.get(postion).getGoods_count())){
-						inter.jian(list, postion);
-						}
-					}
-				});
-				return v;
+			}
+		});
+		myShopItem.btn_jian.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View arg0) {
+				if (0 < Integer.parseInt(list.get(postion).getGoods_number())
+						&& Integer
+								.parseInt(list.get(postion).getGoods_number()) < Integer
+								.parseInt(list.get(postion).getGoods_count())) {
+					inter.jian(list, postion);
+				}
+			}
+		});
+		return v;
 	}
 
-		class MyShopItem{
-			private ImageView iv;
-			private TextView tv_titlt,tv_price,tv_kucun;
-			private EditText et_num;
-			private ImageButton btn_add,btn_jian;
-		}
-
+	class MyShopItem {
+		private ImageView iv;
+		private TextView tv_titlt, tv_price, tv_kucun;
+		private EditText et_num;
+		private ImageButton btn_add, btn_jian;
+	}
 
 }
