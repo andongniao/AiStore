@@ -45,7 +45,7 @@ public class MyRegistActivity extends BaseActivity implements OnClickListener {
 				intent.setFlags(intent.FLAG_ACTIVITY_CLEAR_TOP);
 				startActivity(intent);
 			} else if (msg.what == 2) {
-				Util.ShowToast(MyRegistActivity.this, "注册失败");
+				Util.ShowToast(MyRegistActivity.this, R.string.regist_error);
 
 			}
 
@@ -73,12 +73,6 @@ public class MyRegistActivity extends BaseActivity implements OnClickListener {
 		// TODO Auto-generated method stub
 		if (validate()) {
 			addUser();
-			/*
-			 * if (addUser()) { Util.ShowToast(MyRegistActivity.this, "注册成功");
-			 * Intent intent = new Intent(MyRegistActivity.this,
-			 * MyLoginActivity.class); startActivity(intent); } else {
-			 * Util.ShowToast(MyRegistActivity.this, "注册失败"); }
-			 */
 		}
 	}
 
@@ -96,10 +90,6 @@ public class MyRegistActivity extends BaseActivity implements OnClickListener {
 							R.string.login_password_not_null);// 密码不能空
 					return false;
 				} else {
-					if (Util.isnullstring(pwd)) {
-						Util.ShowToast(MyRegistActivity.this, "密码不能出现空格");// 密码不能有空格
-						return false;
-					} else {
 						if (Util.ispassword(pwd)) { // 检查，密码格式是否是数字或字母，正确就开始输入确认密码
 							String repwd = regist_repassword.getText()
 									.toString();
@@ -120,7 +110,6 @@ public class MyRegistActivity extends BaseActivity implements OnClickListener {
 									R.string.my_regist_password_et);// 密码至少4位
 							return false;
 						}
-					}
 				}
 				
 

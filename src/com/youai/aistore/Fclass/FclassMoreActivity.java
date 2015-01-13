@@ -37,7 +37,7 @@ public class FclassMoreActivity extends BaseActivity implements IXListViewListen
 	private Context context;
 	private MyTask myTask;
 	private ArrayList<GoodsBean>list;
-	private ListFclassTwo listf;
+	private ListFclassTwo listf,listf1;
 	private ImageView popll_iv,numll_iv,pricell_iv;
 	private int p=1,n=1,j=1;
 	@Override
@@ -46,7 +46,7 @@ public class FclassMoreActivity extends BaseActivity implements IXListViewListen
 		super.onCreate(arg0);
 		setContentXml(R.layout.fclass_more);
 		String title = getIntent().getStringExtra("title");
-
+		
 		setTitleTxt(title);		
 		init();
 		if(Util.detect(context)){
@@ -161,7 +161,7 @@ public class FclassMoreActivity extends BaseActivity implements IXListViewListen
 	}
 
 	private class MyTask extends AsyncTask<Object, Object, Object> {
-		int getid = getIntent().getIntExtra("id", -1);
+		
 		
 		
 		//onPreExecute方法用于在执行后台任务前做一些UI操作  
@@ -175,18 +175,20 @@ public class FclassMoreActivity extends BaseActivity implements IXListViewListen
 		@Override  
 		protected Object doInBackground(Object... params) {
 			/* 添加判断句 */
+			int getid = getIntent().getIntExtra("id", 1);
 			Send send = new Send(context);
 
 			try {
 				switch (getid) {
 				case 0:
-/*					listf = send.GetFclassTwo(MyApplication.woman_fangzhenyangjv,
-							MyApplication.clickdesc, 1);
-					return listf;*/
-				case 1:
 					listf = send.GetFclassTwo(MyApplication.woman_av,
 							MyApplication.clickdesc, 1);
 					return listf;
+				case 1:
+					listf1 = send.GetFclassTwo(MyApplication.woman_fangzhenyangjv,
+							MyApplication.clickdesc, 1);
+					
+					return listf1;
 				default:
 					break;
 				}

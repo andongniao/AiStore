@@ -111,6 +111,7 @@ public class FclassFristViewActivity extends BaseActivity implements
 		@Override
 		public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
 				long arg3) {
+			
 			// TODO Auto-generated method stub
 			switch (arg2) {
 			case 0:
@@ -124,14 +125,14 @@ public class FclassFristViewActivity extends BaseActivity implements
 				Util.ShowToast(context, "点击了" + titlelist[arg2]);
 				break;
 			case 1:
-				Intent intent1 = new Intent(FclassFristViewActivity.this,
+/*				Intent intent1 = new Intent(FclassFristViewActivity.this,
 						FclassMoreActivity.class);
 				// titlelist数组传值给FclassFristViewActivity的标题
 				intent1.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 				intent1.putExtra("title", titlelist[arg2].toString());
 				
 				startActivity(intent1);
-				Util.ShowToast(context, "点击了" + titlelist[arg2]);
+				Util.ShowToast(context, "点击了" + titlelist[arg2]);*/
 				break;
 			default:
 				break;

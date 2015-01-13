@@ -53,14 +53,14 @@ public class MyLoginActivity extends BaseActivity implements OnClickListener {
 				//Util.ShowToast(context, "登陆成功");
 			
 				//保存登陆状态
-				result = (UserBean) msg.obj;//
+				result = (UserBean) msg.obj;//result,赋值
 				MyApplication.logined = true;
 				MyApplication.SaveUserBean(result);
 				finish();
 				
 
 			} else if (msg.what == 2) {
-				Util.ShowToast(MyLoginActivity.this, "输入的用户名或密码有问题，请重来");
+				Util.ShowToast(MyLoginActivity.this, R.string.login_error);
 			}
 
 		}
