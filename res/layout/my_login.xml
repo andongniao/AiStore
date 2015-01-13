@@ -84,7 +84,7 @@
             android:id="@+id/my_login_btn"
             android:layout_width="match_parent"
             android:layout_height="35dp"
-            android:background="@color/home_text_red"
+            android:background="@drawable/btn_bg_red"
             android:text="@string/my_login_tv"
             android:textColor="@color/white"
             android:textSize="20sp" />

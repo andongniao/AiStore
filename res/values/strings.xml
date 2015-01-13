@@ -135,7 +135,7 @@
     <string name="my_regist_repassword_tv">确认密码:</string>
     <string name="my_regist_repassword_et">请再输一次密码</string>
     
-    <string name="login_id_not_null">用户名必须输入</string>
+    <string name="login_id_not_null">账号必须输入</string>
     <string name="login_password_not_null">密码必须输入</string>
     <string name="login_format_error">账号为手机号或者邮箱</string>
     <string name="regist_repassword_not_null">确认密码不能为空</string>

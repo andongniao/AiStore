@@ -44,6 +44,7 @@ public class MyRegistActivity extends BaseActivity implements OnClickListener {
 						MyLoginActivity.class);
 				intent.setFlags(intent.FLAG_ACTIVITY_CLEAR_TOP);
 				startActivity(intent);
+				finish();
 			} else if (msg.what == 2) {
 				Util.ShowToast(MyRegistActivity.this, R.string.regist_error);
 
@@ -83,35 +84,38 @@ public class MyRegistActivity extends BaseActivity implements OnClickListener {
 			Util.ShowToast(MyRegistActivity.this, R.string.login_id_not_null);// 账号不能空
 			return false;
 		} else {
-			if (Util.isMobileNO(id) || Util.isEmail(id)) { // 检查账号格式是否正确，正确就输入密码
+			if (Util.isMobileNO(id) || Util.isEmail(id)) { // 判断账号的格式，正确可以输入密码，
 				String pwd = regist_password.getText().toString();
-				if (pwd.equals("")) {
+				if (pwd.equals("")) { // 密码不能空
 					Util.ShowToast(MyRegistActivity.this,
-							R.string.login_password_not_null);// 密码不能空
+							R.string.login_password_not_null);
 					return false;
 				} else {
-						if (Util.ispassword(pwd)) { // 检查，密码格式是否是数字或字母，正确就开始输入确认密码
-							String repwd = regist_repassword.getText()
-									.toString();
-							if (repwd.equals("")) {
-								Util.ShowToast(MyRegistActivity.this,
-										R.string.regist_repassword_not_null);// 确认密码不能为空
+					if (Util.ispassword(pwd)) {// 判断密码格式是否正确，正确可以输入确认密码
+						String repwd = regist_repassword.getText().toString();
+						if (repwd.equals("")) {// 确认密码不能为空
+							Util.ShowToast(MyRegistActivity.this,
+									R.string.regist_repassword_not_null);
 
-								return false;
+							return false;
+						} else {
+							if (repwd.equals(pwd)) {
+								return true;
 							} else {
 								Util.ShowToast(MyRegistActivity.this,
 										R.string.regist_repasswors_error);// 确认密码与，密码不一致
 
 								return false;
 							}
-
-						} else {
-							Util.ShowToast(MyRegistActivity.this,
-									R.string.my_regist_password_et);// 密码至少4位
-							return false;
 						}
+
+					} else {
+						Util.ShowToast(MyRegistActivity.this,
+								R.string.my_regist_password_et);// 密码至少4位
+						return false;
+					}
+
 				}
-				
 
 			} else {
 				Util.ShowToast(MyRegistActivity.this,
