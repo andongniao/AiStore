@@ -67,7 +67,6 @@ public class HomeActivity extends BaseActivity implements OnClickListener {
 	protected void onCreate(Bundle arg0) {
 		super.onCreate(arg0);
 		context = HomeActivity.this;
-		Util.ShowToast(context, MyApplication.SessionId);
 		womanimglist = new ArrayList<ImageView>();
 		manlist = new ArrayList<ImageView>();
 		neiyilist = new ArrayList<ImageView>();

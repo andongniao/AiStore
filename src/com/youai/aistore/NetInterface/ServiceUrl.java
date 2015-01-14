@@ -62,9 +62,13 @@ public class ServiceUrl {
 			+ "?module=user&&user_id=";
 	public static String get_order_list_page = "&page=";
 	public static String get_order_list_action = "&action=order_list";
-	// 订单详情 http://www.aiai.cn/services/api.php=296188
+	// 订单详情 
 	public static String get_order_details_orderid = BaseUrl
 			+ "?module=user&action=order_detail&order_id=";
 	public static String get_order_details_userid = "&user_id=";
+	// 同步购物车信息  
+	public static String updata_shopcart_session_id = BaseUrl
+			+ "?module=update_cart_list&session_id=";
+	public static String updata_shopcart_user_id = "&user_id=";
 
 }

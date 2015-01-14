@@ -36,6 +36,7 @@
     <string name="shopcart_gopay">去结算</string>
     <string name="shopcart_gongji">共计:</string>
     <string name="shopcart_kucun">库存:</string>
+    <string name="updata_shopcart_info_success">同步信息成功</string>
 
     <!-- 收货人信息 -->
     <string name="consignee_info">收货人信息</string>
@@ -60,6 +61,7 @@
     <string name="order_commit">提交订单</string>
     <string name="order_zhifubao">支付宝转账</string>
     <string name="order_huodao">货到付款</string>
+    <string name="commit_order_for_huodao">已提交订单，请等待发货</string>
     <string name="order_gongzuo_xiuxi">工作日、双休日和假日，均可送货</string>
     <string name="order_xiuxi">双休日（周六、周日）</string>
     <string name="order_gopnzuo">工作日（周一至周五）</string>
@@ -162,6 +164,6 @@
     <string name="xlistview_header_last_time">上次更新时间：</string>
     <string name="xlistview_footer_hint_normal">查看更多</string>
     <string name="xlistview_footer_hint_ready">松开载入更多</string>
-    <string name="page_is_final">当前为最后一页</string>
+    <string name="page_is_final">最后一页了，亲</string>
 
 </resources>

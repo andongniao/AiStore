@@ -3,14 +3,10 @@
  */
 package com.youai.aistore;
 
-import java.util.ArrayList;
-
-import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.telephony.TelephonyManager;
-
 import com.nostra13.universalimageloader.cache.disc.naming.Md5FileNameGenerator;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -105,8 +101,7 @@ public class MyApplication extends Application {
 		mEditor.putString("sessionid", SessionId);
 		mEditor.commit();
 		UserName = mSharedPreferences.getString("username", "");
-		UserId = "188";// mSharedPreferences.getString("userid", "0");
-		// UserId = mSharedPreferences.getString("userid", "0");
+		UserId = mSharedPreferences.getString("userid", "0");
 		if (Util.IsNull(UserName)) {
 			logined = true;
 			userBean = new UserBean();

@@ -93,13 +93,6 @@ public class ProductDetailsActivity extends BaseActivity implements
 		} else {
 			Util.ShowToast(context, R.string.net_work_is_error);
 		}
-		// myHandler = new Handler(){
-		// @Override
-		// public void handleMessage(Message msg) {
-		// super.handleMessage(msg);
-		// //TODO
-		// }
-		// };
 	}
 
 	@SuppressWarnings("deprecation")
@@ -245,22 +238,21 @@ public class ProductDetailsActivity extends BaseActivity implements
 				if (getstatu == 1) {
 					Send send = new Send(context);
 					bean = send.GetProductDetails(id);
-					return bean;// new String(baos.toByteArray(), "gb2312");
+					return bean;
 				} else if (getstatu == 2) {
 					Send send = new Send(context);
 					listcombean = send.GetProductComments(id, page);
-					return listcombean;// new String(baos.toByteArr
+					return listcombean;
 				} else if (getstatu == 3) {
 					Send send = new Send(context);
 					nextpagelist = send.GetProductComments(id, page);
-					return nextpagelist;// new String(baos.toByteArr
+					return nextpagelist;
 				} else if (getstatu == 4) {
 					Send send = new Send(context);
 					int good_id = id;
 					int number = 1;
 					String session_id = MyApplication.SessionId;
 					String user_id = MyApplication.UserId;
-					System.out.println("加入购物车所用sessionid======" + session_id);
 					beanresult = send.AddShopCart(good_id, number, session_id,
 							user_id);
 					return beanresult;
@@ -367,7 +359,8 @@ public class ProductDetailsActivity extends BaseActivity implements
 							}
 							Util.setListViewHeightBasedOnChildren(xListView);
 						} else {
-							Util.ShowToast(context, "最后一页了，亲");
+							page-=1;
+							Util.ShowToast(context, R.string.page_is_final);
 						}
 					} else {
 						Util.ShowToast(context, listcombean.getMsg());
@@ -382,6 +375,7 @@ public class ProductDetailsActivity extends BaseActivity implements
 						if (s) {
 							stat = false;
 							ExampleActivity.setCurrentTab(2);
+							//TODO 
 							finish();
 							ShopCartActivity.shopcartchaneged = true;
 						} else {

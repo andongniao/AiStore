@@ -156,16 +156,6 @@ public class Send {
 			try {
 				object = new JSONObject(jsonStr);
 				if (object.get("code") != null && object.getInt("code") == 200) {
-					// JSONObject data = object.getJSONObject("data");
-					// ArrayList<CommentsBean> l = new
-					// ArrayList<CommentsBean>();
-					// for(int i=0;i<10;i++){
-					// JSONObject s = data.getJSONObject(""+i);
-					// String json = s.toString();
-					// Type type = new TypeToken<CommentsBean>() {}.getType();
-					// CommentsBean c = gson.fromJson(json, type);
-					// l.add(c);
-					// }
 					JSONArray data = object.getJSONArray("data");
 					String json = data.toString();
 					Type type = new TypeToken<ArrayList<CommentsBean>>() {
@@ -736,6 +726,47 @@ public class Send {
 					}.getType();
 					ArrayList<Goods> gs = gson.fromJson(j.toString(), tg);
 					bean.setGoods(gs);
+					bean.setCode(200);
+					bean.setMsg(object.getString("message"));
+					return bean;
+				} else {
+					bean.setMsg(object.getString("message"));
+					bean.setCode(object.getInt("code"));
+					return bean;
+
+				}
+
+			} catch (JSONException e) {
+				e.printStackTrace();
+			}
+		} else {
+			bean.setCode(500);
+			bean.setMsg(context.getResources().getString(
+					R.string.http_status_code_error));
+			return bean;
+		}
+		return null;
+	}
+	
+	
+	/**
+	 * 同步购物车信息
+	 * 
+	 * @param id
+	 * @param password
+	 * @return
+	 */
+	public Base updataShopcartInfo(String sessionid, String userid) {
+		Base bean = new Base();
+		String url = ServiceUrl.updata_shopcart_session_id + sessionid
+				+ ServiceUrl.updata_shopcart_user_id + userid;
+		String jsonStr = GetHttp.sendGet(url);
+
+		if (jsonStr != null && !jsonStr.equals("")) {
+			JSONObject object = null;
+			try {
+				object = new JSONObject(jsonStr);
+				if (object.get("code") != null && object.getInt("code") == 200) {
 					bean.setCode(200);
 					bean.setMsg(object.getString("message"));
 					return bean;

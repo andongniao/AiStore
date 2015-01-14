@@ -32,6 +32,7 @@ public abstract class BaseActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle arg0) {
 		super.onCreate(arg0);
+		overridePendingTransition(R.anim.in_rightleft, R.anim.out_rightleft);
 		setContentView(R.layout.base_layout);
 		baseTopLayout = (RelativeLayout) findViewById(R.id.Base_Layout);
 		titleTv = (TextView) findViewById(R.id.base_title_tv);
@@ -241,6 +242,12 @@ public abstract class BaseActivity extends Activity {
 	 */
 	public View getTopRightView() {
 		return topRightTv;
+	}
+	@Override
+	protected void onDestroy() {
+		super.onDestroy();
+		overridePendingTransition(R.anim.in_left_right, R.anim.out_left_right);
+//		overridePendingTransition(R.anim.out_left_right, R.anim.in_left_right);
 	}
 
 }

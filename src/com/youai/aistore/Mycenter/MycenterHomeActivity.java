@@ -2,9 +2,11 @@ package com.youai.aistore.Mycenter;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -17,7 +19,12 @@ import com.youai.aistore.BaseActivity;
 import com.youai.aistore.MyApplication;
 import com.youai.aistore.R;
 import com.youai.aistore.Util;
+import com.youai.aistore.Bean.Base;
+import com.youai.aistore.Bean.ConsigneeBean;
+import com.youai.aistore.NetInterface.Send;
 import com.youai.aistore.Order.AllOrderActivity;
+import com.youai.aistore.Order.OrderActivity;
+import com.youai.aistore.ShopCart.ConsigneeInfoActivity;
 import com.youai.aistore.View.CircleImageView;
 
 /**
@@ -33,8 +40,11 @@ public class MycenterHomeActivity extends BaseActivity implements
 			sms_ll, show_ll, login_ll;
 	private Button login_btn, regist_btn;
 	private TextView uernametv;
-	private boolean isshowing;
+	private boolean isshowing,log;
 	private Dialog alertDialog;
+	private Context context;
+	private Base bean;
+	private MyTask myTask;
 
 	@Override
 	protected void onCreate(Bundle arg0) {
@@ -47,7 +57,9 @@ public class MycenterHomeActivity extends BaseActivity implements
 	}
 
 	private void init() {
+		context = this;
 		isshowing = false;
+		log = true;
 		headeriv = (CircleImageView) findViewById(R.id.mycenter_home_header_iv);
 		headeriv.setOnClickListener(this);
 		dingdan_ll = (LinearLayout) findViewById(R.id.mycenter_home_dingdan_ll);
@@ -185,6 +197,70 @@ public class MycenterHomeActivity extends BaseActivity implements
 		if(MyApplication.logined){
 			login_ll.setVisibility(View.GONE);
 			uernametv.setText(MyApplication.userBean.getUser_name());
+			if(log){
+			if (Util.detect(context)) {
+				myTask = new MyTask();
+				myTask.execute("");
+			} else {
+				Util.ShowToast(context, R.string.net_work_is_error);
+			}
+			}
 		}
 	}
+	
+	
+	private class MyTask extends AsyncTask<Object, Object, Object> {
+		// onPreExecute方法用于在执行后台任务前做一些UI操作
+		@Override
+		protected void onPreExecute() {
+			Util.startProgressDialog(context);
+		}
+
+		// doInBackground方法内部执行后台任务,不可在此方法内修改UI
+		@Override
+		protected Object doInBackground(Object... params) {
+			try {
+					Send s = new Send(context);
+					String sessionid = MyApplication.SessionId;
+					String userid = MyApplication.UserId;
+					bean = s.updataShopcartInfo(sessionid, userid);
+					return bean;
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			return null;
+		}
+
+		// onProgressUpdate方法用于更新进度信息
+		@Override
+		protected void onProgressUpdate(Object... progresses) {
+
+		}
+
+		// onPostExecute方法用于在执行完后台任务后更新UI,显示结果
+		@Override
+		protected void onPostExecute(Object result) {
+			Util.stopProgressDialog();
+			bean = (Base) result;
+			if(bean!=null){
+				if(bean.getCode()==200){
+					log = false;
+					Util.ShowToast(context,R.string.updata_shopcart_info_success);
+				}else{
+					Util.ShowToast(context,bean.getMsg());
+				}
+			}else{
+				Util.ShowToast(context, R.string.net_work_is_error);
+			}
+
+		}
+
+		// onCancelled方法用于在取消执行中的任务时更改UI
+		@Override
+		protected void onCancelled() {
+			// Util.stopProgressDialog();
+		}
+
+	}
+	
 }

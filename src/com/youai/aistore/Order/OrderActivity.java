@@ -190,11 +190,9 @@ public class OrderActivity extends BaseActivity implements OnClickListener {
 			break;
 		case R.id.order_radio_zhifu:
 			type = 1;
-			Util.ShowToast(context, "" + type);
 			break;
 		case R.id.order_radio_huodao:
 			type = 2;
-			Util.ShowToast(context, "" + type);
 			break;
 
 		}
@@ -267,7 +265,6 @@ public class OrderActivity extends BaseActivity implements OnClickListener {
 				if (bean.getCode() == 200) {
 					ShopCartActivity.shopcartchaneged = true;
 					if (type == 1) {
-						Util.ShowToast(context, "调用支付宝");
 						// Fiap fiap = new Fiap(OrderActivity.this);
 						// // 调用支付方法，并传入支付金额
 						// fiap.pay(0.01,"测试商品","测试商品信息","测试订单号");
@@ -276,7 +273,7 @@ public class OrderActivity extends BaseActivity implements OnClickListener {
 						ConsigneeInfoActivity.isfinish = true;
 						finish();
 					} else {
-						Util.ShowToast(context, "已提交订单，请等待发货");
+						Util.ShowToast(context, R.string.commit_order_for_huodao);
 						ExampleActivity.setCurrentTab(2);
 						ConsigneeInfoActivity.isfinish = true;
 						finish();
