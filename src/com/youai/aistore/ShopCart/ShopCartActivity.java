@@ -337,8 +337,11 @@ public class ShopCartActivity extends BaseActivity implements OnClickListener {
 						list.remove(list.get(postion));
 						adapter.setdata(list);
 						adapter.notifyDataSetChanged();
-					} else {
-						Util.ShowToast(context, beanresult.getMsg());
+						if(list.size()==0){
+							showviewll.setVisibility(View.GONE);
+						}
+					}else{
+						Util.ShowToast(context,beanresult.getMsg());
 					}
 				} else {
 					Util.ShowToast(context, R.string.net_work_is_error);

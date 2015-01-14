@@ -35,7 +35,8 @@ public class ConsigneeInfoActivity extends BaseActivity implements
 	private ConsigneeBean bean;
 	private Base b;
 	private ListShopCartBean listbean;
-
+	public static boolean isfinish;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -54,6 +55,7 @@ public class ConsigneeInfoActivity extends BaseActivity implements
 
 	private void init() {
 		context = this;
+		isfinish = false;
 		listbean = (ListShopCartBean) getIntent().getExtras().get("list");
 		consigneeet = (EditText) findViewById(R.id.consignee_consignee_et);
 		consigneeet.setOnClickListener(this);
@@ -142,7 +144,6 @@ public class ConsigneeInfoActivity extends BaseActivity implements
 				} else {
 					Send s = new Send(context);
 					String userid = MyApplication.UserId;
-					// String userid = "188";
 					b = s.saveConsigneeInfo(userid, consignee, number, address);
 					return b;
 				}
@@ -201,5 +202,13 @@ public class ConsigneeInfoActivity extends BaseActivity implements
 			// Util.stopProgressDialog();
 		}
 
+	}
+	
+	@Override
+	protected void onResume() {
+		super.onResume();
+		if(isfinish){
+			finish();
+		}
 	}
 }

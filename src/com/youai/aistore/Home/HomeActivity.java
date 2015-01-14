@@ -30,6 +30,7 @@ import com.youai.aistore.Bean.GoodsBean;
 import com.youai.aistore.Bean.ListGoodsBean;
 import com.youai.aistore.Fclass.FclassFristViewActivity;
 import com.youai.aistore.Fclass.FclassHomeActivity;
+import com.youai.aistore.Fclass.FclassMoreActivity;
 import com.youai.aistore.NetInterface.Send;
 import com.youai.aistore.Product.ProductDetailsActivity;
 
@@ -76,18 +77,6 @@ public class HomeActivity extends BaseActivity implements OnClickListener {
 		setTopLeftBackground(R.drawable.btn_search_navigation_back);
 		setTopTitleBackground(R.drawable.logo);
 		setTopRightBackground(R.drawable.search);
-		// topRightVisible();
-		// TextView topright = (TextView) getTopRightView();
-		// topright.setOnClickListener(new OnClickListener() {
-		// @Override
-		// public void onClick(View arg0) {
-		// Util.ShowToast(HomeActivity.this, "search");
-		// Intent intent = new Intent(HomeActivity.this,SearchActivity.class);
-		// intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-		// startActivity(intent);
-		// overridePendingTransition(R.anim.in_rightleft, R.anim.out_rightleft);
-		// }
-		// });
 		setContentXml(R.layout.home);
 		init();
 		if (Util.detect(context)) {
@@ -111,12 +100,6 @@ public class HomeActivity extends BaseActivity implements OnClickListener {
 		myscrollview = (ScrollView) findViewById(R.id.home_scrollview);
 		myscrollview.smoothScrollTo(0, 20);
 		actitvit = (ImageCycleView) findViewById(R.id.home_activit);
-		// mImageUrl = new ArrayList<String>();
-		// mImageUrl.add(imageUrl1);
-		// mImageUrl.add(imageUrl2);
-		// mImageUrl.add(imageUrl3);
-		// mImageUrl.add(imageUrl4);
-		// actitvit.setImageResources(mImageUrl, mAdCycleViewListener);
 		morell = (LinearLayout) findViewById(R.id.home_more_ll);
 		home_new_l = (ImageView) findViewById(R.id.home_new_iv_l);
 		home_new_l.setOnClickListener(this);
@@ -216,11 +199,9 @@ public class HomeActivity extends BaseActivity implements OnClickListener {
 			startActivity(intent);
 		}
 	}
-
-	private void toFclassFrist(String title, int postion) {
-		// TODO
-		Intent intent = new Intent(HomeActivity.this,
-				ProductDetailsActivity.class);
+	private void toFclassFrist(String title,int postion){
+		//TODO
+		Intent intent = new Intent(HomeActivity.this,FclassFristViewActivity.class);
 		intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 		intent.putExtra("listindex", postion);
 		intent.putExtra("title", title);
@@ -257,6 +238,11 @@ public class HomeActivity extends BaseActivity implements OnClickListener {
 		case R.id.home_lwrite:
 			// 小分类
 			title = "润滑消毒";
+			Intent intent = new Intent(HomeActivity.this,FclassMoreActivity.class);
+			intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+			intent.putExtra("title",title);
+			intent.putExtra("id",92);
+			startActivity(intent);
 			break;
 		case R.id.home_tt:
 			title = "安全套";
@@ -408,17 +394,45 @@ public class HomeActivity extends BaseActivity implements OnClickListener {
 		@Override
 		public void onImageClick(int position, View imageView) {
 			// TODO 单击图片处理事件
-			if (urllist != null) {
-				int type = homeBeanList.getList().get(0).get(position)
-						.getType();
-				if (type == 2) {
-					Intent intent = new Intent(HomeActivity.this,
-							ProductDetailsActivity.class);
+			if(urllist!=null){
+				int type = homeBeanList.getList().get(0).get(position).getType();
+			if(type==2){
+				Intent intent = new Intent(HomeActivity.this,ProductDetailsActivity.class);
+				intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+				intent.putExtra("id",homeBeanList.getList().get(0).get(position).getId());
+				startActivity(intent);
+			}else if(type ==3){
+				if(homeBeanList.getList().get(0).get(position).getId()==74){
+					title = "女性用品";
+					postion = 0;
+					toFclassFrist(title, postion);
+				}else if(homeBeanList.getList().get(0).get(position).getId()==4){
+					title = "情趣内衣";
+					postion = 2;
+					toFclassFrist(title, postion);
+				}else if(homeBeanList.getList().get(0).get(position).getId()==69){
+					title = "男性用品";
+					postion = 1;
+					toFclassFrist(title, postion);
+				}else if(homeBeanList.getList().get(0).get(position).getId()==63){
+					title = "安全套";
+					postion = 3;
+					toFclassFrist(title, postion);
+				}else if(homeBeanList.getList().get(0).get(position).getId()==87){
+					title = "双人情趣";
+					postion = 5;
+					toFclassFrist(title, postion);
+				}
+			}else if(type ==4){
+				if(homeBeanList.getList().get(0).get(position).getId()==92){
+					title = "润滑";
+					Intent intent = new Intent(HomeActivity.this,FclassMoreActivity.class);
 					intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-					intent.putExtra("id",
-							homeBeanList.getList().get(0).get(position).getId());
+					intent.putExtra("title",title);
+					intent.putExtra("id",92);
 					startActivity(intent);
 				}
+			}
 			}
 		}
 

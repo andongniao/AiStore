@@ -30,12 +30,14 @@ import com.alipay.sdk.app.PayTask;
 import com.youai.aistore.BaseActivity;
 import com.youai.aistore.ExampleActivity;
 import com.youai.aistore.MainActivity;
+import com.youai.aistore.MyApplication;
 import com.youai.aistore.R;
 import com.youai.aistore.Util;
 import com.youai.aistore.Bean.Base;
 import com.youai.aistore.Bean.ListShopCartBean;
 import com.youai.aistore.Bean.ShopCartBean;
 import com.youai.aistore.NetInterface.Send;
+import com.youai.aistore.ShopCart.ConsigneeInfoActivity;
 import com.youai.aistore.ShopCart.ShopCartActivity;
 
 /**
@@ -71,7 +73,7 @@ public class OrderActivity extends BaseActivity implements OnClickListener {
 	@Override
 	protected void onCreate(Bundle arg0) {
 		super.onCreate(arg0);
-		setTitleTxt(R.string.consignee_info);
+		setTitleTxt(R.string.order_gopay_title);
 		setContentXml(R.layout.order);
 		setTopLeftBackground(R.drawable.btn_back);
 		init();
@@ -154,22 +156,22 @@ public class OrderActivity extends BaseActivity implements OnClickListener {
 		} else {
 			kuaidi = 12.00;
 		}
-		final_price = price + kuaidi;
-		tv_kuaidi_price.setText("￥" + kuaidi + "元");
-		tv_final_price.setText("￥" + final_price + "元");
-
-		/************************ 模拟数据 **********************************/
-		list = new ArrayList<ShopCartBean>();
-		ShopCartBean a = new ShopCartBean();
-		ShopCartBean s = new ShopCartBean();
-		ShopCartBean d = new ShopCartBean();
-		ShopCartBean f = new ShopCartBean();
-		list.add(a);
-		list.add(s);
-		list.add(d);
-		list.add(f);
-		adapter = new OrderLvAdapter(context, listbean.getList());
-		lv.setAdapter(adapter);
+		final_price = price+kuaidi;
+		tv_kuaidi_price.setText("￥"+kuaidi+"元");
+		tv_final_price.setText("￥"+final_price+"元");
+		
+//		/************************模拟数据**********************************/
+//		list = new ArrayList<ShopCartBean>();
+//		ShopCartBean a = new ShopCartBean();
+//		ShopCartBean s = new ShopCartBean();
+//		ShopCartBean d = new ShopCartBean();
+//		ShopCartBean f = new ShopCartBean();
+//		list.add(a);
+//		list.add(s);
+//		list.add(d);
+//		list.add(f);
+//		adapter = new OrderLvAdapter(context, listbean.getList());
+//		lv.setAdapter(adapter);
 	}
 
 	@Override
@@ -234,19 +236,17 @@ public class OrderActivity extends BaseActivity implements OnClickListener {
 		@Override
 		protected void onPreExecute() {
 			Util.startProgressDialog(context);
-		}
+		}  
 
-		// doInBackground方法内部执行后台任务,不可在此方法内修改UI
-		@Override
-		protected Object doInBackground(Object... params) {
-			try {
-				Send s = new Send(context);
-				// String userid = MyApplication.UserId;
-				String userid = "188";
-				bean = s.CommitOrder(userid, "" + time, "" + type, ""
-						+ final_price);
-				return bean;
-			} catch (Exception e) {
+		//doInBackground方法内部执行后台任务,不可在此方法内修改UI  
+		@Override  
+		protected Object doInBackground(Object... params) {  
+			try {  
+					Send s = new Send(context);
+					String userid = MyApplication.UserId;
+					bean = s.CommitOrder(userid, ""+time, ""+type, ""+kuaidi);
+					return bean;
+			} catch (Exception e) {  
 				e.printStackTrace();
 			}
 			return null;
@@ -273,10 +273,12 @@ public class OrderActivity extends BaseActivity implements OnClickListener {
 						// fiap.pay(0.01,"测试商品","测试商品信息","测试订单号");
 						// pay("0.01","测试商品","测试商品信息");
 						ExampleActivity.setCurrentTab(2);
+						ConsigneeInfoActivity.isfinish = true;
 						finish();
 					} else {
 						Util.ShowToast(context, "已提交订单，请等待发货");
 						ExampleActivity.setCurrentTab(2);
+						ConsigneeInfoActivity.isfinish = true;
 						finish();
 					}
 				} else {
