@@ -57,7 +57,7 @@ public class FclassFristViewActivity extends BaseActivity implements
 		super.onCreate(arg0);
 		setContentXml(R.layout.fclass_frist_view);
 		String title = getIntent().getStringExtra("title");// 添加标题，获取传过来的值，
-		listindex = getIntent().getIntExtra("listindex", 0);
+		listindex = getIntent().getIntExtra("listindex", 1);
 		setTitleTxt(title);
 		init();
 		if (Util.detect(context)) {
@@ -114,70 +114,102 @@ public class FclassFristViewActivity extends BaseActivity implements
 				long arg3) {
 
 			// TODO Auto-generated method stub
-			switch (arg2) {
-			case 0:
-				Intent intent = new Intent(FclassFristViewActivity.this,
-						FclassMoreActivity.class);
-				// titlelist数组传值给FclassFristViewActivity的标题
-				intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-				intent.putExtra("title", titlelist[arg2].toString());
-				intent.putExtra("id", arg2);
-				startActivity(intent);
-				Util.ShowToast(context, "点击了" + titlelist[arg2]);
-				Log.i("点击了谁", titlelist[arg2]);
-				break;
-			case 1:
-				Intent intent1 = new Intent(FclassFristViewActivity.this,
-						FclassMoreActivity.class);
-				intent1.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-				intent1.putExtra("title", titlelist[arg2].toString());
-				intent1.putExtra("id", arg2);
-				startActivity(intent1);
-				Util.ShowToast(context, "点击了" + titlelist[arg2]);
-				break;
-			case 2:
-				Intent intent2 = new Intent(FclassFristViewActivity.this,
-						FclassMoreActivity.class);
-				intent2.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-				intent2.putExtra("title", titlelist[arg2].toString());
-				intent2.putExtra("id", arg2);
-				startActivity(intent2);
-				Util.ShowToast(context, "点击了" + titlelist[arg2]);
-				break;
-			case 3:
-				Intent intent3 = new Intent(FclassFristViewActivity.this,
-						FclassMoreActivity.class);
-				intent3.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-				intent3.putExtra("title", titlelist[arg2].toString());
-				intent3.putExtra("id", arg2);
-				startActivity(intent3);
-				Util.ShowToast(context, "点击了" + titlelist[arg2]);
-				break;
-			case 4:
-				Intent intent4 = new Intent(FclassFristViewActivity.this,
-						FclassMoreActivity.class);
-				intent4.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-				intent4.putExtra("title", titlelist[arg2].toString());
-				intent4.putExtra("id", arg2);
-				startActivity(intent4);
-				Util.ShowToast(context, "点击了" + titlelist[arg2]);
-				break;
-			case 5:
-				Intent intent5 = new Intent(FclassFristViewActivity.this,
-						FclassMoreActivity.class);
-				intent5.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-				intent5.putExtra("title", titlelist[arg2].toString());
-				intent5.putExtra("id", arg2);
-				startActivity(intent5);
-				Util.ShowToast(context, "点击了" + titlelist[arg2]);
-				break;
-			default:
-				break;
+			/*女性分类*/
+			if(listindex==0){
+				switch (arg2) {
+				case 0:
+					Intent intent = new Intent(FclassFristViewActivity.this,
+							FclassMoreActivity.class);
+					// titlelist数组传值给FclassFristViewActivity的标题
+					intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+					intent.putExtra("title", titlelist[arg2].toString());
+					intent.putExtra("id", MyApplication.woman_av);
+					startActivity(intent);
+					Util.ShowToast(context, "点击了" + titlelist[arg2]);
+					break;
+				case 1:
+					Intent intent1 = new Intent(FclassFristViewActivity.this,
+							FclassMoreActivity.class);
+					intent1.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+					intent1.putExtra("title", titlelist[arg2].toString());
+					intent1.putExtra("id", MyApplication.woman_fangzhenyangjv);
+					startActivity(intent1);
+					break;
+				case 2:
+					Intent intent2 = new Intent(FclassFristViewActivity.this,
+							FclassMoreActivity.class);
+					intent2.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+					intent2.putExtra("title", titlelist[arg2].toString());
+					intent2.putExtra("id", MyApplication.woman_qingqvtiaodan);
+					startActivity(intent2);
+					break;
+				case 3:
+					Intent intent3 = new Intent(FclassFristViewActivity.this,
+							FclassMoreActivity.class);
+					intent3.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+					intent3.putExtra("title", titlelist[arg2].toString());
+					intent3.putExtra("id", MyApplication.woman_shensuozhuanhzu);
+					startActivity(intent3);
+					break;
+				case 4:
+					Intent intent4 = new Intent(FclassFristViewActivity.this,
+							FclassMoreActivity.class);
+					intent4.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+					intent4.putExtra("title", titlelist[arg2].toString());
+					intent4.putExtra("id", MyApplication.woman_hulibaojian);
+					startActivity(intent4);
+					break;
+				case 5:
+					Intent intent5 = new Intent(FclassFristViewActivity.this,
+							FclassMoreActivity.class);
+					intent5.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+					intent5.putExtra("title", titlelist[arg2].toString());
+					intent5.putExtra("id", MyApplication.woman_otherwoman);
+					startActivity(intent5);
+					break;
+				default:
+					break;
+				}
 			}
+			 /*男分类*/
+			else if(listindex==1){
+					switch (arg2) {
+					case 0:
+						Intent intent = new Intent(FclassFristViewActivity.this,
+								FclassMoreActivity.class);
+						// titlelist数组传值给FclassFristViewActivity的标题
+						intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+						intent.putExtra("title", titlelist[arg2].toString());
+						intent.putExtra("id", MyApplication.man_feijibei);
+						startActivity(intent);
+						Util.ShowToast(context, "点击了" + titlelist[arg2]);
+						break;
+					case 1:
+						Intent intent1 = new Intent(FclassFristViewActivity.this,
+								FclassMoreActivity.class);
+						intent1.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+						intent1.putExtra("title", titlelist[arg2].toString());
+						intent1.putExtra("id", MyApplication.man_daomo);
+						startActivity(intent1);
+						break;
+					case 2:
+						Intent intent2 = new Intent(FclassFristViewActivity.this,
+								FclassMoreActivity.class);
+						intent2.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+						intent2.putExtra("title", titlelist[arg2].toString());
+						intent2.putExtra("id", MyApplication.man_fuzhu);
+						startActivity(intent2);
+						break;
+					
+					default:
+						break;
+					}
+				}
 
-		}
 
-	}
+		}//点击事件结束
+
+	}//点击类结束
 
 	/*
 	 * 详细分类gridview监听器

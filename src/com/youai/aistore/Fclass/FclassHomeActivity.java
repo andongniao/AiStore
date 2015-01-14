@@ -3,19 +3,13 @@ package com.youai.aistore.Fclass;
 import java.util.ArrayList;
 
 import android.content.Context;
-import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.view.KeyEvent;
-import android.view.View;
 import android.widget.ExpandableListView;
-import android.widget.ExpandableListView.OnChildClickListener;
 import android.widget.Toast;
-import android.widget.AdapterView.OnItemClickListener;
-
 import com.youai.aistore.BaseActivity;
 import com.youai.aistore.R;
-import com.youai.aistore.Util;
 
 /**
  * 分类首页
@@ -108,50 +102,9 @@ public class FclassHomeActivity extends BaseActivity {
 		adapter = new FclassHomeAdapter(this, groupnamelist, groupimagelist,
 				childnamelist);
 		listView.setAdapter(adapter);
-		//listView.setOnChildClickListener(new onChildClickListener());
-
-	}
-/*	class onChildClickListener implements OnChildClickListener {
-		//private int index;//
-
-	
-		@Override
-		public boolean onChildClick(ExpandableListView parent, View v,
-				int groupPosition, int childPosition, long id) {
-			// TODO Auto-generated method stub
-			String pos=groupPosition+"-"+childPosition;
-			
-			switch (childPosition) {
-			case 0:
-				
-				Intent intent = new Intent(context,FclassFristViewActivity.class);
-				intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-				//groupname数组传值给FclassFristViewActivity的标题
-				intent.putExtra("title", groupnamelist.get(0));
-				context.startActivity(intent);
-				//Util.ShowToast(context, "点击了"+childname.get(index).get(0));
-
-				break;
-			case 1:
-				Intent intent1 = new Intent(context,FclassMoreActivity.class);
-				intent1.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-				//groupname数组传值给FclassFristViewActivity的标题
-				intent1.putExtra("title", childnamelist.get(childPosition).toString());
-				intent1.putExtra("id",childPosition-1);
-				context.startActivity(intent1);
-				//Util.ShowToast(context, "点击了"+childname.get(index).get(childPosition));
-				break;
-			
-			default:
-				break;
-			
-		}
-			return false;
-
-	}
-	
 		
-	}*/
+
+	}
 
 	@Override
 	public boolean onKeyDown(int keyCode, KeyEvent event) {

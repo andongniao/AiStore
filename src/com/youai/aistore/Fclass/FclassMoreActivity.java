@@ -164,53 +164,13 @@ public class FclassMoreActivity extends BaseActivity implements
 		// doInBackground方法内部执行后台任务,不可在此方法内修改UI
 		@Override
 		protected Object doInBackground(Object... params) {
-			/* 添加判断句 */
+			/*接收fclasshome,发过来的数据。*/
 			int getid = getIntent().getIntExtra("id", 1);
 			// Send send = new Send(context);
+			listf = send.GetFclassTwo(getid,
+					MyApplication.clickdesc, 1);
+			return listf;
 
-			try {
-				switch (getid) {
-				case 0:
-					listf = send.GetFclassTwo(MyApplication.woman_av,
-							MyApplication.clickdesc, 1);
-					return listf;
-				case 1:
-					listf = send.GetFclassTwo(
-							MyApplication.woman_fangzhenyangjv,
-							MyApplication.clickdesc, 1);
-
-					return listf;
-				case 2:
-					listf = send.GetFclassTwo(
-							MyApplication.woman_qingqvtiaodan,
-							MyApplication.clickdesc, 1);
-
-					return listf;
-				case 3:
-					listf = send.GetFclassTwo(
-							MyApplication.woman_shensuozhuanhzu,
-							MyApplication.clickdesc, 1);
-
-					return listf;
-				case 4:
-					listf = send.GetFclassTwo(MyApplication.woman_hulibaojian,
-							MyApplication.clickdesc, 1);
-
-					return listf;
-				case 5:
-					listf = send.GetFclassTwo(MyApplication.woman_otherwoman,
-							MyApplication.clickdesc, 1);
-
-					return listf;
-				default:
-					break;
-				}
-
-				// new String(baos.toByteArray(), "gb2312");
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-			return null;
 		}
 
 		// onProgressUpdate方法用于更新进度信息
