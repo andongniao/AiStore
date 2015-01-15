@@ -51,6 +51,7 @@ public class FclassFristViewActivity extends BaseActivity implements
 	private ArrayList<GoodsBean> womenListBean;
 	private FclassFristViewAdapter fclassAdapter;
 	private int type, id, postion;
+	public static boolean isfinish;
 
 	@Override
 	protected void onCreate(Bundle arg0) {
@@ -68,8 +69,16 @@ public class FclassFristViewActivity extends BaseActivity implements
 		}
 
 	}
+	@Override
+	protected void onResume() {
+		super.onResume();
+		if(isfinish){
+			finish();
+		}
+	}
 
 	private void init() {
+		isfinish = false;
 		context = this;
 		rs = getResources();
 		addviewlist = new ArrayList<View>();
@@ -116,96 +125,74 @@ public class FclassFristViewActivity extends BaseActivity implements
 			// TODO Auto-generated method stub
 			/*女性分类*/
 			if(listindex==0){
-				switch (arg2) {
-				case 0:
-					Intent intent = new Intent(FclassFristViewActivity.this,
-							FclassMoreActivity.class);
-					// titlelist数组传值给FclassFristViewActivity的标题
-					intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-					intent.putExtra("title", titlelist[arg2].toString());
-					intent.putExtra("id", MyApplication.woman_av);
-					startActivity(intent);
-					Util.ShowToast(context, "点击了" + titlelist[arg2]);
-					break;
-				case 1:
-					Intent intent1 = new Intent(FclassFristViewActivity.this,
-							FclassMoreActivity.class);
-					intent1.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-					intent1.putExtra("title", titlelist[arg2].toString());
-					intent1.putExtra("id", MyApplication.woman_fangzhenyangjv);
-					startActivity(intent1);
-					break;
-				case 2:
-					Intent intent2 = new Intent(FclassFristViewActivity.this,
-							FclassMoreActivity.class);
-					intent2.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-					intent2.putExtra("title", titlelist[arg2].toString());
-					intent2.putExtra("id", MyApplication.woman_qingqvtiaodan);
-					startActivity(intent2);
-					break;
-				case 3:
-					Intent intent3 = new Intent(FclassFristViewActivity.this,
-							FclassMoreActivity.class);
-					intent3.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-					intent3.putExtra("title", titlelist[arg2].toString());
-					intent3.putExtra("id", MyApplication.woman_shensuozhuanhzu);
-					startActivity(intent3);
-					break;
-				case 4:
-					Intent intent4 = new Intent(FclassFristViewActivity.this,
-							FclassMoreActivity.class);
-					intent4.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-					intent4.putExtra("title", titlelist[arg2].toString());
-					intent4.putExtra("id", MyApplication.woman_hulibaojian);
-					startActivity(intent4);
-					break;
-				case 5:
-					Intent intent5 = new Intent(FclassFristViewActivity.this,
-							FclassMoreActivity.class);
-					intent5.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-					intent5.putExtra("title", titlelist[arg2].toString());
-					intent5.putExtra("id", MyApplication.woman_otherwoman);
-					startActivity(intent5);
-					break;
-				default:
-					break;
-				}
+				int[] womenlist = {MyApplication.woman_av,
+						MyApplication.woman_fangzhenyangjv,
+						MyApplication.woman_qingqvtiaodan,
+						MyApplication.woman_shensuozhuanhzu,
+						MyApplication.woman_hulibaojian,
+						MyApplication.woman_otherwoman };
+				Intent intent = new Intent(FclassFristViewActivity.this,
+						FclassMoreActivity.class);
+				// titlelist数组传值给FclassFristViewActivity的标题
+				intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+				intent.putExtra("title", titlelist[arg2].toString());
+				intent.putExtra("id", womenlist[arg2]);
+				startActivity(intent);
+				//Util.ShowToast(context, "点击了" + titlelist[arg2]);
+			
 			}
-			 /*男分类*/
-			else if(listindex==1){
-					switch (arg2) {
-					case 0:
-						Intent intent = new Intent(FclassFristViewActivity.this,
-								FclassMoreActivity.class);
-						// titlelist数组传值给FclassFristViewActivity的标题
-						intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-						intent.putExtra("title", titlelist[arg2].toString());
-						intent.putExtra("id", MyApplication.man_feijibei);
-						startActivity(intent);
-						Util.ShowToast(context, "点击了" + titlelist[arg2]);
-						break;
-					case 1:
-						Intent intent1 = new Intent(FclassFristViewActivity.this,
-								FclassMoreActivity.class);
-						intent1.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-						intent1.putExtra("title", titlelist[arg2].toString());
-						intent1.putExtra("id", MyApplication.man_daomo);
-						startActivity(intent1);
-						break;
-					case 2:
-						Intent intent2 = new Intent(FclassFristViewActivity.this,
-								FclassMoreActivity.class);
-						intent2.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-						intent2.putExtra("title", titlelist[arg2].toString());
-						intent2.putExtra("id", MyApplication.man_fuzhu);
-						startActivity(intent2);
-						break;
-					
-					default:
-						break;
-					}
-				}
-
+			 /*男性分类*/
+			else if (listindex == 1) {
+				int[] menlist = { MyApplication.man_feijibei,
+						MyApplication.man_daomo, MyApplication.man_fuzhu, };
+				Intent intent = new Intent(FclassFristViewActivity.this,
+						FclassMoreActivity.class);
+				intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+				intent.putExtra("title", titlelist[arg2].toString());
+				intent.putExtra("id", menlist[arg2]);
+				startActivity(intent);
+			}
+			 /*内衣分类*/
+			else if (listindex == 2) {
+				int[] neiyilist = {MyApplication.neiyi_xingganneiyi,
+						MyApplication.neiyi_siwaneiku,
+						MyApplication.neiyi_qingqvshuiyi,
+						MyApplication.neiyi_zhifuyouhuo,
+						MyApplication.neiyi_liantiwangyi,
+						MyApplication.neiyi_sandiantoushi };
+				Intent intent = new Intent(FclassFristViewActivity.this,
+						FclassMoreActivity.class);
+				intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+				intent.putExtra("title", titlelist[arg2].toString());
+				intent.putExtra("id", neiyilist[arg2]);
+				startActivity(intent);
+			}
+			 /*安全套分类*/
+			else if (listindex == 3) {
+				int[] ttlist = {MyApplication.tt_jingdian,
+						MyApplication.tt_yanshi, MyApplication.tt_nvyong,
+						MyApplication.tt_daxiaohao, MyApplication.tt_huayang, };
+				Intent intent = new Intent(FclassFristViewActivity.this,
+						FclassMoreActivity.class);
+				intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+				intent.putExtra("title", titlelist[arg2].toString());
+				intent.putExtra("id", ttlist[arg2]);
+				startActivity(intent);
+			}
+			 /*双人分类*/
+			else if (listindex == 5) {
+				int[] tosexlist = {MyApplication.tosex_zhuqing,
+						MyApplication.tosex_houting,
+						MyApplication.tosex_huantao,
+						MyApplication.tosex_runhua, MyApplication.tosex_sm,
+						MyApplication.tosex_other };
+				Intent intent = new Intent(FclassFristViewActivity.this,
+						FclassMoreActivity.class);
+				intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+				intent.putExtra("title", titlelist[arg2].toString());
+				intent.putExtra("id", tosexlist[arg2]);
+				startActivity(intent);
+			}
 
 		}//点击事件结束
 
@@ -226,6 +213,7 @@ public class FclassFristViewActivity extends BaseActivity implements
 			Intent intent = new Intent(FclassFristViewActivity.this,
 					ProductDetailsActivity.class);
 			intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+			intent.putExtra("finishid", 1);
 			intent.putExtra("id", id);
 
 			startActivity(intent);

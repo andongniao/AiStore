@@ -41,6 +41,7 @@ public class FclassMoreActivity extends BaseActivity implements
 	private ImageView popll_iv, numll_iv, pricell_iv;
 	private int p = 1, n = 1, j = 1;
 	private Send send;
+	public static boolean isfinish;
 
 	@Override
 	protected void onCreate(Bundle arg0) {
@@ -58,8 +59,16 @@ public class FclassMoreActivity extends BaseActivity implements
 			Util.ShowToast(context, R.string.net_work_is_error);
 		}
 	}
+	@Override
+	protected void onResume() {
+		super.onResume();
+		if(isfinish){
+			finish();
+		}
+	}
 
 	private void init() {
+		isfinish = false;
 		context = FclassMoreActivity.this;
 		// 人气，销量,价格的布局
 		popll = (LinearLayout) findViewById(R.id.fclass_more_popularity_ll);
@@ -88,6 +97,7 @@ public class FclassMoreActivity extends BaseActivity implements
 			Intent intent = new Intent(FclassMoreActivity.this,
 					ProductDetailsActivity.class);
 			intent.setFlags(intent.FLAG_ACTIVITY_CLEAR_TOP);
+			intent.putExtra("finishid", 2);
 			intent.putExtra("id", listf.getList().get(arg2 - 1).getId());
 			startActivity(intent);
 		}

@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -34,6 +35,7 @@ public class FclassHomeAdapter extends BaseExpandableListAdapter {
 	private ArrayList<ArrayList<String>> childname;
 	private MyHalderLabel halderLabel;
 	private MyHalderItem halderItem;
+	private Resources rs ;
 	private GridviewItem gridviewItem;
 
 	public FclassHomeAdapter(Context context, ArrayList<String> groupname,
@@ -174,7 +176,6 @@ public class FclassHomeAdapter extends BaseExpandableListAdapter {
 	 */
 	class MygridviewItenlistener implements OnItemClickListener {
 		private int index;//
-
 		public MygridviewItenlistener(int index) {
 			this.index = index;
 		}
@@ -185,345 +186,165 @@ public class FclassHomeAdapter extends BaseExpandableListAdapter {
 			/*
 			 * 女性分类下点击事件
 			 */
-			if(groupname.get(index).equals("女性")){
-/*				for(int i =1;i<=childname[){
-					
-				}*/
-				switch (arg2) {
-				case 0 :				
+			if (groupname.get(index).equals("女性")) {
+				
+				int[] womenlist = { 0, MyApplication.woman_av,
+						MyApplication.woman_fangzhenyangjv,
+						MyApplication.woman_qingqvtiaodan,
+						MyApplication.woman_shensuozhuanhzu,
+						MyApplication.woman_hulibaojian,
+						MyApplication.woman_otherwoman };
+				if (arg2 == 0) {
 					Intent intent = new Intent(context,
 							FclassFristViewActivity.class);
 					intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 					// groupname数组传值给FclassFristViewActivity的标题
 					intent.putExtra("title", groupname.get(index).toString());
-					intent.putExtra("listindex", 0);
+					intent.putExtra("listindex", womenlist[arg2]);
 					System.out.println(arg2);
 					context.startActivity(intent);
-					Util.ShowToast(context, "点击了" + childname.get(index).get(0));
-					break;
-				case 1:
-					Intent intent1 = new Intent(context, FclassMoreActivity.class);
+					Util.ShowToast(context,
+							"点击了" + childname.get(index).get(arg2));
+				} else {
+					Intent intent1 = new Intent(context,
+							FclassMoreActivity.class);
 					intent1.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-					intent1.putExtra("title", childname.get(index).get(arg2).toString());
-					intent1.putExtra("id", MyApplication.woman_av);
+					intent1.putExtra("title", childname.get(index).get(arg2)
+							.toString());
+					intent1.putExtra("id", womenlist[arg2]);
 					System.out.println(arg2);
 					context.startActivity(intent1);
-					Util.ShowToast(context, "点击了" + childname.get(index).get(arg2));
-					break;
-				case 2:
-					Intent intent2 = new Intent(context, FclassMoreActivity.class);
-					intent2.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-					intent2.putExtra("title", childname.get(index).get(arg2)
-							.toString());
-					intent2.putExtra("id", MyApplication.woman_fangzhenyangjv);
-					context.startActivity(intent2);
-					Util.ShowToast(context, "点击了" + childname.get(index).get(arg2));
-					break;
-				case 3:
-					Intent intent3 = new Intent(context, FclassMoreActivity.class);
-					intent3.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-					intent3.putExtra("title", childname.get(index).get(arg2)
-							.toString());
-					intent3.putExtra("id", MyApplication.woman_qingqvtiaodan);
-					context.startActivity(intent3);
-					break;
-				case 4:
-					Intent intent4 = new Intent(context, FclassMoreActivity.class);
-					intent4.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-					intent4.putExtra("title", childname.get(index).get(arg2)
-							.toString());
-					intent4.putExtra("id", MyApplication.woman_shensuozhuanhzu);
-					context.startActivity(intent4);
-					break;
-				case 5:
-					Intent intent5 = new Intent(context, FclassMoreActivity.class);
-					intent5.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-					intent5.putExtra("title", childname.get(index).get(arg2)
-							.toString());
-					intent5.putExtra("id", MyApplication.woman_hulibaojian);
-					context.startActivity(intent5);
-					break;
-				case 6:
-					Intent intent6 = new Intent(context, FclassMoreActivity.class);
-					intent6.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-					intent6.putExtra("title", childname.get(index).get(arg2)
-							.toString());
-					intent6.putExtra("id", MyApplication.woman_otherwoman);
-					context.startActivity(intent6);
-					break;
-
-				default:
-					break;
+					// Util.ShowToast(context, "点击了" +
+					// childname.get(index).get(arg2));
 				}
 			}
 			/*
 			 * 男性分类下点击事件
 			 */
-			else if(groupname.get(index).equals("男性")){
-					switch (arg2) {
-					case 0 :				
-						Intent intent = new Intent(context,
-								FclassFristViewActivity.class);
-						intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-						// groupname数组传值给FclassFristViewActivity的标题
-						intent.putExtra("title", groupname.get(index).toString());
-						intent.putExtra("listindex", 1);
-						System.out.println(arg2);
-						context.startActivity(intent);
-						Util.ShowToast(context, "点击了" + childname.get(index).get(0));
-						break;
-					case 1:
-						Intent intent1 = new Intent(context, FclassMoreActivity.class);
-						intent1.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-						intent1.putExtra("title", childname.get(index).get(arg2).toString());
-						intent1.putExtra("id", MyApplication.man_feijibei);
-						System.out.println(arg2);
-						context.startActivity(intent1);
-						Util.ShowToast(context, "点击了" + childname.get(index).get(arg2));
-						break;
-					case 2:
-						Intent intent2 = new Intent(context, FclassMoreActivity.class);
-						intent2.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-						intent2.putExtra("title", childname.get(index).get(arg2)
-								.toString());
-						intent2.putExtra("id", MyApplication.man_daomo);
-						context.startActivity(intent2);
-						Util.ShowToast(context, "点击了" + childname.get(index).get(arg2));
-						break;
-					case 3:
-						Intent intent3 = new Intent(context, FclassMoreActivity.class);
-						intent3.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-						intent3.putExtra("title", childname.get(index).get(arg2)
-								.toString());
-						intent3.putExtra("id", MyApplication.man_fuzhu);
-						context.startActivity(intent3);
-						break;
-
-					default:
-						break;
-					}
+			else if (groupname.get(index).equals("男性")) {
+				int[] menlist = { 1, MyApplication.man_feijibei,
+						MyApplication.man_daomo, MyApplication.man_fuzhu, };
+				if (arg2 == 0) {
+					Intent intent = new Intent(context,
+							FclassFristViewActivity.class);
+					intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+					// groupname数组传值给FclassFristViewActivity的标题
+					intent.putExtra("title", groupname.get(index).toString());
+					intent.putExtra("listindex", menlist[arg2]);
+					System.out.println(arg2);
+					context.startActivity(intent);
+				} else {
+					Intent intent1 = new Intent(context,
+							FclassMoreActivity.class);
+					intent1.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+					intent1.putExtra("title", childname.get(index).get(arg2)
+							.toString());
+					intent1.putExtra("id", menlist[arg2]);
+					System.out.println(arg2);
+					context.startActivity(intent1);
 				}
+
+			}
 
 			/*
 			 * 内衣分类下点击事件
 			 */
-			else if(groupname.get(index).equals("内衣")){
-					switch (arg2) {
-					case 0 :				
-						Intent intent = new Intent(context,
-								FclassFristViewActivity.class);
-						intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-						// groupname数组传值给FclassFristViewActivity的标题
-						intent.putExtra("title", groupname.get(index).toString());
-						intent.putExtra("listindex", 2);
-						System.out.println(arg2);
-						context.startActivity(intent);
-						Util.ShowToast(context, "点击了" + childname.get(index).get(0));
-						break;
-					case 1:
-						Intent intent1 = new Intent(context, FclassMoreActivity.class);
-						intent1.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-						intent1.putExtra("title", childname.get(index).get(arg2).toString());
-						intent1.putExtra("id", MyApplication.neiyi_xingganneiyi);
-						System.out.println(arg2);
-						context.startActivity(intent1);
-						Util.ShowToast(context, "点击了" + childname.get(index).get(arg2));
-						break;
-					case 2:
-						Intent intent2 = new Intent(context, FclassMoreActivity.class);
-						intent2.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-						intent2.putExtra("title", childname.get(index).get(arg2)
-								.toString());
-						intent2.putExtra("id", MyApplication.neiyi_siwaneiku);
-						context.startActivity(intent2);
-						Util.ShowToast(context, "点击了" + childname.get(index).get(arg2));
-						break;
-					case 3:
-						Intent intent3 = new Intent(context, FclassMoreActivity.class);
-						intent3.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-						intent3.putExtra("title", childname.get(index).get(arg2)
-								.toString());
-						intent3.putExtra("id", MyApplication.neiyi_qingqvshuiyi);
-						context.startActivity(intent3);
-						break;
-					case 4:
-						Intent intent4 = new Intent(context, FclassMoreActivity.class);
-						intent4.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-						intent4.putExtra("title", childname.get(index).get(arg2)
-								.toString());
-						intent4.putExtra("id", MyApplication.neiyi_zhifuyouhuo);
-						context.startActivity(intent4);
-						break;
-					case 5:
-						Intent intent5 = new Intent(context, FclassMoreActivity.class);
-						intent5.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-						intent5.putExtra("title", childname.get(index).get(arg2)
-								.toString());
-						intent5.putExtra("id", MyApplication.neiyi_liantiwangyi);
-						context.startActivity(intent5);
-						break;
-					case 6:
-						Intent intent6 = new Intent(context, FclassMoreActivity.class);
-						intent6.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-						intent6.putExtra("title", childname.get(index).get(arg2)
-								.toString());
-						intent6.putExtra("id", MyApplication.neiyi_sandiantoushi);
-						context.startActivity(intent6);
-						break;	
-						
-					default:
-						break;
-					}
+			else if (groupname.get(index).equals("内衣")) {
+				int[] neiyilist = { 2, MyApplication.neiyi_xingganneiyi,
+						MyApplication.neiyi_siwaneiku,
+						MyApplication.neiyi_qingqvshuiyi,
+						MyApplication.neiyi_zhifuyouhuo,
+						MyApplication.neiyi_liantiwangyi,
+						MyApplication.neiyi_sandiantoushi };
+				if (arg2 == 0) {
+					Intent intent = new Intent(context,
+							FclassFristViewActivity.class);
+					intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+					// groupname数组传值给FclassFristViewActivity的标题
+					intent.putExtra("title", groupname.get(index).toString());
+					intent.putExtra("listindex", neiyilist[arg2]);
+					System.out.println(arg2);
+					context.startActivity(intent);
+				} else {
+					Intent intent1 = new Intent(context,
+							FclassMoreActivity.class);
+					intent1.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+					intent1.putExtra("title", childname.get(index).get(arg2)
+							.toString());
+					intent1.putExtra("id", neiyilist[arg2]);
+					System.out.println(arg2);
+					context.startActivity(intent1);
 				}
+
+			}
 
 			/*
 			 * 安全套分类下点击事件
 			 */
-			else if(groupname.get(index).equals("安全套")){
-					switch (arg2) {
-					case 0 :				
-						Intent intent = new Intent(context,
-								FclassFristViewActivity.class);
-						intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-						// groupname数组传值给FclassFristViewActivity的标题
-						intent.putExtra("title", groupname.get(index).toString());
-						intent.putExtra("listindex", 3);
-						System.out.println(arg2);
-						context.startActivity(intent);
-						Util.ShowToast(context, "点击了" + childname.get(index).get(0));
-						break;
-					case 1:
-						Intent intent1 = new Intent(context, FclassMoreActivity.class);
-						intent1.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-						intent1.putExtra("title", childname.get(index).get(arg2).toString());
-						intent1.putExtra("id", MyApplication.tt_jingdian);
-						System.out.println(arg2);
-						context.startActivity(intent1);
-						Util.ShowToast(context, "点击了" + childname.get(index).get(arg2));
-						break;
-					case 2:
-						Intent intent2 = new Intent(context, FclassMoreActivity.class);
-						intent2.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-						intent2.putExtra("title", childname.get(index).get(arg2)
-								.toString());
-						intent2.putExtra("id", MyApplication.tt_yanshi);
-						context.startActivity(intent2);
-						Util.ShowToast(context, "点击了" + childname.get(index).get(arg2));
-						break;
-					case 3:
-						Intent intent3 = new Intent(context, FclassMoreActivity.class);
-						intent3.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-						intent3.putExtra("title", childname.get(index).get(arg2)
-								.toString());
-						intent3.putExtra("id", MyApplication.tt_nvyong);
-						context.startActivity(intent3);
-						break;
-					case 4:
-						Intent intent4 = new Intent(context, FclassMoreActivity.class);
-						intent4.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-						intent4.putExtra("title", childname.get(index).get(arg2)
-								.toString());
-						intent4.putExtra("id", MyApplication.tt_daxiaohao);
-						context.startActivity(intent4);
-						break;
-					case 5:
-						Intent intent5 = new Intent(context, FclassMoreActivity.class);
-						intent5.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-						intent5.putExtra("title", childname.get(index).get(arg2)
-								.toString());
-						intent5.putExtra("id", MyApplication.tt_huayang);
-						context.startActivity(intent5);
-						break;
-						
-					default:
-						break;
-					}
+			else if (groupname.get(index).equals("安全套")) {
+				int[] ttlist = { 3, MyApplication.tt_jingdian,
+						MyApplication.tt_yanshi, MyApplication.tt_nvyong,
+						MyApplication.tt_daxiaohao, MyApplication.tt_huayang, };
+				if (arg2 == 0) {
+					Intent intent = new Intent(context,
+							FclassFristViewActivity.class);
+					intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+					// groupname数组传值给FclassFristViewActivity的标题
+					intent.putExtra("title", groupname.get(index).toString());
+					intent.putExtra("listindex", ttlist[arg2]);
+					System.out.println(arg2);
+					context.startActivity(intent);
+
+				} else {
+					Intent intent1 = new Intent(context,
+							FclassMoreActivity.class);
+					intent1.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+					intent1.putExtra("title", childname.get(index).get(arg2)
+							.toString());
+					intent1.putExtra("id", ttlist[arg2]);
+					System.out.println(arg2);
+					context.startActivity(intent1);
 				}
+			}
 
 			/*
 			 * 双人分类下点击事件
 			 */
-			else if(groupname.get(index).equals("双人")){
-					switch (arg2) {
-					case 0 :				
-						Intent intent = new Intent(context,
-								FclassFristViewActivity.class);
-						intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-						// groupname数组传值给FclassFristViewActivity的标题
-						intent.putExtra("title", groupname.get(index).toString());
-						intent.putExtra("listindex", 2);
-						System.out.println(arg2);
-						context.startActivity(intent);
-						Util.ShowToast(context, "点击了" + childname.get(index).get(0));
-						break;
-					case 1:
-						Intent intent1 = new Intent(context, FclassMoreActivity.class);
-						intent1.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-						intent1.putExtra("title", childname.get(index).get(arg2).toString());
-						intent1.putExtra("id", MyApplication.tosex_zhuqing);
-						System.out.println(arg2);
-						context.startActivity(intent1);
-						Util.ShowToast(context, "点击了" + childname.get(index).get(arg2));
-						break;
-					case 2:
-						Intent intent2 = new Intent(context, FclassMoreActivity.class);
-						intent2.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-						intent2.putExtra("title", childname.get(index).get(arg2)
-								.toString());
-						intent2.putExtra("id", MyApplication.tosex_houting);
-						context.startActivity(intent2);
-						Util.ShowToast(context, "点击了" + childname.get(index).get(arg2));
-						break;
-					case 3:
-						Intent intent3 = new Intent(context, FclassMoreActivity.class);
-						intent3.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-						intent3.putExtra("title", childname.get(index).get(arg2)
-								.toString());
-						intent3.putExtra("id", MyApplication.tosex_huantao);
-						context.startActivity(intent3);
-						break;
-					case 4:
-						Intent intent4 = new Intent(context, FclassMoreActivity.class);
-						intent4.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-						intent4.putExtra("title", childname.get(index).get(arg2)
-								.toString());
-						intent4.putExtra("id", MyApplication.tosex_runhua);
-						context.startActivity(intent4);
-						break;
-					case 5:
-						Intent intent5 = new Intent(context, FclassMoreActivity.class);
-						intent5.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-						intent5.putExtra("title", childname.get(index).get(arg2)
-								.toString());
-						intent5.putExtra("id", MyApplication.tosex_runhua);
-						context.startActivity(intent5);
-						break;
-					case 6:
-						Intent intent6 = new Intent(context, FclassMoreActivity.class);
-						intent6.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-						intent6.putExtra("title", childname.get(index).get(arg2)
-								.toString());
-						intent6.putExtra("id", MyApplication.tosex_sm);
-						context.startActivity(intent6);
-						break;	
-					case 7:
-						Intent intent7 = new Intent(context, FclassMoreActivity.class);
-						intent7.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-						intent7.putExtra("title", childname.get(index).get(arg2)
-								.toString());
-						intent7.putExtra("id", MyApplication.tosex_other);
-						context.startActivity(intent7);
-						break;	
-					default:
-						break;
-					}
+			else if (groupname.get(index).equals("双人")) {
+				int[] tosexlist = { 5, MyApplication.tosex_zhuqing,
+						MyApplication.tosex_houting,
+						MyApplication.tosex_huantao,
+						MyApplication.tosex_runhua, MyApplication.tosex_sm,
+						MyApplication.tosex_other };
+				if (arg2 == 0) {
+					Intent intent = new Intent(context,
+							FclassFristViewActivity.class);
+					intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+					// groupname数组传值给FclassFristViewActivity的标题
+					intent.putExtra("title", groupname.get(index).toString());
+					intent.putExtra("listindex", tosexlist[arg2]);
+					System.out.println(arg2);
+					context.startActivity(intent);
+					Util.ShowToast(context,
+							"点击了" + childname.get(index).get(arg2));
+				} else {
+					Intent intent1 = new Intent(context,
+							FclassMoreActivity.class);
+					intent1.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+					intent1.putExtra("title", childname.get(index).get(arg2)
+							.toString());
+					intent1.putExtra("id", tosexlist[arg2]);
+					System.out.println(arg2);
+					context.startActivity(intent1);
+					Util.ShowToast(context,
+							"点击了" + childname.get(index).get(arg2));
 				}
 
+			}
 
+		}// 点击事件结束
 
-		}//点击事件结束
-
-	}//类结束
+	}// 类结束
 
 	public class MyHalderLabel {
 		public TextView tv;
