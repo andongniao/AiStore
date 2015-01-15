@@ -188,7 +188,7 @@ public class FclassHomeAdapter extends BaseExpandableListAdapter {
 			 */
 			if (groupname.get(index).equals("女性")) {
 				
-				int[] womenlist = { 0, MyApplication.woman_av,
+				int[] womenlist = {MyApplication.woman_av,
 						MyApplication.woman_fangzhenyangjv,
 						MyApplication.woman_qingqvtiaodan,
 						MyApplication.woman_shensuozhuanhzu,
@@ -200,7 +200,7 @@ public class FclassHomeAdapter extends BaseExpandableListAdapter {
 					intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 					// groupname数组传值给FclassFristViewActivity的标题
 					intent.putExtra("title", groupname.get(index).toString());
-					intent.putExtra("listindex", womenlist[arg2]);
+					intent.putExtra("listindex", 0);
 					System.out.println(arg2);
 					context.startActivity(intent);
 					Util.ShowToast(context,
@@ -222,15 +222,14 @@ public class FclassHomeAdapter extends BaseExpandableListAdapter {
 			 * 男性分类下点击事件
 			 */
 			else if (groupname.get(index).equals("男性")) {
-				int[] menlist = { 1, MyApplication.man_feijibei,
+				int[] menlist = {MyApplication.man_feijibei,
 						MyApplication.man_daomo, MyApplication.man_fuzhu, };
 				if (arg2 == 0) {
 					Intent intent = new Intent(context,
 							FclassFristViewActivity.class);
 					intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-					// groupname数组传值给FclassFristViewActivity的标题
 					intent.putExtra("title", groupname.get(index).toString());
-					intent.putExtra("listindex", menlist[arg2]);
+					intent.putExtra("listindex", 1);
 					System.out.println(arg2);
 					context.startActivity(intent);
 				} else {
@@ -250,7 +249,7 @@ public class FclassHomeAdapter extends BaseExpandableListAdapter {
 			 * 内衣分类下点击事件
 			 */
 			else if (groupname.get(index).equals("内衣")) {
-				int[] neiyilist = { 2, MyApplication.neiyi_xingganneiyi,
+				int[] neiyilist = { MyApplication.neiyi_xingganneiyi,
 						MyApplication.neiyi_siwaneiku,
 						MyApplication.neiyi_qingqvshuiyi,
 						MyApplication.neiyi_zhifuyouhuo,
@@ -260,9 +259,8 @@ public class FclassHomeAdapter extends BaseExpandableListAdapter {
 					Intent intent = new Intent(context,
 							FclassFristViewActivity.class);
 					intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-					// groupname数组传值给FclassFristViewActivity的标题
 					intent.putExtra("title", groupname.get(index).toString());
-					intent.putExtra("listindex", neiyilist[arg2]);
+					intent.putExtra("listindex", 2);
 					System.out.println(arg2);
 					context.startActivity(intent);
 				} else {
@@ -282,16 +280,15 @@ public class FclassHomeAdapter extends BaseExpandableListAdapter {
 			 * 安全套分类下点击事件
 			 */
 			else if (groupname.get(index).equals("安全套")) {
-				int[] ttlist = { 3, MyApplication.tt_jingdian,
+				int[] ttlist = {MyApplication.tt_jingdian,
 						MyApplication.tt_yanshi, MyApplication.tt_nvyong,
 						MyApplication.tt_daxiaohao, MyApplication.tt_huayang, };
 				if (arg2 == 0) {
 					Intent intent = new Intent(context,
 							FclassFristViewActivity.class);
 					intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-					// groupname数组传值给FclassFristViewActivity的标题
 					intent.putExtra("title", groupname.get(index).toString());
-					intent.putExtra("listindex", ttlist[arg2]);
+					intent.putExtra("listindex", 3);
 					System.out.println(arg2);
 					context.startActivity(intent);
 
@@ -311,7 +308,7 @@ public class FclassHomeAdapter extends BaseExpandableListAdapter {
 			 * 双人分类下点击事件
 			 */
 			else if (groupname.get(index).equals("双人")) {
-				int[] tosexlist = { 5, MyApplication.tosex_zhuqing,
+				int[] tosexlist = { MyApplication.tosex_zhuqing,
 						MyApplication.tosex_houting,
 						MyApplication.tosex_huantao,
 						MyApplication.tosex_runhua, MyApplication.tosex_sm,
@@ -320,13 +317,10 @@ public class FclassHomeAdapter extends BaseExpandableListAdapter {
 					Intent intent = new Intent(context,
 							FclassFristViewActivity.class);
 					intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-					// groupname数组传值给FclassFristViewActivity的标题
 					intent.putExtra("title", groupname.get(index).toString());
-					intent.putExtra("listindex", tosexlist[arg2]);
+					intent.putExtra("listindex",5);
 					System.out.println(arg2);
 					context.startActivity(intent);
-					Util.ShowToast(context,
-							"点击了" + childname.get(index).get(arg2));
 				} else {
 					Intent intent1 = new Intent(context,
 							FclassMoreActivity.class);
@@ -336,8 +330,6 @@ public class FclassHomeAdapter extends BaseExpandableListAdapter {
 					intent1.putExtra("id", tosexlist[arg2]);
 					System.out.println(arg2);
 					context.startActivity(intent1);
-					Util.ShowToast(context,
-							"点击了" + childname.get(index).get(arg2));
 				}
 
 			}

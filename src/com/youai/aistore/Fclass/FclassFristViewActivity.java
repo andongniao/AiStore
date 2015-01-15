@@ -48,7 +48,7 @@ public class FclassFristViewActivity extends BaseActivity implements
 	private ArrayList<MyGridview> gridviewlist;
 	private MyTask myTask;
 	private ListGoodsBean fclasslist;
-	private ArrayList<GoodsBean> womenListBean;
+	private ArrayList<GoodsBean> womenListBean,menListBean,neiyiListBean, ttListBean, tosexListBean;
 	private FclassFristViewAdapter fclassAdapter;
 	private int type, id, postion;
 	public static boolean isfinish;
@@ -114,7 +114,7 @@ public class FclassFristViewActivity extends BaseActivity implements
 	}
 
 	/*
-	 * 详细分类监听器
+	 * 顶部网格，详细分类监听器
 	 */
 	class Titlegridviewonclick implements OnItemClickListener {
 
@@ -208,14 +208,14 @@ public class FclassFristViewActivity extends BaseActivity implements
 				long arg3) {
 			// TODO Auto-generated method stub
 			// type = fclasslist.getList().get(0).get(arg2).getType();
-			id = fclasslist.getList().get(7).get(arg2).getId();
+			//id = fclasslist.getList().get(7).get(arg2).getId();
+			id = fclasslist.getList().get(0).get(arg2).getId();
 			// toActivity(type, id);
 			Intent intent = new Intent(FclassFristViewActivity.this,
 					ProductDetailsActivity.class);
 			intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 			intent.putExtra("finishid", 1);
 			intent.putExtra("id", id);
-
 			startActivity(intent);
 
 		}
@@ -235,8 +235,30 @@ public class FclassFristViewActivity extends BaseActivity implements
 		protected ListGoodsBean doInBackground(Object... params) {
 			try {
 				Send send = new Send(context);
-				String time = String.valueOf(System.currentTimeMillis());
-				fclasslist = send.RequestHome(time);
+				//String time = String.valueOf(System.currentTimeMillis());
+				//fclasslist = send.RequestHome(time);
+				/*通过位置判断，点击“热门”后，要进入哪个分类。*/
+				listindex = getIntent().getIntExtra("listindex", 1);
+				switch (listindex) {
+				case 0:
+					fclasslist = send.GetFclassFrist(MyApplication.woman);
+					break;
+				case 1:
+					fclasslist = send.GetFclassFrist(MyApplication.woman);
+					break;
+				case 2:
+					fclasslist = send.GetFclassFrist(MyApplication.neiyi);
+					break;
+				case 3:
+					fclasslist = send.GetFclassFrist(MyApplication.tt);
+					break;
+				case 5:
+					fclasslist = send.GetFclassFrist(MyApplication.tosex);
+					break;
+				default:
+					break;
+				}
+				
 				return fclasslist;// new String(baos.toByteArray(), "gb2312");
 				// TODO getdata
 			} catch (Exception e) {
@@ -258,6 +280,7 @@ public class FclassFristViewActivity extends BaseActivity implements
 			if (fclasslist != null && fclasslist.getCode() == 200) {
 				womenListBean = fclasslist.getList().get(
 						fclasslist.getList().size() - 1);
+				
 				fclassAdapter = new FclassFristViewAdapter(context,
 						womenListBean);
 				for (int i = 0; i < titlelist.length; i++) {
