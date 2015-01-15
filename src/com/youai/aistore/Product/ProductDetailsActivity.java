@@ -42,6 +42,8 @@ import com.youai.aistore.Bean.Base;
 import com.youai.aistore.Bean.CommentsBean;
 import com.youai.aistore.Bean.GoodsBean;
 import com.youai.aistore.Bean.ListCommentsBean;
+import com.youai.aistore.Fclass.FclassFristViewActivity;
+import com.youai.aistore.Fclass.FclassMoreActivity;
 import com.youai.aistore.NetInterface.Send;
 import com.youai.aistore.ShopCart.ShopCartActivity;
 import com.youai.aistore.xlistview.XListView;
@@ -376,8 +378,14 @@ public class ProductDetailsActivity extends BaseActivity implements
 							stat = false;
 							ExampleActivity.setCurrentTab(2);
 							//TODO 
-							finish();
+							int fid = getIntent().getIntExtra("finishid", -1);
+							if(fid==1){
+								FclassFristViewActivity.isfinish = true;
+							}else if(fid == 2){
+								FclassMoreActivity.isfinish = true;
+							}
 							ShopCartActivity.shopcartchaneged = true;
+							finish();
 						} else {
 							Util.ShowToast(context,
 									R.string.product_add_shopcart_success);
@@ -430,13 +438,6 @@ public class ProductDetailsActivity extends BaseActivity implements
 				tv_image_text_tv.getPaint().setFlags(0); // 取消设置的的划线
 				tv_image_text_tv.setTextColor(getResources().getColor(
 						R.color.black));
-				// if(adapter==null){
-				// adapter = new UserCommentAdapter(context, list);
-				// xListView.setAdapter(adapter);
-				// }else{
-				// adapter.setdata(list);
-				// adapter.notifyDataSetInvalidated();
-				// }
 			}
 			break;
 		case R.id.product_details_call_ll:
@@ -463,7 +464,6 @@ public class ProductDetailsActivity extends BaseActivity implements
 	private void onLoad() {
 		xListView.stopRefresh();
 		xListView.stopLoadMore();
-		// xListView.setRefreshTime(changetime);
 	}
 
 	private void ShowDialog(final int statu) {

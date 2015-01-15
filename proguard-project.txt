@@ -18,3 +18,23 @@
 #-keepclassmembers class fqcn.of.javascript.interface.for.webview {
 #   public *;
 #}
+
+dontwarn 
+-optimizationpasses 5
+-dontusemixedcaseclassnames
+-dontskipnonpubliclibraryclasses
+-dontpreverify
+-verbose
+-optimizations !code/simplification/arithmetic,!field/*,!class/merging/*    
+
+-libraryjars D:\Util\workspace\AiStore\libs\alipaysdk.jar
+-libraryjars D:\Util\workspace\AiStore\libs\alipaysecsdk.jar
+-libraryjars D:\Util\workspace\AiStore\libs\alipayutdid.jar
+-libraryjars D:\Util\workspace\AiStore\libs\android-support-v4.jar
+-libraryjars D:\Util\workspace\AiStore\libs\gson-1.7.1.jar
+-libraryjars D:\Util\workspace\AiStore\libs\universal-image-loader-1.9.2-SNAPSHOT-with-sources.jar
+
+-keepclassmembers class * {
+   public <init>(org.json.JSONObject);
+}
+

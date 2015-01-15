@@ -28,7 +28,6 @@ public class SearchActivity extends Activity implements OnClickListener {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		overridePendingTransition(R.anim.in_rightleft, R.anim.out_rightleft);
 		setContentView(R.layout.search_view);
 		init();
 	}
@@ -75,7 +74,6 @@ public class SearchActivity extends Activity implements OnClickListener {
 			list.add(d);
 			intent.putExtra("list", list);
 			startActivity(intent);
-			overridePendingTransition(R.anim.in_rightleft, R.anim.out_rightleft);
 			break;
 
 		}

@@ -1,6 +1,7 @@
 package com.youai.aistore;
 
 import android.app.Activity;
+import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.KeyEvent;
@@ -20,7 +21,10 @@ import android.widget.TextView;
  * 
  */
 public abstract class BaseActivity extends Activity {
+	
+	protected int activityCloseEnterAnimation;
 
+	protected int activityCloseExitAnimation;
 	public TextView titleTv;// 标题控件
 	public TextView topLeftTv;// 左上 控件（返回）
 	public TextView topRightTv;// 右上 控件（返回）
@@ -32,7 +36,14 @@ public abstract class BaseActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle arg0) {
 		super.onCreate(arg0);
-		overridePendingTransition(R.anim.in_rightleft, R.anim.out_rightleft);
+		TypedArray activityStyle = getTheme().obtainStyledAttributes(new int[] {android.R.attr.windowAnimationStyle});
+		int windowAnimationStyleResId = activityStyle.getResourceId(0, 0);      
+		activityStyle.recycle();
+		activityStyle = getTheme().obtainStyledAttributes(windowAnimationStyleResId, new int[] {android.R.attr.activityCloseEnterAnimation, android.R.attr.activityCloseExitAnimation});
+		activityCloseEnterAnimation = activityStyle.getResourceId(0, 0);
+		activityCloseExitAnimation = activityStyle.getResourceId(1, 0);
+
+		activityStyle.recycle();
 		setContentView(R.layout.base_layout);
 		baseTopLayout = (RelativeLayout) findViewById(R.id.Base_Layout);
 		titleTv = (TextView) findViewById(R.id.base_title_tv);
@@ -244,10 +255,10 @@ public abstract class BaseActivity extends Activity {
 		return topRightTv;
 	}
 	@Override
-	protected void onDestroy() {
-		super.onDestroy();
-		overridePendingTransition(R.anim.in_left_right, R.anim.out_left_right);
-//		overridePendingTransition(R.anim.out_left_right, R.anim.in_left_right);
+	public void finish() {
+		// TODO Auto-generated method stub
+		super.finish();
+		overridePendingTransition(activityCloseEnterAnimation, activityCloseExitAnimation);
 	}
 
 }
