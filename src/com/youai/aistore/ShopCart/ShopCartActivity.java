@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.ApplicationInfo;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.AsyncTask;
@@ -48,11 +47,13 @@ public class ShopCartActivity extends BaseActivity implements OnClickListener {
 	private long exitTime = 0;
 	private Context context;
 	private SwipeMenuListView lv;
+	@SuppressWarnings("unused")
 	private ImageView isnull_iv;
 	private View isnull;
 	private ShopCartAdapter adapter;
 	private LinearLayout showviewll;
 	private Button seeagainbt, goypaybt;
+	@SuppressWarnings("unused")
 	private TextView tv_topright, tv_gongji;
 	private ShopcartInterface inter;
 	public static boolean shopcartchaneged;

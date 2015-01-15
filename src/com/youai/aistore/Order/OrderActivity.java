@@ -29,7 +29,6 @@ import android.widget.Toast;
 import com.alipay.sdk.app.PayTask;
 import com.youai.aistore.BaseActivity;
 import com.youai.aistore.ExampleActivity;
-import com.youai.aistore.MainActivity;
 import com.youai.aistore.MyApplication;
 import com.youai.aistore.R;
 import com.youai.aistore.Util;
@@ -47,6 +46,7 @@ import com.youai.aistore.ShopCart.ShopCartActivity;
  * 
  */
 public class OrderActivity extends BaseActivity implements OnClickListener {
+	@SuppressWarnings("unused")
 	private OrderListview lv;
 	private TextView tv_consignee, tv_address, tv_number, tv_goods_prive,
 			tv_kuaidi_price, tv_final_price, tv_chose_time;
@@ -55,7 +55,9 @@ public class OrderActivity extends BaseActivity implements OnClickListener {
 	private RadioButton zhifu_rbt, huodao_rbt;
 	private Context context;
 	private Dialog alertDialog;
+	@SuppressWarnings("unused")
 	private OrderLvAdapter adapter;
+	@SuppressWarnings("unused")
 	private ArrayList<ShopCartBean> list;
 	private int type, postion, time;
 	private ListShopCartBean listbean;
@@ -160,18 +162,6 @@ public class OrderActivity extends BaseActivity implements OnClickListener {
 		tv_kuaidi_price.setText("￥"+kuaidi+"元");
 		tv_final_price.setText("￥"+final_price+"元");
 		
-//		/************************模拟数据**********************************/
-//		list = new ArrayList<ShopCartBean>();
-//		ShopCartBean a = new ShopCartBean();
-//		ShopCartBean s = new ShopCartBean();
-//		ShopCartBean d = new ShopCartBean();
-//		ShopCartBean f = new ShopCartBean();
-//		list.add(a);
-//		list.add(s);
-//		list.add(d);
-//		list.add(f);
-//		adapter = new OrderLvAdapter(context, listbean.getList());
-//		lv.setAdapter(adapter);
 	}
 
 	@Override
@@ -269,6 +259,7 @@ public class OrderActivity extends BaseActivity implements OnClickListener {
 						// // 调用支付方法，并传入支付金额
 						// fiap.pay(0.01,"测试商品","测试商品信息","测试订单号");
 						// pay("0.01","测试商品","测试商品信息");
+						//TODO
 						ExampleActivity.setCurrentTab(2);
 						ConsigneeInfoActivity.isfinish = true;
 						finish();

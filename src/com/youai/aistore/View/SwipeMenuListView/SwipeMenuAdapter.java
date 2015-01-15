@@ -39,6 +39,7 @@ public class SwipeMenuAdapter implements WrapperListAdapter,
 		return mAdapter.getItemId(position);
 	}
 
+	@SuppressWarnings("unused")
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
 		SwipeMenuLayout layout = null;

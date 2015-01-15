@@ -17,7 +17,6 @@ import android.os.Handler;
 import android.util.DisplayMetrics;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.webkit.WebSettings.LayoutAlgorithm;
@@ -26,9 +25,7 @@ import android.webkit.WebViewClient;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.SeekBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.youai.aistore.BaseActivity;
@@ -72,7 +69,7 @@ public class ProductDetailsActivity extends BaseActivity implements
 	private GoodsBean bean;
 	private UserCommentAdapter adapter;
 	private ArrayList<CommentsBean> list;
-	private Handler handler, myHandler;
+	private Handler handler;
 	private ListCommentsBean listcombean, nextpagelist;
 	private Dialog alertDialog;
 	private Button addshopcartbtn, gopaynowbtn;
@@ -97,7 +94,6 @@ public class ProductDetailsActivity extends BaseActivity implements
 		}
 	}
 
-	@SuppressWarnings("deprecation")
 	@SuppressLint("InflateParams")
 	private void init() {
 		page = 1;
@@ -291,7 +287,6 @@ public class ProductDetailsActivity extends BaseActivity implements
 						webView.loadUrl(URL);
 						DisplayMetrics dm = new DisplayMetrics();// 获取当前显示的界面大小
 						getWindowManager().getDefaultDisplay().getMetrics(dm);
-						int width = dm.widthPixels;
 						int height = dm.heightPixels;// 获取当前界面的高度
 						LinearLayout.LayoutParams linearParams = (LinearLayout.LayoutParams) webView
 								.getLayoutParams();
@@ -299,13 +294,12 @@ public class ProductDetailsActivity extends BaseActivity implements
 						webView.setLayoutParams(linearParams);
 						handler.postDelayed(new Runnable() {
 
+							@SuppressWarnings("static-access")
 							@Override
 							public void run() {
 								DisplayMetrics dm = new DisplayMetrics();// 获取当前显示的界面大小
 								getWindowManager().getDefaultDisplay()
 										.getMetrics(dm);
-								int width = dm.widthPixels;
-								int height = dm.heightPixels;// 获取当前界面的高度
 								LinearLayout.LayoutParams linearParams = (LinearLayout.LayoutParams) webView
 										.getLayoutParams();
 								linearParams.height = linearParams.WRAP_CONTENT;

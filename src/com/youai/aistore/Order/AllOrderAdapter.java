@@ -2,6 +2,7 @@ package com.youai.aistore.Order;
 
 import java.util.ArrayList;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
@@ -12,10 +13,7 @@ import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.youai.aistore.ExampleActivity;
-import com.youai.aistore.MyApplication;
 import com.youai.aistore.R;
-import com.youai.aistore.WelcomeActivity;
 import com.youai.aistore.Bean.ListOrderBean.OrderBean;
 
 /**
@@ -24,6 +22,7 @@ import com.youai.aistore.Bean.ListOrderBean.OrderBean;
  * @author Qzr
  * 
  */
+@SuppressLint("InflateParams")
 public class AllOrderAdapter extends BaseAdapter {
 	private Context context;
 	private ArrayList<OrderBean> list;
@@ -83,6 +82,7 @@ public class AllOrderAdapter extends BaseAdapter {
 		myitem.tv_statu.setText(list.get(postion).getOrder_status());
 		// TODO
 		myitem.btn_detail.setOnClickListener(new OnClickListener() {
+			@SuppressWarnings("unused")
 			@Override
 			public void onClick(View arg0) {
 				Intent intent = new Intent(context, OrderDetailActivity.class);

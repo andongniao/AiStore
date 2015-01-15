@@ -1,26 +1,26 @@
 package com.youai.aistore.ShopCart;
 
 import java.util.ArrayList;
-
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.youai.aistore.R;
 import com.youai.aistore.Bean.ShopCartBean;
 import com.youai.aistore.ShopCart.ShopCartActivity.ShopcartInterface;
 
+@SuppressLint("InflateParams")
 public class ShopCartAdapter extends BaseAdapter {
+	@SuppressWarnings("unused")
 	private Context context;
 	private ArrayList<ShopCartBean> list;
 	private LayoutInflater inflater;

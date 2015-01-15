@@ -9,6 +9,7 @@ import java.util.ArrayList;
  * @author Qzr
  * 
  */
+@SuppressWarnings("serial")
 public class GoodsBean extends Base implements Serializable {
 	private int id;
 	private int type;

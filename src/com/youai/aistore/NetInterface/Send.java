@@ -41,7 +41,6 @@ public class Send {
 	/**
 	 * 获取首页信息
 	 */
-	@SuppressWarnings("unchecked")
 	public ListGoodsBean RequestHome(String time) {
 		ListGoodsBean List = new ListGoodsBean();
 		String key = Util.hashKeyForDisk("AIAI.CN_" + time);
@@ -91,7 +90,7 @@ public class Send {
 	/**
 	 * 获取单品信息
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings("null")
 	public GoodsBean GetProductDetails(int id) {
 		GoodsBean bean = null;
 		String url = ServiceUrl.Product_Details_Url + id;
@@ -141,7 +140,7 @@ public class Send {
 	/**
 	 * 获取单品评论
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings("unused")
 	public ListCommentsBean GetProductComments(int id, int page) {
 		ListCommentsBean list = new ListCommentsBean();
 		CommentsBean bean = null;
@@ -190,7 +189,6 @@ public class Send {
 	/**
 	 * 获取一级分类
 	 */
-	@SuppressWarnings("unchecked")
 	public ListGoodsBean GetFclassFrist(int id) {
 		ListGoodsBean list = new ListGoodsBean();
 		ArrayList<ArrayList<GoodsBean>> listb = new ArrayList<ArrayList<GoodsBean>>();

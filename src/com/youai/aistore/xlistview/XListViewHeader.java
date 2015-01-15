@@ -6,6 +6,7 @@
  */
 package com.youai.aistore.xlistview;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.Gravity;
@@ -17,9 +18,9 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-
 import com.youai.aistore.R;
 
+@SuppressLint("InflateParams")
 public class XListViewHeader extends LinearLayout {
 	private LinearLayout mContainer;
 	private ImageView mArrowImageView;
@@ -50,6 +51,7 @@ public class XListViewHeader extends LinearLayout {
 		initView(context);
 	}
 
+	@SuppressWarnings("deprecation")
 	private void initView(Context context) {
 		// 初始情况，设置下拉刷新view高度�?0
 		LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(

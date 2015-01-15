@@ -11,7 +11,6 @@ import android.widget.TabWidget;
 import com.youai.aistore.Fclass.FclassHomeActivity;
 import com.youai.aistore.Home.HomeActivity;
 import com.youai.aistore.Mycenter.MycenterHomeActivity;
-import com.youai.aistore.Product.ProductDetailsActivity;
 import com.youai.aistore.ShopCart.ShopCartActivity;
 
 /**

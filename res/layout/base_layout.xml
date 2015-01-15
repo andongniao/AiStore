@@ -10,7 +10,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/top_bg"
-        android:padding="15dp" >
+        android:paddingTop="15dp" 
+        android:paddingBottom="15dp" 
+        android:paddingRight="15dp" 
+        >
         <RelativeLayout 
             android:id="@+id/base_top_left_tv_rl"
             android:layout_width="wrap_content"
@@ -19,7 +22,10 @@
             android:layout_alignParentTop="true"
             android:layout_centerVertical="true"
             android:gravity="center"
-            android:padding="10dp"
+            android:paddingLeft="10dp"
+            android:paddingTop="1dp"
+            android:paddingRight="2dp"
+            android:paddingBottom="1dp"
             >
         <TextView
             android:id="@+id/base_top_left_tv"

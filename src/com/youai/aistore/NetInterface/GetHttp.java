@@ -1,22 +1,16 @@
 package com.youai.aistore.NetInterface;
 
 import java.io.BufferedReader;
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.List;
 import java.util.Map;
 
-import org.json.JSONException;
-import org.json.JSONObject;
 
-import android.content.Context;
 
 public class GetHttp {
-	// String uriAPI = "http://192.168.1.100:8080/test/test.jsp?u=wangyi&p=456";
 	static String Jx = "http://xh.ai.cn/service/list.php?type=jing&";
 	static String Cw = "http://xh.ai.cn/service/list.php?type=character&";
 	static String Pic = "http://xh.ai.cn/service/list.php?type=pic&";
@@ -36,20 +30,6 @@ public class GetHttp {
 		String result = "";
 		BufferedReader in = null;
 		try {
-			// String urlName = "";
-			// if(type ==1){
-			// urlName = Jx + "page=" + page+"&per_page="+perpage;
-			// }else if(type ==2){
-			// urlName = Cw + "page=" + page+"&per_page="+perpage;
-			// }else if(type ==3){
-			// urlName = Pic + "page=" + page+"&per_page="+perpage;
-			// }else if(type ==4){
-			// //3&type=zan&key=91a0b7a6574c164f7e874796c06353f3
-			// urlName = Zan + page+"&type=zan&key="+k;
-			// }else if(type ==5){
-			// //3&type=cancel&key=056ea842413a1bff309a7926e3e6d409
-			// urlName = CancelZan + page+"&type=cancel&key="+k;
-			// }
 			URL realUrl = new URL(urlName);
 			// 打开和URL之间的连接
 			URLConnection conn = realUrl.openConnection();

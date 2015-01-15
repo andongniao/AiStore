@@ -6,15 +6,16 @@
  */
 package com.youai.aistore.xlistview;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-
 import com.youai.aistore.R;
 
+@SuppressLint("InflateParams")
 public class XListViewFooter extends LinearLayout {
 	public final static int STATE_NORMAL = 0;
 	public final static int STATE_READY = 1;
@@ -106,6 +107,7 @@ public class XListViewFooter extends LinearLayout {
 		mContentView.setLayoutParams(lp);
 	}
 
+	@SuppressWarnings("deprecation")
 	private void initView(Context context) {
 		mContext = context;
 		LinearLayout moreView = (LinearLayout) LayoutInflater.from(mContext)

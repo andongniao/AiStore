@@ -3,6 +3,7 @@ package com.youai.aistore.Bean;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+@SuppressWarnings("serial")
 public class ListShopCartBean extends Base implements Serializable {
 	private ArrayList<ShopCartBean> list;
 	private String count_price;

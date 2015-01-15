@@ -20,11 +20,8 @@ import com.youai.aistore.MyApplication;
 import com.youai.aistore.R;
 import com.youai.aistore.Util;
 import com.youai.aistore.Bean.Base;
-import com.youai.aistore.Bean.ConsigneeBean;
 import com.youai.aistore.NetInterface.Send;
 import com.youai.aistore.Order.AllOrderActivity;
-import com.youai.aistore.Order.OrderActivity;
-import com.youai.aistore.ShopCart.ConsigneeInfoActivity;
 import com.youai.aistore.View.CircleImageView;
 
 /**
@@ -45,6 +42,7 @@ public class MycenterHomeActivity extends BaseActivity implements
 	private Context context;
 	private Base bean;
 	private MyTask myTask;
+	private Bundle ble;
 
 	@Override
 	protected void onCreate(Bundle arg0) {
@@ -54,6 +52,12 @@ public class MycenterHomeActivity extends BaseActivity implements
 		setTopTitleBackground(R.drawable.logo);
 		setContentXml(R.layout.mycenter_home_view);
 		init();
+		this.ble = arg0;
+	}
+	@Override
+	protected void onRestoreInstanceState(Bundle savedInstanceState) {
+		// TODO Auto-generated method stub
+		super.onRestoreInstanceState(ble);
 	}
 
 	private void init() {

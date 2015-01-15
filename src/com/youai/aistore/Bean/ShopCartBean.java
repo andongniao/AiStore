@@ -2,6 +2,7 @@ package com.youai.aistore.Bean;
 
 import java.io.Serializable;
 
+@SuppressWarnings("serial")
 public class ShopCartBean implements Serializable {
 	private String pic_url;
 	private String goods_count;

@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 public class SwipeMenuView extends LinearLayout implements OnClickListener {
 
+	@SuppressWarnings("unused")
 	private SwipeMenuListView mListView;
 	private SwipeMenuLayout mLayout;
 	private SwipeMenu mMenu;
@@ -37,6 +38,7 @@ public class SwipeMenuView extends LinearLayout implements OnClickListener {
 		}
 	}
 
+	@SuppressWarnings("deprecation")
 	private void addItem(SwipeMenuItem item, int id) {
 		LayoutParams params = new LayoutParams(item.getWidth(),
 				LayoutParams.MATCH_PARENT);

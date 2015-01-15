@@ -6,8 +6,9 @@ import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
 import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import com.youai.aistore.BaseActivity;
@@ -24,16 +25,17 @@ import com.youai.aistore.NetInterface.Send;
  * @author Qzr
  * 
  */
-public class OrderDetailActivity extends BaseActivity {
+public class OrderDetailActivity extends BaseActivity implements OnClickListener{
 	private MyTask myTask;
 	private Context context;
 	private OrderDetailsBean bean;
 	private TextView number_tv, statu_tv, time_tv, pp_tv, tel_tv, money_tv,
 			youfei_tv, address_tv;
+	private Button cancel_btn,gopay_btn;
 	private LinearLayout gopay_ll;
 	private OrderDetailsAdapter adapter;
 	private ArrayList<Goods> list;
-	private ListView lv;
+	private OrderListview lv;
 
 	@Override
 	protected void onCreate(Bundle arg0) {
@@ -60,8 +62,13 @@ public class OrderDetailActivity extends BaseActivity {
 		money_tv = (TextView) findViewById(R.id.order_detail_money_tv);
 		youfei_tv = (TextView) findViewById(R.id.order_detail_youfei_tv);
 		address_tv = (TextView) findViewById(R.id.order_detail_address_tv);
-		lv = (ListView) findViewById(R.id.order_detail_listview);
+		lv = (OrderListview) findViewById(R.id.order_detail_listview);
 		gopay_ll = (LinearLayout) findViewById(R.id.order_detail_gopay_ll);
+		cancel_btn = (Button) findViewById(R.id.order_detail_cancel_btn);
+		cancel_btn.setOnClickListener(this);
+		gopay_btn = (Button) findViewById(R.id.order_detail_gopay_btn);
+		gopay_btn.setOnClickListener(this);
+		cancel_btn.setVisibility(View.GONE);
 	}
 
 	private class MyTask extends AsyncTask<Object, Object, Object> {
@@ -137,6 +144,19 @@ public class OrderDetailActivity extends BaseActivity {
 		@Override
 		protected void onCancelled() {
 			Util.stopProgressDialog();
+		}
+	}
+
+	@Override
+	public void onClick(View arg0) {
+		switch (arg0.getId()) {
+		case R.id.order_detail_gopay_btn:
+			
+			break;
+		case R.id.order_detail_cancel_btn:
+			
+			break;
+
 		}
 	}
 

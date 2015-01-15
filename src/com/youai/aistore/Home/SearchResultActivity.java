@@ -6,10 +6,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.View.OnTouchListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.LinearLayout;
@@ -38,8 +36,10 @@ public class SearchResultActivity extends BaseActivity implements
 	private SearchResultAdapter adapter;
 	private Context context;
 	private MyTask myTask;
+	@SuppressWarnings("unused")
 	private ArrayList<GoodsBean> list;
 	private ListFclassTwo listf;
+	@SuppressWarnings("unused")
 	private float pby, pay;
 
 	@Override
@@ -120,6 +120,7 @@ public class SearchResultActivity extends BaseActivity implements
 		// onLoad();
 	}
 
+	@SuppressWarnings("unused")
 	private void onLoad() {
 		listView.stopRefresh();
 		listView.stopLoadMore();

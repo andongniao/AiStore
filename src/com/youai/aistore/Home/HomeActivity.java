@@ -19,17 +19,13 @@ import android.widget.Toast;
 
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.youai.aistore.BaseActivity;
-import com.youai.aistore.ExampleActivity;
 import com.youai.aistore.ImageCycleView;
-import com.youai.aistore.MyApplication;
-import com.youai.aistore.WelcomeActivity;
 import com.youai.aistore.ImageCycleView.ImageCycleViewListener;
 import com.youai.aistore.R;
 import com.youai.aistore.Util;
 import com.youai.aistore.Bean.GoodsBean;
 import com.youai.aistore.Bean.ListGoodsBean;
 import com.youai.aistore.Fclass.FclassFristViewActivity;
-import com.youai.aistore.Fclass.FclassHomeActivity;
 import com.youai.aistore.Fclass.FclassMoreActivity;
 import com.youai.aistore.NetInterface.Send;
 import com.youai.aistore.Product.ProductDetailsActivity;

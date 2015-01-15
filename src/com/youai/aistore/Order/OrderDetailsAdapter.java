@@ -1,11 +1,10 @@
 package com.youai.aistore.Order;
 
 import java.util.ArrayList;
-
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.youai.aistore.R;
 import com.youai.aistore.Bean.OrderDetailsBean.Goods;
-
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,7 +19,9 @@ import android.widget.TextView;
  * @author Qzr
  * 
  */
+@SuppressLint("InflateParams")
 public class OrderDetailsAdapter extends BaseAdapter {
+	@SuppressWarnings("unused")
 	private Context context;
 	private ArrayList<Goods> list;
 	private LayoutInflater inflater;
