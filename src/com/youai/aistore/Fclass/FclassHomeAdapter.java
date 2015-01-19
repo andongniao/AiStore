@@ -211,7 +211,7 @@ public class FclassHomeAdapter extends BaseExpandableListAdapter {
 					intent1.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 					intent1.putExtra("title", childname.get(index).get(arg2)
 							.toString());
-					intent1.putExtra("id", womenlist[arg2]);
+					intent1.putExtra("id", womenlist[arg2-1]);
 					System.out.println(arg2);
 					context.startActivity(intent1);
 					// Util.ShowToast(context, "µã»÷ÁË" +
@@ -238,7 +238,7 @@ public class FclassHomeAdapter extends BaseExpandableListAdapter {
 					intent1.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 					intent1.putExtra("title", childname.get(index).get(arg2)
 							.toString());
-					intent1.putExtra("id", menlist[arg2]);
+					intent1.putExtra("id", menlist[arg2-1]);
 					System.out.println(arg2);
 					context.startActivity(intent1);
 				}
@@ -269,7 +269,7 @@ public class FclassHomeAdapter extends BaseExpandableListAdapter {
 					intent1.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 					intent1.putExtra("title", childname.get(index).get(arg2)
 							.toString());
-					intent1.putExtra("id", neiyilist[arg2]);
+					intent1.putExtra("id", neiyilist[arg2-1]);
 					System.out.println(arg2);
 					context.startActivity(intent1);
 				}
@@ -298,7 +298,7 @@ public class FclassHomeAdapter extends BaseExpandableListAdapter {
 					intent1.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 					intent1.putExtra("title", childname.get(index).get(arg2)
 							.toString());
-					intent1.putExtra("id", ttlist[arg2]);
+					intent1.putExtra("id", ttlist[arg2-1]);
 					System.out.println(arg2);
 					context.startActivity(intent1);
 				}
@@ -327,7 +327,7 @@ public class FclassHomeAdapter extends BaseExpandableListAdapter {
 					intent1.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 					intent1.putExtra("title", childname.get(index).get(arg2)
 							.toString());
-					intent1.putExtra("id", tosexlist[arg2]);
+					intent1.putExtra("id", tosexlist[arg2-1]);
 					System.out.println(arg2);
 					context.startActivity(intent1);
 				}

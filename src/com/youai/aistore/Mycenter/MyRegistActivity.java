@@ -44,6 +44,7 @@ public class MyRegistActivity extends BaseActivity implements OnClickListener {
 				Intent intent = new Intent(MyRegistActivity.this,
 						MyLoginActivity.class);
 				intent.setFlags(intent.FLAG_ACTIVITY_CLEAR_TOP);
+				intent.putExtra("uerID", regist_ID.getText().toString());//把注册账号，传送到登陆界面
 				startActivity(intent);
 				finish();
 			} else if (msg.what == 2) {

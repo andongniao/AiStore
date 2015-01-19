@@ -39,7 +39,7 @@ public class FclassMoreActivity extends BaseActivity implements
 	private ArrayList<GoodsBean> list;
 	private ListFclassTwo listf, listf1;
 	private ImageView popll_iv, numll_iv, pricell_iv;
-	private int p = 1, n = 1, j = 1;
+	private int p = 1, n = 1, j = 1,x;
 	private Send send;
 	public static boolean isfinish;
 
@@ -109,36 +109,78 @@ public class FclassMoreActivity extends BaseActivity implements
 
 		switch (arg0.getId()) {
 		case R.id.fclass_more_popularity_ll:
+			x = 1 ;
+			
 			if (p % 2 != 0) {
 				popll_iv.setImageResource(R.drawable.order_top);
-
+				
+				if (Util.detect(context)) {
+					myTask = new MyTask();
+					myTask.execute("");
+				} else {
+					Util.ShowToast(context, R.string.net_work_is_error);
+				}
 				p++;
 			} else {
 				popll_iv.setImageResource(R.drawable.order_bottom);
-
+				if (Util.detect(context)) {
+					myTask = new MyTask();
+					myTask.execute("");
+				} else {
+					Util.ShowToast(context, R.string.net_work_is_error);
+				}
 				p++;
 			}
-
+			
 			// order();
+			
 			break;
 
 		case R.id.fclass_more_number_ll:
+			x = 2 ;
 			if (n % 2 != 0) {
 				numll_iv.setImageResource(R.drawable.order_top);
-
+				
+				if (Util.detect(context)) {
+					myTask = new MyTask();
+					myTask.execute("");
+				} else {
+					Util.ShowToast(context, R.string.net_work_is_error);
+				}
 				n++;
 			} else {
 				numll_iv.setImageResource(R.drawable.order_bottom);
+				
+				if (Util.detect(context)) {
+					myTask = new MyTask();
+					myTask.execute("");
+				} else {
+					Util.ShowToast(context, R.string.net_work_is_error);
+				}
 				n++;
 			}
 			break;
 		case R.id.fclass_more_price_ll:
+			x = 3 ;
 			if (j % 2 != 0) {
 				pricell_iv.setImageResource(R.drawable.order_top);
-
+				
+				if (Util.detect(context)) {
+					myTask = new MyTask();
+					myTask.execute("");
+				} else {
+					Util.ShowToast(context, R.string.net_work_is_error);
+				}
 				j++;
 			} else {
 				pricell_iv.setImageResource(R.drawable.order_bottom);
+				
+				if (Util.detect(context)) {
+					myTask = new MyTask();
+					myTask.execute("");
+				} else {
+					Util.ShowToast(context, R.string.net_work_is_error);
+				}
 				j++;
 			}
 			break;
@@ -176,9 +218,45 @@ public class FclassMoreActivity extends BaseActivity implements
 		protected Object doInBackground(Object... params) {
 			/*接收fclasshome,发过来的数据。*/
 			int getid = getIntent().getIntExtra("id", 1);
-			// Send send = new Send(context);
-			listf = send.GetFclassTwo(getid,
-					MyApplication.clickdesc, 1);
+			// Send send = new Send(context);	
+			switch (x) {
+			case 1:
+				if (p % 2 != 0) { //箭头向上，人气正序
+					listf = send.GetFclassTwo(getid,
+							MyApplication.clickdasc, 1);
+
+				} else {		//箭头向上，人气倒序
+					listf = send.GetFclassTwo(getid,
+							MyApplication.clickdesc, 1);
+				}
+				break;
+			case 2:
+				if (n % 2 != 0) {//箭头向上，销量正序
+					listf = send.GetFclassTwo(getid,
+							MyApplication.salesdasc, 1);
+
+				} else {		//箭头向下，销量倒序
+					listf = send.GetFclassTwo(getid,
+							MyApplication.salesdesc, 1);
+				}
+			break;
+			case 3:
+				if (j % 2 != 0) {//箭头向上，价格正序
+					listf = send.GetFclassTwo(getid,
+							MyApplication.priceasc, 1);
+
+				} else {		//箭头向下，价格倒序
+					listf = send.GetFclassTwo(getid,
+							MyApplication.pricedesc, 1);
+				}
+			break;
+			default:
+				listf = send.GetFclassTwo(getid,
+						MyApplication.clickdesc, 1);
+				break;
+			}
+			
+			//listf = send.GetFclassTwo(getid,MyApplication.salesdesc, 1);
 			return listf;
 
 		}

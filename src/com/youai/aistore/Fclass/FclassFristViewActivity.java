@@ -86,7 +86,7 @@ public class FclassFristViewActivity extends BaseActivity implements
 		gridviewlist = new ArrayList<MyGridview>();
 		// 顶部网格
 		toptitlegridview = (MyGridview) findViewById(R.id.fclass_frist_view_topgridview);
-		// 商品网格
+		// 商品网格布局文件
 		addviewll = (LinearLayout) findViewById(R.id.fclass_frist_view_addview_ll);
 
 		if (listindex == 0) {
@@ -215,6 +215,7 @@ public class FclassFristViewActivity extends BaseActivity implements
 					ProductDetailsActivity.class);
 			intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 			intent.putExtra("finishid", 1);
+			
 			intent.putExtra("id", id);
 			startActivity(intent);
 
@@ -278,12 +279,14 @@ public class FclassFristViewActivity extends BaseActivity implements
 			Util.stopProgressDialog();
 			fclasslist = (ListGoodsBean) result;
 			if (fclasslist != null && fclasslist.getCode() == 200) {
-				womenListBean = fclasslist.getList().get(
-						fclasslist.getList().size() - 1);
-				
-				fclassAdapter = new FclassFristViewAdapter(context,
-						womenListBean);
+			//	womenListBean = fclasslist.getList().get(fclasslist.getList().size() - 1);
+
 				for (int i = 0; i < titlelist.length; i++) {
+					/*网格内容要循环添加*/
+					womenListBean = fclasslist.getList().get(i);
+					
+					fclassAdapter = new FclassFristViewAdapter(context,
+							womenListBean);
 					View v = inflater.inflate(
 							R.layout.fclass_frist_view_added_view, null);
 					TextView tv = (TextView) v
@@ -296,8 +299,8 @@ public class FclassFristViewActivity extends BaseActivity implements
 					gridviewlist.add(g);
 					addviewlist.add(v);
 					addviewll.addView(v);
-
 				}
+
 
 			} else {
 				if (fclasslist != null)
