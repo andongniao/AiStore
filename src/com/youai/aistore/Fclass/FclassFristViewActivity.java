@@ -48,7 +48,7 @@ public class FclassFristViewActivity extends BaseActivity implements
 	private ArrayList<MyGridview> gridviewlist;
 	private MyTask myTask;
 	private ListGoodsBean fclasslist;
-	private ArrayList<GoodsBean> womenListBean,menListBean,neiyiListBean, ttListBean, tosexListBean;
+	private ArrayList<GoodsBean> womenListBean,listBean;
 	private FclassFristViewAdapter fclassAdapter;
 	private int type, id, postion;
 	public static boolean isfinish;
@@ -202,15 +202,41 @@ public class FclassFristViewActivity extends BaseActivity implements
 	 * ÏêÏ¸·ÖÀàgridview¼àÌýÆ÷
 	 */
 	class gridviewonclick implements OnItemClickListener {
-
+		private int index;//
+		public gridviewonclick(int index) {
+			this.index = index;
+		}
 		@Override
 		public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
 				long arg3) {
 			// TODO Auto-generated method stub
-			// type = fclasslist.getList().get(0).get(arg2).getType();
-			//id = fclasslist.getList().get(7).get(arg2).getId();
-			id = fclasslist.getList().get(0).get(arg2).getId();
-			// toActivity(type, id);
+
+			switch (index) {
+			case 0:
+				id = fclasslist.getList().get(0).get(arg2).getId();
+				break;
+			case 1:
+				id = fclasslist.getList().get(1).get(arg2).getId();
+				break;
+			case 2:
+				id = fclasslist.getList().get(2).get(arg2).getId();
+				break;
+			case 3:
+				id = fclasslist.getList().get(3).get(arg2).getId();
+				break;
+			case 4:
+				id = fclasslist.getList().get(4).get(arg2).getId();
+				break;
+			case 5:
+				id = fclasslist.getList().get(5).get(arg2).getId();
+				break;
+			case 6:
+				id = fclasslist.getList().get(6).get(arg2).getId();
+				break;
+			default:
+				break;
+			}
+			
 			Intent intent = new Intent(FclassFristViewActivity.this,
 					ProductDetailsActivity.class);
 			intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -295,7 +321,7 @@ public class FclassFristViewActivity extends BaseActivity implements
 					g = (MyGridview) v
 							.findViewById(R.id.fclass_frist_view_addview_gridview);
 					g.setAdapter(fclassAdapter);
-					g.setOnItemClickListener(new gridviewonclick());
+					g.setOnItemClickListener(new gridviewonclick(i));
 					gridviewlist.add(g);
 					addviewlist.add(v);
 					addviewll.addView(v);
