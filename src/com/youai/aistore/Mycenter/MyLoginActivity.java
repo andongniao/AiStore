@@ -80,7 +80,9 @@ public class MyLoginActivity extends BaseActivity implements OnClickListener {
 
 		login_btn = (Button) findViewById(R.id.my_login_btn);
 		login_btn.setOnClickListener(this);
-
+		/*接收注册界面发过来的账号，*/
+		String uerid = getIntent().getStringExtra("uerID");
+		login_ID.setText(uerid);
 	}
 
 	@Override

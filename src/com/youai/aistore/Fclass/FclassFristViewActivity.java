@@ -59,7 +59,7 @@ public class FclassFristViewActivity extends BaseActivity implements
 		setTopLeftBackground(R.drawable.btn_search_navigation_back);
 		setContentXml(R.layout.fclass_frist_view);
 		String title = getIntent().getStringExtra("title");// 添加标题，获取传过来的值，
-		listindex = getIntent().getIntExtra("listindex", 1);
+		listindex = getIntent().getIntExtra("listindex", -1);
 		setTitleTxt(title);
 		init();
 		if (Util.detect(context)) {
@@ -208,8 +208,6 @@ public class FclassFristViewActivity extends BaseActivity implements
 		public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
 				long arg3) {
 			// TODO Auto-generated method stub
-			// type = fclasslist.getList().get(0).get(arg2).getType();
-			//id = fclasslist.getList().get(7).get(arg2).getId();
 			id = fclasslist.getList().get(0).get(arg2).getId();
 			// toActivity(type, id);
 			Intent intent = new Intent(FclassFristViewActivity.this,
@@ -233,19 +231,19 @@ public class FclassFristViewActivity extends BaseActivity implements
 
 		// doInBackground方法内部执行后台任务,不可在此方法内修改UI
 		@Override
-		protected ListGoodsBean doInBackground(Object... params) {
+		protected Object doInBackground(Object... params) {
 			try {
 				Send send = new Send(context);
 				//String time = String.valueOf(System.currentTimeMillis());
 				//fclasslist = send.RequestHome(time);
 				/*通过位置判断，点击“热门”后，要进入哪个分类。*/
-				listindex = getIntent().getIntExtra("listindex", 1);
+//				listindex = getIntent().getIntExtra("listindex", 1);
 				switch (listindex) {
 				case 0:
 					fclasslist = send.GetFclassFrist(MyApplication.woman);
 					break;
 				case 1:
-					fclasslist = send.GetFclassFrist(MyApplication.woman);
+					fclasslist = send.GetFclassFrist(MyApplication.man);
 					break;
 				case 2:
 					fclasslist = send.GetFclassFrist(MyApplication.neiyi);
@@ -256,10 +254,7 @@ public class FclassFristViewActivity extends BaseActivity implements
 				case 5:
 					fclasslist = send.GetFclassFrist(MyApplication.tosex);
 					break;
-				default:
-					break;
 				}
-				
 				return fclasslist;// new String(baos.toByteArray(), "gb2312");
 				// TODO getdata
 			} catch (Exception e) {
@@ -279,12 +274,10 @@ public class FclassFristViewActivity extends BaseActivity implements
 			Util.stopProgressDialog();
 			fclasslist = (ListGoodsBean) result;
 			if (fclasslist != null && fclasslist.getCode() == 200) {
-				ListBean = fclasslist.getList().get(
-						fclasslist.getList().size() - 1);
-				
-				fclassAdapter = new FclassFristViewAdapter(context,
-						ListBean);
 				for (int i = 0; i < titlelist.length; i++) {
+					ListBean = fclasslist.getList().get(i);
+					fclassAdapter = new FclassFristViewAdapter(context,
+							ListBean);
 					View v = inflater.inflate(
 							R.layout.fclass_frist_view_added_view, null);
 					TextView tv = (TextView) v
@@ -297,7 +290,6 @@ public class FclassFristViewActivity extends BaseActivity implements
 					gridviewlist.add(g);
 					addviewlist.add(v);
 					addviewll.addView(v);
-
 				}
 
 			} else {

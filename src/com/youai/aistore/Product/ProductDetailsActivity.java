@@ -77,7 +77,6 @@ IXListViewListener, OnClickListener {
 	private String URL;
 	private MyTask myTask;
 	private int id, showsatau, page;
-	private double maxwidth,oldwidth;
 	private GoodsBean bean;
 	private UserCommentAdapter adapter;
 	private ArrayList<CommentsBean> list;
@@ -314,11 +313,6 @@ IXListViewListener, OnClickListener {
 						tv_title.setText(bean.getTitle());
 						// TODO webview
 						URL = bean.getGood_desc();
-//						webView.loadUrl("");"document.getElementsByTagName('head')[0].appendChild(script);"
-						
-//						webView.loadDataWithBaseURL(URL, js, "text/html", "utf-8", null);
-						
-//						webView.loadUrl(URL);
 						new Thread() {
 							public void run() {
 								Message msg = new Message();
@@ -339,10 +333,8 @@ IXListViewListener, OnClickListener {
 						linearParams.width = linearParams.WRAP_CONTENT;
 						linearParams.height = height;// linearParams.WRAP_CONTENT;
 						webView.setLayoutParams(linearParams);
-						
-						handler.postDelayed(new Runnable() {
-
-							@SuppressWarnings("static-access")
+						handler.post(new Runnable() {
+							
 							@Override
 							public void run() {
 								DisplayMetrics dm = new DisplayMetrics();// 获取当前显示的界面大小
@@ -355,7 +347,7 @@ IXListViewListener, OnClickListener {
 								webView.setLayoutParams(linearParams);
 								
 							}
-						}, 2000);
+						});
 					} else {
 						Util.ShowToast(context, bean.getMsg());
 					}
