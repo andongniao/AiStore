@@ -202,8 +202,6 @@ public class FclassHomeAdapter extends BaseExpandableListAdapter {
 					intent.putExtra("listindex", 0);
 					//System.out.println(arg2);
 					context.startActivity(intent);
-					Util.ShowToast(context,
-							"µã»÷ÁË" + childname.get(index).get(arg2));
 				} else {
 					Intent intent1 = new Intent(context,
 							FclassMoreActivity.class);

@@ -148,6 +148,9 @@ public class AllOrderActivity extends BaseActivity implements
 					Util.ShowToast(context, listbean.getMsg());
 				}
 			} else {
+				if(addtype == 2){
+					page-=1;
+				}
 				Util.ShowToast(context, R.string.net_work_is_error);
 			}
 		}

@@ -33,6 +33,7 @@ import com.youai.aistore.MyApplication;
 import com.youai.aistore.R;
 import com.youai.aistore.Util;
 import com.youai.aistore.Bean.Base;
+import com.youai.aistore.Bean.CommitOrderBean;
 import com.youai.aistore.Bean.ListShopCartBean;
 import com.youai.aistore.Bean.ShopCartBean;
 import com.youai.aistore.NetInterface.Send;
@@ -49,7 +50,7 @@ public class OrderActivity extends BaseActivity implements OnClickListener {
 	@SuppressWarnings("unused")
 	private OrderListview lv;
 	private TextView tv_consignee, tv_address, tv_number, tv_goods_prive,
-			tv_kuaidi_price, tv_final_price, tv_chose_time;
+	tv_kuaidi_price, tv_final_price, tv_chose_time;
 	private LinearLayout chose_time_ll;
 	private Button commitbtn;
 	private RadioButton zhifu_rbt, huodao_rbt;
@@ -62,15 +63,17 @@ public class OrderActivity extends BaseActivity implements OnClickListener {
 	private int type, postion, time;
 	private ListShopCartBean listbean;
 	private MyTask myTask;
-	private Base bean;
+	private CommitOrderBean bean;
 	private double kuaidi, price, final_price;
 	private Handler mHandler;
 	private static final int SDK_PAY_FLAG = 1;
 	private static final int SDK_CHECK_FLAG = 2;
-	public static final String PARTNER = "";// 合作者身份ID
-	public static final String SELLER = "";// 卖家支付宝账号
-	public static final String RSA_PRIVATE = "151321";
-	public static final String RSA_PUBLIC = "";
+	private final String PARTNER = MyApplication.PARTNER;// 合作者身份ID
+	private final String SELLER = MyApplication.SELLER;// 卖家支付宝账号
+	private final String RSA_PRIVATE = MyApplication.RSA_PRIVATE;
+	private final String RSA_PUBLIC = MyApplication.RSA_PUBLIC;
+	private final String Notify_Url = MyApplication.Notify_Url;// 
+	
 
 	@Override
 	protected void onCreate(Bundle arg0) {
@@ -161,7 +164,7 @@ public class OrderActivity extends BaseActivity implements OnClickListener {
 		final_price = price+kuaidi;
 		tv_kuaidi_price.setText("￥"+kuaidi+"元");
 		tv_final_price.setText("￥"+final_price+"元");
-		
+
 	}
 
 	@Override
@@ -230,10 +233,10 @@ public class OrderActivity extends BaseActivity implements OnClickListener {
 		@Override  
 		protected Object doInBackground(Object... params) {  
 			try {  
-					Send s = new Send(context);
-					String userid = MyApplication.UserId;
-					bean = s.CommitOrder(userid, ""+time, ""+type, ""+kuaidi);
-					return bean;
+				Send s = new Send(context);
+				String userid = MyApplication.UserId;
+				bean = s.CommitOrder(userid, ""+time, ""+type, ""+kuaidi);
+				return bean;
 			} catch (Exception e) {  
 				e.printStackTrace();
 			}
@@ -250,7 +253,7 @@ public class OrderActivity extends BaseActivity implements OnClickListener {
 		@Override
 		protected void onPostExecute(Object result) {
 			Util.stopProgressDialog();
-			bean = (Base) result;
+			bean = (CommitOrderBean) result;
 			if (bean != null) {
 				if (bean.getCode() == 200) {
 					ShopCartActivity.shopcartchaneged = true;
@@ -258,11 +261,11 @@ public class OrderActivity extends BaseActivity implements OnClickListener {
 						// Fiap fiap = new Fiap(OrderActivity.this);
 						// // 调用支付方法，并传入支付金额
 						// fiap.pay(0.01,"测试商品","测试商品信息","测试订单号");
-						// pay("0.01","测试商品","测试商品信息");
+						String price = String.valueOf(final_price);
+						String goodsinfo = listbean.getList().get(0).getGoods_name()+"等";
+						 pay("0.01","订单"+bean.getOrder_sn(),goodsinfo,bean.getOrder_sn());
 						//TODO
 						ExampleActivity.setCurrentTab(2);
-						ConsigneeInfoActivity.isfinish = true;
-						finish();
 					} else {
 						Util.ShowToast(context, R.string.commit_order_for_huodao);
 						ExampleActivity.setCurrentTab(2);
@@ -289,10 +292,10 @@ public class OrderActivity extends BaseActivity implements OnClickListener {
 	 * call alipay sdk pay. 调用SDK支付
 	 * 
 	 */
-	public void pay(String price, String goodname, String gooddes) {
-		String orderInfo = getOrderInfo(goodname, gooddes, price);
-		String sign = "lBBK%2F0w5LOajrMrji7DUgEqNjIhQbidR13GovA5r3TgIbNqv231yC1NksLdw%2Ba3JnfHXoXuet6XNNHtn7VE%2BeCoRO1O%2BR1KugLrQEZMtG5jmJIe2pbjm%2F3kb%2FuGkpG%2BwYQYI51%2BhA3YBbvZHVQBYveBqK%2Bh8mUyb7GM1HxWs9k4%3D";
-		// = sign(orderInfo);
+	public void pay(String price, String goodname, String gooddes,String orderid) {
+		String orderInfo = getOrderInfo(goodname, gooddes, price,orderid);
+//		String sign = "lBBK%2F0w5LOajrMrji7DUgEqNjIhQbidR13GovA5r3TgIbNqv231yC1NksLdw%2Ba3JnfHXoXuet6XNNHtn7VE%2BeCoRO1O%2BR1KugLrQEZMtG5jmJIe2pbjm%2F3kb%2FuGkpG%2BwYQYI51%2BhA3YBbvZHVQBYveBqK%2Bh8mUyb7GM1HxWs9k4%3D";
+		String sign = sign(orderInfo);
 		try {
 			// 仅需对sign 做URL编码
 			sign = URLEncoder.encode(sign, "UTF-8");
@@ -334,38 +337,28 @@ public class OrderActivity extends BaseActivity implements OnClickListener {
 	 * create the order info. 创建订单信息
 	 * 
 	 */
-	public String getOrderInfo(String subject, String body, String price) {
+	public String getOrderInfo(String subject, String body, String price,String orderid) {
 		// 合作者身份ID
 		String orderInfo = "partner=" + "\"" + PARTNER + "\"";
-
 		// 卖家支付宝账号
 		orderInfo += "&seller_id=" + "\"" + SELLER + "\"";
-
 		// 商户网站唯一订单号
-		orderInfo += "&out_trade_no=" + "\"" + getOutTradeNo() + "\"";
-
+		orderInfo += "&out_trade_no=" + "\"" + orderid + "\"";
 		// 商品名称
 		orderInfo += "&subject=" + "\"" + subject + "\"";
-
 		// 商品详情
 		orderInfo += "&body=" + "\"" + body + "\"";
-
 		// 商品金额
 		orderInfo += "&total_fee=" + "\"" + price + "\"";
-
 		// 服务器异步通知页面路径
-		orderInfo += "&notify_url=" + "\"" + "http://notify.msp.hk/notify.htm"
+		orderInfo += "&notify_url=" + "\"" + Notify_Url
 				+ "\"";
-
 		// 接口名称， 固定值
 		orderInfo += "&service=\"mobile.securitypay.pay\"";
-
 		// 支付类型， 固定值
 		orderInfo += "&payment_type=\"1\"";
-
 		// 参数编码， 固定值
 		orderInfo += "&_input_charset=\"utf-8\"";
-
 		// 设置未付款交易的超时时间
 		// 默认30分钟，一旦超时，该笔交易就会自动被关闭。
 		// 取值范围：1m～15d。
@@ -382,21 +375,6 @@ public class OrderActivity extends BaseActivity implements OnClickListener {
 		return orderInfo;
 	}
 
-	/**
-	 * get the out_trade_no for an order. 获取外部订单号
-	 * 
-	 */
-	public String getOutTradeNo() {
-		SimpleDateFormat format = new SimpleDateFormat("MMddHHmmss",
-				Locale.getDefault());
-		Date date = new Date();
-		String key = format.format(date);
-
-		Random r = new Random();
-		key = key + r.nextInt();
-		key = key.substring(0, 15);
-		return key;
-	}
 
 	/**
 	 * sign the order info. 对订单信息进行签名
@@ -413,7 +391,7 @@ public class OrderActivity extends BaseActivity implements OnClickListener {
 	 * 查询终端设备是否存在支付宝认证账户
 	 * 
 	 */
-	public void check(View v) {
+	public void check() {
 		Runnable checkRunnable = new Runnable() {
 
 			@Override

@@ -3,6 +3,8 @@
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
     android:background="@drawable/bg"
+    android:padding="3dp"
+    android:gravity="center"
     android:orientation="vertical" >
 
     <!-- 女性用品，girdview，自定义每个网格的格式,3行 -->
@@ -12,10 +14,10 @@
 
         <ImageView
             android:id="@+id/fclass_frist_view_addview_item_iv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
             android:layout_margin="5dip"
-            android:src="@drawable/wumen_av1" />
+            />
 
 
         <!-- 第二行：价格文字+❤图片+评论文字 -->
@@ -65,7 +67,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="5dip"
             android:ellipsize="end"
-            android:gravity="center"
+            android:gravity="center_vertical"
             android:padding="3dp"
             android:singleLine="true"
             android:text="@string/base_test"

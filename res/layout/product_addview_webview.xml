@@ -3,11 +3,13 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:background="@color/bg_color"
+    android:gravity="center"
     android:orientation="vertical" >
 
 	<WebView 
 	    android:id="@+id/product_webview"
 	    android:layout_width="fill_parent"
 	    android:layout_height="wrap_content"
+	    android:layout_gravity="center"
 	    />
 </LinearLayout>
