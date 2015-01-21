@@ -104,12 +104,12 @@ public class FclassMoreActivity extends BaseActivity implements
 		public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
 				long arg3) {
 			// TODO Auto-generated method stub
-			if(0<arg2 && arg2<listf.getList().size()+1){
+			if(0<arg2 && arg2<list.size()+1){
 			Intent intent = new Intent(FclassMoreActivity.this,
 					ProductDetailsActivity.class);
 			intent.setFlags(intent.FLAG_ACTIVITY_CLEAR_TOP);
 			intent.putExtra("finishid", 2);
-			intent.putExtra("id", listf.getList().get(arg2 - 1).getId());
+			intent.putExtra("id", list.get(arg2 - 1).getId());
 			startActivity(intent);
 			}
 		}
