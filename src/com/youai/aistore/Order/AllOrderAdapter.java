@@ -11,6 +11,7 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.youai.aistore.R;
@@ -60,7 +61,7 @@ public class AllOrderAdapter extends BaseAdapter {
 		if (v == null) {
 			myitem = new MyItem();
 			v = inflater.inflate(R.layout.order_all_item, null);
-			myitem.btn_detail = (Button) v
+			myitem.btn_detail = (ImageButton) v
 					.findViewById(R.id.all_order_item_detail_btn);
 			myitem.tv_number = (TextView) v
 					.findViewById(R.id.all_order_item_number_tv);
@@ -98,7 +99,7 @@ public class AllOrderAdapter extends BaseAdapter {
 
 	class MyItem {
 		TextView tv_number, tv_time, tv_type, tv_statu;
-		Button btn_detail;
+		ImageButton btn_detail;
 
 	}
 }

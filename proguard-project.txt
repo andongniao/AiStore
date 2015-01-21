@@ -27,14 +27,22 @@ dontwarn
 -verbose
 -optimizations !code/simplification/arithmetic,!field/*,!class/merging/*    
 
--libraryjars D:\Util\workspace\AiStore\libs\alipaysdk.jar
--libraryjars D:\Util\workspace\AiStore\libs\alipaysecsdk.jar
--libraryjars D:\Util\workspace\AiStore\libs\alipayutdid.jar
--libraryjars D:\Util\workspace\AiStore\libs\android-support-v4.jar
--libraryjars D:\Util\workspace\AiStore\libs\gson-1.7.1.jar
--libraryjars D:\Util\workspace\AiStore\libs\universal-image-loader-1.9.2-SNAPSHOT-with-sources.jar
+-libraryjars libs/alipaysdk.jar
+-libraryjars libs/alipaysecsdk.jar
+-libraryjars libs/alipayutdid.jar
+-libraryjars libs/android-support-v4.jar
+-libraryjars libs/gson-1.7.1.jar
+-libraryjars libs/universal-image-loader-1.9.2-SNAPSHOT-with-sources.jar
 
 -keepclassmembers class * {
    public <init>(org.json.JSONObject);
 }
-
+-keep class com.alipay.android.app.IAlixPay{*;}
+-keep class com.alipay.android.app.IAlixPay$Stub{*;}
+-keep class com.alipay.android.app.IRemoteServiceCallback{*;}
+-keep class com.alipay.android.app.IRemoteServiceCallback$Stub{*;}
+-keep class com.alipay.sdk.app.PayTask{ public *;}
+-keep class com.alipay.sdk.auth.AlipaySDK{ public *;}
+-keep class com.alipay.sdk.auth.APAuthInfo{ public *;}
+-keep class com.alipay.mobilesecuritysdk.*
+-keep class com.ut.*

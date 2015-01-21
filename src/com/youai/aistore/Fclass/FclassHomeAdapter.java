@@ -203,19 +203,15 @@ public class FclassHomeAdapter extends BaseExpandableListAdapter {
 					intent.putExtra("listindex", 0);
 					System.out.println(arg2);
 					context.startActivity(intent);
-					Util.ShowToast(context,
-							"点击了" + childname.get(index).get(arg2));
 				} else {
 					Intent intent1 = new Intent(context,
 							FclassMoreActivity.class);
 					intent1.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 					intent1.putExtra("title", childname.get(index).get(arg2)
 							.toString());
-					intent1.putExtra("id", womenlist[arg2]);
+					intent1.putExtra("id", womenlist[arg2-1]);
 					System.out.println(arg2);
 					context.startActivity(intent1);
-					// Util.ShowToast(context, "点击了" +
-					// childname.get(index).get(arg2));
 				}
 			}
 			/*
@@ -238,7 +234,7 @@ public class FclassHomeAdapter extends BaseExpandableListAdapter {
 					intent1.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 					intent1.putExtra("title", childname.get(index).get(arg2)
 							.toString());
-					intent1.putExtra("id", menlist[arg2]);
+					intent1.putExtra("id", menlist[arg2-1]);
 					System.out.println(arg2);
 					context.startActivity(intent1);
 				}
@@ -269,7 +265,7 @@ public class FclassHomeAdapter extends BaseExpandableListAdapter {
 					intent1.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 					intent1.putExtra("title", childname.get(index).get(arg2)
 							.toString());
-					intent1.putExtra("id", neiyilist[arg2]);
+					intent1.putExtra("id", neiyilist[arg2-1]);
 					System.out.println(arg2);
 					context.startActivity(intent1);
 				}
@@ -298,7 +294,7 @@ public class FclassHomeAdapter extends BaseExpandableListAdapter {
 					intent1.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 					intent1.putExtra("title", childname.get(index).get(arg2)
 							.toString());
-					intent1.putExtra("id", ttlist[arg2]);
+					intent1.putExtra("id", ttlist[arg2-1]);
 					System.out.println(arg2);
 					context.startActivity(intent1);
 				}
@@ -327,7 +323,7 @@ public class FclassHomeAdapter extends BaseExpandableListAdapter {
 					intent1.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 					intent1.putExtra("title", childname.get(index).get(arg2)
 							.toString());
-					intent1.putExtra("id", tosexlist[arg2]);
+					intent1.putExtra("id", tosexlist[arg2-1]);
 					System.out.println(arg2);
 					context.startActivity(intent1);
 				}

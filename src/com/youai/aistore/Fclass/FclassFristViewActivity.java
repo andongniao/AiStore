@@ -48,7 +48,7 @@ public class FclassFristViewActivity extends BaseActivity implements
 	private ArrayList<MyGridview> gridviewlist;
 	private MyTask myTask;
 	private ListGoodsBean fclasslist;
-	private ArrayList<GoodsBean> womenListBean,menListBean,neiyiListBean, ttListBean, tosexListBean;
+	private ArrayList<GoodsBean> ListBean;
 	private FclassFristViewAdapter fclassAdapter;
 	private int type, id, postion;
 	public static boolean isfinish;
@@ -56,6 +56,7 @@ public class FclassFristViewActivity extends BaseActivity implements
 	@Override
 	protected void onCreate(Bundle arg0) {
 		super.onCreate(arg0);
+		setTopLeftBackground(R.drawable.btn_search_navigation_back);
 		setContentXml(R.layout.fclass_frist_view);
 		String title = getIntent().getStringExtra("title");// 添加标题，获取传过来的值，
 		listindex = getIntent().getIntExtra("listindex", 1);
@@ -278,11 +279,11 @@ public class FclassFristViewActivity extends BaseActivity implements
 			Util.stopProgressDialog();
 			fclasslist = (ListGoodsBean) result;
 			if (fclasslist != null && fclasslist.getCode() == 200) {
-				womenListBean = fclasslist.getList().get(
+				ListBean = fclasslist.getList().get(
 						fclasslist.getList().size() - 1);
 				
 				fclassAdapter = new FclassFristViewAdapter(context,
-						womenListBean);
+						ListBean);
 				for (int i = 0; i < titlelist.length; i++) {
 					View v = inflater.inflate(
 							R.layout.fclass_frist_view_added_view, null);

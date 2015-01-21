@@ -15,6 +15,7 @@ import com.youai.aistore.R;
 import com.youai.aistore.Util;
 import com.youai.aistore.Bean.Base;
 import com.youai.aistore.Bean.CommentsBean;
+import com.youai.aistore.Bean.CommitOrderBean;
 import com.youai.aistore.Bean.ConsigneeBean;
 import com.youai.aistore.Bean.GoodsBean;
 import com.youai.aistore.Bean.ListCommentsBean;
@@ -614,8 +615,8 @@ public class Send {
 	 * @param password
 	 * @return
 	 */
-	public Base CommitOrder(String userid, String time, String type, String fee) {
-		Base bean = new Base();
+	public CommitOrderBean CommitOrder(String userid, String time, String type, String fee) {
+		CommitOrderBean bean = new CommitOrderBean();
 		String url = ServiceUrl.save_order_info + userid
 				+ ServiceUrl.save_order_info_time + time
 				+ ServiceUrl.save_order_info_type + type
@@ -627,6 +628,10 @@ public class Send {
 			try {
 				object = new JSONObject(jsonStr);
 				if (object.get("code") != null && object.getInt("code") == 200) {
+					JSONObject data = object.getJSONObject("data");
+					bean.setOrder_sn(data.getString("order_sn"));
+					
+					
 					bean.setCode(200);
 					bean.setMsg(object.getString("message"));
 					return bean;

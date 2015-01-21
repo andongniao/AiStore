@@ -1,6 +1,13 @@
 package com.youai.aistore.Product;
 
+import java.io.InputStream;
 import java.util.ArrayList;
+
+import org.apache.http.HttpResponse;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.protocol.HTTP;
+import org.apache.http.util.ByteArrayBuffer;
 
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
@@ -12,9 +19,12 @@ import android.graphics.Bitmap;
 import android.graphics.Paint;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.os.Build.VERSION;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Message;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -29,9 +39,10 @@ import android.widget.TextView;
 
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.youai.aistore.BaseActivity;
+import com.youai.aistore.CustomProgressDialog;
+import com.youai.aistore.ExampleActivity;
 import com.youai.aistore.ImageCycleView;
 import com.youai.aistore.ImageCycleView.ImageCycleViewListener;
-import com.youai.aistore.ExampleActivity;
 import com.youai.aistore.MyApplication;
 import com.youai.aistore.R;
 import com.youai.aistore.Util;
@@ -53,28 +64,33 @@ import com.youai.aistore.xlistview.XListView.IXListViewListener;
  * 
  */
 public class ProductDetailsActivity extends BaseActivity implements
-		IXListViewListener, OnClickListener {
+IXListViewListener, OnClickListener {
 	private ImageCycleView topshowic;
 	private WebView webView;
 	private XListView xListView;
 	private View view_webview, view_listview;
 	private TextView tv_shop_price, tv_market_price, tv_title, tv_click_num,
-			tv_image_text_tv, tv_user_comment;
+	tv_image_text_tv, tv_user_comment;
 	private LinearLayout addviewll, call_ll, sms_ll;
 	private LayoutInflater inflater;
 	private Context context;
 	private String URL;
 	private MyTask myTask;
 	private int id, showsatau, page;
+	private double maxwidth,oldwidth;
 	private GoodsBean bean;
 	private UserCommentAdapter adapter;
 	private ArrayList<CommentsBean> list;
-	private Handler handler;
+	private Handler handler,myhandler;
 	private ListCommentsBean listcombean, nextpagelist;
-	private Dialog alertDialog;
+	private Dialog alertDialog,progressDialog;
 	private Button addshopcartbtn, gopaynowbtn;
 	private Base beanresult;
 	private boolean stat;
+	private String WEB_STYLE = "<style>* {font-size:16px;line-height:20px;} p {color:#333;} a {color:#3E62A6;} img {max-width:100%;} "
+			+ "img.alignleft {float:left;max-width:120px;margin:0 10px 5px 0;border:1px solid #ccc;background:#fff;padding:2px;} "
+			+ "pre {font-size:9pt;line-height:12pt;font-family:Courier New,Arial;border:1px solid #ddd;border-left:5px solid #6CE26C;background:#f6f6f6;padding:5px;} "
+			+ "a.tag {font-size:15px;text-decoration:none;background-color:#bbd6f3;border-bottom:2px solid #3E6D8E;border-right:2px solid #7F9FB6;color:#284a7b;margin:2px 2px 2px 0;padding:2px 4px;white-space:nowrap;}</style>";
 
 	@Override
 	protected void onCreate(Bundle arg0) {
@@ -149,18 +165,35 @@ public class ProductDetailsActivity extends BaseActivity implements
 		tv_user_comment.setTextColor(getResources().getColor(R.color.black));
 
 		// 自适应屏幕
-		webView.getSettings().setLayoutAlgorithm(LayoutAlgorithm.SINGLE_COLUMN);
-		webView.getSettings().setLoadWithOverviewMode(true);
+		webView	.getSettings().setSupportZoom(false);
+		webView.getSettings().setDefaultFontSize(15);
+		webView.getSettings().setBuiltInZoomControls(false);
+//		webView.getSettings().setLayoutAlgorithm(
+//				LayoutAlgorithm.SINGLE_COLUMN);
+		webView.getSettings().setAllowFileAccess(true); 
 		webView.setWebViewClient(new MyWebViewClient());
-
+		myhandler = new Handler(){
+			@Override
+			public void handleMessage(Message msg) {
+				super.handleMessage(msg);
+				String str = (String) msg.obj;
+				str = str
+						.replaceAll("(<img[^>]*?)\\s+width\\s*=\\s*\\S+", "$1");
+				str = str.replaceAll("(<img[^>]*?)\\s+height\\s*=\\s*\\S+",
+						"$1");
+				str += WEB_STYLE;
+				webView.loadDataWithBaseURL(null, str, "text/html", "utf-8",
+						null);
+			}
+		};
 	}
+
 
 	class MyWebViewClient extends WebViewClient {
 		// 重写父类方法，让新打开的网页在当前的WebView中显示
 		@Override
 		public boolean shouldOverrideUrlLoading(WebView view, String url) {
-			view.loadUrl(url);
-			return true;
+			return shouldOverrideUrlLoading(view, url);
 		}
 
 		// 网页开始加载
@@ -169,9 +202,7 @@ public class ProductDetailsActivity extends BaseActivity implements
 
 			super.onPageStarted(view, url, favicon);
 		}
-
 		// 网页加载完毕
-
 		@Override
 		public void onPageFinished(WebView view, String url) {
 			super.onPageFinished(view, url);
@@ -223,9 +254,8 @@ public class ProductDetailsActivity extends BaseActivity implements
 		// onPreExecute方法用于在执行后台任务前做一些UI操作
 		@Override
 		protected void onPreExecute() {
-			// textView.setText("loading...");
 			if (getstatu == 1 || getstatu == 2) {
-				Util.startProgressDialog(context);
+				startProgressDialog(context);
 			}
 		}
 
@@ -269,7 +299,7 @@ public class ProductDetailsActivity extends BaseActivity implements
 		// onPostExecute方法用于在执行完后台任务后更新UI,显示结果
 		@Override
 		protected void onPostExecute(Object result) {
-			Util.stopProgressDialog();
+			stopProgressDialog();
 			if (getstatu == 1) {
 				bean = (GoodsBean) result;
 				if (bean != null) {
@@ -282,16 +312,34 @@ public class ProductDetailsActivity extends BaseActivity implements
 								+ "元");
 						tv_click_num.setText(bean.getClick());
 						tv_title.setText(bean.getTitle());
-						// webview
+						// TODO webview
 						URL = bean.getGood_desc();
-						webView.loadUrl(URL);
+//						webView.loadUrl("");"document.getElementsByTagName('head')[0].appendChild(script);"
+						
+//						webView.loadDataWithBaseURL(URL, js, "text/html", "utf-8", null);
+						
+//						webView.loadUrl(URL);
+						new Thread() {
+							public void run() {
+								Message msg = new Message();
+								String str = doGetConnect(URL);
+								if (str != null && !str.equals("")) {
+									msg.what = 1;
+									msg.obj = str;
+								}
+								myhandler.sendMessage(msg);
+							};
+						}.start();
+						
 						DisplayMetrics dm = new DisplayMetrics();// 获取当前显示的界面大小
 						getWindowManager().getDefaultDisplay().getMetrics(dm);
 						int height = dm.heightPixels;// 获取当前界面的高度
 						LinearLayout.LayoutParams linearParams = (LinearLayout.LayoutParams) webView
 								.getLayoutParams();
+						linearParams.width = linearParams.WRAP_CONTENT;
 						linearParams.height = height;// linearParams.WRAP_CONTENT;
 						webView.setLayoutParams(linearParams);
+						
 						handler.postDelayed(new Runnable() {
 
 							@SuppressWarnings("static-access")
@@ -299,11 +347,13 @@ public class ProductDetailsActivity extends BaseActivity implements
 							public void run() {
 								DisplayMetrics dm = new DisplayMetrics();// 获取当前显示的界面大小
 								getWindowManager().getDefaultDisplay()
-										.getMetrics(dm);
+								.getMetrics(dm);
 								LinearLayout.LayoutParams linearParams = (LinearLayout.LayoutParams) webView
 										.getLayoutParams();
+								linearParams.width = linearParams.WRAP_CONTENT;
 								linearParams.height = linearParams.WRAP_CONTENT;
 								webView.setLayoutParams(linearParams);
+								
 							}
 						}, 2000);
 					} else {
@@ -362,6 +412,7 @@ public class ProductDetailsActivity extends BaseActivity implements
 						Util.ShowToast(context, listcombean.getMsg());
 					}
 				} else {
+					page -=1;
 					Util.ShowToast(context, R.string.net_work_is_error);
 				}
 			} else if (getstatu == 4) {
@@ -392,13 +443,12 @@ public class ProductDetailsActivity extends BaseActivity implements
 					Util.ShowToast(context, R.string.net_work_is_error);
 				}
 			}
-
 		}
 
 		// onCancelled方法用于在取消执行中的任务时更改UI
 		@Override
 		protected void onCancelled() {
-			Util.stopProgressDialog();
+			//			stopProgressDialog();
 		}
 	}
 
@@ -452,7 +502,6 @@ public class ProductDetailsActivity extends BaseActivity implements
 			break;
 
 		}
-
 	}
 
 	private void onLoad() {
@@ -471,38 +520,38 @@ public class ProductDetailsActivity extends BaseActivity implements
 
 		}
 		alertDialog = new AlertDialog.Builder(this)
-				.setTitle(title)
-				.setIcon(null)
-				.setPositiveButton(R.string.product_cancle,
-						new DialogInterface.OnClickListener() {
+		.setTitle(title)
+		.setIcon(null)
+		.setPositiveButton(R.string.product_cancle,
+				new DialogInterface.OnClickListener() {
 
-							@Override
-							public void onClick(DialogInterface dialog,
-									int which) {
-							}
-						})
-				.setNegativeButton(index,
-						new DialogInterface.OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialog,
+					int which) {
+			}
+		})
+		.setNegativeButton(index,
+				new DialogInterface.OnClickListener() {
 
-							@Override
-							public void onClick(DialogInterface dialog,
-									int which) {
-								if (statu == 1) {
-									Intent phoneIntent = new Intent(
-											"android.intent.action.CALL",
-											Uri.parse("tel:"
-													+ MyApplication.callnumber));
-									startActivity(phoneIntent);
-								} else {
-									Uri uri = Uri.parse("smsto:"
-											+ MyApplication.smsnumber);
-									Intent ii = new Intent(
-											Intent.ACTION_SENDTO, uri);
-									ii.putExtra("sms_body", "");
-									startActivity(ii);
-								}
-							}
-						}).create();
+			@Override
+			public void onClick(DialogInterface dialog,
+					int which) {
+				if (statu == 1) {
+					Intent phoneIntent = new Intent(
+							"android.intent.action.CALL",
+							Uri.parse("tel:"
+									+ MyApplication.callnumber));
+					startActivity(phoneIntent);
+				} else {
+					Uri uri = Uri.parse("smsto:"
+							+ MyApplication.smsnumber);
+					Intent ii = new Intent(
+							Intent.ACTION_SENDTO, uri);
+					ii.putExtra("sms_body", "");
+					startActivity(ii);
+				}
+			}
+		}).create();
 		alertDialog.show();
 	}
 
@@ -519,4 +568,60 @@ public class ProductDetailsActivity extends BaseActivity implements
 		return super.onKeyDown(keyCode, event);
 	}
 
+
+	/**
+	 * 启动Loding...
+	 * 
+	 * @param context
+	 */
+	public  void startProgressDialog(Context context) {
+		if (progressDialog == null) {
+			progressDialog = CustomProgressDialog.createDialog(context);
+		}
+
+		progressDialog.show();
+	}
+
+	/**
+	 * 关闭Loding...
+	 */
+	public  void stopProgressDialog() {
+		if (progressDialog != null && progressDialog.isShowing()) {
+			progressDialog.dismiss();
+			progressDialog = null;
+		}
+	}
+	final class InJavaScriptLocalObj {  
+		public void showSource(String html) {  
+			System.out.println("====>iamge="+html);  
+		Util.ShowToast(context, html);
+		}  
+	}  
+	private String doGetConnect(String url) {
+		String result = "";
+		InputStream is = null;
+		HttpGet httpRequest = new HttpGet(url);
+		try {
+			HttpResponse httpResponse = new DefaultHttpClient()
+					.execute(httpRequest);
+			if (httpResponse.getStatusLine().getStatusCode() == 200) { // 正确
+
+				is = httpResponse.getEntity().getContent();
+				byte[] data = new byte[1024];
+				int n = -1;
+				ByteArrayBuffer buf = new ByteArrayBuffer(10 * 1024);
+				while ((n = is.read(data)) != -1)
+					buf.append(data, 0, n);
+				result = new String(buf.toByteArray(), HTTP.UTF_8);
+				Log.v("result==", result);
+				is.close();
+				return result;
+			} else {
+				Log.v("tip==", "error response code");
+			}
+		} catch (Exception e) {
+			Log.e("error==", "" + e.getMessage());
+		}
+		return null;
+	}
 }
