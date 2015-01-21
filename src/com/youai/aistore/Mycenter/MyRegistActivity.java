@@ -1,6 +1,5 @@
 package com.youai.aistore.Mycenter;
 
-import org.json.JSONObject;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -8,7 +7,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -17,11 +15,8 @@ import android.widget.EditText;
 import com.youai.aistore.BaseActivity;
 import com.youai.aistore.R;
 import com.youai.aistore.Util;
-import com.youai.aistore.Bean.Base;
 import com.youai.aistore.Bean.UserBean;
-import com.youai.aistore.NetInterface.GetHttp;
 import com.youai.aistore.NetInterface.Send;
-import com.youai.aistore.NetInterface.ServiceUrl;
 
 /**
  * 注册界面
@@ -40,10 +35,11 @@ public class MyRegistActivity extends BaseActivity implements OnClickListener {
 		public void handleMessage(Message msg) {
 			super.handleMessage(msg);
 			if (msg.what == 1) {
+				//提示注册成功
 				Util.ShowToast(MyRegistActivity.this, R.string.regist_succeed);
 				Intent intent = new Intent(MyRegistActivity.this,
 						MyLoginActivity.class);
-				intent.setFlags(intent.FLAG_ACTIVITY_CLEAR_TOP);
+				intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 				intent.putExtra("uerID", regist_ID.getText().toString());//把注册账号，传送到登陆界面
 				startActivity(intent);
 				finish();

@@ -4,12 +4,8 @@ import java.util.ArrayList;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.res.Resources;
-import android.content.res.TypedArray;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.provider.Settings.System;
-import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
@@ -29,8 +25,7 @@ import com.youai.aistore.Product.ProductDetailsActivity;
 import com.youai.aistore.xlistview.XListView;
 import com.youai.aistore.xlistview.XListView.IXListViewListener;
 
-public class FclassMoreActivity extends BaseActivity implements
-		IXListViewListener, OnClickListener {
+public class FclassMoreActivity extends BaseActivity implements IXListViewListener, OnClickListener {
 	private LinearLayout popll, numll, pricell;
 	private XListView listView;
 	private FclassMoreAdapter adapter;
@@ -87,7 +82,9 @@ public class FclassMoreActivity extends BaseActivity implements
 		listView.setOnItemClickListener(new mylistener());
 
 	}
-
+	/*
+	 * 列表数据的点击事件
+	 */
 	class mylistener implements OnItemClickListener {
 
 		@Override
@@ -96,7 +93,7 @@ public class FclassMoreActivity extends BaseActivity implements
 			// TODO Auto-generated method stub
 			Intent intent = new Intent(FclassMoreActivity.this,
 					ProductDetailsActivity.class);
-			intent.setFlags(intent.FLAG_ACTIVITY_CLEAR_TOP);
+			intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 			intent.putExtra("finishid", 2);
 			intent.putExtra("id", listf.getList().get(arg2 - 1).getId());
 			startActivity(intent);
@@ -216,7 +213,10 @@ public class FclassMoreActivity extends BaseActivity implements
 		// doInBackground方法内部执行后台任务,不可在此方法内修改UI
 		@Override
 		protected Object doInBackground(Object... params) {
-			/*接收fclasshome,发过来的数据。*/
+			/*
+			 * 接收fclassHome,发过来的ID数据。
+			 * 通过ID，读取小分类信息。
+			 */
 			int getid = getIntent().getIntExtra("id", 1);
 			// Send send = new Send(context);	
 			switch (x) {
