@@ -59,7 +59,7 @@ public class FclassFristViewActivity extends BaseActivity implements
 		setTopLeftBackground(R.drawable.btn_search_navigation_back);
 		setContentXml(R.layout.fclass_frist_view);
 		String title = getIntent().getStringExtra("title");// 添加标题，获取传过来的值，
-		listindex = getIntent().getIntExtra("listindex", -1);
+		listindex = getIntent().getIntExtra("listindex", -1);//接收传过来的ID，辨别点的那个组。
 		setTitleTxt(title);
 		init();
 		if (Util.detect(context)) {
@@ -203,17 +203,45 @@ public class FclassFristViewActivity extends BaseActivity implements
 	 * 详细分类gridview监听器
 	 */
 	class gridviewonclick implements OnItemClickListener {
-
+		private int index;//判断点击的是那个gridview，
+		public gridviewonclick(int index) {
+			this.index = index;
+		}
 		@Override
 		public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
 				long arg3) {
 			// TODO Auto-generated method stub
-			id = fclasslist.getList().get(0).get(arg2).getId();
-			// toActivity(type, id);
+			//先判断，是那个gridview，然后点击的那个具体商品，获取它的ID
+			switch (index) {
+			case 0:
+				id = fclasslist.getList().get(0).get(arg2).getId();
+				break;
+			case 1:
+				id = fclasslist.getList().get(1).get(arg2).getId();
+				break;
+			case 2:
+				id = fclasslist.getList().get(2).get(arg2).getId();
+				break;
+			case 3:
+				id = fclasslist.getList().get(3).get(arg2).getId();
+				break;
+			case 4:
+				id = fclasslist.getList().get(4).get(arg2).getId();
+				break;
+			case 5:
+				id = fclasslist.getList().get(5).get(arg2).getId();
+				break;
+			case 6:
+				id = fclasslist.getList().get(6).get(arg2).getId();
+				break;
+			default:
+				break;
+			}
+			
 			Intent intent = new Intent(FclassFristViewActivity.this,
 					ProductDetailsActivity.class);
 			intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-			intent.putExtra("finishid", 1);
+			intent.putExtra("finishid", 1);			
 			intent.putExtra("id", id);
 			startActivity(intent);
 
@@ -234,10 +262,10 @@ public class FclassFristViewActivity extends BaseActivity implements
 		protected Object doInBackground(Object... params) {
 			try {
 				Send send = new Send(context);
-				//String time = String.valueOf(System.currentTimeMillis());
-				//fclasslist = send.RequestHome(time);
-				/*通过位置判断，点击“热门”后，要进入哪个分类。*/
-//				listindex = getIntent().getIntExtra("listindex", 1);
+				// String time = String.valueOf(System.currentTimeMillis());
+				// fclasslist = send.RequestHome(time);
+				/* 通过位置判断，点击“热门”后，要进入哪个分类。 */
+				listindex = getIntent().getIntExtra("listindex", 1);
 				switch (listindex) {
 				case 0:
 					fclasslist = send.GetFclassFrist(MyApplication.woman);
@@ -253,6 +281,8 @@ public class FclassFristViewActivity extends BaseActivity implements
 					break;
 				case 5:
 					fclasslist = send.GetFclassFrist(MyApplication.tosex);
+					break;
+				default:
 					break;
 				}
 				return fclasslist;// new String(baos.toByteArray(), "gb2312");
@@ -275,9 +305,11 @@ public class FclassFristViewActivity extends BaseActivity implements
 			fclasslist = (ListGoodsBean) result;
 			if (fclasslist != null && fclasslist.getCode() == 200) {
 				for (int i = 0; i < titlelist.length; i++) {
+					/* 网格内容要循环添加 */
 					ListBean = fclasslist.getList().get(i);
 					fclassAdapter = new FclassFristViewAdapter(context,
 							ListBean);
+					// 载人布局文件，添加文字+网格，gridview做适配器，点击事件。
 					View v = inflater.inflate(
 							R.layout.fclass_frist_view_added_view, null);
 					TextView tv = (TextView) v
@@ -286,10 +318,11 @@ public class FclassFristViewActivity extends BaseActivity implements
 					g = (MyGridview) v
 							.findViewById(R.id.fclass_frist_view_addview_gridview);
 					g.setAdapter(fclassAdapter);
-					g.setOnItemClickListener(new gridviewonclick());
+					g.setOnItemClickListener(new gridviewonclick(i));
 					gridviewlist.add(g);
-					addviewlist.add(v);
+					addviewlist.add(v);//
 					addviewll.addView(v);
+
 				}
 
 			} else {
