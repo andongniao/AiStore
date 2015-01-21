@@ -331,7 +331,6 @@ public class FclassFristViewActivity extends BaseActivity implements
 
 			}
 
-			// setadapter
 
 		}
 

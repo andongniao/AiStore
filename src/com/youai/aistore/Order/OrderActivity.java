@@ -2,12 +2,7 @@ package com.youai.aistore.Order;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.Locale;
-import java.util.Random;
-
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
@@ -32,7 +27,6 @@ import com.youai.aistore.ExampleActivity;
 import com.youai.aistore.MyApplication;
 import com.youai.aistore.R;
 import com.youai.aistore.Util;
-import com.youai.aistore.Bean.Base;
 import com.youai.aistore.Bean.CommitOrderBean;
 import com.youai.aistore.Bean.ListShopCartBean;
 import com.youai.aistore.Bean.ShopCartBean;
@@ -71,6 +65,7 @@ public class OrderActivity extends BaseActivity implements OnClickListener {
 	private final String PARTNER = MyApplication.PARTNER;// 合作者身份ID
 	private final String SELLER = MyApplication.SELLER;// 卖家支付宝账号
 	private final String RSA_PRIVATE = MyApplication.RSA_PRIVATE;
+	@SuppressWarnings("unused")
 	private final String RSA_PUBLIC = MyApplication.RSA_PUBLIC;
 	private final String Notify_Url = MyApplication.Notify_Url;// 
 	

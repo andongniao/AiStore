@@ -19,7 +19,6 @@ import android.graphics.Bitmap;
 import android.graphics.Paint;
 import android.net.Uri;
 import android.os.AsyncTask;
-import android.os.Build.VERSION;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -29,7 +28,6 @@ import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.webkit.WebSettings.LayoutAlgorithm;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.Button;
@@ -296,6 +294,7 @@ IXListViewListener, OnClickListener {
 		}
 
 		// onPostExecute方法用于在执行完后台任务后更新UI,显示结果
+		@SuppressWarnings("static-access")
 		@Override
 		protected void onPostExecute(Object result) {
 			stopProgressDialog();
