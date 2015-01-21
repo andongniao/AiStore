@@ -35,7 +35,6 @@ public class FclassHomeAdapter extends BaseExpandableListAdapter {
 	private ArrayList<ArrayList<String>> childname;
 	private MyHalderLabel halderLabel;
 	private MyHalderItem halderItem;
-	private Resources rs ;
 	private GridviewItem gridviewItem;
 
 	public FclassHomeAdapter(Context context, ArrayList<String> groupname,
@@ -201,7 +200,7 @@ public class FclassHomeAdapter extends BaseExpandableListAdapter {
 					// groupname数组传值给FclassFristViewActivity的标题
 					intent.putExtra("title", groupname.get(index).toString());
 					intent.putExtra("listindex", 0);
-					System.out.println(arg2);
+					//System.out.println(arg2);
 					context.startActivity(intent);
 				} else {
 					Intent intent1 = new Intent(context,
@@ -210,7 +209,6 @@ public class FclassHomeAdapter extends BaseExpandableListAdapter {
 					intent1.putExtra("title", childname.get(index).get(arg2)
 							.toString());
 					intent1.putExtra("id", womenlist[arg2-1]);
-					System.out.println(arg2);
 					context.startActivity(intent1);
 				}
 			}
@@ -226,7 +224,6 @@ public class FclassHomeAdapter extends BaseExpandableListAdapter {
 					intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 					intent.putExtra("title", groupname.get(index).toString());
 					intent.putExtra("listindex", 1);
-					System.out.println(arg2);
 					context.startActivity(intent);
 				} else {
 					Intent intent1 = new Intent(context,
@@ -235,7 +232,6 @@ public class FclassHomeAdapter extends BaseExpandableListAdapter {
 					intent1.putExtra("title", childname.get(index).get(arg2)
 							.toString());
 					intent1.putExtra("id", menlist[arg2-1]);
-					System.out.println(arg2);
 					context.startActivity(intent1);
 				}
 
@@ -257,7 +253,6 @@ public class FclassHomeAdapter extends BaseExpandableListAdapter {
 					intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 					intent.putExtra("title", groupname.get(index).toString());
 					intent.putExtra("listindex", 2);
-					System.out.println(arg2);
 					context.startActivity(intent);
 				} else {
 					Intent intent1 = new Intent(context,
@@ -266,7 +261,6 @@ public class FclassHomeAdapter extends BaseExpandableListAdapter {
 					intent1.putExtra("title", childname.get(index).get(arg2)
 							.toString());
 					intent1.putExtra("id", neiyilist[arg2-1]);
-					System.out.println(arg2);
 					context.startActivity(intent1);
 				}
 
@@ -285,7 +279,6 @@ public class FclassHomeAdapter extends BaseExpandableListAdapter {
 					intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 					intent.putExtra("title", groupname.get(index).toString());
 					intent.putExtra("listindex", 3);
-					System.out.println(arg2);
 					context.startActivity(intent);
 
 				} else {
@@ -295,7 +288,6 @@ public class FclassHomeAdapter extends BaseExpandableListAdapter {
 					intent1.putExtra("title", childname.get(index).get(arg2)
 							.toString());
 					intent1.putExtra("id", ttlist[arg2-1]);
-					System.out.println(arg2);
 					context.startActivity(intent1);
 				}
 			}
@@ -315,7 +307,6 @@ public class FclassHomeAdapter extends BaseExpandableListAdapter {
 					intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 					intent.putExtra("title", groupname.get(index).toString());
 					intent.putExtra("listindex",5);
-					System.out.println(arg2);
 					context.startActivity(intent);
 				} else {
 					Intent intent1 = new Intent(context,
@@ -324,7 +315,6 @@ public class FclassHomeAdapter extends BaseExpandableListAdapter {
 					intent1.putExtra("title", childname.get(index).get(arg2)
 							.toString());
 					intent1.putExtra("id", tosexlist[arg2-1]);
-					System.out.println(arg2);
 					context.startActivity(intent1);
 				}
 

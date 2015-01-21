@@ -43,17 +43,9 @@ public class MyLoginActivity extends BaseActivity implements OnClickListener {
 		public void handleMessage(Message msg) {
 			super.handleMessage(msg);
 			if (msg.what == 1) {
-				// 把ID传值到MyApplication中
-				// MyApplication.setUserId(login_ID.getText().toString());
-
-				// Intent intent = new Intent(MyLoginActivity.this,
-				// MycenterHomeActivity.class);
-				// intent.setFlags(intent.FLAG_ACTIVITY_CLEAR_TOP);
-				// startActivity(intent);
-				// Util.ShowToast(context, "登陆成功");
-
-				// 保存登陆状态
+				//提示登录成功
 				Util.ShowToast(MyLoginActivity.this, R.string.login_succeed);
+				// 保存登陆状态
 				result = (UserBean) msg.obj;// result,赋值
 				MyApplication.logined = true;
 				MyApplication.SaveUserBean(result);
