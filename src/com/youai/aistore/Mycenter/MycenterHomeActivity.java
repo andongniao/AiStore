@@ -8,6 +8,8 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -139,7 +141,10 @@ public class MycenterHomeActivity extends BaseActivity implements
 
 			break;
 		case R.id.mycenter_home_set_ll:
-
+			Intent intent2 = new Intent(MycenterHomeActivity.this,
+					MySettingActivity.class);
+			intent2.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+			startActivity(intent2);
 			break;
 		case R.id.mycenter_home_call_ll:
 			ShowDialog(1);
@@ -266,5 +271,8 @@ public class MycenterHomeActivity extends BaseActivity implements
 		}
 
 	}
+	
+
+    
 	
 }

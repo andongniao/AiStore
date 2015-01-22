@@ -80,10 +80,16 @@ public class MyLoginActivity extends BaseActivity implements OnClickListener {
 	@Override
 	public void onClick(View v) {
 		// TODO Auto-generated method stub
-		if (validate()) {// 判断验证是不是成功了
-			login();
+		if(Util.detect(MyLoginActivity.this)){//判断是否联网
+			if (validate()) {// 判断验证是不是成功了
+				login();
 
+			}
+		}else{
+			Util.ShowToast(MyLoginActivity.this, R.string.net_work_is_error);
 		}
+		
+		
 	}
 
 	/* 验证输入的用户名和密码对不对。 */
