@@ -2,9 +2,11 @@ package com.youai.aistore.Mycenter;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -96,6 +98,9 @@ public class MycenterHomeActivity extends BaseActivity implements
 		if (MyApplication.logined) {
 			login_ll.setVisibility(View.GONE);
 			uernametv.setText(MyApplication.UserName);
+		}else{
+			uernametv.setText("");
+			
 		}
 	}
 
@@ -144,6 +149,7 @@ public class MycenterHomeActivity extends BaseActivity implements
 			Intent intent2 = new Intent(MycenterHomeActivity.this,
 					MySettingActivity.class);
 			intent2.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+			intent2.putExtra("username",uernametv.toString() );
 			startActivity(intent2);
 			break;
 		case R.id.mycenter_home_call_ll:
@@ -217,6 +223,7 @@ public class MycenterHomeActivity extends BaseActivity implements
 		}
 	}
 	
+
 	
 	private class MyTask extends AsyncTask<Object, Object, Object> {
 		// onPreExecute方法用于在执行后台任务前做一些UI操作
