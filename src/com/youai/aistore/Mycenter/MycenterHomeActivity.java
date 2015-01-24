@@ -130,8 +130,8 @@ OnClickListener {
 			if(MyApplication.logined){
 				dd = new Intent(MycenterHomeActivity.this,AllOrderActivity.class);
 			}else{
-				dd.putExtra("uerID", "");
 				dd = new Intent(MycenterHomeActivity.this,MyLoginActivity.class);
+				dd.putExtra("uerID", "");
 			}
 			dd.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 			startActivity(dd);
