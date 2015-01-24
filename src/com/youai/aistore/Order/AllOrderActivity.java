@@ -12,6 +12,7 @@ import com.youai.aistore.BaseActivity;
 import com.youai.aistore.MyApplication;
 import com.youai.aistore.R;
 import com.youai.aistore.Util;
+import com.youai.aistore.Bean.Base;
 import com.youai.aistore.Bean.ListOrderBean;
 import com.youai.aistore.Bean.ListOrderBean.OrderBean;
 import com.youai.aistore.NetInterface.Send;
@@ -34,6 +35,7 @@ public class AllOrderActivity extends BaseActivity implements
 	private AllOrderAdapter adapter;
 	private int page, addtype;
 	private View isnull;
+	public static boolean ispaied;
 
 	@Override
 	protected void onCreate(Bundle arg0) {
@@ -51,6 +53,7 @@ public class AllOrderActivity extends BaseActivity implements
 	}
 
 	private void init() {
+		ispaied =false;
 		page = 1;
 		addtype = 1;
 		context = this;
@@ -102,6 +105,12 @@ public class AllOrderActivity extends BaseActivity implements
 		protected Object doInBackground(Object... params) {
 			try {
 				Send s = new Send(context);
+				for(int i=0;i<MyApplication.order_list.size();i++){
+					Base b = s.UpdataOrderStatu(MyApplication.order_list.get(i));
+					if(b!=null && b.getCode() == 200){
+						MyApplication.order_list.remove(MyApplication.order_list.get(i));
+					}
+				}
 				String userid = MyApplication.UserId;
 				listbean = s.getAllOrderlist(userid, page);
 				return listbean;
@@ -144,6 +153,8 @@ public class AllOrderActivity extends BaseActivity implements
 							Util.ShowToast(context,R.string.page_is_final);
 						}
 					}
+				}else if(listbean.getCode() == 500){
+					Util.ShowToast(context, R.string.net_work_is_error);
 				} else {
 					Util.ShowToast(context, listbean.getMsg());
 				}
@@ -169,5 +180,19 @@ public class AllOrderActivity extends BaseActivity implements
 				"yyyy-MM-dd   hh:mm:ss");
 		String date = sDateFormat.format(new java.util.Date());
 		lv.setRefreshTime(date);
+	}
+	@Override
+	protected void onResume() {
+		super.onResume();
+		if(ispaied){
+			page = 1;
+			addtype = 1;
+			if (Util.detect(context)) {
+				myTask = new MyTask();
+				myTask.execute("");
+			} else {
+				Util.ShowToast(context, R.string.net_work_is_error);
+			}
+		}
 	}
 }

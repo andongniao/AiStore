@@ -70,5 +70,8 @@ public class ServiceUrl {
 	public static String updata_shopcart_session_id = BaseUrl
 			+ "?module=update_cart_list&session_id=";
 	public static String updata_shopcart_user_id = "&user_id=";
+	// ¸üÐÂ¶©µ¥×´Ì¬  
+	public static String updata_order_statu_order= BaseUrl
+			+ "?module=pay&order_sn=";
 
 }

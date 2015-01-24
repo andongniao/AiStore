@@ -13,86 +13,141 @@ public class OrderDetailsBean extends Base {
 	private String formated_goods_amount;
 	private String formated_shipping_fee;
 	private ArrayList<Goods> goods;
+	private String pay_id;
+
+	
 
 	public int getPay_status() {
 		return pay_status;
 	}
 
+
+
 	public void setPay_status(int pay_status) {
 		this.pay_status = pay_status;
 	}
+
+
 
 	public String getOrder_sn() {
 		return order_sn;
 	}
 
+
+
 	public void setOrder_sn(String order_sn) {
 		this.order_sn = order_sn;
 	}
+
+
 
 	public String getOrder_zt() {
 		return order_zt;
 	}
 
+
+
 	public void setOrder_zt(String order_zt) {
 		this.order_zt = order_zt;
 	}
+
+
 
 	public String getConsignee() {
 		return consignee;
 	}
 
+
+
 	public void setConsignee(String consignee) {
 		this.consignee = consignee;
 	}
+
+
 
 	public String getAddress() {
 		return address;
 	}
 
+
+
 	public void setAddress(String address) {
 		this.address = address;
 	}
+
+
 
 	public String getTel() {
 		return tel;
 	}
 
+
+
 	public void setTel(String tel) {
 		this.tel = tel;
 	}
+
+
 
 	public String getFormated_add_time() {
 		return formated_add_time;
 	}
 
+
+
 	public void setFormated_add_time(String formated_add_time) {
 		this.formated_add_time = formated_add_time;
 	}
+
+
 
 	public String getFormated_goods_amount() {
 		return formated_goods_amount;
 	}
 
+
+
 	public void setFormated_goods_amount(String formated_goods_amount) {
 		this.formated_goods_amount = formated_goods_amount;
 	}
+
+
 
 	public String getFormated_shipping_fee() {
 		return formated_shipping_fee;
 	}
 
+
+
 	public void setFormated_shipping_fee(String formated_shipping_fee) {
 		this.formated_shipping_fee = formated_shipping_fee;
 	}
+
+
 
 	public ArrayList<Goods> getGoods() {
 		return goods;
 	}
 
+
+
 	public void setGoods(ArrayList<Goods> goods) {
 		this.goods = goods;
 	}
+
+
+
+	public String getPay_id() {
+		return pay_id;
+	}
+
+
+
+	public void setPay_id(String pay_id) {
+		this.pay_id = pay_id;
+	}
+
+
 
 	public class Goods {
 		private String goods_name;

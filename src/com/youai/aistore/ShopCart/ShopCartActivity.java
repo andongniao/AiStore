@@ -295,6 +295,8 @@ public class ShopCartActivity extends BaseActivity implements OnClickListener {
 						price = Double.parseDouble(listbean.getCount_price());
 						tv_gongji
 								.setText("ฃค" + listbean.getCount_price() + "ิช");
+					}else if(listbean.getCode() == 500){
+						Util.ShowToast(context, R.string.net_work_is_error);
 					} else {
 						list = null;
 						list = new ArrayList<ShopCartBean>();
@@ -341,6 +343,8 @@ public class ShopCartActivity extends BaseActivity implements OnClickListener {
 						if(list.size()==0){
 							showviewll.setVisibility(View.GONE);
 						}
+					}else if(beanresult.getCode() == 500){
+						Util.ShowToast(context, R.string.net_work_is_error);
 					}else{
 						Util.ShowToast(context,beanresult.getMsg());
 					}
@@ -365,6 +369,8 @@ public class ShopCartActivity extends BaseActivity implements OnClickListener {
 									.getGoods_price());
 						}
 						tv_gongji.setText(String.valueOf(price));
+					}else if(beanresult.getCode() == 500){
+						Util.ShowToast(context, R.string.net_work_is_error);
 					} else {
 						Util.ShowToast(context, beanresult.getMsg());
 					}

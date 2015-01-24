@@ -191,6 +191,14 @@ public abstract class BaseActivity extends Activity {
 	public void setTopTitleBackground(Drawable drawable) {
 		titleTv.setBackgroundDrawable(drawable);
 	}
+	/**
+	 * 获取顶部view
+	 * 
+	 * @return
+	 */
+	public View getTopTitleView() {
+		return titleTv;
+	}
 
 	/**
 	 * 添加view

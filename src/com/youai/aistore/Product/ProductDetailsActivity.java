@@ -347,6 +347,8 @@ IXListViewListener, OnClickListener {
 								
 							}
 						});
+					}else if(bean.getCode() == 500){
+						Util.ShowToast(context, R.string.net_work_is_error);
 					} else {
 						Util.ShowToast(context, bean.getMsg());
 					}
@@ -361,6 +363,8 @@ IXListViewListener, OnClickListener {
 						adapter = new UserCommentAdapter(context, list);
 						xListView.setAdapter(adapter);
 						Util.setListViewHeightBasedOnChildren(xListView);
+					}else if(listcombean.getCode() == 500){
+						Util.ShowToast(context, R.string.net_work_is_error);
 					} else {
 						Util.ShowToast(context, listcombean.getMsg());
 					}
@@ -399,6 +403,8 @@ IXListViewListener, OnClickListener {
 							page-=1;
 							Util.ShowToast(context, R.string.page_is_final);
 						}
+					}else if(nextpagelist.getCode() == 500){
+						Util.ShowToast(context, R.string.net_work_is_error);
 					} else {
 						Util.ShowToast(context, listcombean.getMsg());
 					}
@@ -427,6 +433,8 @@ IXListViewListener, OnClickListener {
 									R.string.product_add_shopcart_success);
 							ShopCartActivity.shopcartchaneged = true;
 						}
+					}else if(beanresult.getCode() == 500){
+						Util.ShowToast(context, R.string.net_work_is_error);
 					} else {
 						Util.ShowToast(context, beanresult.getMsg());
 					}

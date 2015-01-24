@@ -791,5 +791,46 @@ public class Send {
 		}
 		return null;
 	}
+	
+	
+	/**
+	 * ÐÞ¸Ä¶©µ¥×´Ì¬
+	 * 
+	 * @param id
+	 * @param password
+	 * @return
+	 */
+	public Base UpdataOrderStatu(String order_sn) {
+		Base bean = new Base();
+		String url = ServiceUrl.updata_order_statu_order + order_sn;
+				
+		String jsonStr = GetHttp.sendGet(url);
+
+		if (jsonStr != null && !jsonStr.equals("")) {
+			JSONObject object = null;
+			try {
+				object = new JSONObject(jsonStr);
+				if (object.get("code") != null && object.getInt("code") == 200) {
+					bean.setCode(200);
+					bean.setMsg(object.getString("message"));
+					return bean;
+				} else {
+					bean.setMsg(object.getString("message"));
+					bean.setCode(object.getInt("code"));
+					return bean;
+
+				}
+
+			} catch (JSONException e) {
+				e.printStackTrace();
+			}
+		} else {
+			bean.setCode(500);
+			bean.setMsg(context.getResources().getString(
+					R.string.http_status_code_error));
+			return bean;
+		}
+		return null;
+	}
 
 }

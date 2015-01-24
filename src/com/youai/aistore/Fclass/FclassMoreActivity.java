@@ -267,8 +267,12 @@ public class FclassMoreActivity extends BaseActivity implements
 						}
 					}
 
-				} else {
-					Util.ShowToast(context, listf.getMsg());
+				} else if(listf != null && listf.getCode() == 500){
+					Util.ShowToast(context, R.string.net_work_is_error);
+				}else{
+					if (listf != null)
+						Util.ShowToast(context, listf.getMsg());
+
 				}
 			}else{
 				if(addtype == 2){

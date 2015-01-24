@@ -50,9 +50,10 @@ public class MyLoginActivity extends BaseActivity implements OnClickListener {
 				MyApplication.logined = true;
 				MyApplication.SaveUserBean(result);
 				finish();
-
 			} else if (msg.what == 2) {
 				Util.ShowToast(MyLoginActivity.this, R.string.login_error);
+			}else if (msg.what == 3) {
+				Util.ShowToast(MyLoginActivity.this, R.string.net_work_is_error);
 			}
 
 		}
@@ -73,7 +74,7 @@ public class MyLoginActivity extends BaseActivity implements OnClickListener {
 		login_btn = (Button) findViewById(R.id.my_login_btn);
 		login_btn.setOnClickListener(this);
 		/*接收注册界面发过来的账号，*/
-		String uerid = getIntent().getStringExtra("uerID");
+		String uerid = getIntent().getExtras().getString("uerID", "");
 		login_ID.setText(uerid);
 	}
 
@@ -123,21 +124,20 @@ public class MyLoginActivity extends BaseActivity implements OnClickListener {
 
 				Send send = new Send(MyLoginActivity.this);
 				result = send.getLogin(id, pwd);
-				if (result.getUser_id() != null
-						&& !result.getUser_id().equals("200")) {
-
-					Message msg = new Message();
-					msg.what = 1;
-					msg.obj = result;
-					LoginMessageHandler.sendMessage(msg);
-
-				} else {
-					Message message = new Message();
-					message.what = 2;
-					LoginMessageHandler.sendMessage(message);
-
+				Message msg = new Message();
+				if(result!=null){
+					if (result.getCode() == 200 ) {
+						msg.what = 1;
+						msg.obj = result;
+					}else if(result.getCode() == 500){
+						msg.what = 3;
+					} else {
+						msg.what = 2;
+					}
+				}else{
+					msg.what = 3;
 				}
-
+				LoginMessageHandler.sendMessage(msg);
 			}
 		}.start();
 

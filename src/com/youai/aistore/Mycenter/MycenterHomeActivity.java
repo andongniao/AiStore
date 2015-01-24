@@ -250,6 +250,8 @@ public class MycenterHomeActivity extends BaseActivity implements
 				if(bean.getCode()==200){
 					log = false;
 					Util.ShowToast(context,R.string.updata_shopcart_info_success);
+				}else if(bean.getCode() == 500){
+					Util.ShowToast(context, R.string.net_work_is_error);
 				}else{
 					Util.ShowToast(context,bean.getMsg());
 				}

@@ -170,6 +170,8 @@ public class ConsigneeInfoActivity extends BaseActivity implements
 						consigneeet.setText(bean.getConsignee());
 						addresset.setText(bean.getAddress());
 						numberet.setText(bean.getTel());
+					}else if(bean.getCode() == 500){
+						Util.ShowToast(context, R.string.net_work_is_error);
 					} else {
 						Util.ShowToast(context, bean.getMsg());
 					}
@@ -187,6 +189,8 @@ public class ConsigneeInfoActivity extends BaseActivity implements
 						intent.putExtra("address", address);
 						intent.putExtra("list", listbean);
 						startActivity(intent);
+					}else if(b.getCode() == 500){
+						Util.ShowToast(context, R.string.net_work_is_error);
 					} else {
 						Util.ShowToast(context, b.getMsg());
 					}

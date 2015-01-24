@@ -11,12 +11,6 @@ import java.util.Map;
 
 
 public class GetHttp {
-	static String Jx = "http://xh.ai.cn/service/list.php?type=jing&";
-	static String Cw = "http://xh.ai.cn/service/list.php?type=character&";
-	static String Pic = "http://xh.ai.cn/service/list.php?type=pic&";
-	static String Zan = "http://xh.ai.cn/service/update.php?id=";
-	static String CancelZan = "http://xh.ai.cn/service/update.php?id=";
-
 	/**
 	 * 向指定URL发送GET方法的请求
 	 * 
@@ -34,6 +28,7 @@ public class GetHttp {
 			// 打开和URL之间的连接
 			URLConnection conn = realUrl.openConnection();
 			// 设置通用的请求属性
+			conn.setConnectTimeout(5000);
 			conn.setRequestProperty("accept", "*/*");
 			conn.setRequestProperty("connection", "Keep-Alive");
 			conn.setRequestProperty("user-agent",

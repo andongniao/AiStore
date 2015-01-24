@@ -4,6 +4,7 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.ArrayList;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -19,10 +20,12 @@ import android.widget.Toast;
 
 import com.alipay.sdk.app.PayTask;
 import com.youai.aistore.BaseActivity;
+import com.youai.aistore.CustomProgressDialog;
 import com.youai.aistore.ExampleActivity;
 import com.youai.aistore.MyApplication;
 import com.youai.aistore.R;
 import com.youai.aistore.Util;
+import com.youai.aistore.Bean.Base;
 import com.youai.aistore.Bean.OrderDetailsBean;
 import com.youai.aistore.Bean.OrderDetailsBean.Goods;
 import com.youai.aistore.NetInterface.Send;
@@ -38,13 +41,16 @@ public class OrderDetailActivity extends BaseActivity implements OnClickListener
 	private Context context;
 	private OrderDetailsBean bean;
 	private TextView number_tv, statu_tv, time_tv, pp_tv, tel_tv, money_tv,
-			youfei_tv, address_tv;
+	youfei_tv, address_tv;
 	private Button cancel_btn,gopay_btn;
 	private LinearLayout gopay_ll;
 	private OrderDetailsAdapter adapter;
 	private ArrayList<Goods> list;
 	private OrderListview lv;
 	private Handler mHandler;
+	private Dialog progressDialog;
+	private Base base;
+	private boolean ishave;
 	private static final int SDK_PAY_FLAG = 1;
 	private static final int SDK_CHECK_FLAG = 2;
 	private final String PARTNER = MyApplication.PARTNER;// 合作者身份ID
@@ -86,6 +92,7 @@ public class OrderDetailActivity extends BaseActivity implements OnClickListener
 		gopay_btn = (Button) findViewById(R.id.order_detail_gopay_btn);
 		gopay_btn.setOnClickListener(this);
 		cancel_btn.setVisibility(View.GONE);
+		gopay_btn.setVisibility(View.GONE);
 		mHandler = new Handler() {
 			public void handleMessage(Message msg) {
 				switch (msg.what) {
@@ -96,8 +103,27 @@ public class OrderDetailActivity extends BaseActivity implements OnClickListener
 
 					// 判断resultStatus 为“9000”则代表支付成功，具体状态码代表含义可参考接口文档
 					if (TextUtils.equals(resultStatus, "9000")) {
-						Toast.makeText(OrderDetailActivity.this, memo,// "支付成功",
-								Toast.LENGTH_SHORT).show();
+						//						Toast.makeText(OrderDetailActivity.this, memo,// "支付成功",
+						//								Toast.LENGTH_SHORT).show();
+						ishave = false;
+						for(int i=0;i<MyApplication.order_list.size();i++){
+							if(MyApplication.order_list.get(i)==bean.getOrder_sn()){
+								ishave = true;
+								break;
+							}
+						}
+						if(!ishave){
+							MyApplication.order_list.add(bean.getOrder_sn());
+						}
+						if (Util.detect(context)) {
+							myTask = new MyTask(2);
+							myTask.execute("");
+						} else {
+							Util.ShowToast(context, R.string.net_work_is_error);
+						}
+						statu_tv.setText(R.string.pay_paying_ok);
+						gopay_btn.setVisibility(View.GONE);
+						AllOrderActivity.ispaied = true;
 					} else {
 						// 判断resultStatus 为非“9000”则代表可能支付失败
 						// “8000”
@@ -122,10 +148,6 @@ public class OrderDetailActivity extends BaseActivity implements OnClickListener
 							Toast.LENGTH_SHORT).show();
 					break;
 				}
-				default:
-					ExampleActivity.setCurrentTab(2);
-					finish();
-					break;
 				}
 			};
 		};
@@ -142,7 +164,7 @@ public class OrderDetailActivity extends BaseActivity implements OnClickListener
 		@Override
 		protected void onPreExecute() {
 			// textView.setText("loading...");
-			Util.startProgressDialog(context);
+			startProgressDialog(context);
 		}  
 
 		//doInBackground方法内部执行后台任务,不可在此方法内修改UI  
@@ -150,10 +172,14 @@ public class OrderDetailActivity extends BaseActivity implements OnClickListener
 		protected Object doInBackground(Object... params) {  
 			try {  
 				if(type==1){
-				Send s = new Send(context);
-				String userid = MyApplication.UserId;
-				bean = s.getOrderDetalis(getIntent().getStringExtra("orderid"), userid);
-				return bean;
+					Send s = new Send(context);
+					String userid = MyApplication.UserId;
+					bean = s.getOrderDetalis(getIntent().getStringExtra("orderid"), userid);
+					return bean;
+				}else{
+					Send s = new Send(context);
+					base = s.UpdataOrderStatu(bean.getOrder_sn());
+					return base;
 				}
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -169,7 +195,7 @@ public class OrderDetailActivity extends BaseActivity implements OnClickListener
 		// onPostExecute方法用于在执行完后台任务后更新UI,显示结果
 		@Override
 		protected void onPostExecute(Object result) {
-			Util.stopProgressDialog();
+			stopProgressDialog();
 			if (type == 1) {
 				bean = (OrderDetailsBean) result;
 				if (bean != null) {
@@ -185,9 +211,17 @@ public class OrderDetailActivity extends BaseActivity implements OnClickListener
 						list = bean.getGoods();
 						adapter = new OrderDetailsAdapter(context, list);
 						lv.setAdapter(adapter);
-						if (bean.getPay_status() == 2) {
-							gopay_ll.setVisibility(View.VISIBLE);
+						if("1".endsWith(bean.getPay_id())){
+							if (bean.getPay_status() == 2) {
+								gopay_btn.setVisibility(View.VISIBLE);
+							}else{
+								gopay_btn.setVisibility(View.GONE);
+							}
+						}else{
+							gopay_btn.setVisibility(View.GONE);
 						}
+					}else if(bean.getCode() == 500){
+						Util.ShowToast(context, R.string.net_work_is_error);
 					} else {
 						Util.ShowToast(context, bean.getMsg());
 					}
@@ -195,6 +229,18 @@ public class OrderDetailActivity extends BaseActivity implements OnClickListener
 					Util.ShowToast(context, R.string.net_work_is_error);
 				}
 			} else {
+				base = (Base) result;
+				if(base!=null){
+					if(base.getCode()==200){
+						MyApplication.order_list.remove(bean.getOrder_sn());
+					}else if(base.getCode() == 500){
+						Util.ShowToast(context, R.string.net_work_is_error);
+					}else{
+						Util.ShowToast(context, base.getMsg());
+					}
+				}else{
+					Util.ShowToast(context, R.string.net_work_is_error);
+				}
 
 			}
 
@@ -203,7 +249,7 @@ public class OrderDetailActivity extends BaseActivity implements OnClickListener
 		// onCancelled方法用于在取消执行中的任务时更改UI
 		@Override
 		protected void onCancelled() {
-			Util.stopProgressDialog();
+			stopProgressDialog();
 		}
 	}
 
@@ -212,25 +258,32 @@ public class OrderDetailActivity extends BaseActivity implements OnClickListener
 		switch (arg0.getId()) {
 		case R.id.order_detail_gopay_btn:
 			if(bean!=null && list!=null){
-			String price = String.valueOf(Double.parseDouble(bean.getFormated_goods_amount())+Double.parseDouble(bean.getFormated_shipping_fee()));
-			String goodsinfo = list.get(0).getGoods_name()+"等";
-			 pay(price,"订单"+bean.getOrder_sn(),goodsinfo,bean.getOrder_sn());
+				String price = String.valueOf(Double.parseDouble(bean.getFormated_goods_amount())+Double.parseDouble(bean.getFormated_shipping_fee()));
+				String goodsinfo = "";
+				if(list!=null){
+					if(list.size()==1){
+						goodsinfo = list.get(0).getGoods_name();
+					}else{
+						goodsinfo = list.get(0).getGoods_name()+"等";
+					}
+				}
+				pay(price,goodsinfo,"订单"+bean.getOrder_sn(),bean.getOrder_sn());
 			}
 			break;
 		case R.id.order_detail_cancel_btn:
-			
+
 			break;
 
 		}
 	}
-	
+
 	/**
 	 * call alipay sdk pay. 调用SDK支付
 	 * 
 	 */
 	public void pay(String price, String goodname, String gooddes,String orderid) {
 		String orderInfo = getOrderInfo(goodname, gooddes, price,orderid);
-//		String sign = "lBBK%2F0w5LOajrMrji7DUgEqNjIhQbidR13GovA5r3TgIbNqv231yC1NksLdw%2Ba3JnfHXoXuet6XNNHtn7VE%2BeCoRO1O%2BR1KugLrQEZMtG5jmJIe2pbjm%2F3kb%2FuGkpG%2BwYQYI51%2BhA3YBbvZHVQBYveBqK%2Bh8mUyb7GM1HxWs9k4%3D";
+		//		String sign = "lBBK%2F0w5LOajrMrji7DUgEqNjIhQbidR13GovA5r3TgIbNqv231yC1NksLdw%2Ba3JnfHXoXuet6XNNHtn7VE%2BeCoRO1O%2BR1KugLrQEZMtG5jmJIe2pbjm%2F3kb%2FuGkpG%2BwYQYI51%2BhA3YBbvZHVQBYveBqK%2Bh8mUyb7GM1HxWs9k4%3D";
 		String sign = sign(orderInfo);
 		try {
 			// 仅需对sign 做URL编码
@@ -381,6 +434,28 @@ public class OrderDetailActivity extends BaseActivity implements OnClickListener
 			String prefix = key + "={";
 			return content.substring(content.indexOf(prefix) + prefix.length(),
 					content.lastIndexOf("}"));
+		}
+	}
+	/**
+	 * 启动Loding...
+	 * 
+	 * @param context
+	 */
+	public void startProgressDialog(Context context) {
+		if (progressDialog == null) {
+			progressDialog = CustomProgressDialog.createDialog(context);
+		}
+
+		progressDialog.show();
+	}
+
+	/**
+	 * 关闭Loding...
+	 */
+	public void stopProgressDialog() {
+		if (progressDialog != null && progressDialog.isShowing()) {
+			progressDialog.dismiss();
+			progressDialog = null;
 		}
 	}
 

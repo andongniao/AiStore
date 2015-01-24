@@ -3,6 +3,7 @@ package com.youai.aistore.Order;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.ArrayList;
+
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
@@ -27,6 +28,7 @@ import com.youai.aistore.ExampleActivity;
 import com.youai.aistore.MyApplication;
 import com.youai.aistore.R;
 import com.youai.aistore.Util;
+import com.youai.aistore.Bean.Base;
 import com.youai.aistore.Bean.CommitOrderBean;
 import com.youai.aistore.Bean.ListShopCartBean;
 import com.youai.aistore.Bean.ShopCartBean;
@@ -54,11 +56,12 @@ public class OrderActivity extends BaseActivity implements OnClickListener {
 	private OrderLvAdapter adapter;
 	@SuppressWarnings("unused")
 	private ArrayList<ShopCartBean> list;
-	private int type, postion, time;
+	private int type, postion, time,addtype;
 	private ListShopCartBean listbean;
 	private MyTask myTask;
 	private CommitOrderBean bean;
 	private double kuaidi, price, final_price;
+	private Base base;
 	private Handler mHandler;
 	private static final int SDK_PAY_FLAG = 1;
 	private static final int SDK_CHECK_FLAG = 2;
@@ -68,7 +71,7 @@ public class OrderActivity extends BaseActivity implements OnClickListener {
 	@SuppressWarnings("unused")
 	private final String RSA_PUBLIC = MyApplication.RSA_PUBLIC;
 	private final String Notify_Url = MyApplication.Notify_Url;// 
-	
+
 
 	@Override
 	protected void onCreate(Bundle arg0) {
@@ -87,8 +90,16 @@ public class OrderActivity extends BaseActivity implements OnClickListener {
 
 					// 判断resultStatus 为“9000”则代表支付成功，具体状态码代表含义可参考接口文档
 					if (TextUtils.equals(resultStatus, "9000")) {
-						Toast.makeText(OrderActivity.this, memo,// "支付成功",
-								Toast.LENGTH_SHORT).show();
+						//						Toast.makeText(OrderActivity.this, "这时候支付成功"+memo,// "支付成功",
+						//								Toast.LENGTH_SHORT).show();
+						addtype = 2;
+						MyApplication.order_list.add(bean.getOrder_sn());
+						if (Util.detect(context)) {
+							myTask = new MyTask();
+							myTask.execute("");
+						} else {
+							Util.ShowToast(context, R.string.net_work_is_error);
+						}
 					} else {
 						// 判断resultStatus 为非“9000”则代表可能支付失败
 						// “8000”
@@ -96,14 +107,22 @@ public class OrderActivity extends BaseActivity implements OnClickListener {
 						if (TextUtils.equals(resultStatus, "8000")) {
 							Toast.makeText(OrderActivity.this, memo,// "支付结果确认中",
 									Toast.LENGTH_SHORT).show();
+							ConsigneeInfoActivity.isfinish = true;
+							ExampleActivity.setCurrentTab(2);
+							finish();
 
 						} else if (TextUtils.equals(resultStatus, "4000")) {
 							Toast.makeText(OrderActivity.this, memo,// "订单支付失败",
 									Toast.LENGTH_SHORT).show();
+							ConsigneeInfoActivity.isfinish = true;
+							ExampleActivity.setCurrentTab(2);
+							finish();
 						} else {
 							Toast.makeText(OrderActivity.this, memo,// "支付失败",
 									Toast.LENGTH_SHORT).show();
-
+							ConsigneeInfoActivity.isfinish = true;
+							ExampleActivity.setCurrentTab(2);
+							finish();
 						}
 					}
 					break;
@@ -111,12 +130,10 @@ public class OrderActivity extends BaseActivity implements OnClickListener {
 				case SDK_CHECK_FLAG: {
 					Toast.makeText(OrderActivity.this, "检查结果为：" + msg.obj,
 							Toast.LENGTH_SHORT).show();
-					break;
-				}
-				default:
 					ExampleActivity.setCurrentTab(2);
 					finish();
 					break;
+				}
 				}
 			};
 		};
@@ -128,11 +145,16 @@ public class OrderActivity extends BaseActivity implements OnClickListener {
 		type = 1;
 		context = this;
 		listbean = (ListShopCartBean) getIntent().getExtras().get("list");
+		if(listbean!=null){
+			list = listbean.getList();
+		}
+		adapter = new OrderLvAdapter(context, list);
 		zhifu_rbt = (RadioButton) findViewById(R.id.order_radio_zhifu);
 		zhifu_rbt.setOnClickListener(this);
 		huodao_rbt = (RadioButton) findViewById(R.id.order_radio_huodao);
 		huodao_rbt.setOnClickListener(this);
 		lv = (OrderListview) findViewById(R.id.order_goods_list_lv);
+		lv.setAdapter(adapter);
 		tv_consignee = (TextView) findViewById(R.id.order_consignee_tv);
 		tv_address = (TextView) findViewById(R.id.order_address_tv);
 		tv_number = (TextView) findViewById(R.id.order_number_tv);
@@ -166,6 +188,7 @@ public class OrderActivity extends BaseActivity implements OnClickListener {
 	public void onClick(View arg0) {
 		switch (arg0.getId()) {
 		case R.id.order_commit_btn:
+			addtype = 1;
 			if (Util.detect(context)) {
 				myTask = new MyTask();
 				myTask.execute("");
@@ -227,11 +250,17 @@ public class OrderActivity extends BaseActivity implements OnClickListener {
 		//doInBackground方法内部执行后台任务,不可在此方法内修改UI  
 		@Override  
 		protected Object doInBackground(Object... params) {  
-			try {  
-				Send s = new Send(context);
-				String userid = MyApplication.UserId;
-				bean = s.CommitOrder(userid, ""+time, ""+type, ""+kuaidi);
-				return bean;
+			try {
+				if(addtype == 1){
+					Send s = new Send(context);
+					String userid = MyApplication.UserId;
+					bean = s.CommitOrder(userid, ""+time, ""+type, ""+kuaidi);
+					return bean;
+				}else{
+					Send s = new Send(context);
+					base = s.UpdataOrderStatu(bean.getOrder_sn());
+					return base;
+				}
 			} catch (Exception e) {  
 				e.printStackTrace();
 			}
@@ -248,30 +277,57 @@ public class OrderActivity extends BaseActivity implements OnClickListener {
 		@Override
 		protected void onPostExecute(Object result) {
 			Util.stopProgressDialog();
-			bean = (CommitOrderBean) result;
-			if (bean != null) {
-				if (bean.getCode() == 200) {
-					ShopCartActivity.shopcartchaneged = true;
-					if (type == 1) {
-						// Fiap fiap = new Fiap(OrderActivity.this);
-						// // 调用支付方法，并传入支付金额
-						// fiap.pay(0.01,"测试商品","测试商品信息","测试订单号");
-						String price = String.valueOf(final_price);
-						String goodsinfo = listbean.getList().get(0).getGoods_name()+"等";
-						 pay("0.01","订单"+bean.getOrder_sn(),goodsinfo,bean.getOrder_sn());
-						//TODO
-						ExampleActivity.setCurrentTab(2);
+			if(addtype ==1){
+				bean = (CommitOrderBean) result;
+				if (bean != null) {
+					if (bean.getCode() == 200) {
+						ShopCartActivity.shopcartchaneged = true;
+						if (type == 1) {
+							// Fiap fiap = new Fiap(OrderActivity.this);
+							// // 调用支付方法，并传入支付金额
+							// fiap.pay(0.01,"测试商品","测试商品信息","测试订单号");
+							String price = String.valueOf(final_price);
+							String goodsinfo = "";
+							if(list!=null){
+								if(list.size()==1){
+									goodsinfo = list.get(0).getGoods_name();
+								}else{
+									goodsinfo = list.get(0).getGoods_name()+"等";
+								}
+							}
+							pay("0.01",goodsinfo,"订单"+bean.getOrder_sn(),bean.getOrder_sn());
+							//TODO
+							ExampleActivity.setCurrentTab(2);
+						} else {
+							Util.ShowToast(context, R.string.commit_order_for_huodao);
+							ExampleActivity.setCurrentTab(2);
+							ConsigneeInfoActivity.isfinish = true;
+							finish();
+						}
+					}else if(bean.getCode() == 500){
+						Util.ShowToast(context, R.string.net_work_is_error);
 					} else {
-						Util.ShowToast(context, R.string.commit_order_for_huodao);
-						ExampleActivity.setCurrentTab(2);
-						ConsigneeInfoActivity.isfinish = true;
-						finish();
+						Util.ShowToast(context, bean.getMsg());
 					}
 				} else {
-					Util.ShowToast(context, bean.getMsg());
+					Util.ShowToast(context, R.string.net_work_is_error);
 				}
-			} else {
-				Util.ShowToast(context, R.string.net_work_is_error);
+			}else if(addtype == 2){
+				base = (Base) result;
+				if(base!=null){
+					if(base.getCode()==200){
+						MyApplication.order_list.remove(bean.getOrder_sn());
+					}else if(base.getCode() == 500){
+						Util.ShowToast(context, R.string.net_work_is_error);
+					}else{
+						Util.ShowToast(context, base.getMsg());
+					}
+				}else{
+					Util.ShowToast(context, R.string.net_work_is_error);
+				}
+				ConsigneeInfoActivity.isfinish = true;
+				ExampleActivity.setCurrentTab(2);
+				finish();
 			}
 		}
 
@@ -289,7 +345,7 @@ public class OrderActivity extends BaseActivity implements OnClickListener {
 	 */
 	public void pay(String price, String goodname, String gooddes,String orderid) {
 		String orderInfo = getOrderInfo(goodname, gooddes, price,orderid);
-//		String sign = "lBBK%2F0w5LOajrMrji7DUgEqNjIhQbidR13GovA5r3TgIbNqv231yC1NksLdw%2Ba3JnfHXoXuet6XNNHtn7VE%2BeCoRO1O%2BR1KugLrQEZMtG5jmJIe2pbjm%2F3kb%2FuGkpG%2BwYQYI51%2BhA3YBbvZHVQBYveBqK%2Bh8mUyb7GM1HxWs9k4%3D";
+		//		String sign = "lBBK%2F0w5LOajrMrji7DUgEqNjIhQbidR13GovA5r3TgIbNqv231yC1NksLdw%2Ba3JnfHXoXuet6XNNHtn7VE%2BeCoRO1O%2BR1KugLrQEZMtG5jmJIe2pbjm%2F3kb%2FuGkpG%2BwYQYI51%2BhA3YBbvZHVQBYveBqK%2Bh8mUyb7GM1HxWs9k4%3D";
 		String sign = sign(orderInfo);
 		try {
 			// 仅需对sign 做URL编码

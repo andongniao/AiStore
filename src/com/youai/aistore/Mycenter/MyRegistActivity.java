@@ -27,9 +27,9 @@ import com.youai.aistore.NetInterface.Send;
 public class MyRegistActivity extends BaseActivity implements OnClickListener {
 	private EditText regist_ID, regist_password, regist_repassword;
 	private Button regist_btn;
-	Context context;
-	String errormsg = "";
-	String code, messagetxt;
+	private Context context;
+	private String errormsg = "";
+	private String code, messagetxt;
 	Handler LoginMessageHandler = new Handler() {
 		@SuppressLint("HandlerLeak")
 		public void handleMessage(Message msg) {
@@ -45,6 +45,9 @@ public class MyRegistActivity extends BaseActivity implements OnClickListener {
 				finish();
 			} else if (msg.what == 2) {
 				Util.ShowToast(MyRegistActivity.this, R.string.regist_error);
+
+			}else if (msg.what == 3) {
+				Util.ShowToast(MyRegistActivity.this, R.string.net_work_is_error);
 
 			}
 
@@ -132,20 +135,19 @@ public class MyRegistActivity extends BaseActivity implements OnClickListener {
 
 				Send send = new Send(MyRegistActivity.this);
 				UserBean result = send.regist(id, pwd);
-				if (result.getUser_id() != null
-						&& !result.getUser_id().equals("200")) {
-
-					Message msg = new Message();
-					msg.what = 1;
-					LoginMessageHandler.sendMessage(msg);
-
-				} else {
-					Message message = new Message();
-					message.what = 2;
-					LoginMessageHandler.sendMessage(message);
-
+				Message msg = new Message();
+				if(result!=null){
+					if (result.getCode() == 200) {
+						msg.what = 1;
+					}else if(result.getCode() == 500){
+						msg.what = 3;
+					} else {
+						msg.what = 2;
+					}
+				}else{
+					msg.what = 3;
 				}
-
+				LoginMessageHandler.sendMessage(msg);
 			}
 		}.start();
 

@@ -3,6 +3,7 @@ package com.youai.aistore.Fclass;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
@@ -11,6 +12,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -22,6 +24,7 @@ import android.widget.SimpleAdapter;
 import android.widget.TextView;
 
 import com.youai.aistore.BaseActivity;
+import com.youai.aistore.CustomProgressDialog;
 import com.youai.aistore.MyApplication;
 import com.youai.aistore.R;
 import com.youai.aistore.Util;
@@ -51,6 +54,7 @@ public class FclassFristViewActivity extends BaseActivity implements
 	private ArrayList<GoodsBean> ListBean;
 	private FclassFristViewAdapter fclassAdapter;
 	private int type, id, postion;
+	private Dialog progressDialog;
 	public static boolean isfinish;
 
 	@Override
@@ -225,7 +229,7 @@ public class FclassFristViewActivity extends BaseActivity implements
 		// onPreExecute方法用于在执行后台任务前做一些UI操作
 		@Override
 		protected void onPreExecute() {
-			Util.startProgressDialog(context);
+			startProgressDialog(context);
 
 		}
 
@@ -271,7 +275,7 @@ public class FclassFristViewActivity extends BaseActivity implements
 		// onPostExecute方法用于在执行完后台任务后更新UI,显示结果
 		@Override
 		protected void onPostExecute(Object result) {
-			Util.stopProgressDialog();
+			stopProgressDialog();
 			fclasslist = (ListGoodsBean) result;
 			if (fclasslist != null && fclasslist.getCode() == 200) {
 				for (int i = 0; i < titlelist.length; i++) {
@@ -292,7 +296,10 @@ public class FclassFristViewActivity extends BaseActivity implements
 					addviewll.addView(v);
 				}
 
-			} else {
+			} else if(fclasslist != null && fclasslist.getCode() == 500){
+				stopProgressDialog();
+				Util.ShowToast(context, R.string.net_work_is_error);
+			}else{
 				if (fclasslist != null)
 					Util.ShowToast(context, fclasslist.getMsg());
 
@@ -303,7 +310,7 @@ public class FclassFristViewActivity extends BaseActivity implements
 
 		// onCancelled方法用于在取消执行中的任务时更改UI
 		protected void onCancelled() {
-			Util.stopProgressDialog();
+			stopProgressDialog();
 		}
 	}
 
@@ -312,5 +319,26 @@ public class FclassFristViewActivity extends BaseActivity implements
 		// TODO Auto-generated method stub
 
 	}
+	/**
+	 * 启动Loding...
+	 * 
+	 * @param context
+	 */
+	public void startProgressDialog(Context context) {
+		if (progressDialog == null) {
+			progressDialog = CustomProgressDialog.createDialog(context);
+		}
 
+		progressDialog.show();
+	}
+
+	/**
+	 * 关闭Loding...
+	 */
+	public void stopProgressDialog() {
+		if (progressDialog != null && progressDialog.isShowing()) {
+			progressDialog.dismiss();
+			progressDialog = null;
+		}
+	}
 }

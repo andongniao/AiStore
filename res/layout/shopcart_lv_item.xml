@@ -36,7 +36,7 @@
             android:id="@+id/shopcart_item_title_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:gravity="center"
+            android:gravity="center_vertical"
             android:text="@string/base_test"
             android:textColor="@color/black"
             android:textSize="16dp" />
