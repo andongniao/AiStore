@@ -2,23 +2,17 @@ package com.youai.aistore.Mycenter;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-
-import com.nostra13.universalimageloader.core.ImageLoader;
 import com.youai.aistore.BaseActivity;
 import com.youai.aistore.MyApplication;
 import com.youai.aistore.R;
@@ -38,6 +32,7 @@ import com.youai.aistore.View.CircleImageView;
 public class MycenterHomeActivity extends BaseActivity implements
 OnClickListener {
 	private CircleImageView headeriv;
+	@SuppressWarnings("unused")
 	private LinearLayout dingdan_ll, youhui_ll, kefu_ll, set_ll, call_ll,
 	sms_ll, show_ll, login_ll,login_out_ll;
 	private Button login_btn, regist_btn,login_out_btn;
@@ -135,6 +130,7 @@ OnClickListener {
 			if(MyApplication.logined){
 				dd = new Intent(MycenterHomeActivity.this,AllOrderActivity.class);
 			}else{
+				dd.putExtra("uerID", "");
 				dd = new Intent(MycenterHomeActivity.this,MyLoginActivity.class);
 			}
 			dd.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);

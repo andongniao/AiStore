@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
-import android.content.res.Resources;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,15 +12,11 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.BaseAdapter;
 import android.widget.BaseExpandableListAdapter;
-import android.widget.ExpandableListView;
-import android.widget.ExpandableListView.OnChildClickListener;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.youai.aistore.MainActivity;
 import com.youai.aistore.MyApplication;
 import com.youai.aistore.R;
-import com.youai.aistore.Util;
 import com.youai.aistore.Home.MyGridview;
 
 @SuppressLint("InflateParams")

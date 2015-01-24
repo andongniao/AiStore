@@ -1,30 +1,22 @@
 package com.youai.aistore.Mycenter;
 
-import org.json.JSONObject;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.test.UiThreadTest;
-import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import com.youai.aistore.BaseActivity;
 import com.youai.aistore.MyApplication;
 import com.youai.aistore.R;
 import com.youai.aistore.Util;
-import com.youai.aistore.Bean.Base;
 import com.youai.aistore.Bean.UserBean;
-import com.youai.aistore.NetInterface.GetHttp;
 import com.youai.aistore.NetInterface.Send;
-import com.youai.aistore.NetInterface.ServiceUrl;
 
 /**
  * µÇÂ½½çÃæ
@@ -36,6 +28,7 @@ import com.youai.aistore.NetInterface.ServiceUrl;
 public class MyLoginActivity extends BaseActivity implements OnClickListener {
 	private EditText login_ID, login_password;
 	private Button login_btn;
+	@SuppressWarnings("unused")
 	private Context context;
 	private UserBean result;
 	Handler LoginMessageHandler = new Handler() {

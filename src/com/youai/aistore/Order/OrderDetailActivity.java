@@ -21,7 +21,6 @@ import android.widget.Toast;
 import com.alipay.sdk.app.PayTask;
 import com.youai.aistore.BaseActivity;
 import com.youai.aistore.CustomProgressDialog;
-import com.youai.aistore.ExampleActivity;
 import com.youai.aistore.MyApplication;
 import com.youai.aistore.R;
 import com.youai.aistore.Util;
@@ -43,6 +42,7 @@ public class OrderDetailActivity extends BaseActivity implements OnClickListener
 	private TextView number_tv, statu_tv, time_tv, pp_tv, tel_tv, money_tv,
 	youfei_tv, address_tv;
 	private Button cancel_btn,gopay_btn;
+	@SuppressWarnings("unused")
 	private LinearLayout gopay_ll;
 	private OrderDetailsAdapter adapter;
 	private ArrayList<Goods> list;

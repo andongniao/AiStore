@@ -27,8 +27,11 @@ import com.youai.aistore.NetInterface.Send;
 public class MyRegistActivity extends BaseActivity implements OnClickListener {
 	private EditText regist_ID, regist_password, regist_repassword;
 	private Button regist_btn;
+	@SuppressWarnings("unused")
 	private Context context;
+	@SuppressWarnings("unused")
 	private String errormsg = "";
+	@SuppressWarnings("unused")
 	private String code, messagetxt;
 	Handler LoginMessageHandler = new Handler() {
 		@SuppressLint("HandlerLeak")

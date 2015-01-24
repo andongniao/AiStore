@@ -1,7 +1,7 @@
 package com.youai.aistore.Fclass;
 
 import java.util.ArrayList;
-
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Paint;
 import android.view.LayoutInflater;
@@ -10,12 +10,13 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.youai.aistore.R;
 import com.youai.aistore.Bean.GoodsBean;
 
+@SuppressLint("InflateParams")
 public class FclassMoreAdapter extends BaseAdapter {
+	@SuppressWarnings("unused")
 	private Context context;
 	private ArrayList<GoodsBean> list;
 	private LayoutInflater inflater;

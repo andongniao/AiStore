@@ -12,8 +12,6 @@ import com.youai.aistore.BaseActivity;
 import com.youai.aistore.ExampleActivity;
 import com.youai.aistore.MyApplication;
 import com.youai.aistore.R;
-import com.youai.aistore.WelcomeActivity;
-import com.youai.aistore.R.string;
 /**
  * ∏ˆ»À…Ë÷√
  * 

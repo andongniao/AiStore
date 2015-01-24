@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.KeyEvent;
 import android.widget.ExpandableListView;
 import android.widget.Toast;
+
 import com.youai.aistore.BaseActivity;
 import com.youai.aistore.R;
 
@@ -25,6 +26,7 @@ public class FclassHomeActivity extends BaseActivity {
 	private ArrayList<ArrayList<String>> childnamelist;
 	private Resources rs;
 	private FclassHomeAdapter adapter;
+	@SuppressWarnings("unused")
 	private Context context;
 
 	@Override

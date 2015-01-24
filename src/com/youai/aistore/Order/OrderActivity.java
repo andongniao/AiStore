@@ -43,7 +43,6 @@ import com.youai.aistore.ShopCart.ShopCartActivity;
  * 
  */
 public class OrderActivity extends BaseActivity implements OnClickListener {
-	@SuppressWarnings("unused")
 	private OrderListview lv;
 	private TextView tv_consignee, tv_address, tv_number, tv_goods_prive,
 	tv_kuaidi_price, tv_final_price, tv_chose_time;
@@ -52,9 +51,7 @@ public class OrderActivity extends BaseActivity implements OnClickListener {
 	private RadioButton zhifu_rbt, huodao_rbt;
 	private Context context;
 	private Dialog alertDialog;
-	@SuppressWarnings("unused")
 	private OrderLvAdapter adapter;
-	@SuppressWarnings("unused")
 	private ArrayList<ShopCartBean> list;
 	private int type, postion, time,addtype;
 	private ListShopCartBean listbean;

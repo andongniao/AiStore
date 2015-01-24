@@ -3,7 +3,6 @@ package com.youai.aistore;
 import android.app.Dialog;
 import android.content.Context;
 import android.view.Gravity;
-import android.view.MotionEvent;
 
 /**
  * Loding...

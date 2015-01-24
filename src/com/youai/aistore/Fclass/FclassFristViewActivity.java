@@ -1,43 +1,32 @@
 package com.youai.aistore.Fclass;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-
+import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
-import android.content.res.TypedArray;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
-import android.widget.ListAdapter;
-import android.widget.SimpleAdapter;
 import android.widget.TextView;
-
 import com.youai.aistore.BaseActivity;
 import com.youai.aistore.CustomProgressDialog;
 import com.youai.aistore.MyApplication;
 import com.youai.aistore.R;
 import com.youai.aistore.Util;
 import com.youai.aistore.Bean.GoodsBean;
-import com.youai.aistore.Bean.ListFclassTwo;
 import com.youai.aistore.Bean.ListGoodsBean;
-import com.youai.aistore.Home.HomeActivity;
 import com.youai.aistore.Home.MyGridview;
-import com.youai.aistore.Home.SearchResultActivity;
-import com.youai.aistore.Home.SearchResultAdapter;
 import com.youai.aistore.NetInterface.Send;
 import com.youai.aistore.Product.ProductDetailsActivity;
 
+@SuppressLint("InflateParams")
 public class FclassFristViewActivity extends BaseActivity implements
 		OnItemClickListener {
 	private MyGridview toptitlegridview, g; // 上面标题gridview
@@ -53,6 +42,7 @@ public class FclassFristViewActivity extends BaseActivity implements
 	private ListGoodsBean fclasslist;
 	private ArrayList<GoodsBean> ListBean;
 	private FclassFristViewAdapter fclassAdapter;
+	@SuppressWarnings("unused")
 	private int type, id, postion;
 	private Dialog progressDialog;
 	public static boolean isfinish;
