@@ -121,6 +121,7 @@
     <string name="mycenter_home_youhuiquan">优惠券</string>
     <string name="mycenter_home_zaixiankehu">在线客服</string>
     <string name="mycenter_home_geren_set">个人设置</string>
+    <string name="mycenter_login_out">退出登录</string>
 
     <!-- 登陆和注册 -->
     <string name="my_login_tv">登陆</string>

@@ -24,6 +24,7 @@ import com.youai.aistore.MyApplication;
 import com.youai.aistore.R;
 import com.youai.aistore.Util;
 import com.youai.aistore.Bean.Base;
+import com.youai.aistore.Bean.UserBean;
 import com.youai.aistore.NetInterface.Send;
 import com.youai.aistore.Order.AllOrderActivity;
 import com.youai.aistore.View.CircleImageView;
@@ -35,11 +36,11 @@ import com.youai.aistore.View.CircleImageView;
  * 
  */
 public class MycenterHomeActivity extends BaseActivity implements
-		OnClickListener {
+OnClickListener {
 	private CircleImageView headeriv;
 	private LinearLayout dingdan_ll, youhui_ll, kefu_ll, set_ll, call_ll,
-			sms_ll, show_ll, login_ll;
-	private Button login_btn, regist_btn;
+	sms_ll, show_ll, login_ll,login_out_ll;
+	private Button login_btn, regist_btn,login_out_btn;
 	private TextView uernametv;
 	private boolean isshowing,log;
 	private Dialog alertDialog;
@@ -85,6 +86,10 @@ public class MycenterHomeActivity extends BaseActivity implements
 		show_ll = (LinearLayout) findViewById(R.id.mycenter_home_show_ll);
 		uernametv = (TextView) findViewById(R.id.mycenter_home_username_tv);
 		login_ll = (LinearLayout) findViewById(R.id.mycenter_home_login_ll);
+		login_out_ll = (LinearLayout) findViewById(R.id.mycenter_home_login_out_ll);
+		login_out_btn = (Button) findViewById(R.id.mycenter_home_login_out_btn);
+		login_out_btn.setVisibility(View.GONE);
+		login_out_btn.setOnClickListener(this);
 		// 登陆和注册
 		login_btn = (Button) findViewById(R.id.mycenter_home_login_btn);
 		login_btn.setOnClickListener(this);
@@ -93,14 +98,16 @@ public class MycenterHomeActivity extends BaseActivity implements
 		if (MyApplication.userBean != null) {
 			uernametv.setText(MyApplication.userBean.getUser_name());
 		}
-		String url = "http://img5.imgtn.bdimg.com/it/u=3292851460,915918973&fm=116&gp=0.jpg";
-		ImageLoader.getInstance().displayImage(url, headeriv);
+		//		String url = "http://img5.imgtn.bdimg.com/it/u=3292851460,915918973&fm=116&gp=0.jpg";
+		//		ImageLoader.getInstance().displayImage(url, headeriv);
 		if (MyApplication.logined) {
-			login_ll.setVisibility(View.GONE);
 			uernametv.setText(MyApplication.UserName);
+			login_ll.setVisibility(View.GONE);
+			login_out_btn.setVisibility(View.VISIBLE);
 		}else{
 			uernametv.setText("");
-			
+			login_ll.setVisibility(View.VISIBLE);
+			login_out_btn.setVisibility(View.GONE);
 		}
 	}
 
@@ -113,6 +120,7 @@ public class MycenterHomeActivity extends BaseActivity implements
 		case R.id.mycenter_home_login_btn:
 			Intent intent = new Intent(MycenterHomeActivity.this,
 					MyLoginActivity.class);
+			intent.putExtra("uerID", "");
 			intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 			startActivity(intent);
 			break;
@@ -146,17 +154,33 @@ public class MycenterHomeActivity extends BaseActivity implements
 
 			break;
 		case R.id.mycenter_home_set_ll:
-			Intent intent2 = new Intent(MycenterHomeActivity.this,
-					MySettingActivity.class);
-			intent2.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-			intent2.putExtra("username",uernametv.toString() );
-			startActivity(intent2);
+			//			Intent intent2 = new Intent(MycenterHomeActivity.this,
+			//					MySettingActivity.class);
+			//			intent2.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+			//			intent2.putExtra("username",uernametv.toString() );
+			//			startActivity(intent2);
 			break;
 		case R.id.mycenter_home_call_ll:
 			ShowDialog(1);
 			break;
 		case R.id.mycenter_home_sms_ll:
 			ShowDialog(2);
+			break;
+		case R.id.mycenter_home_login_out_btn:
+			MyApplication.logined = false;
+			UserBean ub = new UserBean();
+			ub.setUser_id("");
+			ub.setUser_name("");
+			MyApplication.SaveUserBean(ub);
+			if (MyApplication.logined) {
+				uernametv.setText(MyApplication.UserName);
+				login_ll.setVisibility(View.GONE);
+				login_out_btn.setVisibility(View.VISIBLE);
+			}else{
+				uernametv.setText("");
+				login_ll.setVisibility(View.VISIBLE);
+				login_out_btn.setVisibility(View.GONE);
+			}
 			break;
 		}
 	}
@@ -172,38 +196,38 @@ public class MycenterHomeActivity extends BaseActivity implements
 
 		}
 		alertDialog = new AlertDialog.Builder(this)
-				.setTitle(title)
-				.setIcon(null)
-				.setPositiveButton(R.string.product_cancle,
-						new DialogInterface.OnClickListener() {
+		.setTitle(title)
+		.setIcon(null)
+		.setPositiveButton(R.string.product_cancle,
+				new DialogInterface.OnClickListener() {
 
-							@Override
-							public void onClick(DialogInterface dialog,
-									int which) {
-							}
-						})
-				.setNegativeButton(index,
-						new DialogInterface.OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialog,
+					int which) {
+			}
+		})
+		.setNegativeButton(index,
+				new DialogInterface.OnClickListener() {
 
-							@Override
-							public void onClick(DialogInterface dialog,
-									int which) {
-								if (statu == 1) {
-									Intent phoneIntent = new Intent(
-											"android.intent.action.CALL",
-											Uri.parse("tel:"
-													+ MyApplication.callnumber));
-									startActivity(phoneIntent);
-								} else {
-									Uri uri = Uri.parse("smsto:"
-											+ MyApplication.smsnumber);
-									Intent ii = new Intent(
-											Intent.ACTION_SENDTO, uri);
-									ii.putExtra("sms_body", "");
-									startActivity(ii);
-								}
-							}
-						}).create();
+			@Override
+			public void onClick(DialogInterface dialog,
+					int which) {
+				if (statu == 1) {
+					Intent phoneIntent = new Intent(
+							"android.intent.action.CALL",
+							Uri.parse("tel:"
+									+ MyApplication.callnumber));
+					startActivity(phoneIntent);
+				} else {
+					Uri uri = Uri.parse("smsto:"
+							+ MyApplication.smsnumber);
+					Intent ii = new Intent(
+							Intent.ACTION_SENDTO, uri);
+					ii.putExtra("sms_body", "");
+					startActivity(ii);
+				}
+			}
+		}).create();
 		alertDialog.show();
 	}
 	@Override
@@ -211,20 +235,21 @@ public class MycenterHomeActivity extends BaseActivity implements
 		super.onResume();
 		if(MyApplication.logined){
 			login_ll.setVisibility(View.GONE);
+			login_out_btn.setVisibility(View.VISIBLE);
 			uernametv.setText(MyApplication.userBean.getUser_name());
 			if(log){
-			if (Util.detect(context)) {
-				myTask = new MyTask();
-				myTask.execute("");
-			} else {
-				Util.ShowToast(context, R.string.net_work_is_error);
-			}
+				if (Util.detect(context)) {
+					myTask = new MyTask();
+					myTask.execute("");
+				} else {
+					Util.ShowToast(context, R.string.net_work_is_error);
+				}
 			}
 		}
 	}
-	
 
-	
+
+
 	private class MyTask extends AsyncTask<Object, Object, Object> {
 		// onPreExecute方法用于在执行后台任务前做一些UI操作
 		@Override
@@ -236,11 +261,11 @@ public class MycenterHomeActivity extends BaseActivity implements
 		@Override
 		protected Object doInBackground(Object... params) {
 			try {
-					Send s = new Send(context);
-					String sessionid = MyApplication.SessionId;
-					String userid = MyApplication.UserId;
-					bean = s.updataShopcartInfo(sessionid, userid);
-					return bean;
+				Send s = new Send(context);
+				String sessionid = MyApplication.SessionId;
+				String userid = MyApplication.UserId;
+				bean = s.updataShopcartInfo(sessionid, userid);
+				return bean;
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -280,8 +305,8 @@ public class MycenterHomeActivity extends BaseActivity implements
 		}
 
 	}
-	
 
-    
-	
+
+
+
 }
