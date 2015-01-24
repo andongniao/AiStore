@@ -96,7 +96,9 @@ public class FclassMoreActivity extends BaseActivity implements
 		listView.setXListViewListener(this);
 
 	}
-
+	/*
+	 * 列表数据的点击事件
+	 */
 	class mylistener implements OnItemClickListener {
 
 		@SuppressWarnings("static-access")
@@ -122,9 +124,11 @@ public class FclassMoreActivity extends BaseActivity implements
 		switch (arg0.getId()) {
 		case R.id.fclass_more_popularity_ll:
 			if(!pp){
+				
 				price = !price;
 				desc = MyApplication.clickdasc;
 				pp = true;
+				
 				if (Util.detect(context)) {
 					myTask = new MyTask();
 					myTask.execute("");

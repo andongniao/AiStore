@@ -138,5 +138,12 @@ public class MyApplication extends Application {
 		mEditor.putString("username", bean.getUser_name());
 		mEditor.commit();
 	}
+	/*退出登录注销用户信息*/
+	public static void RemvoeUser(String username) {
+		// TODO Auto-generated method stub
+		SharedPreferences.Editor mEditor = mSharedPreferences.edit();
+		mEditor.remove(username).clear().commit();
+		
+	}
 
 }

@@ -73,9 +73,14 @@ public class MyRegistActivity extends BaseActivity implements OnClickListener {
 	@Override
 	public void onClick(View v) {
 		// TODO Auto-generated method stub
-		if (validate()) {
-			addUser();
+		if(Util.detect(MyRegistActivity.this)){//判断是否联网
+			if (validate()) {
+				addUser();
+			}
+		}else{
+			Util.ShowToast(MyRegistActivity.this, R.string.net_work_is_error);
 		}
+
 	}
 
 	/* 验证输入的用户名和密码对不对。 */
