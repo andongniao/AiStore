@@ -34,7 +34,6 @@ public class WelcomeActivity extends Activity {
 					msg.what = 1;
 					hand.sendMessage(msg);
 				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			};

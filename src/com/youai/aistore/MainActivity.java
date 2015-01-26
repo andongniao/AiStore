@@ -1,7 +1,7 @@
 package com.youai.aistore;
 
 import java.util.ArrayList;
-
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.ListActivity;
 import android.content.Intent;
@@ -14,7 +14,7 @@ import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
-/** 主程序入口 */
+@SuppressLint({ "ViewHolder", "InflateParams" })
 public class MainActivity extends ListActivity {
 	private ListView mListView;
 	private ListAdapter mAdapter;

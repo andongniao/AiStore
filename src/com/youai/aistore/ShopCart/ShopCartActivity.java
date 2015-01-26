@@ -193,6 +193,7 @@ public class ShopCartActivity extends BaseActivity implements OnClickListener {
 			} else {
 				intent = new Intent(ShopCartActivity.this,
 						MyLoginActivity.class);
+				intent.putExtra("uerID", "");
 			}
 			intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 			startActivity(intent);

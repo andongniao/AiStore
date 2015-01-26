@@ -13,23 +13,14 @@ import com.youai.aistore.Home.HomeActivity;
 import com.youai.aistore.Mycenter.MycenterHomeActivity;
 import com.youai.aistore.ShopCart.ShopCartActivity;
 
-/**
- * 导航
- * 
- * @author Qzr
- * 
- */
 public class ExampleActivity extends TabHostActivity {
 
 	private List<TabItem> mItems;
 
-	/**
-	 * 在初始化TabWidget前调用 和TabWidget有关的必须在这里初始化
-	 */
 	@Override
 	protected void prepare() {
-		TabItem Home = new TabItem(R.drawable.base_home, // background
-				new Intent(this, HomeActivity.class)); // intent
+		TabItem Home = new TabItem(R.drawable.base_home, 
+				new Intent(this, HomeActivity.class)); 
 
 		TabItem Fclass = new TabItem(R.drawable.base_fclass_bg, new Intent(
 				this, FclassHomeActivity.class));
@@ -39,26 +30,16 @@ public class ExampleActivity extends TabHostActivity {
 
 		TabItem MyCenter = new TabItem(R.drawable.base_mycenter, new Intent(
 				this, MycenterHomeActivity.class));
-
-		// TabItem more = new TabItem(
-		// "更多",
-		// R.drawable.icon_more,
-		// R.drawable.example_tab_item_bg,
-		// new Intent(this, HomeActivity.class));
-
 		mItems = new ArrayList<TabItem>();
 		mItems.add(Home);
 		mItems.add(Fclass);
 		mItems.add(ShopCart);
 		mItems.add(MyCenter);
-		// mItems.add(more);
 
-		// 设置分割线
 		@SuppressWarnings("deprecation")
 		TabWidget tabWidget = getTabWidget();
 		tabWidget.setDividerDrawable(R.drawable.tab_divider);
 
-		// mLayoutInflater = getLayoutInflater();
 	}
 
 	@Override
@@ -67,24 +48,18 @@ public class ExampleActivity extends TabHostActivity {
 		setCurrentTab(0);
 	}
 
-	/** tab的title，icon，边距设定等等 */
 	@Override
 	protected void setTabItemTextView(ImageView textView, int position) {
 		textView.setPadding(3, 3, 3, 3);
-		// textView.setText(mItems.get(position).getTitle());
 		textView.setBackgroundResource(mItems.get(position).getBg());
-		// textView.setCompoundDrawablesWithIntrinsicBounds(0,
-		// mItems.get(position).getIcon(), 0, 0);
 
 	}
 
-	/** tab唯一的id */
 	@Override
 	protected String getTabItemId(int position) {
-		return mItems.get(position).getIntent().toString(); // 我们使用title来作为id，你也可以自定
+		return mItems.get(position).getIntent().toString(); 
 	}
 
-	/** 点击tab时触发的事件 */
 	@Override
 	protected Intent getTabItemIntent(int position) {
 
@@ -95,19 +70,4 @@ public class ExampleActivity extends TabHostActivity {
 	protected int getTabItemCount() {
 		return mItems.size();
 	}
-
-	// /**自定义头部文件*/
-	// @Override
-	// protected View getTop() {
-	// View view = mLayoutInflater.inflate(R.layout.example_top, null);
-	// // ImageView lf = (ImageView) view.findViewById(R.id.example_left);
-	// // lf.setOnClickListener(new OnClickListener() {
-	// // @Override
-	// // public void onClick(View arg0) {
-	// //
-	// // }
-	// // });
-	// return null;//mLayoutInflater.inflate(R.layout.example_top, null);
-	// }
-
 }

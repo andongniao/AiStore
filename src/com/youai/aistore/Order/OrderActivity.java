@@ -62,12 +62,12 @@ public class OrderActivity extends BaseActivity implements OnClickListener {
 	private Handler mHandler;
 	private static final int SDK_PAY_FLAG = 1;
 	private static final int SDK_CHECK_FLAG = 2;
-	private final String PARTNER = MyApplication.PARTNER;// 合作者身份ID
-	private final String SELLER = MyApplication.SELLER;// 卖家支付宝账号
+	private final String PARTNER = MyApplication.PARTNER;
+	private final String SELLER = MyApplication.SELLER;
 	private final String RSA_PRIVATE = MyApplication.RSA_PRIVATE;
 	@SuppressWarnings("unused")
 	private final String RSA_PUBLIC = MyApplication.RSA_PUBLIC;
-	private final String Notify_Url = MyApplication.Notify_Url;// 
+	private final String Notify_Url = MyApplication.Notify_Url;
 
 
 	@Override
@@ -84,11 +84,7 @@ public class OrderActivity extends BaseActivity implements OnClickListener {
 					Result resultObj = new Result((String) msg.obj);
 					String resultStatus = resultObj.resultStatus;
 					String memo = resultObj.memo;
-
-					// 判断resultStatus 为“9000”则代表支付成功，具体状态码代表含义可参考接口文档
 					if (TextUtils.equals(resultStatus, "9000")) {
-						//						Toast.makeText(OrderActivity.this, "这时候支付成功"+memo,// "支付成功",
-						//								Toast.LENGTH_SHORT).show();
 						addtype = 2;
 						MyApplication.order_list.add(bean.getOrder_sn());
 						if (Util.detect(context)) {
@@ -98,29 +94,10 @@ public class OrderActivity extends BaseActivity implements OnClickListener {
 							Util.ShowToast(context, R.string.net_work_is_error);
 						}
 					} else {
-						// 判断resultStatus 为非“9000”则代表可能支付失败
-						// “8000”
-						// 代表支付结果因为支付渠道原因或者系统原因还在等待支付结果确认，最终交易是否成功以服务端异步通知为准（小概率状态）
-						if (TextUtils.equals(resultStatus, "8000")) {
-							Toast.makeText(OrderActivity.this, memo,// "支付结果确认中",
-									Toast.LENGTH_SHORT).show();
-							ConsigneeInfoActivity.isfinish = true;
-							ExampleActivity.setCurrentTab(2);
-							finish();
-
-						} else if (TextUtils.equals(resultStatus, "4000")) {
-							Toast.makeText(OrderActivity.this, memo,// "订单支付失败",
-									Toast.LENGTH_SHORT).show();
-							ConsigneeInfoActivity.isfinish = true;
-							ExampleActivity.setCurrentTab(2);
-							finish();
-						} else {
-							Toast.makeText(OrderActivity.this, memo,// "支付失败",
-									Toast.LENGTH_SHORT).show();
-							ConsigneeInfoActivity.isfinish = true;
-							ExampleActivity.setCurrentTab(2);
-							finish();
-						}
+						Util.ShowToast(context, memo);
+						ConsigneeInfoActivity.isfinish = true;
+						ExampleActivity.setCurrentTab(2);
+						finish();
 					}
 					break;
 				}
@@ -238,13 +215,11 @@ public class OrderActivity extends BaseActivity implements OnClickListener {
 
 	private class MyTask extends AsyncTask<Object, Object, Object> {
 
-		// onPreExecute方法用于在执行后台任务前做一些UI操作
 		@Override
 		protected void onPreExecute() {
 			Util.startProgressDialog(context);
 		}  
 
-		//doInBackground方法内部执行后台任务,不可在此方法内修改UI  
 		@Override  
 		protected Object doInBackground(Object... params) {  
 			try {
@@ -264,13 +239,9 @@ public class OrderActivity extends BaseActivity implements OnClickListener {
 			return null;
 		}
 
-		// onProgressUpdate方法用于更新进度信息
 		@Override
-		protected void onProgressUpdate(Object... progresses) {
+		protected void onProgressUpdate(Object... progresses) {}
 
-		}
-
-		// onPostExecute方法用于在执行完后台任务后更新UI,显示结果
 		@Override
 		protected void onPostExecute(Object result) {
 			Util.stopProgressDialog();
@@ -280,9 +251,6 @@ public class OrderActivity extends BaseActivity implements OnClickListener {
 					if (bean.getCode() == 200) {
 						ShopCartActivity.shopcartchaneged = true;
 						if (type == 1) {
-							// Fiap fiap = new Fiap(OrderActivity.this);
-							// // 调用支付方法，并传入支付金额
-							// fiap.pay(0.01,"测试商品","测试商品信息","测试订单号");
 							String price = String.valueOf(final_price);
 							String goodsinfo = "";
 							if(list!=null){
@@ -328,7 +296,6 @@ public class OrderActivity extends BaseActivity implements OnClickListener {
 			}
 		}
 
-		// onCancelled方法用于在取消执行中的任务时更改UI
 		@Override
 		protected void onCancelled() {
 			// Util.stopProgressDialog();
@@ -336,32 +303,21 @@ public class OrderActivity extends BaseActivity implements OnClickListener {
 
 	}
 
-	/**
-	 * call alipay sdk pay. 调用SDK支付
-	 * 
-	 */
 	public void pay(String price, String goodname, String gooddes,String orderid) {
 		String orderInfo = getOrderInfo(goodname, gooddes, price,orderid);
-		//		String sign = "lBBK%2F0w5LOajrMrji7DUgEqNjIhQbidR13GovA5r3TgIbNqv231yC1NksLdw%2Ba3JnfHXoXuet6XNNHtn7VE%2BeCoRO1O%2BR1KugLrQEZMtG5jmJIe2pbjm%2F3kb%2FuGkpG%2BwYQYI51%2BhA3YBbvZHVQBYveBqK%2Bh8mUyb7GM1HxWs9k4%3D";
 		String sign = sign(orderInfo);
 		try {
-			// 仅需对sign 做URL编码
 			sign = URLEncoder.encode(sign, "UTF-8");
 		} catch (UnsupportedEncodingException e) {
 			e.printStackTrace();
 		}
 		final String payInfo = orderInfo + "&sign=\"" + sign + "\"&"
 				+ getSignType();
-
 		Runnable payRunnable = new Runnable() {
-
 			@Override
 			public void run() {
-				// 构造PayTask 对象
 				PayTask alipay = new PayTask(OrderActivity.this);
-				// 调用支付接口
 				String result = alipay.pay(payInfo);
-
 				Message msg = new Message();
 				msg.what = SDK_PAY_FLAG;
 				msg.obj = result;
@@ -373,75 +329,35 @@ public class OrderActivity extends BaseActivity implements OnClickListener {
 		payThread.start();
 	}
 
-	/**
-	 * get the sign type we use. 获取签名方式
-	 * 
-	 */
 	public String getSignType() {
 		return "sign_type=\"RSA\"";
 	}
 
-	/**
-	 * create the order info. 创建订单信息
-	 * 
-	 */
 	public String getOrderInfo(String subject, String body, String price,String orderid) {
-		// 合作者身份ID
 		String orderInfo = "partner=" + "\"" + PARTNER + "\"";
-		// 卖家支付宝账号
 		orderInfo += "&seller_id=" + "\"" + SELLER + "\"";
-		// 商户网站唯一订单号
 		orderInfo += "&out_trade_no=" + "\"" + orderid + "\"";
-		// 商品名称
 		orderInfo += "&subject=" + "\"" + subject + "\"";
-		// 商品详情
 		orderInfo += "&body=" + "\"" + body + "\"";
-		// 商品金额
 		orderInfo += "&total_fee=" + "\"" + price + "\"";
-		// 服务器异步通知页面路径
 		orderInfo += "&notify_url=" + "\"" + Notify_Url
 				+ "\"";
-		// 接口名称， 固定值
 		orderInfo += "&service=\"mobile.securitypay.pay\"";
-		// 支付类型， 固定值
 		orderInfo += "&payment_type=\"1\"";
-		// 参数编码， 固定值
 		orderInfo += "&_input_charset=\"utf-8\"";
-		// 设置未付款交易的超时时间
-		// 默认30分钟，一旦超时，该笔交易就会自动被关闭。
-		// 取值范围：1m～15d。
-		// m-分钟，h-小时，d-天，1c-当天（无论交易何时创建，都在0点关闭）。
-		// 该参数数值不接受小数点，如1.5h，可转换为90m。
 		orderInfo += "&it_b_pay=\"30m\"";
-
-		// 支付宝处理完请求后，当前页面跳转到商户指定页面的路径，可空
 		orderInfo += "&return_url=\"m.alipay.com\"";
-
-		// 调用银行卡支付，需配置此参数，参与签名， 固定值
 		// orderInfo += "&paymethod=\"expressGateway\"";
-
 		return orderInfo;
 	}
 
 
-	/**
-	 * sign the order info. 对订单信息进行签名
-	 * 
-	 * @param content
-	 *            待签名订单信息
-	 */
 	public String sign(String content) {
 		return Util.sign(content, RSA_PRIVATE);
 	}
 
-	/**
-	 * check whether the device has authentication alipay account.
-	 * 查询终端设备是否存在支付宝认证账户
-	 * 
-	 */
 	public void check() {
 		Runnable checkRunnable = new Runnable() {
-
 			@Override
 			public void run() {
 				PayTask payTask = new PayTask(OrderActivity.this);

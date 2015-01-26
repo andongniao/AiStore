@@ -1,7 +1,6 @@
 package com.youai.aistore.Fclass;
 
 import java.util.ArrayList;
-
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
@@ -14,7 +13,6 @@ import android.widget.BaseAdapter;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import com.youai.aistore.MyApplication;
 import com.youai.aistore.R;
 import com.youai.aistore.Home.MyGridview;
