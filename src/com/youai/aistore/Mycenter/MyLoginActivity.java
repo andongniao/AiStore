@@ -3,6 +3,7 @@ package com.youai.aistore.Mycenter;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -10,6 +11,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.youai.aistore.BaseActivity;
 import com.youai.aistore.MyApplication;
@@ -27,6 +29,7 @@ import com.youai.aistore.NetInterface.Send;
 
 public class MyLoginActivity extends BaseActivity implements OnClickListener {
 	private EditText login_ID, login_password;
+	private TextView regist_link;
 	private Button login_btn;
 	@SuppressWarnings("unused")
 	private Context context;
@@ -69,19 +72,35 @@ public class MyLoginActivity extends BaseActivity implements OnClickListener {
 		/*接收注册界面发过来的账号，*/
 		String uerid = getIntent().getExtras().getString("uerID", "");
 		login_ID.setText(uerid);
+		//注册链接
+		regist_link =(TextView) findViewById(R.id.regist_link);
+		regist_link.setOnClickListener(this);
 	}
 
 	@Override
 	public void onClick(View v) {
 		// TODO Auto-generated method stub
-		if(Util.detect(MyLoginActivity.this)){//判断是否联网
-			if (validate()) {// 判断验证是不是成功了
-				login();
+		switch (v.getId()) {
+		case R.id.my_login_btn:
+			if(Util.detect(MyLoginActivity.this)){//判断是否联网
+				if (validate()) {// 判断验证是不是成功了
+					login();
 
+				}
+			}else{
+				Util.ShowToast(MyLoginActivity.this, R.string.net_work_is_error);
 			}
-		}else{
-			Util.ShowToast(MyLoginActivity.this, R.string.net_work_is_error);
+			break;
+		case R.id.regist_link:
+			Intent intent = new Intent(MyLoginActivity.this,
+					MyRegistActivity.class);
+			intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+			startActivity(intent);
+
+		default:
+			break;
 		}
+		
 		
 		
 	}

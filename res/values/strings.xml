@@ -129,6 +129,7 @@
     <string name="my_login_ID_et">请输入您的账号</string>
     <string name="my_login_password_tv">密码:</string>
     <string name="my_login_password_et">请输入您的密码</string>
+    <string name="login_register_link">没有帐号？ <a href="#">点击注册</a></string>
     
     <string name="my_regist_tv">注册</string>
     <string name="my_regist_ID_tv">手机/邮箱:</string>
@@ -137,6 +138,7 @@
     <string name="my_regist_password_et">密码为字母数字组合，至少4位</string>
     <string name="my_regist_repassword_tv">确认密码:</string>
     <string name="my_regist_repassword_et">请再输一次密码</string>
+    
     
     <string name="login_id_not_null">账号必须输入</string>
     <string name="login_password_not_null">密码必须输入</string>

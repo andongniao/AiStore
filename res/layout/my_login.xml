@@ -91,5 +91,15 @@
             android:textColor="@color/white"
             android:textSize="20sp" />
     </LinearLayout>
+    <TextView
+        android:id="@+id/regist_link"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="20dp"
+        android:text="@string/login_register_link"
+        android:textColor="@color/my_login_tv"
+        android:textColorLink="@color/home_text_red" />
 
 </LinearLayout>
