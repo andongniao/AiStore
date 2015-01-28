@@ -78,7 +78,7 @@ public class ShopCartAdapter extends BaseAdapter {
 				myShopItem.iv.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
 				ImageLoader.getInstance().displayImage(list.get(postion).getPic_url(), myShopItem.iv);
 				myShopItem.tv_titlt.setText(list.get(postion).getGoods_name());
-				myShopItem.tv_price.setText("£¤"+list.get(postion).getGoods_price()+"Ôª");
+				myShopItem.tv_price.setText("ï¿¥"+list.get(postion).getGoods_price()+"å…ƒ");
 				myShopItem.tv_kucun.setText(list.get(postion).getGoods_count());
 				myShopItem.et_num.setText(list.get(postion).getGoods_number());
 				

@@ -70,12 +70,12 @@ public abstract class TabHostActivity extends TabActivity {
 
 	}
 
-	/** ÔÚ³õÊ¼»¯½çÃæÖ®Ç°µ÷ÓÃ */
+	/** åœ¨åˆå§‹åŒ–ç•Œé¢ä¹‹å‰è°ƒç”¨ */
 	protected void prepare() {
 		// do nothing or you override it
 	}
 
-	// /** ×Ô¶¨ÒåÍ·²¿²¼¾Ö */
+	// /** è‡ªå®šä¹‰å¤´éƒ¨å¸ƒå±€ */
 	// protected View getTop() {
 	// // do nothing or you override it
 	// return null;
@@ -85,7 +85,7 @@ public abstract class TabHostActivity extends TabActivity {
 		return mTabHost.getTabWidget().getTabCount();
 	}
 
-	/** ÉèÖÃTabItemµÄÍ¼±êºÍ±êÌâµÈ */
+	/** è®¾ç½®TabItemçš„å›¾æ ‡å’Œæ ‡é¢˜ç­‰ */
 	abstract protected void setTabItemTextView(ImageView textView, int position);
 
 	abstract protected String getTabItemId(int position);

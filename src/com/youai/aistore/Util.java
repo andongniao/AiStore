@@ -28,7 +28,7 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 /**
- * ¹«ÓÃ¹¤¾ßÀà
+ * å…¬ç”¨å·¥å…·ç±»
  * 
  * @author Qzr
  * 
@@ -41,13 +41,13 @@ public class Util {
 	private static CustomProgressDialog progressDialog = null;
 
 	/**
-	 * ÅĞ¶ÏÊÇ·ñÊÇµç»°ºÅÂë
+	 * åˆ¤æ–­æ˜¯å¦æ˜¯ç”µè¯å·ç 
 	 * 
 	 * @param mobiles
-	 * @return trueÊÇµç»°ºÅÂë
+	 * @return trueæ˜¯ç”µè¯å·ç 
 	 */
 	public static boolean isMobileNO(String mobiles) {
-		String telRegex = "[1][3578]\\d{9}";// "[1]"´ú±íµÚ1Î»ÎªÊı×Ö1£¬"[358]"´ú±íµÚ¶şÎ»¿ÉÒÔÎª3¡¢5¡¢8ÖĞµÄÒ»¸ö£¬"\\d{9}"´ú±íºóÃæÊÇ¿ÉÒÔÊÇ0¡«9µÄÊı×Ö£¬ÓĞ9Î»¡£
+		String telRegex = "[1][3578]\\d{9}";// "[1]"ä»£è¡¨ç¬¬1ä½ä¸ºæ•°å­—1ï¼Œ"[358]"ä»£è¡¨ç¬¬äºŒä½å¯ä»¥ä¸º3ã€5ã€8ä¸­çš„ä¸€ä¸ªï¼Œ"\\d{9}"ä»£è¡¨åé¢æ˜¯å¯ä»¥æ˜¯0ï½9çš„æ•°å­—ï¼Œæœ‰9ä½ã€‚
 		if (TextUtils.isEmpty(mobiles))
 			return false;
 		else
@@ -55,7 +55,7 @@ public class Util {
 	}
 
 	/**
-	 * ÅĞ¶Ïemail¸ñÊ½ÊÇ·ñÕıÈ·
+	 * åˆ¤æ–­emailæ ¼å¼æ˜¯å¦æ­£ç¡®
 	 * 
 	 * @param email
 	 * @return
@@ -69,7 +69,7 @@ public class Util {
 	}
 
 	/**
-	 * ÃÜÂëÎ»ÊıÏŞÖÆ£¬´óÓÚ4Î»£¬Ğ¡ÓÚ10Î»
+	 * å¯†ç ä½æ•°é™åˆ¶ï¼Œå¤§äº4ä½ï¼Œå°äº10ä½
 	 * 
 	 * @param password
 	 * @return
@@ -83,7 +83,7 @@ public class Util {
 	}
 
 	/**
-	 * ¼ì²é¿ªÍ·»ò½áÎ²ÊÇ·ñÓĞ¿Õ¸ñ
+	 * æ£€æŸ¥å¼€å¤´æˆ–ç»“å°¾æ˜¯å¦æœ‰ç©ºæ ¼
 	 * 
 	 * @param password
 	 * @return
@@ -97,10 +97,10 @@ public class Util {
 	}
 
 	/**
-	 * ÅĞ¶Ï×Ö·û´®ÊÇ·ñÎª¿Õ
+	 * åˆ¤æ–­å­—ç¬¦ä¸²æ˜¯å¦ä¸ºç©º
 	 * 
 	 * @param text
-	 * @return true ²»Îª¿Õ
+	 * @return true ä¸ä¸ºç©º
 	 */
 	public static boolean IsNull(String text) {
 		if (text != null && !text.equals("")) {
@@ -110,7 +110,7 @@ public class Util {
 	}
 
 	/**
-	 * »ñÈ¡Í¼Æ¬¿í¶ÈºÍ¸ß¶È
+	 * è·å–å›¾ç‰‡å®½åº¦å’Œé«˜åº¦
 	 * 
 	 * @param id
 	 * @param resources
@@ -118,7 +118,7 @@ public class Util {
 	 */
 	public static int[] getBitmapWidth(int id, Resources resources) {
 		BitmapFactory.Options opts = new BitmapFactory.Options();
-		// ÉèÖÃÎªtureÖ»»ñÈ¡Í¼Æ¬´óĞ¡
+		// è®¾ç½®ä¸ºtureåªè·å–å›¾ç‰‡å¤§å°
 		opts.inJustDecodeBounds = true;
 		opts.inPreferredConfig = Bitmap.Config.ARGB_8888;
 		BitmapFactory.decodeResource(resources, id, opts);
@@ -126,10 +126,10 @@ public class Util {
 	}
 
 	/**
-	 * ÅĞ¶ÏÍøÂçÊÇ·ñ¿ÉÓÃ
+	 * åˆ¤æ–­ç½‘ç»œæ˜¯å¦å¯ç”¨
 	 * 
 	 * @param act
-	 * @return ture¿ÉÓÃ
+	 * @return tureå¯ç”¨
 	 */
 	public static boolean detect(Context act) {
 		ConnectivityManager manager = (ConnectivityManager) act
@@ -146,12 +146,12 @@ public class Util {
 	}
 
 	/**
-	 * °ÑÊ±¼ä´Á×ª»¯³ÉÊ±¼äÀàĞÍ
+	 * æŠŠæ—¶é—´æˆ³è½¬åŒ–æˆæ—¶é—´ç±»å‹
 	 * 
 	 * @param str
-	 *            Ê±¼äÀàĞÍ¸ñÊ½
+	 *            æ—¶é—´ç±»å‹æ ¼å¼
 	 * @param time
-	 *            Ê±¼ä´Á µ¥Î»ºÁÃë
+	 *            æ—¶é—´æˆ³ å•ä½æ¯«ç§’
 	 * @return
 	 */
 	public static String getData(String str, long time) {
@@ -162,10 +162,10 @@ public class Util {
 	}
 
 	/**
-	 * »ñÈ¡µ±Ç°Ê±¼ä
+	 * è·å–å½“å‰æ—¶é—´
 	 * 
 	 * @param str
-	 *            Ê±¼äÀàĞÍ¸ñÊ½
+	 *            æ—¶é—´ç±»å‹æ ¼å¼
 	 * @return
 	 */
 	public static String getdata(String str) {
@@ -175,7 +175,7 @@ public class Util {
 	}
 
 	/**
-	 * Æô¶¯Loding...
+	 * å¯åŠ¨Loding...
 	 * 
 	 * @param context
 	 */
@@ -188,7 +188,7 @@ public class Util {
 	}
 
 	/**
-	 * ¹Ø±ÕLoding...
+	 * å…³é—­Loding...
 	 */
 	public static void stopProgressDialog() {
 		if (progressDialog != null && progressDialog.isShowing()) {
@@ -198,7 +198,7 @@ public class Util {
 	}
 
 	/**
-	 * »ñÈ¡ÍâÖÃsd¿¨µÄ¸ùÂ·¾¶£¬Èç¹û›]ÓĞÍâÖÃsd¿¨£¬„t·µ»Ønull
+	 * è·å–å¤–ç½®sdå¡çš„æ ¹è·¯å¾„ï¼Œå¦‚æœæ²’æœ‰å¤–ç½®sdå¡ï¼Œå‰‡è¿”å›null
 	 * 
 	 * @return
 	 */
@@ -209,7 +209,7 @@ public class Util {
 		if (sd_default.endsWith("/")) {
 			sd_default = sd_default.substring(0, sd_default.length() - 1);
 		}
-		// µÃµ½Â·¾¶
+		// å¾—åˆ°è·¯å¾„
 		try {
 			Runtime runtime = Runtime.getRuntime();
 			Process proc = runtime.exec("mount");
@@ -247,7 +247,7 @@ public class Util {
 	}
 
 	/**
-	 * ºô³öToast
+	 * å‘¼å‡ºToast
 	 * 
 	 * @param context
 	 * @param content
@@ -257,7 +257,7 @@ public class Util {
 	}
 
 	/**
-	 * ºô³öToast
+	 * å‘¼å‡ºToast
 	 * 
 	 * @param context
 	 * @param i
@@ -267,7 +267,7 @@ public class Util {
 	}
 
 	/**
-	 * md5¼ÓÃÜ
+	 * md5åŠ å¯†
 	 * 
 	 * @param key
 	 * @return
@@ -297,32 +297,32 @@ public class Util {
 	}
 
 	public static void setListViewHeightBasedOnChildren(ListView listView) {
-		// »ñÈ¡ListView¶ÔÓ¦µÄAdapter
+		// è·å–ListViewå¯¹åº”çš„Adapter
 		ListAdapter listAdapter = listView.getAdapter();
 		if (listAdapter == null) {
 			return;
 		}
 		int totalHeight = 0;
-		for (int i = 0, len = listAdapter.getCount(); i < len; i++) { // listAdapter.getCount()·µ»ØÊı¾İÏîµÄÊıÄ¿
+		for (int i = 0, len = listAdapter.getCount(); i < len; i++) { // listAdapter.getCount()è¿”å›æ•°æ®é¡¹çš„æ•°ç›®
 			View listItem = listAdapter.getView(i, null, listView);
-			listItem.measure(0, 0); // ¼ÆËã×ÓÏîView µÄ¿í¸ß
-			totalHeight += listItem.getMeasuredHeight(); // Í³¼ÆËùÓĞ×ÓÏîµÄ×Ü¸ß¶È
+			listItem.measure(0, 0); // è®¡ç®—å­é¡¹View çš„å®½é«˜
+			totalHeight += listItem.getMeasuredHeight(); // ç»Ÿè®¡æ‰€æœ‰å­é¡¹çš„æ€»é«˜åº¦
 		}
 		ViewGroup.LayoutParams params = listView.getLayoutParams();
 		params.height = totalHeight
 				+ (listView.getDividerHeight() * (listAdapter.getCount() - 1));
-		// listView.getDividerHeight()»ñÈ¡×ÓÏî¼ä·Ö¸ô·ûÕ¼ÓÃµÄ¸ß¶È
-		// params.height×îºóµÃµ½Õû¸öListViewÍêÕûÏÔÊ¾ĞèÒªµÄ¸ß¶È
+		// listView.getDividerHeight()è·å–å­é¡¹é—´åˆ†éš”ç¬¦å ç”¨çš„é«˜åº¦
+		// params.heightæœ€åå¾—åˆ°æ•´ä¸ªListViewå®Œæ•´æ˜¾ç¤ºéœ€è¦çš„é«˜åº¦
 		listView.setLayoutParams(params);
 	}
 
 	/**
-	 * °ÑÊ±¼ä´Á×ª»¯³ÉÊ±¼äÀàĞÍ
+	 * æŠŠæ—¶é—´æˆ³è½¬åŒ–æˆæ—¶é—´ç±»å‹
 	 * 
 	 * @param str
-	 *            Ê±¼äÀàĞÍ¸ñÊ½
+	 *            æ—¶é—´ç±»å‹æ ¼å¼
 	 * @param time
-	 *            Ê±¼ä´Á µ¥Î»ºÁÃë
+	 *            æ—¶é—´æˆ³ å•ä½æ¯«ç§’
 	 * @return
 	 */
 	public static String getTimeForData(String str, long time) {

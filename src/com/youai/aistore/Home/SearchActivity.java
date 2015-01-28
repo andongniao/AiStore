@@ -15,7 +15,7 @@ import com.youai.aistore.R;
 import com.youai.aistore.Bean.GoodsBean;
 
 /**
- * ËÑË÷½çÃæ
+ * æœç´¢ç•Œé¢
  * 
  * @author Qzr
  * 
@@ -47,7 +47,7 @@ public class SearchActivity extends Activity implements OnClickListener {
 
 			finish();
 
-			// ¸²¸ÇÄ¬ÈÏactivityÌøÇ¨ÒÆ×ª±ä»­
+			// è¦†ç›–é»˜è®¤activityè·³è¿ç§»è½¬å˜ç”»
 
 			overridePendingTransition(0, 0);
 		}

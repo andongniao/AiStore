@@ -17,7 +17,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 /**
- * ½áËã¶©µ¥ÊÊÅäÆ÷
+ * ç»“ç®—è®¢å•é€‚é…å™¨
  * 
  * @author Qzr
  * 
@@ -84,7 +84,7 @@ public class OrderLvAdapter extends BaseAdapter {
 		ImageLoader.getInstance().displayImage(list.get(postion).getPic_url(),
 				myItem.iv);
 		myItem.tv_titlt.setText(list.get(postion).getGoods_name());
-		myItem.tv_price.setText("£¤" + list.get(postion).getGoods_price() + "Ôª");
+		myItem.tv_price.setText("ï¿¥" + list.get(postion).getGoods_price() + "å…ƒ");
 		myItem.et_num.setText(list.get(postion).getGoods_number());
 
 		return v;

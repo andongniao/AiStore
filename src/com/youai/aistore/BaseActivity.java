@@ -13,7 +13,7 @@ import android.widget.RelativeLayout.LayoutParams;
 import android.widget.TextView;
 
 /**
- * »ù±¾Àà
+ * åŸºæœ¬ç±»
  * 
  * @author Qzr
  * 
@@ -23,13 +23,13 @@ public abstract class BaseActivity extends Activity {
 	protected int activityCloseEnterAnimation;
 
 	protected int activityCloseExitAnimation;
-	public TextView titleTv;// ±êÌâ¿Ø¼ş
-	public TextView topLeftTv;// ×óÉÏ ¿Ø¼ş£¨·µ»Ø£©
-	public TextView topRightTv;// ÓÒÉÏ ¿Ø¼ş£¨·µ»Ø£©
-	private LinearLayout baseContentLayout;// Ìí¼ÓÄÚÈİ¿Ø¼ş
-	public RelativeLayout baseTopLayout, toplefttl;// ¶¥²¿layout
+	public TextView titleTv;// æ ‡é¢˜æ§ä»¶
+	public TextView topLeftTv;// å·¦ä¸Š æ§ä»¶ï¼ˆè¿”å›ï¼‰
+	public TextView topRightTv;// å³ä¸Š æ§ä»¶ï¼ˆè¿”å›ï¼‰
+	private LinearLayout baseContentLayout;// æ·»åŠ å†…å®¹æ§ä»¶
+	public RelativeLayout baseTopLayout, toplefttl;// é¡¶éƒ¨layout
 
-	private BaseLeftClickListener leftClickListener;// ×óÉÏ µã»÷¼àÌı
+	private BaseLeftClickListener leftClickListener;// å·¦ä¸Š ç‚¹å‡»ç›‘å¬
 
 	@Override
 	protected void onCreate(Bundle arg0) {
@@ -71,30 +71,30 @@ public abstract class BaseActivity extends Activity {
 	}
 
 	/**
-	 * baseÒ³Ãæ ×óÉÏ½Çµã»÷Ğ§¹û¼àÌı
+	 * baseé¡µé¢ å·¦ä¸Šè§’ç‚¹å‡»æ•ˆæœç›‘å¬
 	 * 
 	 * @param clickListener
-	 *            ¼àÌı
+	 *            ç›‘å¬
 	 */
 	public void setTopLeftClickListener(BaseLeftClickListener clickListener) {
 		this.leftClickListener = clickListener;
 	}
 
 	/**
-	 * ÉèÖÃ×óÉÏ½Ç±³¾°
+	 * è®¾ç½®å·¦ä¸Šè§’èƒŒæ™¯
 	 * 
 	 * @param drawableid
-	 *            ×ÊÔ´id
+	 *            èµ„æºid
 	 */
 	public void setTopLeftBackground(int drawableId) {
 		topLeftTv.setBackgroundResource(drawableId);
 	}
 
 	/**
-	 * ÉèÖÃ×óÉÏ½Ç±³¾°
+	 * è®¾ç½®å·¦ä¸Šè§’èƒŒæ™¯
 	 * 
 	 * @param drawable
-	 *            Í¼Æ¬
+	 *            å›¾ç‰‡
 	 */
 	@SuppressWarnings("deprecation")
 	public void setTopLeftBackground(Drawable drawable) {
@@ -102,24 +102,24 @@ public abstract class BaseActivity extends Activity {
 	}
 
 	/**
-	 * Òş²Ø×óÉÏ²¼¾Ö
+	 * éšè—å·¦ä¸Šå¸ƒå±€
 	 */
 	public void goneTopLeft() {
 		topLeftTv.setVisibility(View.GONE);
 	}
 
 	/**
-	 * Òş²Ø×óÉÏ²¼¾Ö
+	 * éšè—å·¦ä¸Šå¸ƒå±€
 	 */
 	public void visibleTopLeft() {
 		topLeftTv.setVisibility(View.VISIBLE);
 	}
 
 	/**
-	 * Ìí¼Ó×ÓÒ³Ãæ²¼¾Ö
+	 * æ·»åŠ å­é¡µé¢å¸ƒå±€
 	 * 
 	 * @param contentViewId
-	 *            ×Ó²¼¾Ö
+	 *            å­å¸ƒå±€
 	 */
 	public void setContentXml(int contentViewId) {
 		addViewXML(baseContentLayout, contentViewId, LayoutParams.MATCH_PARENT,
@@ -127,10 +127,10 @@ public abstract class BaseActivity extends Activity {
 	}
 
 	/**
-	 * Ìí¼Ó×ÓÒ³Ãæview
+	 * æ·»åŠ å­é¡µé¢view
 	 * 
 	 * @param childView
-	 *            ×Ó View
+	 *            å­ View
 	 */
 	public void setContentChildView(View childView) {
 		baseContentLayout.addView(childView, new LinearLayout.LayoutParams(
@@ -138,61 +138,61 @@ public abstract class BaseActivity extends Activity {
 	}
 
 	/**
-	 * ÉèÖÃ±êÌâ
+	 * è®¾ç½®æ ‡é¢˜
 	 * 
 	 * @param textId
-	 *            ±êÌâ×ÊÔ´id
+	 *            æ ‡é¢˜èµ„æºid
 	 */
 	public void setTitleTxt(int textId) {
 		titleTv.setText(textId);
 	}
 
 	/**
-	 * ÉèÖÃ±êÌâ
+	 * è®¾ç½®æ ‡é¢˜
 	 * 
 	 * @param text
-	 *            ±êÌâ×ÊÔ´
+	 *            æ ‡é¢˜èµ„æº
 	 */
 	public void setTitleTxt(String text) {
 		titleTv.setText(text);
 	}
 
 	/**
-	 * Òş²Øtitle
+	 * éšè—title
 	 */
 	public void goneTitle() {
 		titleTv.setVisibility(View.GONE);
 	}
 
 	/**
-	 * ÏÔÊ¾title
+	 * æ˜¾ç¤ºtitle
 	 */
 	public void visibleTitle() {
 		titleTv.setVisibility(View.VISIBLE);
 	}
 
 	/**
-	 * ÉèÖÃ¶¥²¿±³¾°
+	 * è®¾ç½®é¡¶éƒ¨èƒŒæ™¯
 	 * 
 	 * @param drawableid
-	 *            ×ÊÔ´id
+	 *            èµ„æºid
 	 */
 	public void setTopTitleBackground(int drawableId) {
 		titleTv.setBackgroundResource(drawableId);
 	}
 
 	/**
-	 * ÉèÖÃ¶¥²¿±³¾°
+	 * è®¾ç½®é¡¶éƒ¨èƒŒæ™¯
 	 * 
 	 * @param drawable
-	 *            Í¼Æ¬
+	 *            å›¾ç‰‡
 	 */
 	@SuppressWarnings("deprecation")
 	public void setTopTitleBackground(Drawable drawable) {
 		titleTv.setBackgroundDrawable(drawable);
 	}
 	/**
-	 * »ñÈ¡¶¥²¿view
+	 * è·å–é¡¶éƒ¨view
 	 * 
 	 * @return
 	 */
@@ -201,16 +201,16 @@ public abstract class BaseActivity extends Activity {
 	}
 
 	/**
-	 * Ìí¼Óview
+	 * æ·»åŠ view
 	 * 
 	 * @param group
-	 *            ¸¸ÈİÆ÷
+	 *            çˆ¶å®¹å™¨
 	 * @param id
-	 *            ×Óview id
+	 *            å­view id
 	 * @param width
-	 *            ¿í
+	 *            å®½
 	 * @param height
-	 *            ¸ß
+	 *            é«˜
 	 */
 	public void addViewXML(ViewGroup group, int id, int width, int height) {
 		View contentView = View.inflate(this, id, null);
@@ -218,24 +218,24 @@ public abstract class BaseActivity extends Activity {
 	}
 
 	/**
-	 * ÓÒÉÏ°´Å¥Òş²Ø
+	 * å³ä¸ŠæŒ‰é’®éšè—
 	 */
 	public void topRightGone() {
 		topRightTv.setVisibility(View.GONE);
 	}
 
 	/**
-	 * ÓÒÉÏ°´Å¥ÏÔÊ¾
+	 * å³ä¸ŠæŒ‰é’®æ˜¾ç¤º
 	 */
 	public void topRightVisible() {
 		topRightTv.setVisibility(View.VISIBLE);
 	}
 
 	/**
-	 * ÉèÖÃÓÒÉÏ½Ç±³¾°
+	 * è®¾ç½®å³ä¸Šè§’èƒŒæ™¯
 	 * 
 	 * @param drawable
-	 *            Í¼Æ¬
+	 *            å›¾ç‰‡
 	 */
 	@SuppressWarnings("deprecation")
 	public void setTopRightBackground(Drawable drawable) {
@@ -243,17 +243,17 @@ public abstract class BaseActivity extends Activity {
 	}
 
 	/**
-	 * ÉèÖÃÓÒÉÏ½Ç±³¾°
+	 * è®¾ç½®å³ä¸Šè§’èƒŒæ™¯
 	 * 
 	 * @param drawableid
-	 *            ×ÊÔ´id
+	 *            èµ„æºid
 	 */
 	public void setTopRightBackground(int drawableId) {
 		topRightTv.setBackgroundResource(drawableId);
 	}
 
 	/**
-	 * »ñÈ¡ÓÒÉÏ½Çview
+	 * è·å–å³ä¸Šè§’view
 	 * 
 	 * @return
 	 */

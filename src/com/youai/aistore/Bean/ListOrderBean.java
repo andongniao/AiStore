@@ -3,7 +3,7 @@ package com.youai.aistore.Bean;
 import java.util.ArrayList;
 
 /**
- * 全部订单实体
+ * 鍏ㄩ儴璁㈠崟瀹炰綋
  * 
  * @author Qzr
  * 

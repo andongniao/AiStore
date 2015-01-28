@@ -55,7 +55,7 @@ public class FclassHomeAdapter extends BaseExpandableListAdapter {
 			View convertView, ViewGroup arg4) {
 		if (convertView == null) {
 			halderItem = new MyHalderItem();
-			// inflateÔØÈë½çÃæ£¬
+			// inflateè½½å…¥ç•Œé¢ï¼Œ
 			convertView = inflater.inflate(R.layout.fclass_home_gridview, null);
 			halderItem.myGridview = (MyGridview) convertView
 					.findViewById(R.id.fclass_home_gridview);
@@ -63,8 +63,8 @@ public class FclassHomeAdapter extends BaseExpandableListAdapter {
 		} else {
 			halderItem = (MyHalderItem) convertView.getTag();
 		}
-		halderItem.myGridview.setAdapter(new MyGridviewAdapter(arg0));// ×ÓÀàÌí¼ÓÊÊÅäÆ÷
-		halderItem.myGridview.setOnItemClickListener(new MygridviewItenlistener(arg0));// ×ÓÀàµã»÷ÊÂ¼ş
+		halderItem.myGridview.setAdapter(new MyGridviewAdapter(arg0));// å­ç±»æ·»åŠ é€‚é…å™¨
+		halderItem.myGridview.setOnItemClickListener(new MygridviewItenlistener(arg0));// å­ç±»ç‚¹å‡»äº‹ä»¶
 		
 		return convertView;
 	}
@@ -107,8 +107,8 @@ public class FclassHomeAdapter extends BaseExpandableListAdapter {
 		// .findViewById(R.id.group_img);
 		// TextView groupTv = (TextView)
 		// convertView.findViewById(R.id.group_tv);
-		halderLabel.iv.setImageResource(groumimg.get(arg0));// ¸¸ÀàÌí¼ÓÍ¼Æ¬
-		halderLabel.tv.setText(groupname.get(arg0).toString());// ¸¸ÀàÌí¼ÓÎÄ×Ö
+		halderLabel.iv.setImageResource(groumimg.get(arg0));// çˆ¶ç±»æ·»åŠ å›¾ç‰‡
+		halderLabel.tv.setText(groupname.get(arg0).toString());// çˆ¶ç±»æ·»åŠ æ–‡å­—
 		return convertView;
 	}
 
@@ -164,7 +164,7 @@ public class FclassHomeAdapter extends BaseExpandableListAdapter {
 
 	}
 	/*
-	 * ÊÊÅäÆ÷£¬×ÓÀàµã»÷ÊÂ¼ş
+	 * é€‚é…å™¨ï¼Œå­ç±»ç‚¹å‡»äº‹ä»¶
 	 */
 	class MygridviewItenlistener implements OnItemClickListener {
 		private int index;//
@@ -176,9 +176,9 @@ public class FclassHomeAdapter extends BaseExpandableListAdapter {
 		public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
 				long arg3) {
 			/*
-			 * Å®ĞÔ·ÖÀàÏÂµã»÷ÊÂ¼ş
+			 * å¥³æ€§åˆ†ç±»ä¸‹ç‚¹å‡»äº‹ä»¶
 			 */
-			if (groupname.get(index).equals("Å®ĞÔ")) {
+			if (groupname.get(index).equals("å¥³æ€§")) {
 				
 				int[] womenlist = {MyApplication.woman_av,
 						MyApplication.woman_fangzhenyangjv,
@@ -190,7 +190,7 @@ public class FclassHomeAdapter extends BaseExpandableListAdapter {
 					Intent intent = new Intent(context,
 							FclassFristViewActivity.class);
 					intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-					// groupnameÊı×é´«Öµ¸øFclassFristViewActivityµÄ±êÌâ
+					// groupnameæ•°ç»„ä¼ å€¼ç»™FclassFristViewActivityçš„æ ‡é¢˜
 					intent.putExtra("title", groupname.get(index).toString());
 					intent.putExtra("listindex", 0);
 					//System.out.println(arg2);
@@ -206,9 +206,9 @@ public class FclassHomeAdapter extends BaseExpandableListAdapter {
 				}
 			}
 			/*
-			 * ÄĞĞÔ·ÖÀàÏÂµã»÷ÊÂ¼ş
+			 * ç”·æ€§åˆ†ç±»ä¸‹ç‚¹å‡»äº‹ä»¶
 			 */
-			else if (groupname.get(index).equals("ÄĞĞÔ")) {
+			else if (groupname.get(index).equals("ç”·æ€§")) {
 				int[] menlist = {MyApplication.man_feijibei,
 						MyApplication.man_daomo, MyApplication.man_fuzhu, };
 				if (arg2 == 0) {
@@ -231,9 +231,9 @@ public class FclassHomeAdapter extends BaseExpandableListAdapter {
 			}
 
 			/*
-			 * ÄÚÒÂ·ÖÀàÏÂµã»÷ÊÂ¼ş
+			 * å†…è¡£åˆ†ç±»ä¸‹ç‚¹å‡»äº‹ä»¶
 			 */
-			else if (groupname.get(index).equals("ÄÚÒÂ")) {
+			else if (groupname.get(index).equals("å†…è¡£")) {
 				int[] neiyilist = { MyApplication.neiyi_xingganneiyi,
 						MyApplication.neiyi_siwaneiku,
 						MyApplication.neiyi_qingqvshuiyi,
@@ -260,9 +260,9 @@ public class FclassHomeAdapter extends BaseExpandableListAdapter {
 			}
 
 			/*
-			 * °²È«Ì×·ÖÀàÏÂµã»÷ÊÂ¼ş
+			 * å®‰å…¨å¥—åˆ†ç±»ä¸‹ç‚¹å‡»äº‹ä»¶
 			 */
-			else if (groupname.get(index).equals("°²È«Ì×")) {
+			else if (groupname.get(index).equals("å®‰å…¨å¥—")) {
 				int[] ttlist = {MyApplication.tt_jingdian,
 						MyApplication.tt_yanshi, MyApplication.tt_nvyong,
 						MyApplication.tt_daxiaohao, MyApplication.tt_huayang, };
@@ -286,9 +286,9 @@ public class FclassHomeAdapter extends BaseExpandableListAdapter {
 			}
 
 			/*
-			 * Ë«ÈË·ÖÀàÏÂµã»÷ÊÂ¼ş
+			 * åŒäººåˆ†ç±»ä¸‹ç‚¹å‡»äº‹ä»¶
 			 */
-			else if (groupname.get(index).equals("Ë«ÈË")) {
+			else if (groupname.get(index).equals("åŒäºº")) {
 				int[] tosexlist = { MyApplication.tosex_zhuqing,
 						MyApplication.tosex_houting,
 						MyApplication.tosex_huantao,
@@ -313,9 +313,9 @@ public class FclassHomeAdapter extends BaseExpandableListAdapter {
 
 			}
 
-		}// µã»÷ÊÂ¼ş½áÊø
+		}// ç‚¹å‡»äº‹ä»¶ç»“æŸ
 
-	}// Àà½áÊø
+	}// ç±»ç»“æŸ
 
 	public class MyHalderLabel {
 		public TextView tv;

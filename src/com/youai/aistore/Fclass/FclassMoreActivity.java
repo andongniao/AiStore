@@ -28,7 +28,7 @@ import com.youai.aistore.xlistview.XListView;
 import com.youai.aistore.xlistview.XListView.IXListViewListener;
 
 public class FclassMoreActivity extends BaseActivity implements
-		IXListViewListener, OnClickListener {
+IXListViewListener, OnClickListener {
 	private LinearLayout popll, numll, pricell;
 	private XListView listView;
 	private FclassMoreAdapter adapter;
@@ -78,11 +78,11 @@ public class FclassMoreActivity extends BaseActivity implements
 		desc = MyApplication.clickdasc;
 		isfinish = false;
 		context = FclassMoreActivity.this;
-		// ÈËÆø£¬ÏúÁ¿,¼Û¸ñµÄ²¼¾Ö
+		// äººæ°”ï¼Œé”€é‡,ä»·æ ¼çš„å¸ƒå±€
 		popll = (LinearLayout) findViewById(R.id.fclass_more_popularity_ll);
 		numll = (LinearLayout) findViewById(R.id.fclass_more_number_ll);
 		pricell = (LinearLayout) findViewById(R.id.fclass_more_price_ll);
-		// ¼ıÍ·Í¼Æ¬
+		// ç®­å¤´å›¾ç‰‡
 		pricell_iv = (ImageView) findViewById(R.id.fclass_more_price_img);
 
 		popll.setOnClickListener(this);
@@ -97,7 +97,7 @@ public class FclassMoreActivity extends BaseActivity implements
 
 	}
 	/*
-	 * ÁĞ±íÊı¾İµÄµã»÷ÊÂ¼ş
+	 * åˆ—è¡¨æ•°æ®çš„ç‚¹å‡»äº‹ä»¶
 	 */
 	class mylistener implements OnItemClickListener {
 
@@ -107,12 +107,12 @@ public class FclassMoreActivity extends BaseActivity implements
 				long arg3) {
 			// TODO Auto-generated method stub
 			if(0<arg2 && arg2<list.size()+1){
-			Intent intent = new Intent(FclassMoreActivity.this,
-					ProductDetailsActivity.class);
-			intent.setFlags(intent.FLAG_ACTIVITY_CLEAR_TOP);
-			intent.putExtra("finishid", 2);
-			intent.putExtra("id", list.get(arg2 - 1).getId());
-			startActivity(intent);
+				Intent intent = new Intent(FclassMoreActivity.this,
+						ProductDetailsActivity.class);
+				intent.setFlags(intent.FLAG_ACTIVITY_CLEAR_TOP);
+				intent.putExtra("finishid", 2);
+				intent.putExtra("id", list.get(arg2 - 1).getId());
+				startActivity(intent);
 			}
 		}
 
@@ -124,11 +124,11 @@ public class FclassMoreActivity extends BaseActivity implements
 		switch (arg0.getId()) {
 		case R.id.fclass_more_popularity_ll:
 			if(!pp){
-				
+
 				price = !price;
 				desc = MyApplication.clickdasc;
 				pp = true;
-				
+
 				if (Util.detect(context)) {
 					myTask = new MyTask();
 					myTask.execute("");
@@ -152,7 +152,7 @@ public class FclassMoreActivity extends BaseActivity implements
 				}
 			}
 			pp = false;
-			
+
 			break;
 		case R.id.fclass_more_price_ll:
 			if(!price){
@@ -205,26 +205,26 @@ public class FclassMoreActivity extends BaseActivity implements
 		listView.stopRefresh();
 		listView.stopLoadMore();
 		if(addtype==1){
-		SimpleDateFormat sDateFormat = new SimpleDateFormat(
-				"yyyy-MM-dd   hh:mm:ss");
-		String date = sDateFormat.format(new java.util.Date());
-		listView.setRefreshTime(date);
+			SimpleDateFormat sDateFormat = new SimpleDateFormat(
+					"yyyy-MM-dd   hh:mm:ss");
+			String date = sDateFormat.format(new java.util.Date());
+			listView.setRefreshTime(date);
 		}
 	}
 
 	private class MyTask extends AsyncTask<Object, Object, Object> {
 
-		// onPreExecute·½·¨ÓÃÓÚÔÚÖ´ĞĞºóÌ¨ÈÎÎñÇ°×öÒ»Ğ©UI²Ù×÷
+		// onPreExecuteæ–¹æ³•ç”¨äºåœ¨æ‰§è¡Œåå°ä»»åŠ¡å‰åšä¸€äº›UIæ“ä½œ
 		@Override
 		protected void onPreExecute() {
 			// textView.setText("loading...");
 			startProgressDialog(context);
 		}
 
-		// doInBackground·½·¨ÄÚ²¿Ö´ĞĞºóÌ¨ÈÎÎñ,²»¿ÉÔÚ´Ë·½·¨ÄÚĞŞ¸ÄUI
+		// doInBackgroundæ–¹æ³•å†…éƒ¨æ‰§è¡Œåå°ä»»åŠ¡,ä¸å¯åœ¨æ­¤æ–¹æ³•å†…ä¿®æ”¹UI
 		@Override
 		protected Object doInBackground(Object... params) {
-			/*½ÓÊÕfclasshome,·¢¹ıÀ´µÄÊı¾İ¡£*/
+			/*æ¥æ”¶fclasshome,å‘è¿‡æ¥çš„æ•°æ®ã€‚*/
 			int getid = getIntent().getIntExtra("id", -1);
 			// Send send = new Send(context);
 			listf = send.GetFclassTwo(getid,desc, page);
@@ -232,12 +232,12 @@ public class FclassMoreActivity extends BaseActivity implements
 
 		}
 
-		// onProgressUpdate·½·¨ÓÃÓÚ¸üĞÂ½ø¶ÈĞÅÏ¢
+		// onProgressUpdateæ–¹æ³•ç”¨äºæ›´æ–°è¿›åº¦ä¿¡æ¯
 		@Override
 		protected void onProgressUpdate(Object... progresses) {
 		}
 
-		// onPostExecute·½·¨ÓÃÓÚÔÚÖ´ĞĞÍêºóÌ¨ÈÎÎñºó¸üĞÂUI,ÏÔÊ¾½á¹û
+		// onPostExecuteæ–¹æ³•ç”¨äºåœ¨æ‰§è¡Œå®Œåå°ä»»åŠ¡åæ›´æ–°UI,æ˜¾ç¤ºç»“æœ
 		@Override
 		protected void onPostExecute(Object result) {
 			onLoad();
@@ -247,12 +247,16 @@ public class FclassMoreActivity extends BaseActivity implements
 				if (listf.getCode() == 200) {
 					if(addtype == 1){
 						list =listf.getList();
-						if(adapter!=null){
-							adapter.setdata(list);
-							adapter.notifyDataSetChanged();
+						if(list.size()>0){
+							if(adapter!=null){
+								adapter.setdata(list);
+								adapter.notifyDataSetChanged();
+							}else{
+								adapter = new FclassMoreAdapter(context,list);
+								listView.setAdapter(adapter);
+							}
 						}else{
-							adapter = new FclassMoreAdapter(context,list);
-							listView.setAdapter(adapter);
+							Util.ShowToast(context, R.string.page_is_final);
 						}
 					}else if(addtype == 2){
 						ArrayList<GoodsBean> l = listf.getList();
@@ -287,16 +291,16 @@ public class FclassMoreActivity extends BaseActivity implements
 
 		}
 
-		// onCancelled·½·¨ÓÃÓÚÔÚÈ¡ÏûÖ´ĞĞÖĞµÄÈÎÎñÊ±¸ü¸ÄUI
+		// onCancelledæ–¹æ³•ç”¨äºåœ¨å–æ¶ˆæ‰§è¡Œä¸­çš„ä»»åŠ¡æ—¶æ›´æ”¹UI
 		@Override
 		protected void onCancelled() {
 			stopProgressDialog();
 		}
 
 	}
-	
+
 	/**
-	 * Æô¶¯Loding...
+	 * å¯åŠ¨Loding...
 	 * 
 	 * @param context
 	 */
@@ -309,7 +313,7 @@ public class FclassMoreActivity extends BaseActivity implements
 	}
 
 	/**
-	 * ¹Ø±ÕLoding...
+	 * å…³é—­Loding...
 	 */
 	public void stopProgressDialog() {
 		if (progressDialog != null && progressDialog.isShowing()) {

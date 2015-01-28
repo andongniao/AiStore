@@ -37,7 +37,7 @@ import com.youai.aistore.ShopCart.ConsigneeInfoActivity;
 import com.youai.aistore.ShopCart.ShopCartActivity;
 
 /**
- * ½áËã¶©µ¥½çÃæ
+ * ç»“ç®—è®¢å•ç•Œé¢
  * 
  * @author Qzr
  * 
@@ -102,7 +102,7 @@ public class OrderActivity extends BaseActivity implements OnClickListener {
 					break;
 				}
 				case SDK_CHECK_FLAG: {
-					Toast.makeText(OrderActivity.this, "¼ì²é½á¹ûÎª£º" + msg.obj,
+					Toast.makeText(OrderActivity.this, "æ£€æŸ¥ç»“æœä¸ºï¼š" + msg.obj,
 							Toast.LENGTH_SHORT).show();
 					ExampleActivity.setCurrentTab(2);
 					finish();
@@ -143,7 +143,7 @@ public class OrderActivity extends BaseActivity implements OnClickListener {
 		tv_consignee.setText(getIntent().getStringExtra("consignee"));
 		tv_address.setText(getIntent().getStringExtra("address"));
 		tv_number.setText(getIntent().getStringExtra("number"));
-		tv_goods_prive.setText("£¤" + listbean.getCount_price() + "Ôª");
+		tv_goods_prive.setText("ï¿¥" + listbean.getCount_price() + "å…ƒ");
 		price = Double.parseDouble(listbean.getCount_price());
 		kuaidi = 0.00;
 		final_price = 0.00;
@@ -153,8 +153,8 @@ public class OrderActivity extends BaseActivity implements OnClickListener {
 			kuaidi = 12.00;
 		}
 		final_price = price+kuaidi;
-		tv_kuaidi_price.setText("£¤"+kuaidi+"Ôª");
-		tv_final_price.setText("£¤"+final_price+"Ôª");
+		tv_kuaidi_price.setText("ï¿¥"+kuaidi+"å…ƒ");
+		tv_final_price.setText("ï¿¥"+final_price+"å…ƒ");
 
 	}
 
@@ -257,10 +257,10 @@ public class OrderActivity extends BaseActivity implements OnClickListener {
 								if(list.size()==1){
 									goodsinfo = list.get(0).getGoods_name();
 								}else{
-									goodsinfo = list.get(0).getGoods_name()+"µÈ";
+									goodsinfo = list.get(0).getGoods_name()+"ç­‰";
 								}
 							}
-							pay("0.01",goodsinfo,"¶©µ¥"+bean.getOrder_sn(),bean.getOrder_sn());
+							pay("0.01",goodsinfo,"è®¢å•"+bean.getOrder_sn(),bean.getOrder_sn());
 							//TODO
 							ExampleActivity.setCurrentTab(2);
 						} else {

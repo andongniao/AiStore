@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
- * 单品 实体
+ * 鍗曞搧 瀹炰綋
  * 
  * @author Qzr
  * 

@@ -13,7 +13,7 @@ import com.youai.aistore.ExampleActivity;
 import com.youai.aistore.MyApplication;
 import com.youai.aistore.R;
 /**
- * ¸öÈËÉèÖÃ
+ * ä¸ªäººè®¾ç½®
  * 
  * @author zy
  * 
@@ -26,9 +26,9 @@ public class MySettingActivity extends BaseActivity implements OnClickListener {
 	protected void onCreate(Bundle arg0) {
 		// TODO Auto-generated method stub
 		super.onCreate(arg0);
-		// ÉèÖÃ½çÃæ±êÌâ£»ÏÔÊ¾
+		// è®¾ç½®ç•Œé¢æ ‡é¢˜ï¼›æ˜¾ç¤º
 		setTitleTxt(R.string.mycenter_home_geren_set);
-		// ²¼¾ÖÎÄ¼ş
+		// å¸ƒå±€æ–‡ä»¶
 		setContentXml(R.layout.my_setting);
 		exit_btn = (Button) findViewById(R.id.my_setting_exitid);
 		exit_btn.setOnClickListener(this);

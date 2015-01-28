@@ -28,12 +28,12 @@ public class MyGridview extends GridView {
 
 	}
 
-	// Í¨¹ıÖØĞÂdispatchTouchEvent·½·¨À´½ûÖ¹»¬¶¯
+	// é€šè¿‡é‡æ–°dispatchTouchEventæ–¹æ³•æ¥ç¦æ­¢æ»‘åŠ¨
 	@Override
 	public boolean dispatchTouchEvent(MotionEvent ev) {
 		// TODO Auto-generated method stub
 		if (ev.getAction() == MotionEvent.ACTION_MOVE) {
-			return true;// ½ûÖ¹½øĞĞ»¬¶¯
+			return true;// ç¦æ­¢è¿›è¡Œæ»‘åŠ¨
 		}
 		return super.dispatchTouchEvent(ev);
 	}

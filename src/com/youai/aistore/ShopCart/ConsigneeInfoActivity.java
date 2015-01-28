@@ -20,7 +20,7 @@ import android.widget.Button;
 import android.widget.EditText;
 
 /**
- * ÊÕ»õÈËĞÅÏ¢½çÃæ
+ * æ”¶è´§äººä¿¡æ¯ç•Œé¢
  * 
  * @author Qzr
  * 
@@ -125,20 +125,19 @@ public class ConsigneeInfoActivity extends BaseActivity implements
 			this.statu = statu;
 		}
 
-		// onPreExecute·½·¨ÓÃÓÚÔÚÖ´ĞĞºóÌ¨ÈÎÎñÇ°×öÒ»Ğ©UI²Ù×÷
+		// onPreExecuteæ–¹æ³•ç”¨äºåœ¨æ‰§è¡Œåå°ä»»åŠ¡å‰åšä¸€äº›UIæ“ä½œ
 		@Override
 		protected void onPreExecute() {
 			Util.startProgressDialog(context);
 		}
 
-		// doInBackground·½·¨ÄÚ²¿Ö´ĞĞºóÌ¨ÈÎÎñ,²»¿ÉÔÚ´Ë·½·¨ÄÚĞŞ¸ÄUI
+		// doInBackgroundæ–¹æ³•å†…éƒ¨æ‰§è¡Œåå°ä»»åŠ¡,ä¸å¯åœ¨æ­¤æ–¹æ³•å†…ä¿®æ”¹UI
 		@Override
 		protected Object doInBackground(Object... params) {
 			try {
 				if (statu == 1) {
 					Send s = new Send(context);
 					String userid = MyApplication.UserId;
-					// String userid = "188";
 					bean = s.getConsigneeInfo(userid);
 					return bean;
 				} else {
@@ -153,13 +152,13 @@ public class ConsigneeInfoActivity extends BaseActivity implements
 			return null;
 		}
 
-		// onProgressUpdate·½·¨ÓÃÓÚ¸üĞÂ½ø¶ÈĞÅÏ¢
+		// onProgressUpdateæ–¹æ³•ç”¨äºæ›´æ–°è¿›åº¦ä¿¡æ¯
 		@Override
 		protected void onProgressUpdate(Object... progresses) {
 
 		}
 
-		// onPostExecute·½·¨ÓÃÓÚÔÚÖ´ĞĞÍêºóÌ¨ÈÎÎñºó¸üĞÂUI,ÏÔÊ¾½á¹û
+		// onPostExecuteæ–¹æ³•ç”¨äºåœ¨æ‰§è¡Œå®Œåå°ä»»åŠ¡åæ›´æ–°UI,æ˜¾ç¤ºç»“æœ
 		@Override
 		protected void onPostExecute(Object result) {
 			Util.stopProgressDialog();
@@ -200,7 +199,7 @@ public class ConsigneeInfoActivity extends BaseActivity implements
 			}
 		}
 
-		// onCancelled·½·¨ÓÃÓÚÔÚÈ¡ÏûÖ´ĞĞÖĞµÄÈÎÎñÊ±¸ü¸ÄUI
+		// onCancelledæ–¹æ³•ç”¨äºåœ¨å–æ¶ˆæ‰§è¡Œä¸­çš„ä»»åŠ¡æ—¶æ›´æ”¹UI
 		@Override
 		protected void onCancelled() {
 			// Util.stopProgressDialog();

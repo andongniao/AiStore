@@ -40,7 +40,7 @@ public class Send {
 	}
 
 	/**
-	 * »ñÈ¡Ê×Ò³ĞÅÏ¢
+	 * è·å–é¦–é¡µä¿¡æ¯
 	 */
 	public ListGoodsBean RequestHome(String time) {
 		ListGoodsBean List = new ListGoodsBean();
@@ -89,7 +89,7 @@ public class Send {
 	}
 
 	/**
-	 * »ñÈ¡µ¥Æ·ĞÅÏ¢
+	 * è·å–å•å“ä¿¡æ¯
 	 */
 	@SuppressWarnings("null")
 	public GoodsBean GetProductDetails(int id) {
@@ -139,7 +139,7 @@ public class Send {
 	}
 
 	/**
-	 * »ñÈ¡µ¥Æ·ÆÀÂÛ
+	 * è·å–å•å“è¯„è®º
 	 */
 	@SuppressWarnings("unused")
 	public ListCommentsBean GetProductComments(int id, int page) {
@@ -188,7 +188,7 @@ public class Send {
 	}
 
 	/**
-	 * »ñÈ¡Ò»¼¶·ÖÀà
+	 * è·å–ä¸€çº§åˆ†ç±»
 	 */
 	public ListGoodsBean GetFclassFrist(int id) {
 		ListGoodsBean list = new ListGoodsBean();
@@ -243,7 +243,7 @@ public class Send {
 	}
 
 	/**
-	 * »ñÈ¡¶ş¼¶·ÖÀà
+	 * è·å–äºŒçº§åˆ†ç±»
 	 */
 	public ListFclassTwo GetFclassTwo(int id, String asctype, int page) {
 		ListFclassTwo list = new ListFclassTwo();
@@ -290,7 +290,7 @@ public class Send {
 	}
 
 	/**
-	 * ¼ÓÈë¹ºÎï³µ
+	 * åŠ å…¥è´­ç‰©è½¦
 	 */
 	public Base AddShopCart(int good_id, int number, String session_id,
 			String userid) {
@@ -333,7 +333,7 @@ public class Send {
 	}
 
 	/**
-	 * ¹ºÎï³µÁĞ±í
+	 * è´­ç‰©è½¦åˆ—è¡¨
 	 */
 	public ListShopCartBean getShopCartlist(String sessionid, String userid) {
 		ListShopCartBean list = new ListShopCartBean();
@@ -387,7 +387,7 @@ public class Send {
 	}
 
 	/**
-	 * ´Ó¹ºÎï³µÉ¾³ı
+	 * ä»è´­ç‰©è½¦åˆ é™¤
 	 */
 	public Base DeletefromShopCart(String res_id, String session_id,
 			String userid) {
@@ -430,7 +430,7 @@ public class Send {
 	}
 
 	/**
-	 * µÇÂ¼
+	 * ç™»å½•
 	 * 
 	 * @param id
 	 * @param password
@@ -454,7 +454,7 @@ public class Send {
 					bean = gson.fromJson(json, type);
 					bean.setCode(200);
 					bean.setMsg(object.getString("message"));
-					System.out.println(object.get("code") + "µÇÂ½³É¹¦");// ²âÊÔÊÇ²»ÊÇ200
+					System.out.println(object.get("code") + "ç™»é™†æˆåŠŸ");// æµ‹è¯•æ˜¯ä¸æ˜¯200
 					return bean;
 				} else {
 					bean.setMsg(object.getString("message"));
@@ -476,7 +476,7 @@ public class Send {
 	}
 
 	/**
-	 * ×¢²á
+	 * æ³¨å†Œ
 	 * 
 	 * @param id
 	 * @param password
@@ -500,7 +500,7 @@ public class Send {
 					bean = gson.fromJson(json, type);
 					bean.setCode(200);
 					bean.setMsg(object.getString("message"));
-					System.out.println(object.get("code") + "×¢²á³É¹¦");// ²âÊÔÊÇ²»ÊÇ200
+					System.out.println(object.get("code") + "æ³¨å†ŒæˆåŠŸ");// æµ‹è¯•æ˜¯ä¸æ˜¯200
 					return bean;
 				} else {
 					bean.setMsg(object.getString("message"));
@@ -522,7 +522,7 @@ public class Send {
 	}
 
 	/**
-	 * »ñÈ¡ÊÕ»õÈËĞÅÏ¢
+	 * è·å–æ”¶è´§äººä¿¡æ¯
 	 * 
 	 * @param id
 	 * @param password
@@ -534,6 +534,7 @@ public class Send {
 		String jsonStr = GetHttp.sendGet(url);
 
 		if (jsonStr != null && !jsonStr.equals("")) {
+			System.out.println("æ”¶ä»¶äººä¿¡æ¯"+jsonStr);
 			JSONObject object = null;
 			try {
 				object = new JSONObject(jsonStr);
@@ -566,7 +567,7 @@ public class Send {
 	}
 
 	/**
-	 * saveÊÕ»õÈËĞÅÏ¢
+	 * saveæ”¶è´§äººä¿¡æ¯
 	 * 
 	 * @param id
 	 * @param password
@@ -576,9 +577,9 @@ public class Send {
 			String address) {
 		Base bean = new Base();
 		String url = ServiceUrl.save_consignee_info + userid
-				+ ServiceUrl.save_consignee_info_consignee + consignee
-				+ ServiceUrl.save_consignee_info_tel + tel
-				+ ServiceUrl.save_consignee_info_address + address;
+				+ ServiceUrl.save_consignee_info_consignee +java.net.URLEncoder.encode(consignee) 
+				+ ServiceUrl.save_consignee_info_tel  +java.net.URLEncoder.encode(tel) 
+				+ ServiceUrl.save_consignee_info_address +java.net.URLEncoder.encode(address) ;
 		String jsonStr = GetHttp.sendGet(url);
 
 		if (jsonStr != null && !jsonStr.equals("")) {
@@ -609,7 +610,7 @@ public class Send {
 	}
 
 	/**
-	 * Ìá½»¶©µ¥
+	 * æäº¤è®¢å•
 	 * 
 	 * @param id
 	 * @param password
@@ -655,7 +656,7 @@ public class Send {
 	}
 
 	/**
-	 * »ñÈ¡È«²¿¶©µ¥
+	 * è·å–å…¨éƒ¨è®¢å•
 	 * 
 	 * @param id
 	 * @param password
@@ -702,7 +703,7 @@ public class Send {
 	}
 
 	/**
-	 * »ñÈ¡¶©µ¥ÏêÇé
+	 * è·å–è®¢å•è¯¦æƒ…
 	 * 
 	 * @param id
 	 * @param password
@@ -753,7 +754,7 @@ public class Send {
 	
 	
 	/**
-	 * Í¬²½¹ºÎï³µĞÅÏ¢
+	 * åŒæ­¥è´­ç‰©è½¦ä¿¡æ¯
 	 * 
 	 * @param id
 	 * @param password
@@ -794,7 +795,7 @@ public class Send {
 	
 	
 	/**
-	 * ĞŞ¸Ä¶©µ¥×´Ì¬
+	 * ä¿®æ”¹è®¢å•çŠ¶æ€
 	 * 
 	 * @param id
 	 * @param password

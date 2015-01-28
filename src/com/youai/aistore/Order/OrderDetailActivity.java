@@ -30,7 +30,7 @@ import com.youai.aistore.Bean.OrderDetailsBean.Goods;
 import com.youai.aistore.NetInterface.Send;
 
 /**
- * ¶©µ¥ÏêÇé
+ * è®¢å•è¯¦æƒ…
  * 
  * @author Qzr
  * 
@@ -126,7 +126,7 @@ public class OrderDetailActivity extends BaseActivity implements OnClickListener
 					break;
 				}
 				case SDK_CHECK_FLAG: {
-					Toast.makeText(OrderDetailActivity.this, "¼ì²é½á¹ûÎª£º" + msg.obj,
+					Toast.makeText(OrderDetailActivity.this, "æ£€æŸ¥ç»“æœä¸ºï¼š" + msg.obj,
 							Toast.LENGTH_SHORT).show();
 					break;
 				}
@@ -182,8 +182,8 @@ public class OrderDetailActivity extends BaseActivity implements OnClickListener
 						time_tv.setText(bean.getFormated_add_time());
 						pp_tv.setText(bean.getConsignee());
 						tel_tv.setText(bean.getTel());
-						money_tv.setText("£¤"+bean.getFormated_goods_amount()+"Ôª");
-						youfei_tv.setText("£¤"+bean.getFormated_shipping_fee()+"Ôª");
+						money_tv.setText("ï¿¥"+bean.getFormated_goods_amount()+"å…ƒ");
+						youfei_tv.setText("ï¿¥"+bean.getFormated_shipping_fee()+"å…ƒ");
 						address_tv.setText(bean.getAddress());
 						list = bean.getGoods();
 						adapter = new OrderDetailsAdapter(context, list);
@@ -240,10 +240,10 @@ public class OrderDetailActivity extends BaseActivity implements OnClickListener
 					if(list.size()==1){
 						goodsinfo = list.get(0).getGoods_name();
 					}else{
-						goodsinfo = list.get(0).getGoods_name()+"µÈ";
+						goodsinfo = list.get(0).getGoods_name()+"ç­‰";
 					}
 				}
-				pay(price,goodsinfo,"¶©µ¥"+bean.getOrder_sn(),bean.getOrder_sn());
+				pay(price,goodsinfo,"è®¢å•"+bean.getOrder_sn(),bean.getOrder_sn());
 			}
 			break;
 		case R.id.order_detail_cancel_btn:

@@ -24,7 +24,7 @@ import com.youai.aistore.Order.AllOrderActivity;
 import com.youai.aistore.View.CircleImageView;
 
 /**
- * ¸öÈËÖĞĞÄÊ×Ò³
+ * ä¸ªäººä¸­å¿ƒé¦–é¡µ
  * 
  * @author Qzr
  * 
@@ -37,7 +37,7 @@ OnClickListener {
 	sms_ll, show_ll, login_ll,login_out_ll;
 	private Button login_btn, regist_btn,login_out_btn;
 	private TextView uernametv;
-	private boolean isshowing,log;
+	private boolean isshowing;
 	private Dialog alertDialog;
 	private Context context;
 	private Base bean;
@@ -63,7 +63,6 @@ OnClickListener {
 	private void init() {
 		context = this;
 		isshowing = false;
-		log = true;
 		headeriv = (CircleImageView) findViewById(R.id.mycenter_home_header_iv);
 		headeriv.setOnClickListener(this);
 		dingdan_ll = (LinearLayout) findViewById(R.id.mycenter_home_dingdan_ll);
@@ -85,7 +84,7 @@ OnClickListener {
 		login_out_btn = (Button) findViewById(R.id.mycenter_home_login_out_btn);
 		login_out_btn.setVisibility(View.GONE);
 		login_out_btn.setOnClickListener(this);
-		// µÇÂ½ºÍ×¢²á
+		// ç™»é™†å’Œæ³¨å†Œ
 		login_btn = (Button) findViewById(R.id.mycenter_home_login_btn);
 		login_btn.setOnClickListener(this);
 		regist_btn = (Button) findViewById(R.id.mycenter_home_regist_btn);
@@ -164,6 +163,7 @@ OnClickListener {
 			break;
 		case R.id.mycenter_home_login_out_btn:
 			MyApplication.logined = false;
+			MyApplication.log_staau_ischanged = true;
 			UserBean ub = new UserBean();
 			ub.setUser_id("");
 			ub.setUser_name("");
@@ -233,7 +233,7 @@ OnClickListener {
 			login_ll.setVisibility(View.GONE);
 			login_out_btn.setVisibility(View.VISIBLE);
 			uernametv.setText(MyApplication.userBean.getUser_name());
-			if(log){
+			if(MyApplication.log_staau_ischanged){
 				if (Util.detect(context)) {
 					myTask = new MyTask();
 					myTask.execute("");
@@ -247,13 +247,13 @@ OnClickListener {
 
 
 	private class MyTask extends AsyncTask<Object, Object, Object> {
-		// onPreExecute·½·¨ÓÃÓÚÔÚÖ´ĞĞºóÌ¨ÈÎÎñÇ°×öÒ»Ğ©UI²Ù×÷
+		// onPreExecuteæ–¹æ³•ç”¨äºåœ¨æ‰§è¡Œåå°ä»»åŠ¡å‰åšä¸€äº›UIæ“ä½œ
 		@Override
 		protected void onPreExecute() {
 			Util.startProgressDialog(context);
 		}
 
-		// doInBackground·½·¨ÄÚ²¿Ö´ĞĞºóÌ¨ÈÎÎñ,²»¿ÉÔÚ´Ë·½·¨ÄÚĞŞ¸ÄUI
+		// doInBackgroundæ–¹æ³•å†…éƒ¨æ‰§è¡Œåå°ä»»åŠ¡,ä¸å¯åœ¨æ­¤æ–¹æ³•å†…ä¿®æ”¹UI
 		@Override
 		protected Object doInBackground(Object... params) {
 			try {
@@ -268,20 +268,20 @@ OnClickListener {
 			return null;
 		}
 
-		// onProgressUpdate·½·¨ÓÃÓÚ¸üĞÂ½ø¶ÈĞÅÏ¢
+		// onProgressUpdateæ–¹æ³•ç”¨äºæ›´æ–°è¿›åº¦ä¿¡æ¯
 		@Override
 		protected void onProgressUpdate(Object... progresses) {
 
 		}
 
-		// onPostExecute·½·¨ÓÃÓÚÔÚÖ´ĞĞÍêºóÌ¨ÈÎÎñºó¸üĞÂUI,ÏÔÊ¾½á¹û
+		// onPostExecuteæ–¹æ³•ç”¨äºåœ¨æ‰§è¡Œå®Œåå°ä»»åŠ¡åæ›´æ–°UI,æ˜¾ç¤ºç»“æœ
 		@Override
 		protected void onPostExecute(Object result) {
 			Util.stopProgressDialog();
 			bean = (Base) result;
 			if(bean!=null){
 				if(bean.getCode()==200){
-					log = false;
+					MyApplication.log_staau_ischanged = false;
 					Util.ShowToast(context,R.string.updata_shopcart_info_success);
 				}else if(bean.getCode() == 500){
 					Util.ShowToast(context, R.string.net_work_is_error);
@@ -294,7 +294,7 @@ OnClickListener {
 
 		}
 
-		// onCancelled·½·¨ÓÃÓÚÔÚÈ¡ÏûÖ´ĞĞÖĞµÄÈÎÎñÊ±¸ü¸ÄUI
+		// onCancelledæ–¹æ³•ç”¨äºåœ¨å–æ¶ˆæ‰§è¡Œä¸­çš„ä»»åŠ¡æ—¶æ›´æ”¹UI
 		@Override
 		protected void onCancelled() {
 			// Util.stopProgressDialog();

@@ -50,7 +50,7 @@ public class CustomProgressDialog extends Dialog {
 
 	/**
 	 * 
-	 * [Summary] setTitile 标题
+	 * [Summary] setTitile 鏍囬
 	 * 
 	 * @param strTitle
 	 * @return
@@ -62,7 +62,7 @@ public class CustomProgressDialog extends Dialog {
 
 	/**
 	 * 
-	 * [Summary] setMessage 提示内容
+	 * [Summary] setMessage 鎻愮ず鍐呭
 	 * 
 	 * @param strMessage
 	 * @return

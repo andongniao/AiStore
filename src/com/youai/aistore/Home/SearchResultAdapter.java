@@ -73,13 +73,13 @@ public class SearchResultAdapter extends BaseAdapter {
 		myItem.iv.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
 		ImageLoader.getInstance().displayImage(list.get(arg0).getPicurl(),
 				myItem.iv);
-		myItem.tv_market_price.getPaint().setFlags(Paint.STRIKE_THRU_TEXT_FLAG); // ÖÐ»®Ïß
-		myItem.tv_market_price.getPaint().setAntiAlias(true);// ¿¹¾â³Ý
+		myItem.tv_market_price.getPaint().setFlags(Paint.STRIKE_THRU_TEXT_FLAG); // ä¸­åˆ’çº¿
+		myItem.tv_market_price.getPaint().setAntiAlias(true);// æŠ—é”¯é½¿
 		myItem.tv_title.setText(list.get(arg0).getTitle());
-		myItem.tv_market_price.setText("£¤" + list.get(arg0).getMarket_price()
-				+ "Ôª");
+		myItem.tv_market_price.setText("ï¿¥" + list.get(arg0).getMarket_price()
+				+ "å…ƒ");
 		myItem.tv_shop_price
-				.setText("£¤" + list.get(arg0).getShop_price() + "Ôª");
+				.setText("ï¿¥" + list.get(arg0).getShop_price() + "å…ƒ");
 		myItem.tv_comments.setText(list.get(arg0).getComments_num());
 		myItem.tv_click.setText(list.get(arg0).getClick());
 		return arg1;

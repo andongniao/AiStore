@@ -29,29 +29,30 @@ import com.youai.aistore.Fclass.FclassFristViewActivity;
 import com.youai.aistore.Fclass.FclassMoreActivity;
 import com.youai.aistore.NetInterface.Send;
 import com.youai.aistore.Product.ProductDetailsActivity;
+import com.youai.aistore.View.RefreshableView;
 
-public class HomeActivity extends BaseActivity implements OnClickListener {
+public class HomeActivity extends BaseActivity implements OnClickListener,RefreshableView.RefreshListener {
 	private long exitTime = 0;
 	private Context context;
 	private ImageCycleView actitvit;
 	private ImageView woman, man, neiyi, more, runhua, tt, tosex, home_new_l,
-			home_new_c, home_new_r, home_woman_hot_iv_l, home_woman_hot_iv_r_t,
-			home_woman_hot_iv_r_b, home_man_hot_iv_l, home_man_hot_iv_r_t,
-			home_man_hot_iv_r_b, home_neiyi_hot_iv_l, home_neiyi_hot_iv_r_t,
-			home_neiyi_hot_iv_r_b, home_tt_hot_iv_l, home_tt_hot_iv_r_t,
-			home_tt_hot_iv_r_b, home_tosex_hot_iv_l, home_tosex_hot_iv_r_t,
-			home_tosex_hot_iv_r_b;
+	home_new_c, home_new_r, home_woman_hot_iv_l, home_woman_hot_iv_r_t,
+	home_woman_hot_iv_r_b, home_man_hot_iv_l, home_man_hot_iv_r_t,
+	home_man_hot_iv_r_b, home_neiyi_hot_iv_l, home_neiyi_hot_iv_r_t,
+	home_neiyi_hot_iv_r_b, home_tt_hot_iv_l, home_tt_hot_iv_r_t,
+	home_tt_hot_iv_r_b, home_tosex_hot_iv_l, home_tosex_hot_iv_r_t,
+	home_tosex_hot_iv_r_b;
 	private TextView tv_newpp_l_tttle, tv_newpp_l_price, tv_newpp_c_tttle,
-			tv_newpp_c_price, tv_newpp_r_tttle, tv_newpp_r_price;
+	tv_newpp_c_price, tv_newpp_r_tttle, tv_newpp_r_price;
 	private LinearLayout morell;
 	private boolean morellisshow;
 	private ListGoodsBean homeBeanList;
 	private MyTask myTask;
 	private ArrayList<ImageView> womanimglist, manlist, neiyilist, ttlist,
-			tosexlist;
+	tosexlist;
 	private ArrayList<GoodsBean> activitListBean, newppListBean, womanListBean,
-			manlistBean, neiyilistBean, ttlistBean, tosexlistBean,
-			likeListBean;
+	manlistBean, neiyilistBean, ttlistBean, tosexlistBean,
+	likeListBean;
 	private MyGridview gridView;
 	private HomeGridviewAdapter adapter;
 	private ScrollView myscrollview;
@@ -59,6 +60,7 @@ public class HomeActivity extends BaseActivity implements OnClickListener {
 	private int type, id, postion;
 	private String title;
 	private TextView title_tv;
+	private RefreshableView mRefreshableView;
 
 	@Override
 	protected void onCreate(Bundle arg0) {
@@ -94,29 +96,30 @@ public class HomeActivity extends BaseActivity implements OnClickListener {
 
 	private void init() {
 		morellisshow = false;
-		myscrollview = (ScrollView) findViewById(R.id.home_scrollview);
-		myscrollview.setOnClickListener(this);
+		mRefreshableView = (RefreshableView) findViewById(R.id.home_scrollview);
+		mRefreshableView.setRefreshListener(this);
+		myscrollview = (ScrollView) findViewById(R.id.scroll_view_root);
 		myscrollview.smoothScrollTo(0, 20);
 		actitvit = (ImageCycleView) findViewById(R.id.home_activit);
 		morell = (LinearLayout) findViewById(R.id.home_more_ll);
 		home_new_l = (ImageView) findViewById(R.id.home_new_iv_l);
 		home_new_c = (ImageView) findViewById(R.id.home_new_iv_c);
 		home_new_r = (ImageView) findViewById(R.id.home_new_iv_r);
-		// Å®ÓÃ
+		// å¥³ç”¨
 		home_woman_hot_iv_l = (ImageView) findViewById(R.id.home_woman_hot_iv_l);
 		womanimglist.add(home_woman_hot_iv_l);
 		home_woman_hot_iv_r_t = (ImageView) findViewById(R.id.home_woman_hot_iv_r_t);
 		womanimglist.add(home_woman_hot_iv_r_t);
 		home_woman_hot_iv_r_b = (ImageView) findViewById(R.id.home_woman_hot_iv_r_b);
 		womanimglist.add(home_woman_hot_iv_r_b);
-		// ÄĞÓÃ
+		// ç”·ç”¨
 		home_man_hot_iv_l = (ImageView) findViewById(R.id.home_man_hot_iv_l);
 		manlist.add(home_man_hot_iv_l);
 		home_man_hot_iv_r_t = (ImageView) findViewById(R.id.home_man_hot_iv_r_t);
 		manlist.add(home_man_hot_iv_r_t);
 		home_man_hot_iv_r_b = (ImageView) findViewById(R.id.home_man_hot_iv_r_b);
 		manlist.add(home_man_hot_iv_r_b);
-		// ÄÚÒÂ
+		// å†…è¡£
 		home_neiyi_hot_iv_l = (ImageView) findViewById(R.id.home_neiyi_hot_iv_l);
 		neiyilist.add(home_neiyi_hot_iv_l);
 		home_neiyi_hot_iv_r_t = (ImageView) findViewById(R.id.home_neiyi_hot_iv_r_t);
@@ -158,42 +161,42 @@ public class HomeActivity extends BaseActivity implements OnClickListener {
 		addlistener();
 	}
 	private void addlistener(){
-			home_new_l.setOnClickListener(this);
-			home_new_c.setOnClickListener(this);
-			home_new_r.setOnClickListener(this);
-			home_woman_hot_iv_l.setOnClickListener(this);
-			home_woman_hot_iv_r_t.setOnClickListener(this);
-			home_woman_hot_iv_r_b.setOnClickListener(this);
-			home_man_hot_iv_l.setOnClickListener(this);
-			home_man_hot_iv_r_t.setOnClickListener(this);
-			home_man_hot_iv_r_b.setOnClickListener(this);
-			home_neiyi_hot_iv_l.setOnClickListener(this);
-			home_neiyi_hot_iv_r_t.setOnClickListener(this);
-			home_neiyi_hot_iv_r_b.setOnClickListener(this);
-			home_tt_hot_iv_l.setOnClickListener(this);
-			home_tt_hot_iv_r_t.setOnClickListener(this);
-			home_tt_hot_iv_r_b.setOnClickListener(this);
-			home_tosex_hot_iv_l.setOnClickListener(this);
-			home_tosex_hot_iv_r_t.setOnClickListener(this);
-			home_tosex_hot_iv_r_b.setOnClickListener(this);
-			more.setOnClickListener(this);
-			woman.setOnClickListener(this);
-			man.setOnClickListener(this);
-			neiyi.setOnClickListener(this);
-			runhua.setOnClickListener(this);
-			tt.setOnClickListener(this);
-			tosex.setOnClickListener(this);
-			title_tv.setOnClickListener(new OnClickListener() {
-				@Override
-				public void onClick(View arg0) {
-						if (Util.detect(context)) {
-							myTask = new MyTask();
-							myTask.execute("");
-						} else {
-							Util.ShowToast(context, R.string.net_work_is_error);
-						}
+		home_new_l.setOnClickListener(this);
+		home_new_c.setOnClickListener(this);
+		home_new_r.setOnClickListener(this);
+		home_woman_hot_iv_l.setOnClickListener(this);
+		home_woman_hot_iv_r_t.setOnClickListener(this);
+		home_woman_hot_iv_r_b.setOnClickListener(this);
+		home_man_hot_iv_l.setOnClickListener(this);
+		home_man_hot_iv_r_t.setOnClickListener(this);
+		home_man_hot_iv_r_b.setOnClickListener(this);
+		home_neiyi_hot_iv_l.setOnClickListener(this);
+		home_neiyi_hot_iv_r_t.setOnClickListener(this);
+		home_neiyi_hot_iv_r_b.setOnClickListener(this);
+		home_tt_hot_iv_l.setOnClickListener(this);
+		home_tt_hot_iv_r_t.setOnClickListener(this);
+		home_tt_hot_iv_r_b.setOnClickListener(this);
+		home_tosex_hot_iv_l.setOnClickListener(this);
+		home_tosex_hot_iv_r_t.setOnClickListener(this);
+		home_tosex_hot_iv_r_b.setOnClickListener(this);
+		more.setOnClickListener(this);
+		woman.setOnClickListener(this);
+		man.setOnClickListener(this);
+		neiyi.setOnClickListener(this);
+		runhua.setOnClickListener(this);
+		tt.setOnClickListener(this);
+		tosex.setOnClickListener(this);
+		title_tv.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View arg0) {
+				if (Util.detect(context)) {
+					myTask = new MyTask();
+					myTask.execute("");
+				} else {
+					Util.ShowToast(context, R.string.net_work_is_error);
 				}
-			});
+			}
+		});
 	}
 
 	private void setimagebackground(String url, ImageView iv) {
@@ -232,23 +235,23 @@ public class HomeActivity extends BaseActivity implements OnClickListener {
 			}
 			break;
 		case R.id.home_woman:
-			title = "Å®ĞÔÓÃÆ·";
+			title = "å¥³æ€§ç”¨å“";
 			postion = 0;
 			toFclassFrist(title, postion);
 			break;
 		case R.id.home_mant:
-			title = "ÄĞĞÔÓÃÆ·";
+			title = "ç”·æ€§ç”¨å“";
 			postion = 1;
 			toFclassFrist(title, postion);
 			break;
 		case R.id.home_threex:
-			title = "ÇéÈ¤ÄÚÒÂ";
+			title = "æƒ…è¶£å†…è¡£";
 			postion = 2;
 			toFclassFrist(title, postion);
 			break;
 		case R.id.home_lwrite:
-			// Ğ¡·ÖÀà
-			title = "Èó»¬Ïû¶¾";
+			// å°åˆ†ç±»
+			title = "æ¶¦æ»‘æ¶ˆæ¯’";
 			Intent intent = new Intent(HomeActivity.this,FclassMoreActivity.class);
 			intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 			intent.putExtra("title",title);
@@ -256,12 +259,12 @@ public class HomeActivity extends BaseActivity implements OnClickListener {
 			startActivity(intent);
 			break;
 		case R.id.home_tt:
-			title = "°²È«Ì×";
+			title = "å®‰å…¨å¥—";
 			postion = 3;
 			toFclassFrist(title, postion);
 			break;
 		case R.id.home_tosex:
-			title = "Ë«ÈËÇéÈ¤";
+			title = "åŒäººæƒ…è¶£";
 			postion = 5;
 			toFclassFrist(title, postion);
 			break;
@@ -403,46 +406,46 @@ public class HomeActivity extends BaseActivity implements OnClickListener {
 
 		@Override
 		public void onImageClick(int position, View imageView) {
-			// TODO µ¥»÷Í¼Æ¬´¦ÀíÊÂ¼ş
+			// TODO å•å‡»å›¾ç‰‡å¤„ç†äº‹ä»¶
 			if(urllist!=null){
 				int type = homeBeanList.getList().get(0).get(position).getType();
-			if(type==2){
-				Intent intent = new Intent(HomeActivity.this,ProductDetailsActivity.class);
-				intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-				intent.putExtra("id",homeBeanList.getList().get(0).get(position).getId());
-				startActivity(intent);
-			}else if(type ==3){
-				if(homeBeanList.getList().get(0).get(position).getId()==74){
-					title = "Å®ĞÔÓÃÆ·";
-					postion = 0;
-					toFclassFrist(title, postion);
-				}else if(homeBeanList.getList().get(0).get(position).getId()==4){
-					title = "ÇéÈ¤ÄÚÒÂ";
-					postion = 2;
-					toFclassFrist(title, postion);
-				}else if(homeBeanList.getList().get(0).get(position).getId()==69){
-					title = "ÄĞĞÔÓÃÆ·";
-					postion = 1;
-					toFclassFrist(title, postion);
-				}else if(homeBeanList.getList().get(0).get(position).getId()==63){
-					title = "°²È«Ì×";
-					postion = 3;
-					toFclassFrist(title, postion);
-				}else if(homeBeanList.getList().get(0).get(position).getId()==87){
-					title = "Ë«ÈËÇéÈ¤";
-					postion = 5;
-					toFclassFrist(title, postion);
-				}
-			}else if(type ==4){
-				if(homeBeanList.getList().get(0).get(position).getId()==92){
-					title = "Èó»¬";
-					Intent intent = new Intent(HomeActivity.this,FclassMoreActivity.class);
+				if(type==2){
+					Intent intent = new Intent(HomeActivity.this,ProductDetailsActivity.class);
 					intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-					intent.putExtra("title",title);
-					intent.putExtra("id",92);
+					intent.putExtra("id",homeBeanList.getList().get(0).get(position).getId());
 					startActivity(intent);
+				}else if(type ==3){
+					if(homeBeanList.getList().get(0).get(position).getId()==74){
+						title = "å¥³æ€§ç”¨å“";
+						postion = 0;
+						toFclassFrist(title, postion);
+					}else if(homeBeanList.getList().get(0).get(position).getId()==4){
+						title = "æƒ…è¶£å†…è¡£";
+						postion = 2;
+						toFclassFrist(title, postion);
+					}else if(homeBeanList.getList().get(0).get(position).getId()==69){
+						title = "ç”·æ€§ç”¨å“";
+						postion = 1;
+						toFclassFrist(title, postion);
+					}else if(homeBeanList.getList().get(0).get(position).getId()==63){
+						title = "å®‰å…¨å¥—";
+						postion = 3;
+						toFclassFrist(title, postion);
+					}else if(homeBeanList.getList().get(0).get(position).getId()==87){
+						title = "åŒäººæƒ…è¶£";
+						postion = 5;
+						toFclassFrist(title, postion);
+					}
+				}else if(type ==4){
+					if(homeBeanList.getList().get(0).get(position).getId()==92){
+						title = "æ¶¦æ»‘";
+						Intent intent = new Intent(HomeActivity.this,FclassMoreActivity.class);
+						intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+						intent.putExtra("title",title);
+						intent.putExtra("id",92);
+						startActivity(intent);
+					}
 				}
-			}
 			}
 		}
 
@@ -471,14 +474,14 @@ public class HomeActivity extends BaseActivity implements OnClickListener {
 	}
 
 	private class MyTask extends AsyncTask<Object, Object, Object> {
-		// onPreExecute·½·¨ÓÃÓÚÔÚÖ´ĞĞºóÌ¨ÈÎÎñÇ°×öÒ»Ğ©UI²Ù×÷
+		// onPreExecuteæ–¹æ³•ç”¨äºåœ¨æ‰§è¡Œåå°ä»»åŠ¡å‰åšä¸€äº›UIæ“ä½œ
 		@Override
 		protected void onPreExecute() {
 			// textView.setText("loading...");
 			Util.startProgressDialog(context);
 		}
 
-		// doInBackground·½·¨ÄÚ²¿Ö´ĞĞºóÌ¨ÈÎÎñ,²»¿ÉÔÚ´Ë·½·¨ÄÚĞŞ¸ÄUI
+		// doInBackgroundæ–¹æ³•å†…éƒ¨æ‰§è¡Œåå°ä»»åŠ¡,ä¸å¯åœ¨æ­¤æ–¹æ³•å†…ä¿®æ”¹UI
 		@Override
 		protected ListGoodsBean doInBackground(Object... params) {
 			try {
@@ -492,15 +495,16 @@ public class HomeActivity extends BaseActivity implements OnClickListener {
 			return null;
 		}
 
-		// onProgressUpdate·½·¨ÓÃÓÚ¸üĞÂ½ø¶ÈĞÅÏ¢
+		// onProgressUpdateæ–¹æ³•ç”¨äºæ›´æ–°è¿›åº¦ä¿¡æ¯
 		@Override
 		protected void onProgressUpdate(Object... progresses) {
 		}
 
-		// onPostExecute·½·¨ÓÃÓÚÔÚÖ´ĞĞÍêºóÌ¨ÈÎÎñºó¸üĞÂUI,ÏÔÊ¾½á¹û
+		// onPostExecuteæ–¹æ³•ç”¨äºåœ¨æ‰§è¡Œå®Œåå°ä»»åŠ¡åæ›´æ–°UI,æ˜¾ç¤ºç»“æœ
 		@Override
 		protected void onPostExecute(Object result) {
 			Util.stopProgressDialog();
+			mRefreshableView.finishRefresh();
 			homeBeanList = (ListGoodsBean) result;
 			if (homeBeanList != null && homeBeanList.getCode() == 200) {
 				activitListBean = homeBeanList.getList().get(0);
@@ -512,30 +516,30 @@ public class HomeActivity extends BaseActivity implements OnClickListener {
 				actitvit.setImageResources(urllist, mAdCycleViewListener);
 				newppListBean = homeBeanList.getList().get(1);
 				setimagebackground(newppListBean.get(0).getPicurl(), home_new_l);
-				tv_newpp_l_price.setText("£¤"
+				tv_newpp_l_price.setText("ï¿¥"
 						+ newppListBean.get(0).getShop_price());
 				tv_newpp_l_tttle.setText(newppListBean.get(0).getTitle());
 				setimagebackground(newppListBean.get(1).getPicurl(), home_new_c);
-				tv_newpp_c_price.setText("£¤"
+				tv_newpp_c_price.setText("ï¿¥"
 						+ newppListBean.get(1).getShop_price());
 				tv_newpp_c_tttle.setText(newppListBean.get(1).getTitle());
 				setimagebackground(newppListBean.get(2).getPicurl(), home_new_r);
-				tv_newpp_r_price.setText("£¤"
+				tv_newpp_r_price.setText("ï¿¥"
 						+ newppListBean.get(2).getShop_price());
 				tv_newpp_r_tttle.setText(newppListBean.get(2).getTitle());
-				// Å®ÓÃ
+				// å¥³ç”¨
 				womanListBean = homeBeanList.getList().get(2);
 				for (int i = 0; i < womanListBean.size(); i++) {
 					String u = womanListBean.get(i).getPicurl();
 					setimagebackground(u, womanimglist.get(i));
 				}
-				// ÄĞÓÃ
+				// ç”·ç”¨
 				manlistBean = homeBeanList.getList().get(3);
 				for (int i = 0; i < manlistBean.size(); i++) {
 					String u = manlistBean.get(i).getPicurl();
 					setimagebackground(u, manlist.get(i));
 				}
-				// ÄÚÒÂ
+				// å†…è¡£
 				neiyilistBean = homeBeanList.getList().get(4);
 				for (int i = 0; i < neiyilistBean.size(); i++) {
 					String u = neiyilistBean.get(i).getPicurl();
@@ -569,7 +573,7 @@ public class HomeActivity extends BaseActivity implements OnClickListener {
 			}
 		}
 
-		// onCancelled·½·¨ÓÃÓÚÔÚÈ¡ÏûÖ´ĞĞÖĞµÄÈÎÎñÊ±¸ü¸ÄUI
+		// onCancelledæ–¹æ³•ç”¨äºåœ¨å–æ¶ˆæ‰§è¡Œä¸­çš„ä»»åŠ¡æ—¶æ›´æ”¹UI
 		@Override
 		protected void onCancelled() {
 			Util.stopProgressDialog();
@@ -593,7 +597,7 @@ public class HomeActivity extends BaseActivity implements OnClickListener {
 		if (keyCode == KeyEvent.KEYCODE_BACK
 				&& event.getAction() == KeyEvent.ACTION_DOWN) {
 			if ((System.currentTimeMillis() - exitTime) > 2000) {
-				Toast.makeText(getApplicationContext(), "ÔÙ°´Ò»´ÎÍË³ö³ÌĞò",
+				Toast.makeText(getApplicationContext(), "å†æŒ‰ä¸€æ¬¡é€€å‡ºç¨‹åº",
 						Toast.LENGTH_SHORT).show();
 				exitTime = System.currentTimeMillis();
 			} else {
@@ -603,5 +607,14 @@ public class HomeActivity extends BaseActivity implements OnClickListener {
 			return true;
 		}
 		return super.onKeyDown(keyCode, event);
+	}
+	@Override
+	public void onRefresh(RefreshableView view) {
+		if (Util.detect(context)) {
+			myTask = new MyTask();
+			myTask.execute("");
+		} else {
+			Util.ShowToast(context, R.string.net_work_is_error);
+		}
 	}
 }

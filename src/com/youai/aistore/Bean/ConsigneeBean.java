@@ -1,7 +1,7 @@
 package com.youai.aistore.Bean;
 
 /**
- * ÊÕ»õÈËĞÅÏ¢ÊµÌå
+ * æ”¶è´§äººä¿¡æ¯å®ä½“
  * 
  * @author Qzr
  * 

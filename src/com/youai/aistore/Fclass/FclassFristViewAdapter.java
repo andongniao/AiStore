@@ -68,7 +68,7 @@ public class FclassFristViewAdapter extends BaseAdapter {
 				myItem.iv);
 		myItem.tv_title.setText(list.get(arg0).getTitle());
 		myItem.tv_shop_price
-				.setText("£¤" + list.get(arg0).getShop_price() + "Ôª");
+				.setText("ï¿¥" + list.get(arg0).getShop_price() + "å…ƒ");
 		myItem.tv_click.setText(list.get(arg0).getClick());
 
 		return arg1;

@@ -13,7 +13,7 @@ import com.youai.aistore.BaseActivity;
 import com.youai.aistore.R;
 
 /**
- * ·ÖÀàÊ×Ò³
+ * åˆ†ç±»é¦–é¡µ
  * 
  * @author Qzr
  * 
@@ -55,28 +55,28 @@ public class FclassHomeActivity extends BaseActivity {
 		groupimagelist.add(R.drawable.fclass_neiyi);
 		groupimagelist.add(R.drawable.fclass_tt);
 		groupimagelist.add(R.drawable.fclass_tosex);
-		// Å®ĞÔÓÃÆ·£¬×ÓÃû×ÖÁĞ±í
+		// å¥³æ€§ç”¨å“ï¼Œå­åå­—åˆ—è¡¨
 		ArrayList<String> woman = new ArrayList<String>();
 		String[] womanc = rs.getStringArray(R.array.fclass_home_woman_gridview);
 		for (int i = 0; i < womanc.length; i++) {
 			woman.add(womanc[i]);
 		}
 		childnamelist.add(woman);
-		// ÄĞĞÔÓÃÆ·£¬×ÓÃû×ÖÁĞ±í
+		// ç”·æ€§ç”¨å“ï¼Œå­åå­—åˆ—è¡¨
 		ArrayList<String> man = new ArrayList<String>();
 		String[] manc = rs.getStringArray(R.array.fclass_home_man_gridview);
 		for (int i = 0; i < manc.length; i++) {
 			man.add(manc[i]);
 		}
 		childnamelist.add(man);
-		// ÄÚÒÂ£¬×ÓÃû×ÖÁĞ±í
+		// å†…è¡£ï¼Œå­åå­—åˆ—è¡¨
 		ArrayList<String> neiyi = new ArrayList<String>();
 		String[] neiyic = rs.getStringArray(R.array.fclass_home_neiyi_gridview);
 		for (int i = 0; i < neiyic.length; i++) {
 			neiyi.add(neiyic[i]);
 		}
 		childnamelist.add(neiyi);
-		// °²È«Ì×£¬×ÓÃû×ÖÁĞ±í
+		// å®‰å…¨å¥—ï¼Œå­åå­—åˆ—è¡¨
 		ArrayList<String> tt = new ArrayList<String>();
 		String[] ttc = rs.getStringArray(R.array.fclass_home_tt_gridview);
 		for (int i = 0; i < ttc.length; i++) {
@@ -91,7 +91,7 @@ public class FclassHomeActivity extends BaseActivity {
 		// runhua.add(runhuac[i]);
 		// }
 		// childnamelist.add(runhua);
-		// Ë«ÈË£¬×ÓÃû×ÖÁĞ±í
+		// åŒäººï¼Œå­åå­—åˆ—è¡¨
 		ArrayList<String> tosex = new ArrayList<String>();
 		String[] tosexc = rs.getStringArray(R.array.fclass_home_tosex_gridview);
 		for (int i = 0; i < tosexc.length; i++) {
@@ -99,7 +99,7 @@ public class FclassHomeActivity extends BaseActivity {
 		}
 		childnamelist.add(tosex);
 
-		// ÕÛµşÊ½ÁĞ±í
+		// æŠ˜å å¼åˆ—è¡¨
 		listView = (ExpandableListView) findViewById(R.id.fclass_expandableListView);
 		adapter = new FclassHomeAdapter(this, groupnamelist, groupimagelist,
 				childnamelist);
@@ -113,7 +113,7 @@ public class FclassHomeActivity extends BaseActivity {
 		if (keyCode == KeyEvent.KEYCODE_BACK
 				&& event.getAction() == KeyEvent.ACTION_DOWN) {
 			if ((System.currentTimeMillis() - exitTime) > 2000) {
-				Toast.makeText(getApplicationContext(), "ÔÙ°´Ò»´ÎÍË³ö³ÌĞò",
+				Toast.makeText(getApplicationContext(), "å†æŒ‰ä¸€æ¬¡é€€å‡ºç¨‹åº",
 						Toast.LENGTH_SHORT).show();
 				exitTime = System.currentTimeMillis();
 			} else {

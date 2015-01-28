@@ -1,7 +1,7 @@
 package com.youai.aistore;
 
 /**
- * »ù±¾Ò³ ×óÉÏµã»÷¼àÌı
+ * åŸºæœ¬é¡µ å·¦ä¸Šç‚¹å‡»ç›‘å¬
  * 
  * @author dxv
  * 
@@ -9,7 +9,7 @@ package com.youai.aistore;
 public interface BaseLeftClickListener {
 
 	/**
-	 * µã»÷¼àÌı
+	 * ç‚¹å‡»ç›‘å¬
 	 */
 	public void onTopLeftClickListener();
 }

@@ -68,7 +68,7 @@ public class HomeGridviewAdapter extends BaseAdapter {
 		ImageLoader.getInstance().displayImage(beanlist.get(arg0).getPicurl(),
 				myHalder.imageView);
 		myHalder.textclick.setText(beanlist.get(arg0).getClick());
-		myHalder.textprice.setText("гд" + beanlist.get(arg0).getShop_price());
+		myHalder.textprice.setText("я┐е" + beanlist.get(arg0).getShop_price());
 		myHalder.textTitle.setText(beanlist.get(arg0).getTitle());
 
 		return convertView;

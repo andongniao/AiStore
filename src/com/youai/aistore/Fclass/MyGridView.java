@@ -5,7 +5,7 @@ import android.util.AttributeSet;
 import android.widget.GridView;
 
 /**
- * @Type: MyGridView 让GridView可以做ScrollView的子控件，但尺寸不会减小
+ * @Type: MyGridView 璁〨ridView鍙互鍋歋crollView鐨勫瓙鎺т欢锛屼絾灏哄涓嶄細鍑忓皬
  */
 public class MyGridView extends GridView {
 

@@ -37,7 +37,7 @@ import com.youai.aistore.View.SwipeMenuListView.SwipeMenuListView.OnMenuItemClic
 import com.youai.aistore.View.SwipeMenuListView.SwipeMenuListView.OnSwipeListener;
 
 /**
- * ¹ºÎï³µÊ×Ò³
+ * è´­ç‰©è½¦é¦–é¡µ
  * 
  * @author Qzr
  * 
@@ -60,6 +60,7 @@ public class ShopCartActivity extends BaseActivity implements OnClickListener {
 	private MyTask myTask;
 	private ListShopCartBean listbean;
 	private Base beanresult;
+	private Base bean;
 	private double price;
 
 	@Override
@@ -179,7 +180,7 @@ public class ShopCartActivity extends BaseActivity implements OnClickListener {
 	public void onClick(View v) {
 		switch (v.getId()) {
 		// case R.id.shopcart_isnull_iv:
-		// Util.ShowToast(context, "Ã»ÓĞÊı¾İ");
+		// Util.ShowToast(context, "æ²¡æœ‰æ•°æ®");
 		// break;
 		case R.id.shopcart_see_again_bt:
 			ExampleActivity.setCurrentTab(0);
@@ -207,7 +208,7 @@ public class ShopCartActivity extends BaseActivity implements OnClickListener {
 		if (keyCode == KeyEvent.KEYCODE_BACK
 				&& event.getAction() == KeyEvent.ACTION_DOWN) {
 			if ((System.currentTimeMillis() - exitTime) > 2000) {
-				Toast.makeText(getApplicationContext(), "ÔÙ°´Ò»´ÎÍË³ö³ÌĞò",
+				Toast.makeText(getApplicationContext(), "å†æŒ‰ä¸€æ¬¡é€€å‡ºç¨‹åº",
 						Toast.LENGTH_SHORT).show();
 				exitTime = System.currentTimeMillis();
 			} else {
@@ -234,17 +235,24 @@ public class ShopCartActivity extends BaseActivity implements OnClickListener {
 			this.postion = index;
 		}
 
-		// onPreExecute·½·¨ÓÃÓÚÔÚÖ´ĞĞºóÌ¨ÈÎÎñÇ°×öÒ»Ğ©UI²Ù×÷
+		// onPreExecuteæ–¹æ³•ç”¨äºåœ¨æ‰§è¡Œåå°ä»»åŠ¡å‰åšä¸€äº›UIæ“ä½œ
 		@Override
 		protected void onPreExecute() {
 			// textView.setText("loading...");
 			Util.startProgressDialog(context);
 		}
 
-		// doInBackground·½·¨ÄÚ²¿Ö´ĞĞºóÌ¨ÈÎÎñ,²»¿ÉÔÚ´Ë·½·¨ÄÚĞŞ¸ÄUI
+		// doInBackgroundæ–¹æ³•å†…éƒ¨æ‰§è¡Œåå°ä»»åŠ¡,ä¸å¯åœ¨æ­¤æ–¹æ³•å†…ä¿®æ”¹UI
 		@Override
 		protected Object doInBackground(Object... params) {
 			try {
+				if(index == 3){
+					Send s = new Send(context);
+					String sessionid = MyApplication.SessionId;
+					String userid = MyApplication.UserId;
+					bean = s.updataShopcartInfo(sessionid, userid);
+					return bean;
+				}else
 				if (index == 1) {
 					Send send = new Send(context);
 					listbean = send.getShopCartlist(MyApplication.SessionId,
@@ -279,15 +287,30 @@ public class ShopCartActivity extends BaseActivity implements OnClickListener {
 			return null;
 		}
 
-		// onProgressUpdate·½·¨ÓÃÓÚ¸üĞÂ½ø¶ÈĞÅÏ¢
+		// onProgressUpdateæ–¹æ³•ç”¨äºæ›´æ–°è¿›åº¦ä¿¡æ¯
 		@Override
 		protected void onProgressUpdate(Object... progresses) {
 		}
 
-		// onPostExecute·½·¨ÓÃÓÚÔÚÖ´ĞĞÍêºóÌ¨ÈÎÎñºó¸üĞÂUI,ÏÔÊ¾½á¹û
+		// onPostExecuteæ–¹æ³•ç”¨äºåœ¨æ‰§è¡Œå®Œåå°ä»»åŠ¡åæ›´æ–°UI,æ˜¾ç¤ºç»“æœ
 		@Override
 		protected void onPostExecute(Object result) {
 			Util.stopProgressDialog();
+			if(index == 3){
+				bean = (Base) result;
+				if(bean!=null){
+					if(bean.getCode()==200){
+						MyApplication.log_staau_ischanged = false;
+						Util.ShowToast(context,R.string.updata_shopcart_info_success);
+					}else if(bean.getCode() == 500){
+						Util.ShowToast(context, R.string.net_work_is_error);
+					}else{
+						Util.ShowToast(context,bean.getMsg());
+					}
+				}else{
+					Util.ShowToast(context, R.string.net_work_is_error);
+				}
+			}else
 			if (index == 1) {
 				listbean = (ListShopCartBean) result;
 				if (listbean != null) {
@@ -295,7 +318,7 @@ public class ShopCartActivity extends BaseActivity implements OnClickListener {
 						UpUI();
 						price = Double.parseDouble(listbean.getCount_price());
 						tv_gongji
-								.setText("£¤" + listbean.getCount_price() + "Ôª");
+								.setText("ï¿¥" + listbean.getCount_price() + "å…ƒ");
 					}else if(listbean.getCode() == 500){
 						Util.ShowToast(context, R.string.net_work_is_error);
 					} else {
@@ -381,7 +404,7 @@ public class ShopCartActivity extends BaseActivity implements OnClickListener {
 			}
 		}
 
-		// onCancelled·½·¨ÓÃÓÚÔÚÈ¡ÏûÖ´ĞĞÖĞµÄÈÎÎñÊ±¸ü¸ÄUI
+		// onCancelledæ–¹æ³•ç”¨äºåœ¨å–æ¶ˆæ‰§è¡Œä¸­çš„ä»»åŠ¡æ—¶æ›´æ”¹UI
 		@Override
 		protected void onCancelled() {
 			Util.stopProgressDialog();
@@ -452,6 +475,16 @@ public class ShopCartActivity extends BaseActivity implements OnClickListener {
 				Util.ShowToast(context, R.string.net_work_is_error);
 			}
 			shopcartchaneged = false;
+		}
+		if(MyApplication.logined){
+			if(MyApplication.log_staau_ischanged){
+				if (Util.detect(context)) {
+					myTask = new MyTask(3,0);
+					myTask.execute("");
+				} else {
+					Util.ShowToast(context, R.string.net_work_is_error);
+				}
+			}
 		}
 	}
 

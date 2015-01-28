@@ -1,16 +1,16 @@
 package com.youai.aistore.Bean;
 
 /**
- * »ù´¡Àà
+ * åŸºç¡€ç±»
  * 
  * @author Qzr
  * 
  */
 public class Base {
-	private int code;// ·µ»ØµÄ×´Ì¬Âë
-	private String msg;// ·µ»ØµÄĞÅÏ¢
+	private int code;// è¿”å›çš„çŠ¶æ€ç 
+	private String msg;// è¿”å›çš„ä¿¡æ¯
 
-	// private String counts;//¼ÇÂ¼×ÜÊı
+	// private String counts;//è®°å½•æ€»æ•°
 	// private String pagecount;//
 
 	public String getMsg() {

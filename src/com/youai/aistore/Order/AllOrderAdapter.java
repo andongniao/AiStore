@@ -17,7 +17,7 @@ import com.youai.aistore.R;
 import com.youai.aistore.Bean.ListOrderBean.OrderBean;
 
 /**
- * È«²¿¶©µ¥ÊÊÅä
+ * å…¨éƒ¨è®¢å•é€‚é…
  * 
  * @author Qzr
  * 

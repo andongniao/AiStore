@@ -20,7 +20,7 @@ import com.youai.aistore.xlistview.XListView;
 import com.youai.aistore.xlistview.XListView.IXListViewListener;
 
 /**
- * 全部订单
+ * 鍏ㄩ儴璁㈠崟
  * 
  * @author Qzr
  * 
@@ -93,14 +93,14 @@ public class AllOrderActivity extends BaseActivity implements
 
 	private class MyTask extends AsyncTask<Object, Object, Object> {
 
-		// onPreExecute方法用于在执行后台任务前做一些UI操作
+		// onPreExecute鏂规硶鐢ㄤ簬鍦ㄦ墽琛屽悗鍙颁换鍔″墠鍋氫竴浜沀I鎿嶄綔
 		@Override
 		protected void onPreExecute() {
 			// textView.setText("loading...");
 			Util.startProgressDialog(context);
 		}
 
-		// doInBackground方法内部执行后台任务,不可在此方法内修改UI
+		// doInBackground鏂规硶鍐呴儴鎵ц鍚庡彴浠诲姟,涓嶅彲鍦ㄦ鏂规硶鍐呬慨鏀筓I
 		@Override
 		protected Object doInBackground(Object... params) {
 			try {
@@ -120,12 +120,12 @@ public class AllOrderActivity extends BaseActivity implements
 			return null;
 		}
 
-		// onProgressUpdate方法用于更新进度信息
+		// onProgressUpdate鏂规硶鐢ㄤ簬鏇存柊杩涘害淇℃伅
 		@Override
 		protected void onProgressUpdate(Object... progresses) {
 		}
 
-		// onPostExecute方法用于在执行完后台任务后更新UI,显示结果
+		// onPostExecute鏂规硶鐢ㄤ簬鍦ㄦ墽琛屽畬鍚庡彴浠诲姟鍚庢洿鏂癠I,鏄剧ず缁撴灉
 		@Override
 		protected void onPostExecute(Object result) {
 			onLoad();
@@ -166,7 +166,7 @@ public class AllOrderActivity extends BaseActivity implements
 			}
 		}
 
-		// onCancelled方法用于在取消执行中的任务时更改UI
+		// onCancelled鏂规硶鐢ㄤ簬鍦ㄥ彇娑堟墽琛屼腑鐨勪换鍔℃椂鏇存敼UI
 		@Override
 		protected void onCancelled() {
 			Util.stopProgressDialog();

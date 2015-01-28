@@ -15,7 +15,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 /**
- * ÓÃ»§ÆÀÂÛAdapter
+ * ç”¨æˆ·è¯„è®ºAdapter
  * 
  * @author Qzr
  * 

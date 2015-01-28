@@ -29,13 +29,13 @@ import com.youai.aistore.Product.ProductDetailsActivity;
 @SuppressLint("InflateParams")
 public class FclassFristViewActivity extends BaseActivity implements
 		OnItemClickListener {
-	private MyGridview toptitlegridview, g; // ÉÏÃæ±êÌâgridview
-	private LinearLayout addviewll; // Ìí¼Ó¶¯Ì¬²¼¾Ö
+	private MyGridview toptitlegridview, g; // ä¸Šé¢æ ‡é¢˜gridview
+	private LinearLayout addviewll; // æ·»åŠ åŠ¨æ€å¸ƒå±€
 	private int listindex;
 	private Resources rs;
-	private String[] titlelist; // ±êÌâÊı×é
+	private String[] titlelist; // æ ‡é¢˜æ•°ç»„
 	private ArrayList<View> addviewlist;
-	private LayoutInflater inflater; // ĞèÒªÊ¹ÓÃinflateÀ´¶¯Ì¬ÔØÈë½çÃæ
+	private LayoutInflater inflater; // éœ€è¦ä½¿ç”¨inflateæ¥åŠ¨æ€è½½å…¥ç•Œé¢
 	private Context context;
 	private ArrayList<MyGridview> gridviewlist;
 	private MyTask myTask;
@@ -52,8 +52,8 @@ public class FclassFristViewActivity extends BaseActivity implements
 		super.onCreate(arg0);
 		setTopLeftBackground(R.drawable.btn_search_navigation_back);
 		setContentXml(R.layout.fclass_frist_view);
-		String title = getIntent().getStringExtra("title");// Ìí¼Ó±êÌâ£¬»ñÈ¡´«¹ıÀ´µÄÖµ£¬
-		listindex = getIntent().getIntExtra("listindex", -1);//½ÓÊÕ´«¹ıÀ´µÄID£¬±æ±ğµãµÄÄÇ¸ö×é¡£
+		String title = getIntent().getStringExtra("title");// æ·»åŠ æ ‡é¢˜ï¼Œè·å–ä¼ è¿‡æ¥çš„å€¼ï¼Œ
+		listindex = getIntent().getIntExtra("listindex", -1);//æ¥æ”¶ä¼ è¿‡æ¥çš„IDï¼Œè¾¨åˆ«ç‚¹çš„é‚£ä¸ªç»„ã€‚
 		setTitleTxt(title);
 		init();
 		if (Util.detect(context)) {
@@ -79,9 +79,9 @@ public class FclassFristViewActivity extends BaseActivity implements
 		addviewlist = new ArrayList<View>();
 		inflater = LayoutInflater.from(context);
 		gridviewlist = new ArrayList<MyGridview>();
-		// ¶¥²¿Íø¸ñ
+		// é¡¶éƒ¨ç½‘æ ¼
 		toptitlegridview = (MyGridview) findViewById(R.id.fclass_frist_view_topgridview);
-		// ÉÌÆ·Íø¸ñ
+		// å•†å“ç½‘æ ¼
 		addviewll = (LinearLayout) findViewById(R.id.fclass_frist_view_addview_ll);
 
 		if (listindex == 0) {
@@ -95,7 +95,7 @@ public class FclassFristViewActivity extends BaseActivity implements
 		} else if (listindex == 5) {
 			titlelist = rs.getStringArray(R.array.fclass_frist_tosex_gridview);
 		}
-		// ¶¥²¿Íø¸ñÊÊÅäÆ÷
+		// é¡¶éƒ¨ç½‘æ ¼é€‚é…å™¨
 		toptitlegridview
 				.setAdapter(new ArrayAdapter<String>(this,
 						R.layout.fclass_gridview, R.id.fclass_gridview_text,
@@ -109,7 +109,7 @@ public class FclassFristViewActivity extends BaseActivity implements
 	}
 
 	/*
-	 * ¶¥²¿Íø¸ñ£¬ÏêÏ¸·ÖÀà¼àÌıÆ÷
+	 * é¡¶éƒ¨ç½‘æ ¼ï¼Œè¯¦ç»†åˆ†ç±»ç›‘å¬å™¨
 	 */
 	class Titlegridviewonclick implements OnItemClickListener {
 
@@ -118,7 +118,7 @@ public class FclassFristViewActivity extends BaseActivity implements
 				long arg3) {
 
 			// TODO Auto-generated method stub
-			/*Å®ĞÔ·ÖÀà*/
+			/*å¥³æ€§åˆ†ç±»*/
 			if(listindex==0){
 				int[] womenlist = {MyApplication.woman_av,
 						MyApplication.woman_fangzhenyangjv,
@@ -128,15 +128,15 @@ public class FclassFristViewActivity extends BaseActivity implements
 						MyApplication.woman_otherwoman };
 				Intent intent = new Intent(FclassFristViewActivity.this,
 						FclassMoreActivity.class);
-				// titlelistÊı×é´«Öµ¸øFclassFristViewActivityµÄ±êÌâ
+				// titlelistæ•°ç»„ä¼ å€¼ç»™FclassFristViewActivityçš„æ ‡é¢˜
 				intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 				intent.putExtra("title", titlelist[arg2].toString());
 				intent.putExtra("id", womenlist[arg2]);
 				startActivity(intent);
-				//Util.ShowToast(context, "µã»÷ÁË" + titlelist[arg2]);
+				//Util.ShowToast(context, "ç‚¹å‡»äº†" + titlelist[arg2]);
 			
 			}
-			 /*ÄĞĞÔ·ÖÀà*/
+			 /*ç”·æ€§åˆ†ç±»*/
 			else if (listindex == 1) {
 				int[] menlist = { MyApplication.man_feijibei,
 						MyApplication.man_daomo, MyApplication.man_fuzhu, };
@@ -147,7 +147,7 @@ public class FclassFristViewActivity extends BaseActivity implements
 				intent.putExtra("id", menlist[arg2]);
 				startActivity(intent);
 			}
-			 /*ÄÚÒÂ·ÖÀà*/
+			 /*å†…è¡£åˆ†ç±»*/
 			else if (listindex == 2) {
 				int[] neiyilist = {MyApplication.neiyi_xingganneiyi,
 						MyApplication.neiyi_siwaneiku,
@@ -162,7 +162,7 @@ public class FclassFristViewActivity extends BaseActivity implements
 				intent.putExtra("id", neiyilist[arg2]);
 				startActivity(intent);
 			}
-			 /*°²È«Ì×·ÖÀà*/
+			 /*å®‰å…¨å¥—åˆ†ç±»*/
 			else if (listindex == 3) {
 				int[] ttlist = {MyApplication.tt_jingdian,
 						MyApplication.tt_yanshi, MyApplication.tt_nvyong,
@@ -174,7 +174,7 @@ public class FclassFristViewActivity extends BaseActivity implements
 				intent.putExtra("id", ttlist[arg2]);
 				startActivity(intent);
 			}
-			 /*Ë«ÈË·ÖÀà*/
+			 /*åŒäººåˆ†ç±»*/
 			else if (listindex == 5) {
 				int[] tosexlist = {MyApplication.tosex_zhuqing,
 						MyApplication.tosex_houting,
@@ -189,15 +189,15 @@ public class FclassFristViewActivity extends BaseActivity implements
 				startActivity(intent);
 			}
 
-		}//µã»÷ÊÂ¼ş½áÊø
+		}//ç‚¹å‡»äº‹ä»¶ç»“æŸ
 
-	}//µã»÷Àà½áÊø
+	}//ç‚¹å‡»ç±»ç»“æŸ
 
 	/*
-	 * ÏêÏ¸·ÖÀàgridview¼àÌıÆ÷
+	 * è¯¦ç»†åˆ†ç±»gridviewç›‘å¬å™¨
 	 */
 	class gridviewonclick implements OnItemClickListener {
-		private int index;//ÅĞ¶Ïµã»÷µÄÊÇÄÇ¸ögridview£¬
+		private int index;//åˆ¤æ–­ç‚¹å‡»çš„æ˜¯é‚£ä¸ªgridviewï¼Œ
 		public gridviewonclick(int index) {
 			this.index = index;
 		}
@@ -205,7 +205,7 @@ public class FclassFristViewActivity extends BaseActivity implements
 		public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
 				long arg3) {
 			// TODO Auto-generated method stub
-			//ÏÈÅĞ¶Ï£¬ÊÇÄÇ¸ögridview£¬È»ºóµã»÷µÄÄÇ¸ö¾ßÌåÉÌÆ·£¬»ñÈ¡ËüµÄID
+			//å…ˆåˆ¤æ–­ï¼Œæ˜¯é‚£ä¸ªgridviewï¼Œç„¶åç‚¹å‡»çš„é‚£ä¸ªå…·ä½“å•†å“ï¼Œè·å–å®ƒçš„ID
 			switch (index) {
 			case 0:
 				id = fclasslist.getList().get(0).get(arg2).getId();
@@ -244,21 +244,21 @@ public class FclassFristViewActivity extends BaseActivity implements
 	}
 
 	private class MyTask extends AsyncTask<Object, Object, Object> {
-		// onPreExecute·½·¨ÓÃÓÚÔÚÖ´ĞĞºóÌ¨ÈÎÎñÇ°×öÒ»Ğ©UI²Ù×÷
+		// onPreExecuteæ–¹æ³•ç”¨äºåœ¨æ‰§è¡Œåå°ä»»åŠ¡å‰åšä¸€äº›UIæ“ä½œ
 		@Override
 		protected void onPreExecute() {
 			startProgressDialog(context);
 
 		}
 
-		// doInBackground·½·¨ÄÚ²¿Ö´ĞĞºóÌ¨ÈÎÎñ,²»¿ÉÔÚ´Ë·½·¨ÄÚĞŞ¸ÄUI
+		// doInBackgroundæ–¹æ³•å†…éƒ¨æ‰§è¡Œåå°ä»»åŠ¡,ä¸å¯åœ¨æ­¤æ–¹æ³•å†…ä¿®æ”¹UI
 		@Override
 		protected Object doInBackground(Object... params) {
 			try {
 				Send send = new Send(context);
 				// String time = String.valueOf(System.currentTimeMillis());
 				// fclasslist = send.RequestHome(time);
-				/* Í¨¹ıÎ»ÖÃÅĞ¶Ï£¬µã»÷¡°ÈÈÃÅ¡±ºó£¬Òª½øÈëÄÄ¸ö·ÖÀà¡£ */
+				/* é€šè¿‡ä½ç½®åˆ¤æ–­ï¼Œç‚¹å‡»â€œçƒ­é—¨â€åï¼Œè¦è¿›å…¥å“ªä¸ªåˆ†ç±»ã€‚ */
 				listindex = getIntent().getIntExtra("listindex", 1);
 				switch (listindex) {
 				case 0:
@@ -287,23 +287,23 @@ public class FclassFristViewActivity extends BaseActivity implements
 			return null;
 		}
 
-		// onProgressUpdate·½·¨ÓÃÓÚ¸üĞÂ½ø¶ÈĞÅÏ¢
+		// onProgressUpdateæ–¹æ³•ç”¨äºæ›´æ–°è¿›åº¦ä¿¡æ¯
 		@Override
 		protected void onProgressUpdate(Object... progresses) {
 		}
 
-		// onPostExecute·½·¨ÓÃÓÚÔÚÖ´ĞĞÍêºóÌ¨ÈÎÎñºó¸üĞÂUI,ÏÔÊ¾½á¹û
+		// onPostExecuteæ–¹æ³•ç”¨äºåœ¨æ‰§è¡Œå®Œåå°ä»»åŠ¡åæ›´æ–°UI,æ˜¾ç¤ºç»“æœ
 		@Override
 		protected void onPostExecute(Object result) {
 			stopProgressDialog();
 			fclasslist = (ListGoodsBean) result;
 			if (fclasslist != null && fclasslist.getCode() == 200) {
 				for (int i = 0; i < titlelist.length; i++) {
-					/* Íø¸ñÄÚÈİÒªÑ­»·Ìí¼Ó */
+					/* ç½‘æ ¼å†…å®¹è¦å¾ªç¯æ·»åŠ  */
 					ListBean = fclasslist.getList().get(i);
 					fclassAdapter = new FclassFristViewAdapter(context,
 							ListBean);
-					// ÔØÈË²¼¾ÖÎÄ¼ş£¬Ìí¼ÓÎÄ×Ö+Íø¸ñ£¬gridview×öÊÊÅäÆ÷£¬µã»÷ÊÂ¼ş¡£
+					// è½½äººå¸ƒå±€æ–‡ä»¶ï¼Œæ·»åŠ æ–‡å­—+ç½‘æ ¼ï¼Œgridviewåšé€‚é…å™¨ï¼Œç‚¹å‡»äº‹ä»¶ã€‚
 					View v = inflater.inflate(
 							R.layout.fclass_frist_view_added_view, null);
 					TextView tv = (TextView) v
@@ -331,7 +331,7 @@ public class FclassFristViewActivity extends BaseActivity implements
 
 		}
 
-		// onCancelled·½·¨ÓÃÓÚÔÚÈ¡ÏûÖ´ĞĞÖĞµÄÈÎÎñÊ±¸ü¸ÄUI
+		// onCancelledæ–¹æ³•ç”¨äºåœ¨å–æ¶ˆæ‰§è¡Œä¸­çš„ä»»åŠ¡æ—¶æ›´æ”¹UI
 		protected void onCancelled() {
 			stopProgressDialog();
 		}
@@ -343,7 +343,7 @@ public class FclassFristViewActivity extends BaseActivity implements
 
 	}
 	/**
-	 * Æô¶¯Loding...
+	 * å¯åŠ¨Loding...
 	 * 
 	 * @param context
 	 */
@@ -356,7 +356,7 @@ public class FclassFristViewActivity extends BaseActivity implements
 	}
 
 	/**
-	 * ¹Ø±ÕLoding...
+	 * å…³é—­Loding...
 	 */
 	public void stopProgressDialog() {
 		if (progressDialog != null && progressDialog.isShowing()) {

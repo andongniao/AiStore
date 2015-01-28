@@ -12,7 +12,7 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
 /**
- * µã»÷ÏÔÊ¾´óÍ¼
+ * ç‚¹å‡»æ˜¾ç¤ºå¤§å›¾
  * 
  * @author Qzr
  * 

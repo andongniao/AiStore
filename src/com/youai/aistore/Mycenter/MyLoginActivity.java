@@ -21,7 +21,7 @@ import com.youai.aistore.Bean.UserBean;
 import com.youai.aistore.NetInterface.Send;
 
 /**
- * µÇÂ½½çÃæ
+ * ç™»é™†ç•Œé¢
  * 
  * @author zy
  * 
@@ -39,11 +39,12 @@ public class MyLoginActivity extends BaseActivity implements OnClickListener {
 		public void handleMessage(Message msg) {
 			super.handleMessage(msg);
 			if (msg.what == 1) {
-				//ÌáÊ¾µÇÂ¼³É¹¦
+				//æç¤ºç™»å½•æˆåŠŸ
 				Util.ShowToast(MyLoginActivity.this, R.string.login_succeed);
-				// ±£´æµÇÂ½×´Ì¬
-				result = (UserBean) msg.obj;// result,¸³Öµ
+				// ä¿å­˜ç™»é™†çŠ¶æ€
+				result = (UserBean) msg.obj;// result,èµ‹å€¼
 				MyApplication.logined = true;
+				MyApplication.log_staau_ischanged = true;
 				MyApplication.SaveUserBean(result);
 				finish();
 			} else if (msg.what == 2) {
@@ -59,20 +60,20 @@ public class MyLoginActivity extends BaseActivity implements OnClickListener {
 	protected void onCreate(Bundle arg0) {
 		// TODO Auto-generated method stub
 		super.onCreate(arg0);
-		// µÇÂ½½çÃæ±êÌâ£»ÏÔÊ¾
+		// ç™»é™†ç•Œé¢æ ‡é¢˜ï¼›æ˜¾ç¤º
 		setTitleTxt(R.string.my_login_tv);
-		// ²¼¾ÖÎÄ¼ş
+		// å¸ƒå±€æ–‡ä»¶
 		setContentXml(R.layout.my_login);
-		// µÇÂ½ÕËºÅIDºÍÃÜÂë
+		// ç™»é™†è´¦å·IDå’Œå¯†ç 
 		login_ID = (EditText) findViewById(R.id.my_login_ID_et);
 		login_password = (EditText) findViewById(R.id.my_login_password_et);
 
 		login_btn = (Button) findViewById(R.id.my_login_btn);
 		login_btn.setOnClickListener(this);
-		/*½ÓÊÕ×¢²á½çÃæ·¢¹ıÀ´µÄÕËºÅ£¬*/
+		/*æ¥æ”¶æ³¨å†Œç•Œé¢å‘è¿‡æ¥çš„è´¦å·ï¼Œ*/
 		String uerid = getIntent().getExtras().getString("uerID", "");
 		login_ID.setText(uerid);
-		//×¢²áÁ´½Ó
+		//æ³¨å†Œé“¾æ¥
 		regist_link =(TextView) findViewById(R.id.regist_link);
 		regist_link.setOnClickListener(this);
 	}
@@ -82,8 +83,8 @@ public class MyLoginActivity extends BaseActivity implements OnClickListener {
 		// TODO Auto-generated method stub
 		switch (v.getId()) {
 		case R.id.my_login_btn:
-			if(Util.detect(MyLoginActivity.this)){//ÅĞ¶ÏÊÇ·ñÁªÍø
-				if (validate()) {// ÅĞ¶ÏÑéÖ¤ÊÇ²»ÊÇ³É¹¦ÁË
+			if(Util.detect(MyLoginActivity.this)){//åˆ¤æ–­æ˜¯å¦è”ç½‘
+				if (validate()) {// åˆ¤æ–­éªŒè¯æ˜¯ä¸æ˜¯æˆåŠŸäº†
 					login();
 
 				}
@@ -105,25 +106,25 @@ public class MyLoginActivity extends BaseActivity implements OnClickListener {
 		
 	}
 
-	/* ÑéÖ¤ÊäÈëµÄÓÃ»§ÃûºÍÃÜÂë¶Ô²»¶Ô¡£ */
+	/* éªŒè¯è¾“å…¥çš„ç”¨æˆ·åå’Œå¯†ç å¯¹ä¸å¯¹ã€‚ */
 	private boolean validate() {
 		String id = login_ID.getText().toString();
 		if (id.equals("")) {
-			Util.ShowToast(MyLoginActivity.this, R.string.login_id_not_null);// ÕËºÅ²»ÄÜ¿Õ
+			Util.ShowToast(MyLoginActivity.this, R.string.login_id_not_null);// è´¦å·ä¸èƒ½ç©º
 			return false;
 		} else {
 			if (Util.isMobileNO(id) || Util.isEmail(id)) {
 				String pwd = login_password.getText().toString();
 				if (pwd.equals("")) {
 					Util.ShowToast(MyLoginActivity.this,
-							R.string.login_password_not_null);// ÃÜÂë²»ÄÜ¿Õ
+							R.string.login_password_not_null);// å¯†ç ä¸èƒ½ç©º
 					return false;
 				} else {
 					return true;
 				}
 			} else {
 				Util.ShowToast(MyLoginActivity.this,
-						R.string.login_format_error); // ¸ñÊ½´íÎó
+						R.string.login_format_error); // æ ¼å¼é”™è¯¯
 				return false;
 			}
 		}
@@ -131,7 +132,7 @@ public class MyLoginActivity extends BaseActivity implements OnClickListener {
 	}// validate
 
 	/*
-	 * µÇÂ¼(×ÓÏß³Ì£¬Òì²½¼ÓÔØµÄ·½Ê½¼ÓÔØÊı¾İ)
+	 * ç™»å½•(å­çº¿ç¨‹ï¼Œå¼‚æ­¥åŠ è½½çš„æ–¹å¼åŠ è½½æ•°æ®)
 	 */
 
 	private void login() {

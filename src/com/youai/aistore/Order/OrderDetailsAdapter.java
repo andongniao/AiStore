@@ -14,7 +14,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 /**
- * ¶©µ¥ÏêÇéÊÊÅäÆ÷
+ * è®¢å•è¯¦æƒ…é€‚é…å™¨
  * 
  * @author Qzr
  * 
@@ -62,8 +62,8 @@ public class OrderDetailsAdapter extends BaseAdapter {
 			item = (Item) v.getTag();
 		}
 		item.tv_title.setText(list.get(postion).getGoods_name());
-		item.tv_price.setText("£¤" + list.get(postion).getGoods_price() + "Ôª");
-		item.tv_number.setText(list.get(postion).getGoods_number() + "¼ş");
+		item.tv_price.setText("ï¿¥" + list.get(postion).getGoods_price() + "å…ƒ");
+		item.tv_number.setText(list.get(postion).getGoods_number() + "ä»¶");
 		item.iv.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
 		ImageLoader.getInstance().displayImage(
 				list.get(postion).getGoods_thumb(), item.iv);

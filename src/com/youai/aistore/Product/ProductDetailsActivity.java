@@ -56,7 +56,7 @@ import com.youai.aistore.xlistview.XListView;
 import com.youai.aistore.xlistview.XListView.IXListViewListener;
 
 /**
- * ²úÆ·ÏêÇé½çÃæ
+ * äº§å“è¯¦æƒ…ç•Œé¢
  * 
  * @author
  * 
@@ -142,11 +142,11 @@ IXListViewListener, OnClickListener {
 		topshowic.settime(999999999);
 
 		tv_shop_price = (TextView) findViewById(R.id.product_shop_price_tv);
-		tv_shop_price.getPaint().setFlags(Paint.UNDERLINE_TEXT_FLAG); // ÏÂ»®Ïß
-		tv_shop_price.getPaint().setAntiAlias(true);// ¿¹¾â³İ
+		tv_shop_price.getPaint().setFlags(Paint.UNDERLINE_TEXT_FLAG); // ä¸‹åˆ’çº¿
+		tv_shop_price.getPaint().setAntiAlias(true);// æŠ—é”¯é½¿
 		tv_market_price = (TextView) findViewById(R.id.product_market_price_tv);
-		tv_market_price.getPaint().setFlags(Paint.STRIKE_THRU_TEXT_FLAG); // ÖĞ»®Ïß
-		tv_market_price.getPaint().setAntiAlias(true);// ¿¹¾â³İ
+		tv_market_price.getPaint().setFlags(Paint.STRIKE_THRU_TEXT_FLAG); // ä¸­åˆ’çº¿
+		tv_market_price.getPaint().setAntiAlias(true);// æŠ—é”¯é½¿
 		tv_click_num = (TextView) findViewById(R.id.product_click_num_tv);
 		tv_title = (TextView) findViewById(R.id.product_title_tv);
 		tv_image_text_tv = (TextView) findViewById(R.id.product_image_text_tv);
@@ -156,12 +156,12 @@ IXListViewListener, OnClickListener {
 
 		tv_image_text_tv.setTextColor(getResources().getColor(
 				R.color.home_text_red));
-		tv_image_text_tv.getPaint().setFlags(Paint.UNDERLINE_TEXT_FLAG); // ÏÂ»®Ïß
-		tv_image_text_tv.getPaint().setAntiAlias(true);// ¿¹¾â³İ
-		tv_user_comment.getPaint().setFlags(0); // È¡ÏûÉèÖÃµÄµÄ»®Ïß
+		tv_image_text_tv.getPaint().setFlags(Paint.UNDERLINE_TEXT_FLAG); // ä¸‹åˆ’çº¿
+		tv_image_text_tv.getPaint().setAntiAlias(true);// æŠ—é”¯é½¿
+		tv_user_comment.getPaint().setFlags(0); // å–æ¶ˆè®¾ç½®çš„çš„åˆ’çº¿
 		tv_user_comment.setTextColor(getResources().getColor(R.color.black));
 
-		// ×ÔÊÊÓ¦ÆÁÄ»
+		// è‡ªé€‚åº”å±å¹•
 		webView	.getSettings().setSupportZoom(false);
 		webView.getSettings().setDefaultFontSize(15);
 		webView.getSettings().setBuiltInZoomControls(false);
@@ -187,19 +187,19 @@ IXListViewListener, OnClickListener {
 
 
 	class MyWebViewClient extends WebViewClient {
-		// ÖØĞ´¸¸Àà·½·¨£¬ÈÃĞÂ´ò¿ªµÄÍøÒ³ÔÚµ±Ç°µÄWebViewÖĞÏÔÊ¾
+		// é‡å†™çˆ¶ç±»æ–¹æ³•ï¼Œè®©æ–°æ‰“å¼€çš„ç½‘é¡µåœ¨å½“å‰çš„WebViewä¸­æ˜¾ç¤º
 		@Override
 		public boolean shouldOverrideUrlLoading(WebView view, String url) {
 			return shouldOverrideUrlLoading(view, url);
 		}
 
-		// ÍøÒ³¿ªÊ¼¼ÓÔØ
+		// ç½‘é¡µå¼€å§‹åŠ è½½
 		@Override
 		public void onPageStarted(WebView view, String url, Bitmap favicon) {
 
 			super.onPageStarted(view, url, favicon);
 		}
-		// ÍøÒ³¼ÓÔØÍê±Ï
+		// ç½‘é¡µåŠ è½½å®Œæ¯•
 		@Override
 		public void onPageFinished(WebView view, String url) {
 			super.onPageFinished(view, url);
@@ -211,7 +211,7 @@ IXListViewListener, OnClickListener {
 
 		@Override
 		public void onImageClick(int position, View imageView) {
-			// TODO µ¥»÷Í¼Æ¬´¦ÀíÊÂ¼ş
+			// TODO å•å‡»å›¾ç‰‡å¤„ç†äº‹ä»¶
 		}
 
 		@Override
@@ -248,7 +248,7 @@ IXListViewListener, OnClickListener {
 			this.s = s;
 		}
 
-		// onPreExecute·½·¨ÓÃÓÚÔÚÖ´ĞĞºóÌ¨ÈÎÎñÇ°×öÒ»Ğ©UI²Ù×÷
+		// onPreExecuteæ–¹æ³•ç”¨äºåœ¨æ‰§è¡Œåå°ä»»åŠ¡å‰åšä¸€äº›UIæ“ä½œ
 		@Override
 		protected void onPreExecute() {
 			if (getstatu == 1 || getstatu == 2) {
@@ -256,7 +256,7 @@ IXListViewListener, OnClickListener {
 			}
 		}
 
-		// doInBackground·½·¨ÄÚ²¿Ö´ĞĞºóÌ¨ÈÎÎñ,²»¿ÉÔÚ´Ë·½·¨ÄÚĞŞ¸ÄUI
+		// doInBackgroundæ–¹æ³•å†…éƒ¨æ‰§è¡Œåå°ä»»åŠ¡,ä¸å¯åœ¨æ­¤æ–¹æ³•å†…ä¿®æ”¹UI
 		@Override
 		protected Object doInBackground(Object... params) {
 			try {
@@ -288,12 +288,12 @@ IXListViewListener, OnClickListener {
 			return null;
 		}
 
-		// onProgressUpdate·½·¨ÓÃÓÚ¸üĞÂ½ø¶ÈĞÅÏ¢
+		// onProgressUpdateæ–¹æ³•ç”¨äºæ›´æ–°è¿›åº¦ä¿¡æ¯
 		@Override
 		protected void onProgressUpdate(Object... progresses) {
 		}
 
-		// onPostExecute·½·¨ÓÃÓÚÔÚÖ´ĞĞÍêºóÌ¨ÈÎÎñºó¸üĞÂUI,ÏÔÊ¾½á¹û
+		// onPostExecuteæ–¹æ³•ç”¨äºåœ¨æ‰§è¡Œå®Œåå°ä»»åŠ¡åæ›´æ–°UI,æ˜¾ç¤ºç»“æœ
 		@SuppressWarnings("static-access")
 		@Override
 		protected void onPostExecute(Object result) {
@@ -302,12 +302,12 @@ IXListViewListener, OnClickListener {
 				bean = (GoodsBean) result;
 				if (bean != null) {
 					if (bean.getCode() == 200) {
-						// Í¼Æ¬
+						// å›¾ç‰‡
 						topshowic.setImageResources(bean.getPicurls(),
 								mAdCycleViewListener);
-						tv_shop_price.setText("£¤" + bean.getShop_price() + "Ôª");
-						tv_market_price.setText("£¤" + bean.getMarket_price()
-								+ "Ôª");
+						tv_shop_price.setText("ï¿¥" + bean.getShop_price() + "å…ƒ");
+						tv_market_price.setText("ï¿¥" + bean.getMarket_price()
+								+ "å…ƒ");
 						tv_click_num.setText(bean.getClick());
 						tv_title.setText(bean.getTitle());
 						// TODO webview
@@ -324,9 +324,9 @@ IXListViewListener, OnClickListener {
 							};
 						}.start();
 						
-						DisplayMetrics dm = new DisplayMetrics();// »ñÈ¡µ±Ç°ÏÔÊ¾µÄ½çÃæ´óĞ¡
+						DisplayMetrics dm = new DisplayMetrics();// è·å–å½“å‰æ˜¾ç¤ºçš„ç•Œé¢å¤§å°
 						getWindowManager().getDefaultDisplay().getMetrics(dm);
-						int height = dm.heightPixels;// »ñÈ¡µ±Ç°½çÃæµÄ¸ß¶È
+						int height = dm.heightPixels;// è·å–å½“å‰ç•Œé¢çš„é«˜åº¦
 						LinearLayout.LayoutParams linearParams = (LinearLayout.LayoutParams) webView
 								.getLayoutParams();
 						linearParams.width = linearParams.WRAP_CONTENT;
@@ -336,7 +336,7 @@ IXListViewListener, OnClickListener {
 							
 							@Override
 							public void run() {
-								DisplayMetrics dm = new DisplayMetrics();// »ñÈ¡µ±Ç°ÏÔÊ¾µÄ½çÃæ´óĞ¡
+								DisplayMetrics dm = new DisplayMetrics();// è·å–å½“å‰æ˜¾ç¤ºçš„ç•Œé¢å¤§å°
 								getWindowManager().getDefaultDisplay()
 								.getMetrics(dm);
 								LinearLayout.LayoutParams linearParams = (LinearLayout.LayoutParams) webView
@@ -444,7 +444,7 @@ IXListViewListener, OnClickListener {
 			}
 		}
 
-		// onCancelled·½·¨ÓÃÓÚÔÚÈ¡ÏûÖ´ĞĞÖĞµÄÈÎÎñÊ±¸ü¸ÄUI
+		// onCancelledæ–¹æ³•ç”¨äºåœ¨å–æ¶ˆæ‰§è¡Œä¸­çš„ä»»åŠ¡æ—¶æ›´æ”¹UI
 		@Override
 		protected void onCancelled() {
 			//			stopProgressDialog();
@@ -461,9 +461,9 @@ IXListViewListener, OnClickListener {
 				showsatau = 0;
 				tv_image_text_tv.setTextColor(getResources().getColor(
 						R.color.home_text_red));
-				tv_image_text_tv.getPaint().setFlags(Paint.UNDERLINE_TEXT_FLAG); // ÏÂ»®Ïß
-				tv_image_text_tv.getPaint().setAntiAlias(true);// ¿¹¾â³İ
-				tv_user_comment.getPaint().setFlags(0); // È¡ÏûÉèÖÃµÄµÄ»®Ïß
+				tv_image_text_tv.getPaint().setFlags(Paint.UNDERLINE_TEXT_FLAG); // ä¸‹åˆ’çº¿
+				tv_image_text_tv.getPaint().setAntiAlias(true);// æŠ—é”¯é½¿
+				tv_user_comment.getPaint().setFlags(0); // å–æ¶ˆè®¾ç½®çš„çš„åˆ’çº¿
 				tv_user_comment.setTextColor(getResources().getColor(
 						R.color.black));
 
@@ -476,9 +476,9 @@ IXListViewListener, OnClickListener {
 				showsatau = 1;
 				tv_user_comment.setTextColor(getResources().getColor(
 						R.color.home_text_red));
-				tv_user_comment.getPaint().setFlags(Paint.UNDERLINE_TEXT_FLAG); // ÏÂ»®Ïß
-				tv_user_comment.getPaint().setAntiAlias(true);// ¿¹¾â³İ
-				tv_image_text_tv.getPaint().setFlags(0); // È¡ÏûÉèÖÃµÄµÄ»®Ïß
+				tv_user_comment.getPaint().setFlags(Paint.UNDERLINE_TEXT_FLAG); // ä¸‹åˆ’çº¿
+				tv_user_comment.getPaint().setAntiAlias(true);// æŠ—é”¯é½¿
+				tv_image_text_tv.getPaint().setFlags(0); // å–æ¶ˆè®¾ç½®çš„çš„åˆ’çº¿
 				tv_image_text_tv.setTextColor(getResources().getColor(
 						R.color.black));
 			}
@@ -569,7 +569,7 @@ IXListViewListener, OnClickListener {
 
 
 	/**
-	 * Æô¶¯Loding...
+	 * å¯åŠ¨Loding...
 	 * 
 	 * @param context
 	 */
@@ -582,7 +582,7 @@ IXListViewListener, OnClickListener {
 	}
 
 	/**
-	 * ¹Ø±ÕLoding...
+	 * å…³é—­Loding...
 	 */
 	public  void stopProgressDialog() {
 		if (progressDialog != null && progressDialog.isShowing()) {
@@ -603,7 +603,7 @@ IXListViewListener, OnClickListener {
 		try {
 			HttpResponse httpResponse = new DefaultHttpClient()
 					.execute(httpRequest);
-			if (httpResponse.getStatusLine().getStatusCode() == 200) { // ÕıÈ·
+			if (httpResponse.getStatusLine().getStatusCode() == 200) { // æ­£ç¡®
 
 				is = httpResponse.getEntity().getContent();
 				byte[] data = new byte[1024];

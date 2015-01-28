@@ -21,7 +21,7 @@ public class OrderListview extends ListView {
 
 	@Override
 	/**
-	 * ÖØÐ´¸Ã·½·¨£¬´ïµ½Ê¹ListViewÊÊÓ¦ScrollViewµÄÐ§¹û
+	 * é‡å†™è¯¥æ–¹æ³•ï¼Œè¾¾åˆ°ä½¿ListViewé€‚åº”ScrollViewçš„æ•ˆæžœ
 	 */
 	protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
 		int expandSpec = MeasureSpec.makeMeasureSpec(Integer.MAX_VALUE >> 2,

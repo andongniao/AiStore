@@ -23,7 +23,7 @@ import com.youai.aistore.Bean.UserBean;
  * @author Qzr
  */
 public class MyApplication extends Application {
-	public static boolean logined;
+	public static boolean logined,log_staau_ischanged;
 	public static UserBean userBean;
 	public static String SessionId = "";
 	public static String UserId = "0";
@@ -31,21 +31,21 @@ public class MyApplication extends Application {
 	public static SharedPreferences mSharedPreferences;
 	public static String callnumber = "4000965585";
 	public static String smsnumber = "13331054189";
-	public static int neiyi = 4;// ÄÚÒÂÀà
+	public static int neiyi = 4;// å†…è¡£ç±»
 	public static int neiyi_qingqvshuiyi = 40;
 	public static int neiyi_zhifuyouhuo = 37;
 	public static int neiyi_xingganneiyi = 86;
 	public static int neiyi_siwaneiku = 85;
 	public static int neiyi_liantiwangyi = 83;
 	public static int neiyi_sandiantoushi = 84;
-	public static int woman = 74;// Å®ĞÔÀà
+	public static int woman = 74;// å¥³æ€§ç±»
 	public static int woman_av = 75;
 	public static int woman_fangzhenyangjv = 76;
 	public static int woman_qingqvtiaodan = 91;
 	public static int woman_shensuozhuanhzu = 19;
 	public static int woman_hulibaojian = 77;
 	public static int woman_otherwoman = 78;
-	public static int man = 69;// ÄĞĞÔÀà
+	public static int man = 69;// ç”·æ€§ç±»
 	public static int man_feijibei = 70;
 	public static int man_daomo = 73;
 	public static int man_fuzhu = 98;
@@ -55,21 +55,21 @@ public class MyApplication extends Application {
 	public static int tt_nvyong = 68;
 	public static int tt_daxiaohao = 65;
 	public static int tt_huayang = 66;
-	public static int tosex = 87;// Ë«ÈË
+	public static int tosex = 87;// åŒäºº
 	public static int tosex_zhuqing = 93;
 	public static int tosex_houting = 71;
 	public static int tosex_huantao = 89;
 	public static int tosex_runhua = 92;
 	public static int tosex_sm = 88;
 	public static int tosex_other = 90;
-	public static String clickdesc = "clickdesc";// ÈËÆøµ¹Ğò
-	public static String clickdasc = "clickdasc";// ÈËÆøÕıĞò
-	public static String salesdesc = "salesdesc";// ÏúÁ¿µ¹Ğò
-	public static String salesdasc = "salesdasc";// ÏúÁ¿ÕıĞò
-	public static String pricedesc = "pricedesc";// ¼Û¸ñµ¹Ğò
-	public static String priceasc = "priceasc";// ¼Û¸ñÕıĞò
-	public static final String PARTNER = "2088612509277434";// ºÏ×÷ÕßÉí·İID
-	public static final String SELLER = "youaishidai@qq.com";// Âô¼ÒÖ§¸¶±¦ÕËºÅ
+	public static String clickdesc = "clickdesc";// äººæ°”å€’åº
+	public static String clickdasc = "clickdasc";// äººæ°”æ­£åº
+	public static String salesdesc = "salesdesc";// é”€é‡å€’åº
+	public static String salesdasc = "salesdasc";// é”€é‡æ­£åº
+	public static String pricedesc = "pricedesc";// ä»·æ ¼å€’åº
+	public static String priceasc = "priceasc";// ä»·æ ¼æ­£åº
+	public static final String PARTNER = "2088612509277434";// åˆä½œè€…èº«ä»½ID
+	public static final String SELLER = "youaishidai@qq.com";// å–å®¶æ”¯ä»˜å®è´¦å·
 	public static final String RSA_PRIVATE ="MIICdwIBADANBgkqhkiG9w0BAQEFAASCAmEwggJdAgEAAoGBALvCKNMyj8bcM6jshdjzZBKbK/Jcb+gyFPz4WUdMKdtOEZWlsBVgAifvwN/w8rSVHSnIEU+4UOdgNwJSNDadU+gj0LtoPEPGiU3kZme0TcqsjgIt56XhSfZ7lS999WNd3BA7O9ctx9qyDNQ5X1XWeDDpgs3eW/eaSiR2mMSD/SaLAgMBAAECgYEAoQLy0ZJ1e5pQbtdOPOsT8WTCPheJG/z+xKUQorSs3FVJfSRWKS5pCuhuZVySNcv981uPhObR8mkvIz1tazxlu57ctnucLFaVatq3OZpplNQ9luZiU9wVcENQE0fQCd/alW04GvpijIctyxDPWPFTbzWXOJjWa60fcBu7BXeX32kCQQDt4SdA6VYXNFnp4RKPxGMmCA5bGDvnLOERBNNMgu6OH6FgUDg+ZyByJQixbtVUayJrPOOVF93Juf8xyX487ShdAkEAyg+amiU37eIgaaxrE7tyBW0EbUbGLwBTa896JwTheARObIQ6j8l/0qesDXu/UJ9DWtZRxv7HgH936AD/MoR8BwJBAOwJHk8NeOw7eQBV4XogLxV8puoC6OWhJY4ikJt5y8XgYttTngtlfs9kKfUNecZzK8rmtxeof9z7ntnDCmzgEc0CQDehIiRMGODSP7A4Ouac1aBuyig3svpfsZfd8Dhr3JNJRDoWEXViuWFKrlCsABj3L/kDRlJt9IkJDv79v0SuOuMCQDAiq+EBz7mBfToiOnB1MikO3L3WsBeKmldL/2U8cnY88nBWzSHF1tICy5W8CbuYS4zLXFTXnCEZWle/yvq8WIk=";
 	public static final String RSA_PUBLIC ="MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCnxj/9qwVfgoUh/y2W89L6BkRAFljhNhgPdyPuBV64bfQNN1PjbCzkIM6qRdKBoLPXmKKMiFYnkd6rAoprih3/PrQEB/VsW8OoM8fxn67UDYuyBTqA23MML9q1+ilIZwBC2AQ2UBVOrFXfFl75p6/B5KsiNG9zpgmLCUYuLkxpLQIDAQAB";
 	public static final String Notify_Url = "http://www.aiai.cn/services/api.php?module=notify_url";
@@ -79,16 +79,16 @@ public class MyApplication extends Application {
 	@Override
 	public void onCreate() {
 		super.onCreate();
-		// ³õÊ¼»¯ImageLoader
+		// åˆå§‹åŒ–ImageLoader
 		@SuppressWarnings("deprecation")
 		DisplayImageOptions options = new DisplayImageOptions.Builder()
-				.showStubImage(R.drawable.ic_stub) // ÉèÖÃÍ¼Æ¬ÏÂÔØÆÚ¼äÏÔÊ¾µÄÍ¼Æ¬
-				.showImageForEmptyUri(R.drawable.ic_empty) // ÉèÖÃÍ¼Æ¬UriÎª¿Õ»òÊÇ´íÎóµÄÊ±ºòÏÔÊ¾µÄÍ¼Æ¬
-				.showImageOnFail(R.drawable.ic_error) // ÉèÖÃÍ¼Æ¬¼ÓÔØ»ò½âÂë¹ı³ÌÖĞ·¢Éú´íÎóÏÔÊ¾µÄÍ¼Æ¬
-				.cacheInMemory(true) // ÉèÖÃÏÂÔØµÄÍ¼Æ¬ÊÇ·ñ»º´æÔÚÄÚ´æÖĞ
-				.cacheOnDisc(true) // ÉèÖÃÏÂÔØµÄÍ¼Æ¬ÊÇ·ñ»º´æÔÚSD¿¨ÖĞ
-				// .displayer(new RoundedBitmapDisplayer(20)) // ÉèÖÃ³ÉÔ²½ÇÍ¼Æ¬
-				.build(); // ´´½¨ÅäÖÃ¹ıµÃDisplayImageOption¶ÔÏó
+				.showStubImage(R.drawable.ic_stub) // è®¾ç½®å›¾ç‰‡ä¸‹è½½æœŸé—´æ˜¾ç¤ºçš„å›¾ç‰‡
+				.showImageForEmptyUri(R.drawable.ic_empty) // è®¾ç½®å›¾ç‰‡Uriä¸ºç©ºæˆ–æ˜¯é”™è¯¯çš„æ—¶å€™æ˜¾ç¤ºçš„å›¾ç‰‡
+				.showImageOnFail(R.drawable.ic_error) // è®¾ç½®å›¾ç‰‡åŠ è½½æˆ–è§£ç è¿‡ç¨‹ä¸­å‘ç”Ÿé”™è¯¯æ˜¾ç¤ºçš„å›¾ç‰‡
+				.cacheInMemory(true) // è®¾ç½®ä¸‹è½½çš„å›¾ç‰‡æ˜¯å¦ç¼“å­˜åœ¨å†…å­˜ä¸­
+				.cacheOnDisc(true) // è®¾ç½®ä¸‹è½½çš„å›¾ç‰‡æ˜¯å¦ç¼“å­˜åœ¨SDå¡ä¸­
+				// .displayer(new RoundedBitmapDisplayer(20)) // è®¾ç½®æˆåœ†è§’å›¾ç‰‡
+				.build(); // åˆ›å»ºé…ç½®è¿‡å¾—DisplayImageOptionå¯¹è±¡
 		
 		ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(
 				getApplicationContext()).defaultDisplayImageOptions(options)
@@ -121,6 +121,7 @@ public class MyApplication extends Application {
 		} else {
 			logined = false;
 		}
+		log_staau_ischanged = true;
 	}
 
 	public static void setUserId(String userid) {
@@ -138,7 +139,7 @@ public class MyApplication extends Application {
 		mEditor.putString("username", bean.getUser_name());
 		mEditor.commit();
 	}
-	/*ÍË³öµÇÂ¼×¢ÏúÓÃ»§ĞÅÏ¢*/
+	/*é€€å‡ºç™»å½•æ³¨é”€ç”¨æˆ·ä¿¡æ¯*/
 	public static void RemvoeUser(String username) {
 		// TODO Auto-generated method stub
 		SharedPreferences.Editor mEditor = mSharedPreferences.edit();

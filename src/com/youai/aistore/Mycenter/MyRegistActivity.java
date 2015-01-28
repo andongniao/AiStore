@@ -19,7 +19,7 @@ import com.youai.aistore.Bean.UserBean;
 import com.youai.aistore.NetInterface.Send;
 
 /**
- * ×¢²á½çÃæ
+ * æ³¨å†Œç•Œé¢
  * 
  * @author zy
  * 
@@ -38,12 +38,12 @@ public class MyRegistActivity extends BaseActivity implements OnClickListener {
 		public void handleMessage(Message msg) {
 			super.handleMessage(msg);
 			if (msg.what == 1) {
-				//ÌáÊ¾×¢²á³É¹¦
+				//æç¤ºæ³¨å†ŒæˆåŠŸ
 				Util.ShowToast(MyRegistActivity.this, R.string.regist_succeed);
 				Intent intent = new Intent(MyRegistActivity.this,
 						MyLoginActivity.class);
 				intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-				intent.putExtra("uerID", regist_ID.getText().toString());//°Ñ×¢²áÕËºÅ£¬´«ËÍµ½µÇÂ½½çÃæ
+				intent.putExtra("uerID", regist_ID.getText().toString());//æŠŠæ³¨å†Œè´¦å·ï¼Œä¼ é€åˆ°ç™»é™†ç•Œé¢
 				startActivity(intent);
 				finish();
 			} else if (msg.what == 2) {
@@ -61,10 +61,10 @@ public class MyRegistActivity extends BaseActivity implements OnClickListener {
 	protected void onCreate(Bundle arg0) {
 		// TODO Auto-generated method stub
 		super.onCreate(arg0);
-		// ×¢²á½çÃæ±êÌâ£»ÏÔÊ¾
+		// æ³¨å†Œç•Œé¢æ ‡é¢˜ï¼›æ˜¾ç¤º
 		setTitleTxt(R.string.my_regist_tv);
 		setContentXml(R.layout.my_regist);
-		// ×¢²áÕËºÅIDºÍÃÜÂë
+		// æ³¨å†Œè´¦å·IDå’Œå¯†ç 
 		regist_ID = (EditText) findViewById(R.id.my_regist_ID_et);
 		regist_password = (EditText) findViewById(R.id.my_regist_password_et);
 		regist_repassword = (EditText) findViewById(R.id.my_regist_repassword_et);
@@ -76,7 +76,7 @@ public class MyRegistActivity extends BaseActivity implements OnClickListener {
 	@Override
 	public void onClick(View v) {
 		// TODO Auto-generated method stub
-		if(Util.detect(MyRegistActivity.this)){//ÅĞ¶ÏÊÇ·ñÁªÍø
+		if(Util.detect(MyRegistActivity.this)){//åˆ¤æ–­æ˜¯å¦è”ç½‘
 			if (validate()) {
 				addUser();
 			}
@@ -86,23 +86,23 @@ public class MyRegistActivity extends BaseActivity implements OnClickListener {
 
 	}
 
-	/* ÑéÖ¤ÊäÈëµÄÓÃ»§ÃûºÍÃÜÂë¶Ô²»¶Ô¡£ */
+	/* éªŒè¯è¾“å…¥çš„ç”¨æˆ·åå’Œå¯†ç å¯¹ä¸å¯¹ã€‚ */
 	private boolean validate() {
 		String id = regist_ID.getText().toString();
 		if (id.equals("")) {
-			Util.ShowToast(MyRegistActivity.this, R.string.login_id_not_null);// ÕËºÅ²»ÄÜ¿Õ
+			Util.ShowToast(MyRegistActivity.this, R.string.login_id_not_null);// è´¦å·ä¸èƒ½ç©º
 			return false;
 		} else {
-			if (Util.isMobileNO(id) || Util.isEmail(id)) { // ÅĞ¶ÏÕËºÅµÄ¸ñÊ½£¬ÕıÈ·¿ÉÒÔÊäÈëÃÜÂë£¬
+			if (Util.isMobileNO(id) || Util.isEmail(id)) { // åˆ¤æ–­è´¦å·çš„æ ¼å¼ï¼Œæ­£ç¡®å¯ä»¥è¾“å…¥å¯†ç ï¼Œ
 				String pwd = regist_password.getText().toString();
-				if (pwd.equals("")) { // ÃÜÂë²»ÄÜ¿Õ
+				if (pwd.equals("")) { // å¯†ç ä¸èƒ½ç©º
 					Util.ShowToast(MyRegistActivity.this,
 							R.string.login_password_not_null);
 					return false;
 				} else {
-					if (Util.ispassword(pwd)) {// ÅĞ¶ÏÃÜÂë¸ñÊ½ÊÇ·ñÕıÈ·£¬ÕıÈ·¿ÉÒÔÊäÈëÈ·ÈÏÃÜÂë
+					if (Util.ispassword(pwd)) {// åˆ¤æ–­å¯†ç æ ¼å¼æ˜¯å¦æ­£ç¡®ï¼Œæ­£ç¡®å¯ä»¥è¾“å…¥ç¡®è®¤å¯†ç 
 						String repwd = regist_repassword.getText().toString();
-						if (repwd.equals("")) {// È·ÈÏÃÜÂë²»ÄÜÎª¿Õ
+						if (repwd.equals("")) {// ç¡®è®¤å¯†ç ä¸èƒ½ä¸ºç©º
 							Util.ShowToast(MyRegistActivity.this,
 									R.string.regist_repassword_not_null);
 
@@ -112,7 +112,7 @@ public class MyRegistActivity extends BaseActivity implements OnClickListener {
 								return true;
 							} else {
 								Util.ShowToast(MyRegistActivity.this,
-										R.string.regist_repasswors_error);// È·ÈÏÃÜÂëÓë£¬ÃÜÂë²»Ò»ÖÂ
+										R.string.regist_repasswors_error);// ç¡®è®¤å¯†ç ä¸ï¼Œå¯†ç ä¸ä¸€è‡´
 
 								return false;
 							}
@@ -120,7 +120,7 @@ public class MyRegistActivity extends BaseActivity implements OnClickListener {
 
 					} else {
 						Util.ShowToast(MyRegistActivity.this,
-								R.string.my_regist_password_et);// ÃÜÂëÖÁÉÙ4Î»
+								R.string.my_regist_password_et);// å¯†ç è‡³å°‘4ä½
 						return false;
 					}
 
@@ -128,7 +128,7 @@ public class MyRegistActivity extends BaseActivity implements OnClickListener {
 
 			} else {
 				Util.ShowToast(MyRegistActivity.this,
-						R.string.regist_format_error); // ¸ñÊ½´íÎó
+						R.string.regist_format_error); // æ ¼å¼é”™è¯¯
 				return false;
 			}
 		}

@@ -3,7 +3,7 @@ package com.youai.aistore.Bean;
 import java.util.ArrayList;
 
 /**
- * 二级分类列表实体
+ * 浜岀骇鍒嗙被鍒楄〃瀹炰綋
  * 
  * @author Qzr
  * 
